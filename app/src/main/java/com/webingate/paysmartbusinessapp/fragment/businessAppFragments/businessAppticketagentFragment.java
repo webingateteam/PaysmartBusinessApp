@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappBusinessOwnerListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappFleetOwnerListActivity;
+import com.webingate.paysmartbusinessapp.activity.businessapp.customerDashboardActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.customerappFlightBookingSearchActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.customerappTrainBookingSearchActivity;
 import com.webingate.paysmartbusinessapp.adapter.customerapp_FlightsAdapter;
@@ -152,7 +153,7 @@ public class businessAppticketagentFragment extends Fragment {
                       //  startActivity(intent);
                         break;
                     case 1:
-                        Intent intent = new Intent(getActivity(), customerappFlightBookingSearchActivity.class);
+                        Intent intent = new Intent(getActivity(), customerDashboardActivity.class);
                         startActivity(intent);
 //                        AppDirectoryHome1Fragment af1 = new AppDirectoryHome1Fragment();
 //

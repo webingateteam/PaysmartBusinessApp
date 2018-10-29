@@ -31,13 +31,23 @@
     <!-- deep purples -->
 
     <!-- indigo -->
+    <color name="indigo_900">#1A237E</color>
 
     <!--blue-->
     <color name="md_blue_500">#2196f3</color>
     <color name="md_blue_800">#1565C0</color>
     <color name="md_blue_600">#1e88e5</color>
     <!-- light blue-->
+
     <color name="md_light_blue_500">#03A9F4</color>
+
+
+    <color name="light_blue_50">#E1F5FE</color>
+    <color name="light_blue_100">#B3E5FC</color>
+    <color name="light_blue_200">#81D4FA</color>
+    <color name="light_blue_500">#03A9F4</color>
+    <color name="light_blue_700">#0288D1</color>
+
 
     <!-- cyan -->
 
@@ -160,4 +170,7 @@
     <color name="dark_gray">#8E8E93</color>
 
     <color name="light_gray">#C7C7CC</color>
+    <!--gradient-->
+    <color name="overlay_dark_10">#1A000000</color>
+
 </resources>

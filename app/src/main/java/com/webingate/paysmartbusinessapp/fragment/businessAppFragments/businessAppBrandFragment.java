@@ -19,6 +19,7 @@ import com.webingate.paysmartbusinessapp.activity.businessapp.businessappBusines
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappCurrentTicketListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriversListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappFleetOwnerListActivity;
+import com.webingate.paysmartbusinessapp.activity.businessapp.businessappStatisticsActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappTicketAgentListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappVehicleListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.customerappFlightBookingSearchActivity;
@@ -168,7 +169,7 @@ public class businessAppBrandFragment extends Fragment {
                         startActivity(intent2);
                         break;
                     case 3:
-                        intent = new Intent(getActivity(), customerappTrainBookingSearchActivity.class);
+                        intent = new Intent(getActivity(), businessappStatisticsActivity.class);
                         startActivity(intent);
                         break;
                     case 4:
