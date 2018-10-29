@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "418241428686",
+    "firebase_url": "https://awesomematerial-e879c.firebaseio.com",
+    "project_id": "awesomematerial-e879c",
+    "storage_bucket": "awesomematerial-e879c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418241428686:android:83789f18ec123967",
+        "android_client_info": {
+          "package_name": "com.webingate.paysmartcustomerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418241428686-3k3fea3mjd2tdf5d0ul4fnm9muhen3mt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.webingate.paysmartcustomerapp",
+            "certificate_hash": "b518ff65efd23c522c15db6866ad3d376ab874bb"
+          }
+        },
+        {
+          "client_id": "418241428686-o4ifuatm0kt96lo3sfc9o3a7c0pa2c73.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7HFkfD0WOfuQYZZIi2gyJ_pfZNThXC_I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418241428686-o4ifuatm0kt96lo3sfc9o3a7c0pa2c73.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

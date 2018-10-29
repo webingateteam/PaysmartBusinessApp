@@ -1,0 +1,34 @@
+
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/refresh"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@mipmap/dummy_card"
+        android:title="Refresh"
+        tools:ignore="AppCompatResource" />
+    <item
+        android:id="@+id/addcontact"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@mipmap/dummy_card"
+        android:title="Add New Item"
+        tools:ignore="AppCompatResource" />
+    <item
+        android:id="@+id/sharedtext"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@mipmap/marker_taxi"
+        android:title="Share"
+        tools:ignore="AppCompatResource" />
+    <!--<item
+        android:id="@+id/writenfcTag"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@drawable/nfcwrite"
+        android:title="WriteNFCTAG"
+        tools:ignore="AppCompatResource" />-->
+
+</menu>

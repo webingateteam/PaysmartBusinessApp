@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/edit_profile"
+            android:title="Edit Profile" />
+        <item
+            android:id="@+id/mytickets"
+            android:title="Cancel/Modify Tickets" />
+        <item
+            android:id="@+id/MyTrips"
+
+            android:title="My Trips" />
+        <item
+            android:id="@+id/menu_payments"
+
+            android:title="Payments" />
+        <item
+            android:id="@+id/reset_password"
+
+            android:title="Reset Password" />
+        <item
+            android:id="@+id/Help"
+
+            android:title="Help" />
+        <item
+            android:id="@+id/faq"
+
+            android:title="Faqs" />
+
+
+    </group>
+
+   </menu>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="40dp"
+    android:gravity="top"
+    tools:showIn="@layout/fragment_home">
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/go_online"
+        android:textSize="20dp"
+        android:layout_gravity="top|center"
+        android:background="@color/colorPrimaryDark"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_statastics"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/statistics"
+            android:text="@string/statistics"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_profile"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/profile"
+            android:text="@string/my_profile"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_logout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/logout"
+            android:text="@string/logout"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_driver_details"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/statistics"
+            android:text="Driver Details"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_vehicle_details"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/profile"
+            android:text="vehicle details"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_driver_vehicle_details"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/logout"
+            android:text="Driver and vehicle details"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+
+
+    </TableRow>
+
+</LinearLayout>
+

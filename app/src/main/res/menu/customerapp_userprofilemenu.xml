@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/baseline_profile_card_black_24"
+            android:title="Profile" />
+        <item
+            android:id="@+id/nav_preferences"
+            android:icon="@drawable/baseline_setting_black_24"
+            android:title="Preferences" />
+    </group>
+
+    <item android:title="App">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_paymentmode"
+                    android:icon="@drawable/baseline_credit_card_black_24"
+                    android:title="Payment mode" />
+                <item
+                    android:id="@+id/nav_bookings"
+                    android:icon="@drawable/baseline_book_black_24"
+                    android:title="bookings" />
+                <item
+                    android:id="@+id/nav_ewallet"
+                    android:icon="@mipmap/wallet"
+                    android:tint="@color/md_blue_grey_600"
+                    android:title="e-wallet" />
+                <item
+                    android:id="@+id/nav_notification"
+                    android:icon="@drawable/baseline_announce_white_24"
+                    android:title="Notifications" />
+                <item
+                    android:id="@+id/nav_alerts"
+                    android:icon="@drawable/baseline_bell_40_grey_25"
+                    android:title="Alerts" />
+
+                <item
+                    android:id="@+id/nav_coupons"
+                    android:icon="@drawable/baseline_money_white_24"
+                    android:title="Coupons &amp; Offers" />
+                <item
+                    android:id="@+id/nav_sos"
+                    android:icon="@drawable/ic_people_outline"
+                    android:title="SOS" />
+
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Help &amp; support">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_faq"
+                    android:icon="@drawable/baseline_bell_40_grey_25"
+                    android:title="FAQs" />
+                <item
+                    android:id="@+id/nav_tticket"
+                    android:icon="@drawable/baseline_bookmark_border_black_24"
+                    android:title="Trouble Ticket" />
+                <item
+                    android:id="@+id/nav_about_us"
+                    android:icon="@drawable/baseline_info_line_24"
+                    android:title="About Us" />
+                <item
+                    android:id="@+id/nav_contact_us"
+                    android:icon="@drawable/baseline_book_black_24"
+                    android:title="Contact Us" />
+
+            </group>
+        </menu>
+    </item>
+
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/baseline_power_black_24"
+                    android:title="Logout" />
+
+            </group>
+
+</menu>

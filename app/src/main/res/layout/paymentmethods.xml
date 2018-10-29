@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:showIn="@layout/activity_login">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:paddingTop="@dimen/fab_margin"
+            android:text="@string/payment"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/slide_title"
+            android:textStyle="bold|italic" />
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_ewallet"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/button_padding"
+                android:layout_marginLeft="@dimen/button_padding"
+                android:layout_marginRight="@dimen/button_padding"
+                android:layout_marginTop="@dimen/button_padding"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/wallet"
+                android:padding="@dimen/button"
+                android:text="@string/slide_2_title"
+                android:textStyle="bold" />
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_preferences"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/button_padding"
+                android:layout_marginLeft="@dimen/button_padding"
+                android:layout_marginRight="@dimen/button_padding"
+                android:layout_marginTop="@dimen/button_padding"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/recharge"
+                android:padding="@dimen/button"
+                android:text="@string/net_banking"
+                android:textStyle="bold" />
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_feedback_enquiry"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/button_padding"
+                android:layout_marginLeft="@dimen/button_padding"
+                android:layout_marginRight="@dimen/button_padding"
+                android:layout_marginTop="@dimen/button_padding"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/transfer"
+                android:padding="@dimen/button"
+                android:text="@string/cards"
+                android:textStyle="bold" />
+
+
+        </TableRow>
+    </LinearLayout>
+</ScrollView>

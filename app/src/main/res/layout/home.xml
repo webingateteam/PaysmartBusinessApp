@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="40dp"
+    android:gravity="center"
+    tools:showIn="@layout/activity_login">
+
+      <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:paddingTop="@dimen/fab_margin"
+            android:text="@string/app_name"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/slide_title"
+            android:textStyle="bold|italic" />-->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_getalyft"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/lyft"
+                android:text="@string/getalyft"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_metered_taxi"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/taxi"
+                android:text="@string/taxi"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_ticket"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_bus"
+                android:text="@string/bus_ticket"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                />
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_train"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/train"
+                android:text="@string/train"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_cruise"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/cruise"
+                android:text="@string/cruise_services"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_ambulance"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ambulance"
+                android:text="@string/ambulance_services"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_towing"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/towing"
+                android:text="@string/towing_services"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_parcel_services"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/parcel"
+                android:text="@string/parcel_services"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_ewallet"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/wallet"
+                android:text="@string/slide_2_title"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_shop"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_shop"
+                android:text="@string/shop"
+                android:background="@color/white"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_hotel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_sleep"
+                android:text="@string/hotel"
+                android:background="@color/white"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_flight"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/flight"
+                android:text="@string/flight"
+                android:background="@color/white"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+        </TableRow>
+</LinearLayout>

@@ -1,0 +1,362 @@
+<resources>
+    <string name="app_name">paysmartbusinessapp</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <!--<string name="navigation_drawer_open">Open navigation drawer</string>-->
+    <!--<string name="navigation_drawer_close">Close navigation drawer</string>-->
+
+    <!--<string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">-->
+        <!--AIzaSyBdLsoQN4TDHBGdwXvwp35gFo9o9cn8lus-->
+    <!--</string>-->
+
+    <string name="title_activity_login_activity">login_activity</string>
+
+    <!--Main server-->
+    <!--  <string name="url_server">http://154.120.237.198:8088</string>-->
+    <!--Local server-->
+    <!--<string name="url_server">http://124.123.41.203:8088</string>-->
+    <string name="url_server">http://196.27.119.219:8088</string>
+    <string name="url_save_bookingdetails">/api/VehicleBooking/SaveBookingDetails</string>
+    <string name="url_bookingstatus">/api/VehicleBooking/BookingStatus</string>
+    <string name="url_update_bookingstatus">/api/VehicleBooking/UpdateBookingStatus</string>
+    <string name="url_advance_bookingdetails">/api/VehicleBooking/AdvanceBookingDetails</string>
+    <string name="url_get_available_services">/api/TicketBooking/GetAvailableServices?srcId=</string>
+    <string name="url_eotpverification">/api/UserAccount/EOTPVerification</string>
+    <string name="url_motpverification">/api/UserAccount/MOTPVerifications</string>
+    <string name="url_getwallet_transdetails">/api/WalletTransDetails/GetWalletTransDetails?MobileNo=</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="forgot_pasword"><u>Forgot Password</u>.</string>
+    <string name="create_new"><u>No account yet? Create one</u>.</string>
+    <string name="next">Register</string>
+    <string name="skip">Login</string>
+    <string name="reset_password_hint">Reset Password</string>
+    <string name="mobileno">Enter Your Regestered No</string>
+    <string name="otp">Enter Mobile Number OTP</string>
+    <string name="add_payment_method_title">Add Payments Method</string>
+
+
+    <string name="slide_1_title">Hello Mzansi Traveller!</string>
+
+    <string name="slide_2_title">E-Wallet </string>
+
+    <string name="slide_3_title">Great Discounts</string>
+
+    <string name="slide_4_title">Hire vehicle</string>
+
+    <string name="password_hint">Password </string>
+    <string name="email_hint">Email </string>
+
+    <!-- Strings related to login -->
+    <string name="email_otp">"Enter OTP sent to the registered email address to complete registration process"</string>
+    <string name="mobile_otp">"Enter OTP sent to the registered Mobile Number to complete registration process"</string>
+
+    <string-array name="payments_array">
+        <item>Cash</item>
+        <item>Net Banking</item>
+        <item>Debit Card</item>
+        <item>Credit Card</item>
+        <item>E-Wallet</item>
+    </string-array>
+    <string-array name="country_type">
+        <item>Afghanistan</item>
+        <item>Zambia</item>
+        <item>Zimbabwe</item>
+    </string-array>
+    <string-array name="country_type_id">
+        <item>1</item>
+        <item>244</item>
+        <item>245</item>
+    </string-array>
+
+
+    <string name="crop_image_activity_title"></string>
+    <string name="crop_image_menu_rotate_left">Rotate counter clockwise</string>
+    <string name="crop_image_menu_rotate_right">Rotate</string>
+    <string name="crop_image_menu_crop">Crop</string>
+    <string name="crop_image_menu_flip">Flip</string>
+    <string name="crop_image_menu_flip_horizontally">Flip horizontally</string>
+    <string name="crop_image_menu_flip_vertically">Flip vertically</string>
+
+    <string name="pick_image_intent_chooser_title">Select source</string>
+
+    <string name="crop_image_activity_no_permissions">Cancelling, required permissions are not granted</string>
+    <string name="select_country">Select Country</string>
+    <string name="edit_profilepicture">Edit Profile Picture</string>
+    <string name="name">Name</string>
+    <string name="mobilenumber">Mobile No</string>
+    <string name="dateofbirth">Date Of Birth</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="paymenttype">Payment Type</string>
+    <string name="text_skip">Skip</string>
+    <string name="update">Update</string>
+    <string name="seats">Seats</string>
+    <string name="continue_bus">Continue</string>
+    <string name="cancelride">Cancel Ride</string>
+    <string name="call_driver">Call Driver</string>
+    <string name="home">Home</string>
+    <string name="taxi">Taxi</string>
+    <string name="account">Account</string>
+    <string name="reenter_password_hint">Re enter Password</string>
+    <string name="lastname_hint">Last Name</string>
+    <string name="firstname_hint">First Name</string>
+    <string name="confirm">Confirm</string>
+    <string name="recharge">Recharge</string>
+    <string name="transfer_money">Transfer Money</string>
+    <string name="time">Min:Sec</string>
+    <string name="min_time">00 : 15</string>
+    <string name="submit">Submit</string>
+    <string name="metered_taxi">Metered Taxi</string>
+    <string name="bus">Bus</string>
+    <string name="ride_now">Ride Now</string>
+    <string name="ride_later">Ride Later</string>
+    <string name="getalyft">Get-a-Lyft</string>
+    <string name="bus_ticket">Bus Ticket</string>
+    <string name="train">Train</string>
+    <string name="cruise_services">Cruise Services</string>
+    <string name="ambulance_services">Ambulance Services</string>
+    <string name="towing_services">Towing Services</string>
+    <string name="parcel_services">Parcel Sevices</string>
+    <string name="logout">Logout</string>
+    <string name="sos">SOS</string>
+    <string name="flight">Flight</string>
+    <string name="where_togo_hint">Where To Go ?</string>
+    <string name="currentlocation_hint">Current Location ?</string>
+    <string name="website">www.mzansitraveller.com</string>
+    <string name="ticket_details">Ticket Details</string>
+    <string name="age">Age</string>
+    <string name="payment">Payment</string>
+    <string name="payment_options">Payment Options</string>
+    <string name="e_wallet">E-Wallet</string>
+    <string name="net_banking">Net Banking</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="debit_card">Debit Card</string>
+    <string name="cash">Cash</string>
+    <string name="rate_trip">Please Rate Your Trip ?</string>
+    <string name="comments">Please Enter comments</string>
+    <string name="select_date">Please Select Date</string>
+    <string name="select_time">Please Select Time</string>
+    <string name="book">Book</string>
+    <string name="cancel">Cancel</string>
+    <string name="sos_options">SOS Options</string>
+    <string name="need_ambulance">Need Ambulance</string>
+    <string name="driver_misbehaviour">Driver Misbehaviour</string>
+    <string name="forgot_belongings">Forgot Belongings</string>
+    <string name="other">Other</string>
+    <string name="from">\n  From</string>
+    <string name="enter_city">  Enter City</string>
+    <string name="to">\n  To</string>
+    <string name="date">\n  Date</string>
+    <string name="journey_date"> Journey Date</string>
+    <string name="choose_any_paymentmethod">Choose Any Payment Method</string>
+    <string name="add_bankaccount_details">Add Bank Account Details</string>
+    <string name="credit_debitcard">Credit/Debit Card</string>
+    <string name="cards">Debit/Credit card</string>
+    <string name="payment_id">Payment Id</string>
+    <string name="shop">SHOP</string>
+    <string name="hotel">HOTEL</string>
+    <string name="standard_title">Loading</string>
+    <string name="standard_message">Please Wait</string>
+
+
+    <string name="url_driver_login">/api/Driverlogin/ValidateDriverCredentials</string>
+    <string name="url_savedriver_documents">/api/DriverMaster/SaveDriverDocuments</string>
+    <string name="url_driver_goonline">/api/Driverlogin/Driverlogin</string>
+    <string name="url_trackvehicle">/api/VehicleMaster/TrackVehicle</string>
+    <string name="url_vehicle_booking">/api/VehicleBooking/AcceptRejectBooking</string>
+    <string name="url_driver_ratingtoride">/api/VehicleBooking/DriverRatingToRide</string>
+    <string name="url_getdrivertrips">/api/Driverlogin/Getdrivertrips?DriverNo=</string>
+    <string name="url_getdriver_details">/api/DriverMaster/GetDriverDetails?DID=</string>
+    <string name="url_getvehicle_details">/api/VehicleMaster/GetVehicleDetails?VID=</string>
+    <string name="url_pendingdocs">/api/Common/PendingDocs?userId=</string>
+    <string name="url_starttrip">/api/VehicleBooking/StartTrip</string>
+    <string name="url_process_payment">/api/VehicleBooking/ProcessPayment</string>
+    <string name="url_endtrip">/api/VehicleBooking/EndTrip</string>
+    <string name="url_register_drivers">/api/RegisterDriver/RegisterDrivers</string>
+    <string name="url_save_vehicledoc">/api/VehicleMaster/SaveVehicleDoc</string>
+    <string name="url_eotp_verification">/api/RegisterDriver/EOTPVerification</string>
+    <string name="url_motp_verification">/api/RegisterDriver/MOTPVerifications</string>
+    <string name="url_fleet_ownerrequest">http://154.120.237.198:52800/UI/Fleetownerrequest.html</string>
+    <string name="url_add_payment_method">/api/CustomerAccountDetails/CustomerAccount</string>
+    <string name="url_get_payment_methods">/api/CustomerAccountDetails/GetCustomerAccount?userid=</string>
+    <string name="url_reset_password">/api/DriverChangePwd/ChangePassword</string>
+    <string name="url_driver_profile">/api/DriverMaster/Driver</string>
+    <string name="url_get_trip_details">/api/VehicleBooking/RideDetails</string>
+    <string name="url_driver_forgot_password">/api/DriverForgotpassword/Forgotpassword</string>
+    <string name="url_driver_forgot_password_verfication">/api/RegisterDriver/Passwordverification</string>
+    <string name="url_save_sos">/api/SaveSOSNumber</string>
+    <string name="SOS">SOS</string>
+
+
+     <string name="facebook_app_id">1660606980909829</string>
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="fleetowner_link"><u>Click Here For Fleet Owner Registration</u>.</string>
+
+
+
+
+    <string name="username_hint">User Name</string>
+    <string name="address_hint">Address</string>
+    <string name="pincode_hint">Pincode</string>
+
+    <string name="phoneno_hint">PhoneNo</string>
+    <string name="login">Login</string>
+    <string name="register_button">Register</string>
+    <string name="advertisement">My Advertisement</string>
+
+    <string name="title_activity_home_screenactivity">HomeScreenactivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_home_screen">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+ <string name="vehicle_group">Select Vehicle Group</string>
+    <string name="vehicle_type">Select Vehicle Type</string>
+
+
+    //vehicle group names
+    <string-array name="vehicle_group">
+        <item>Hailing Car</item>
+        <item>Metered taxi</item>
+        <item>Ambulance</item>
+        <item>Towing vehicle</item>
+        <item>Parcel van</item>
+        <item>Bus</item>
+        <item>Train</item>
+        <item>Cruise</item>
+        <item>Aeroplane</item>
+        <item>Hire vehicle</item>
+    </string-array>
+    //vehicle group ids
+    <string-array name="vehicle_group_id">
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+    </string-array>
+
+
+    <string-array name="vehicle_type">
+        <item>Sedan</item>
+        <item>SUV</item>
+        <item>Hatchback</item>
+    </string-array>
+    <string-array name="vehicle_type_id">
+        <item>66</item>
+        <item>67</item>
+        <item>68</item>
+    </string-array>
+
+
+
+    <string-array name="login_type">
+        <item>Driver</item>
+        <item>Administrator</item>
+        <item>Fleet Owner</item>
+    </string-array>
+    <string-array name="currency_type">
+        <item>US Dollar</item>
+        <item>Zimbabwe Dollar</item>
+    </string-array>
+
+
+    <string name="my_profile">My Profile</string>
+    <string name="user_name">User Name</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="account_no">Account Number</string>
+    <string name="dob_hint">Date Of Birth</string>
+
+    <string name="select_photo">Select Photo</string>
+    <string name="booking_no">B.no</string>
+    <string name="source">Source</string>
+    <string name="destination">Destination</string>
+    <string name="accept">ACCEPT</string>
+    <string name="reject">REJECT</string>
+    <string name="mobile_no_hint">Mobile No</string>
+
+    <string name="drive_ownvehicle">Drive Own Vehicle</string>
+    <string name="reg_no">Regd Number</string>
+    <string name="vehicle_name">Vehicle Name</string>
+    <string name="enter_password_hint">Enter Password</string>
+
+    <string name="seconds_left_toaccept">SECONDS LEFT TO ACCEPT</string>
+    <string name="decline">DECLINE</string>
+    <string name="regno">Reg.No:AP28BR1687</string>
+    <string name="vehicle_model">Model: Innova 2005</string>
+    <string name="vehicle_insurance">Insurance No: 201798761234\n Insurance Exp Dt: 18/09/2018</string>
+    <string name="pollution_exp">Pollution Exp Dt:06/12/2017</string>
+    <string name="confirmed_trips">Confirmed Trips</string>
+    <string name="delete_all">Delete All</string>
+    <string name="delete_selected">Delete Selected</string>
+    <string name="hello_world">Hello World!</string>
+    <string name="enter_document_no">Enter Document Number</string>
+    <string name="enter_expire_dt">Enter Expire Date</string>
+    <string name="choose_file">Select Document</string>
+
+    <string name="address">Address : </string>
+
+    <string name="documents_list">Documents List</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="go_online">Go Online</string>
+    <string name="statistics">Statistics</string>
+    <string name="my_location">My Location</string>
+    <string name="assigned_taxi">Assigned Vehicle</string>
+    <string name="ongoing_trip">Ongoing Trip</string>
+
+    <string name="start_trip">Start Trip</string>
+    <string name="payments">Payments</string>
+    <string name="call_customer">Call Customer</string>
+    <string name="paysmart">Paysmart</string>
+
+    <string name="please_rate_trip">Please Rate Your Trip ?</string>
+
+    <string name="customer_misbehaviour">Customer Misbehaviour</string>
+    <string name="theft_vehicle">Theft Vehicle</string>
+    <string name="vehicle_browkdown">Vehicle BrowkDown</string>
+
+    <string name="upload_document">Upload Document</string>
+    <string name="vehicle_profile">Vehicle Profile</string>
+    <string name="payments_title">Payments</string>
+    <string name="payment_method_title">Payments Methods</string>
+
+
+    <string name="add_payment_method">Add Payment Method</string>
+    <string name="default_payment_method">Default Payment Method</string>
+    <string name="my_payment_methods">My Payment Methods</string>
+
+
+    <string name="title_activity_confirmed_trips">Confirmed Trips</string>
+    <string name="title_activity_confirmed_trips_details">ConfirmedTripsDetails</string>
+    <string name="title_on_going_trips">OnGoingTrips</string>
+
+    <string name="towing">TOWING</string>
+
+    <string name="wallet">E-WALLET</string>
+
+
+
+</resources>
