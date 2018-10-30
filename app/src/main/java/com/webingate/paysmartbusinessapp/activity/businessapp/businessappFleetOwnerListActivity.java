@@ -116,6 +116,19 @@ public class businessappFleetOwnerListActivity extends AppCompatActivity {
             }
         });
 
+        fab.setOnClickListener(
+
+                v ->
+                {
+                    Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, businessappNewFleetOwnerActivity.class);
+                    startActivity(intent);
+                }
+
+                //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show()
+
+        );
+
         fabVideo.setOnClickListener(
 
                 v ->

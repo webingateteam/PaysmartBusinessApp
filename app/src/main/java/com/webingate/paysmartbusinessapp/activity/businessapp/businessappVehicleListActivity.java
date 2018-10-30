@@ -118,6 +118,19 @@ public class businessappVehicleListActivity extends AppCompatActivity {
             }
         });
 
+        fab.setOnClickListener(
+
+                v ->
+                {
+                    Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, businessappNewVehicleActivity.class);
+                    startActivity(intent);
+                }
+
+                //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show()
+
+        );
+
         fabVideo.setOnClickListener(
 
                 v ->
