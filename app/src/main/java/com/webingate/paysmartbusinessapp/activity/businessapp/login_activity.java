@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
+import com.rilixtech.CountryCodePicker;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.uicollection.CustomSpinnerAdapter;
 import com.webingate.paysmartbusinessapp.utils.Utils;
@@ -31,7 +32,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
     @BindView(R.id.loginButton)
     Button loginButton;
     CardView facebookCardView, twitterCardView;
-
+    CountryCodePicker ccp;
     Spinner spinner;
     TextView textView;
     ArrayList<String> list;
@@ -66,7 +67,8 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
 
         CustomSpinnerAdapter uiloginasCustomSpinnerAdapter =new CustomSpinnerAdapter(getApplicationContext(),icons,fruits);
         spinner.setAdapter(uiloginasCustomSpinnerAdapter);
-
+        ccp = (CountryCodePicker) findViewById(R.id.ccp);
+        ccp.setCustomMasterCountries("IN,ZW,AF");
     }
 
     //region Init Functions
