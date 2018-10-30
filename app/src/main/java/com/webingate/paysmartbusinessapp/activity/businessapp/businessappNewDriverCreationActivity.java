@@ -1,25 +1,23 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.graphics.PorterDuff;
+        import android.os.Bundle;
+        import android.support.design.widget.FloatingActionButton;
+        import android.support.v7.app.AppCompatActivity;
+        import android.support.v7.widget.Toolbar;
+        import android.util.Log;
+        import android.view.MenuItem;
+        import android.widget.Button;
+        import android.widget.ImageView;
+        import android.widget.TextView;
+        import android.widget.Toast;
+        import android.support.v4.app.Fragment;
 
-import com.webingate.paysmartbusinessapp.R;
-import com.webingate.paysmartbusinessapp.utils.Utils;
+        import com.webingate.paysmartbusinessapp.R;
+        import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDashboardFragment;
+        import com.webingate.paysmartbusinessapp.utils.Utils;
 
-public class businessappNewDriverActivity extends AppCompatActivity {
+public class businessappNewDriverCreationActivity extends AppCompatActivity {
 
     private ImageView profileImageView;
     private TextView emailTextView;
@@ -27,15 +25,15 @@ public class businessappNewDriverActivity extends AppCompatActivity {
     private TextView websiteTextView;
     private FloatingActionButton editFAB;
 
-    private int position = 1;
-    private int maxPosition = 10;
     private Button nextButton, prevButton;
     private TextView imageNoTextView;
-
+    private int position = 1;
+    private int maxPosition = 4;
+    Fragment fragment = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.businessapp_newdriver_activity);
+        setContentView(R.layout.businessapp_newdrivercreation_activity);
 
         initData();
 
@@ -65,9 +63,19 @@ public class businessappNewDriverActivity extends AppCompatActivity {
     private void initUI() {
         initToolbar();
 
-        profileImageView = findViewById(R.id.profileImageView);
-        int id = R.drawable.profile2;
-        Utils.setCornerRadiusImageToImageView(getApplicationContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
+        nextButton = findViewById(R.id.nextButton);
+        prevButton = findViewById(R.id.prevButton);
+        imageNoTextView = findViewById(R.id.imageNoTextView);
+
+        //  profileImageView = findViewById(R.id.profileImageView);
+        //  int id = R.drawable.profile2;
+        // Utils.setCornerRadiusImageToImageView(getApplicationContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
+        updatePositionTextView();
+        //  setupFragment(FeatureStepperGeneralStepper1Fragment.newInstance(position));
+
+        //fragment = (Fragment) businessappNewDriverActivity.class.newInstance();
+
+        setupFragment(new businessAppDashboardFragment());
 
         //ImageView coverUserImageView = findViewById(R.id.coverUserImageView);
         //Utils.setImageToImageView(getApplicationContext(), coverUserImageView, id);
@@ -78,13 +86,20 @@ public class businessappNewDriverActivity extends AppCompatActivity {
 
         //editFAB = findViewById(R.id.editFAB);
 
-        nextButton = findViewById(R.id.nextButton);
-        prevButton = findViewById(R.id.prevButton);
-        imageNoTextView = findViewById(R.id.imageNoTextView);
+    }
 
-        updatePositionTextView();
-        setupFragment(businessappBasicStepperActivity.newInstance(position));
+    private void updatePositionTextView() {
+        imageNoTextView.setText(new StringBuilder().append(position).append(" of ").append(maxPosition).toString());
+    }
 
+    private void setupFragment(Fragment fragment) {
+        try {
+            this.getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contentLayout, fragment)
+                    .commitAllowingStateLoss();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initActions() {
@@ -133,7 +148,8 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                 position++;
 
                 updatePositionTextView();
-                setupFragment(businessappBasicStepperActivity.newInstance(position));
+                // setupFragment(FeatureStepperGeneralStepper1Fragment.newInstance(position));
+                setupFragment(new businessAppDashboardFragment());
             } else {
                 Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
             }
@@ -145,7 +161,8 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                 position--;
 
                 updatePositionTextView();
-                setupFragment(businessappBasicStepperActivity.newInstance(position));
+                // setupFragment(FeatureStepperGeneralStepper1Fragment.newInstance(position));
+                setupFragment(new businessAppDashboardFragment());
             } else {
                 Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
             }
@@ -184,20 +201,6 @@ public class businessappNewDriverActivity extends AppCompatActivity {
             Log.e("TEAMPS","Error in set display home as up enabled.");
         }
 
-    }
-
-    private void updatePositionTextView() {
-        imageNoTextView.setText(position + " of " + maxPosition);
-    }
-
-    private void setupFragment(Fragment fragment) {
-        try {
-            this.getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentLayout, fragment)
-                    .commitAllowingStateLoss();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
     //endregion
 }

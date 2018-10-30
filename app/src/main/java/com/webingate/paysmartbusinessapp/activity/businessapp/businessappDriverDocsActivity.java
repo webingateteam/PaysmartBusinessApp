@@ -1,17 +1,12 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,18 +14,13 @@ import android.widget.Toast;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
-public class businessappNewDriverActivity extends AppCompatActivity {
+public class businessappDriverDocsActivity extends AppCompatActivity {
 
     private ImageView profileImageView;
     private TextView emailTextView;
     private TextView phoneTextView;
     private TextView websiteTextView;
     private FloatingActionButton editFAB;
-
-    private int position = 1;
-    private int maxPosition = 10;
-    private Button nextButton, prevButton;
-    private TextView imageNoTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,13 +68,6 @@ public class businessappNewDriverActivity extends AppCompatActivity {
 
         //editFAB = findViewById(R.id.editFAB);
 
-        nextButton = findViewById(R.id.nextButton);
-        prevButton = findViewById(R.id.prevButton);
-        imageNoTextView = findViewById(R.id.imageNoTextView);
-
-        updatePositionTextView();
-        setupFragment(businessappBasicStepperActivity.newInstance(position));
-
     }
 
     private void initActions() {
@@ -126,30 +109,6 @@ public class businessappNewDriverActivity extends AppCompatActivity {
 //            Toast.makeText(getApplicationContext(), "Click Edit FAB", Toast.LENGTH_SHORT).show();
 //
 //        });
-
-        nextButton.setOnClickListener(v -> {
-
-            if (position < maxPosition) {
-                position++;
-
-                updatePositionTextView();
-                setupFragment(businessappBasicStepperActivity.newInstance(position));
-            } else {
-                Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        prevButton.setOnClickListener(v -> {
-
-            if (position > 1) {
-                position--;
-
-                updatePositionTextView();
-                setupFragment(businessappBasicStepperActivity.newInstance(position));
-            } else {
-                Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void initToolbar() {
@@ -184,20 +143,6 @@ public class businessappNewDriverActivity extends AppCompatActivity {
             Log.e("TEAMPS","Error in set display home as up enabled.");
         }
 
-    }
-
-    private void updatePositionTextView() {
-        imageNoTextView.setText(position + " of " + maxPosition);
-    }
-
-    private void setupFragment(Fragment fragment) {
-        try {
-            this.getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentLayout, fragment)
-                    .commitAllowingStateLoss();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
     //endregion
 }

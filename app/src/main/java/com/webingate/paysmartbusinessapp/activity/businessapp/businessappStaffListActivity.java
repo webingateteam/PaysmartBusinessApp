@@ -118,6 +118,19 @@ public class businessappStaffListActivity extends AppCompatActivity {
             }
         });
 
+        fab.setOnClickListener(
+
+                v ->
+                {
+                    Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, businessappNewStaffActivity.class);
+                    startActivity(intent);
+                }
+
+                //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show()
+
+        );
+
         fabVideo.setOnClickListener(
 
                 v ->

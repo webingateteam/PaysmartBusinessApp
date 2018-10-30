@@ -102,15 +102,15 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:id="@+id/imageView104"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginStart="16dp"
-                            android:tint="@color/md_grey_500"
-                            app:layout_constraintBottom_toBottomOf="@+id/editText8"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/editText8"
-                            app:srcCompat="@drawable/baseline_mail" />
+                        android:id="@+id/imageView104"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="16dp"
+                        android:tint="@color/md_grey_500"
+                        app:layout_constraintBottom_toBottomOf="@+id/editText8"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/editText8"
+                        app:srcCompat="@drawable/baseline_mail" />
 
                         <EditText
                             android:id="@+id/editText8"

@@ -41,9 +41,9 @@ public class businessappStatisticsActivity extends AppCompatActivity {
         nested_scroll_view = (NestedScrollView) findViewById(R.id.nested_scroll_view);
         tab_layout = (TabLayout) findViewById(R.id.tab_layout);
 
-//        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_equalizer), 0);
-//        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_credit_card), 1);
-//        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_pie_chart_outline), 2);
+        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_equalizer), 0);
+        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_credit_card), 1);
+        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_pie_chart_outline), 2);
         tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_person), 3);
 
         // set icon color pre-selected
