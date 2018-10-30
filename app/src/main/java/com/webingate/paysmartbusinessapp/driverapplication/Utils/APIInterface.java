@@ -1,9 +1,9 @@
 package com.webingate.paysmartbusinessapp.driverapplication.Utils;
 
 import com.google.gson.JsonObject;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessEOTPVerificationResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AcceptRejectBookingResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.ChangepwdResponse;
-import com.webingate.paysmartbusinessapp.driverapplication.Deo.CustomerAccountResponce;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DefaultResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverDetailsResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverForgotpasswordResponse;
@@ -15,16 +15,14 @@ import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterRespo
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.EndtripResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetCustomerAccountResponce;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetdriverTripsResponse;
-import com.webingate.paysmartbusinessapp.driverapplication.Deo.LoginDriverResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.PendingDocsResponce;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.RegisterDriverResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.RideDetailsResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.SaveSOSNumberResponce;
-import com.webingate.paysmartbusinessapp.driverapplication.Deo.SaveVehicleDocResponce;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.StartTripResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.TrackvehicleResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.VehicleDetailsResponse;
-
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
 
 import java.util.List;
 
@@ -39,14 +37,18 @@ public interface APIInterface  {
     @POST("/api/Driverlogin/ValidateDriverCredentials")
     public Observable<List<DriverValidateCredentialsResponse>> ValidateDriver(@Body JsonObject jsonObject);
 
+    @POST("/api/BusinessAppUser/RegisterBusinessAppUser")
+    public Observable<List<RegisterBusinessUsers>> Savebusinessappusers(@Body JsonObject jsonObject);
+
+    @POST("/api/BusinessAppUser/BusinessAppUserEOTPVerification")
+    public Observable<List<BusinessEOTPVerificationResponse>> BusinessEOTPVerification(@Body JsonObject jsonObject);
+
     @POST("/api/RegisterDriver/RegisterDrivers")
     public Observable<List<RegisterDriverResponse>> RegisterDriver(@Body JsonObject jsonObject);
-
 
     //responce 1
     @POST("/api/DriverMaster/SaveDriverDocuments")
     public Observable<List<DefaultResponse>> SaveDriverDocuments(@Body JsonObject jsonObject);
-
 
     @POST("/api/Driverlogin/Driverlogin")
     public Observable<List<DriverLoginResponse>> DriverLogin(@Body JsonObject jsonObject);
@@ -115,6 +117,7 @@ public interface APIInterface  {
 
     @POST("/api/SaveSOSNumber")
     public Observable<List<SaveSOSNumberResponce>> SaveSOSNumber(@Body JsonObject jsonObject);//w
+
 
 
 

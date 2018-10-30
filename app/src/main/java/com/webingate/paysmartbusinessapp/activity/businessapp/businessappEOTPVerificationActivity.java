@@ -29,7 +29,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class customerEOTPVerificationActivity extends AppCompatActivity {
+public class businessappEOTPVerificationActivity extends AppCompatActivity {
+
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String Phone = "phoneKey";
     public static final String Email = "emailKey";
@@ -44,6 +45,7 @@ public class customerEOTPVerificationActivity extends AppCompatActivity {
 
     ImageView bgImageView;
     Button changeButton, resendButton, submitOTPButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +80,8 @@ public class customerEOTPVerificationActivity extends AppCompatActivity {
         bgImageView = findViewById(R.id.bgImageView);
         int id = Utils.getDrawableInt(getApplicationContext(), "verification3");
         Utils.setImageToImageView(getApplicationContext(), bgImageView, id);
-
         changeButton = findViewById(R.id.changeButton);
-
         resendButton = findViewById(R.id.resendButton);
-
         submitOTPButton = findViewById(R.id.submitOTPButton);
 
         sbtn=findViewById(R.id.submitOTPButton);
@@ -111,7 +110,7 @@ public class customerEOTPVerificationActivity extends AppCompatActivity {
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("Email", "hnmisv@gmail.com");
                 jsonObject.addProperty("EVerificationCode", etop.getText().toString());
-                jsonObject.addProperty("userId", "20");
+                jsonObject.addProperty("userId", "14");
                 EOTPVerification(jsonObject);
             }
         });
@@ -176,12 +175,12 @@ public class customerEOTPVerificationActivity extends AppCompatActivity {
                     @Override
                     public void onNext(List<BusinessEOTPVerificationResponse> responselist) {
                         BusinessEOTPVerificationResponse response=responselist.get(0);
-                        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedpreferences.edit();
-                        editor.putString(Emailotp, null);
-                        editor.commit();
-                        startActivity(new Intent(customerEOTPVerificationActivity.this, login_activity.class));
-                        finish();
+                            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                            editor.putString(Emailotp, response.getEmail());
+                            editor.commit();
+                            startActivity(new Intent(businessappEOTPVerificationActivity.this, VerificationActivity.class));
+                            finish();
                     }
                 });
     }

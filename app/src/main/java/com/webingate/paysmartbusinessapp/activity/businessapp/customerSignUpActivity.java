@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.RegisterDriverResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.RegisterActivity;
 import com.webingate.paysmartbusinessapp.driverapplication.VerificationActivity;
@@ -29,7 +30,7 @@ import rx.schedulers.Schedulers;
 public class customerSignUpActivity extends AppCompatActivity {
 
     public static final String MyPREFERENCES = "MyPrefs";
-    public static final String Name = "nameKey";
+    public static final String Username = "nameKey";
     public static final String Phone = "phoneKey";
     public static final String Email = "emailKey";
     public static final String Password = "passwordkey";
@@ -46,6 +47,8 @@ public class customerSignUpActivity extends AppCompatActivity {
     EditText S_password;
     @BindView(R.id.s_email)
     EditText S_email;
+    @BindView(R.id.mobileNo)
+    EditText S_mobileNo;
     TextView forgotTextView, signUpTextView;
    //Button registerButton;
     ImageView bgImageView;
@@ -53,7 +56,7 @@ public class customerSignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.customerapp_signup_activity);
+        setContentView(R.layout.businessapp_signup_activity);
 
         initUI();
 
@@ -71,8 +74,8 @@ public class customerSignUpActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.registerButton);
         S_username=findViewById(R.id.s_username);
         S_password=findViewById(R.id.s_password);
-        S_username=findViewById(R.id.s_email);
-
+        S_email=findViewById(R.id.s_email);
+        S_mobileNo=findViewById(R.id.mobileNo);
         bgImageView = findViewById(R.id.bgImageView);
     }
 
@@ -102,12 +105,16 @@ public class customerSignUpActivity extends AppCompatActivity {
 
             JsonObject object = new JsonObject();
             object.addProperty("flag", "I");
-            object.addProperty("Firstname", "hnmisv");
-            object.addProperty("lastname", "sv");
-            object.addProperty("AuthTypeId", "2");
-            object.addProperty("Password", "123");
-            object.addProperty("Mobilenumber", "7893890990");
-            object.addProperty("Email", "hnmisv@gmail.com");
+            object.addProperty("Usename",S_username.getText().toString());
+//            object.addProperty("lastname", "kumar");
+            object.addProperty("AuthTypeId", "");
+            object.addProperty("Password", S_password.getText().toString());
+            object.addProperty("Mobilenumber",S_mobileNo.getText().toString());
+            object.addProperty("Email", S_email.getText().toString());
+            object.addProperty("CountryId","1");
+            object.addProperty("CCode","91");
+            object.addProperty("UserAccountNo","10991"+S_mobileNo.getText().toString());
+            object.addProperty("UserTypeId","109");
             RegisterDriver(object);
 //            Intent intent = new Intent(this, customerEOTPVerificationActivity.class);
 //            startActivity(intent);
@@ -118,10 +125,10 @@ public class customerSignUpActivity extends AppCompatActivity {
 
         //StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(customerSignUpActivity.this).getrestadapter()
-                .RegisterDriver(jsonObject)
+                .Savebusinessappusers(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<RegisterDriverResponse>>() {
+                .subscribe(new Subscriber<List<RegisterBusinessUsers>>() {
                     @Override
                     public void onCompleted() {
                         DisplayToast("Successfully onCompleted");
@@ -139,19 +146,19 @@ public class customerSignUpActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onNext(List<RegisterDriverResponse> responseList) {
+                    public void onNext(List<RegisterBusinessUsers> responseList) {
                         DisplayToast("Successfully onNext");
-                        RegisterDriverResponse response=responseList.get(0);
+                        RegisterBusinessUsers response=responseList.get(0);
                         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedpreferences.edit();
-                        editor.putString(Name, response.getName());
-                        editor.putString(Phone, response.getPMobNo());
-                        editor.putString(Email, response.getEmail());
-                        editor.putString(Password, response.getPassword());
-                        editor.putString(Mobileotp, response.getMobileotp());
-                        editor.putString(Emailotp, response.getEmailotp());
-                        editor.putString(DRIVERID, response.getDriverId());
-                        editor.putString(VEHICLEID, response.getVehicleId());
+                        editor.putString(Username, response.getusername());
+//                        editor.putString(Phone, response.getPMobNo());
+//                        editor.putString(Email, response.getEmail());
+//                        editor.putString(Password, response.getPassword());
+//                        editor.putString(Mobileotp, response.getMobileotp());
+//                        editor.putString(Emailotp, response.getEmailotp());
+//                        editor.putString(DRIVERID, response.getDriverId());
+//                        editor.putString(VEHICLEID, response.getVehicleId());
                         editor.commit();
                         startActivity(new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class));
                         finish();
