@@ -193,5 +193,8 @@
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappVehicleDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappStatisticsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 </manifest>
