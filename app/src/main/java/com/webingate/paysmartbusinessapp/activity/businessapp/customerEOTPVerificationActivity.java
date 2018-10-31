@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessEOTPVerificationResponse;
-import com.webingate.paysmartbusinessapp.customerapp.VerificationActivity;
+//import com.webingate.paysmartbusinessapp.customerapp.VerificationActivity;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import java.util.List;
