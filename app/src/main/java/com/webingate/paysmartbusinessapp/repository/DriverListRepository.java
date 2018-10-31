@@ -2,6 +2,7 @@ package com.webingate.paysmartbusinessapp.repository;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverDetailsTableItem;
 import com.webingate.paysmartbusinessapp.object.Place;
 
 import java.util.ArrayList;
@@ -23,7 +24,13 @@ public class DriverListRepository {
     public static ArrayList<Place> getPlaceList() {
         return new Gson().fromJson(json, new  TypeToken<ArrayList<Place>>(){}.getType());
     }
+public  static ArrayList<DriverDetailsTableItem>  GetDriversList(){
+      ArrayList<DriverDetailsTableItem> response = new ArrayList <DriverDetailsTableItem>();
 
+      //call the APIInterface
+
+      return  response;
+}
     static String json = "[\n" +
             "  {\n" +
             "    \"id\":\"GardensByTheBay\",\n" +

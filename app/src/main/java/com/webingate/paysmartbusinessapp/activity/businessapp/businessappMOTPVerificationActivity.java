@@ -18,8 +18,7 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
-import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessEOTPVerificationResponse;
-//import com.webingate.paysmartbusinessapp.customerapp.VerificationActivity;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.MOTPVerification;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import java.util.List;
@@ -29,19 +28,20 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class customerEOTPVerificationActivity extends AppCompatActivity {
+public class businessappMOTPVerificationActivity extends AppCompatActivity {
+
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String Phone = "phoneKey";
     public static final String Email = "emailKey";
     public static final String Mobileotp = "mobileotpkey";
     public static final String Emailotp = "emailotpkey";
     Toast toast;
-     String E_etop;  int E_uid; String E_email;String M_otp;String M_mno;
-    @BindView(R.id.b_eotp)
-    EditText etop;
-
+    String M_numbers;
+    int M_uid;
+    @BindView(R.id.mpassword)
+    EditText M_password;
     @BindView(R.id.submitOTPButton)
-    Button sbtn;
+    Button M_submit;
 
     ImageView bgImageView;
     Button changeButton, resendButton, submitOTPButton;
@@ -49,15 +49,14 @@ public class customerEOTPVerificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.businessapp_eotpverification_activity);
+        setContentView(R.layout.businessapp_motpverification_activity);
         Intent intent = getIntent();
-        E_etop=intent.getStringExtra("etop");
-        E_uid=intent.getIntExtra("uid",0);
-        E_email=intent.getStringExtra("email");
-        M_otp=intent.getStringExtra("motp");
-        M_mno=intent.getStringExtra("mno");
+        M_numbers=intent.getStringExtra("Mnumber");
+        M_uid=intent.getIntExtra("Uid",0);
         initUI();
+
         initActions();
+
     }
 
     @Override
@@ -87,10 +86,10 @@ public class customerEOTPVerificationActivity extends AppCompatActivity {
 
         resendButton = findViewById(R.id.resendButton);
 
-        submitOTPButton = findViewById(R.id.submitOTPButton);
+        M_password=findViewById(R.id.mpassword);
+        M_submit=findViewById(R.id.submitOTPButton);
 
-        sbtn=findViewById(R.id.submitOTPButton);
-        etop=findViewById(R.id.b_eotp);
+        submitOTPButton = findViewById(R.id.submitOTPButton);
     }
 
     private void initActions(){
@@ -105,19 +104,14 @@ public class customerEOTPVerificationActivity extends AppCompatActivity {
 
         submitOTPButton.setOnClickListener((View v) ->{
             //Toast.makeText(getApplicationContext(),"OTP is Resent.",Toast.LENGTH_SHORT).show();
-//            Intent intent = new Intent(this, customerMOTPVerificationActivity.class);
+            //Intent intent = new Intent(this, login_activity.class);
+//            Intent intent = new Intent(this, customerappPaymentModeActivity.class);
 //            startActivity(intent);
-            if(etop.getText().toString().matches("")){
-                Toast.makeText(getApplicationContext(),"Please Enter OTP",Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("Email", E_email.toString());
-                jsonObject.addProperty("EVerificationCode", etop.getText().toString());
-                jsonObject.addProperty("userId", E_uid);
-                EOTPVerification(jsonObject);
-            }
+            JsonObject jsonObject = new JsonObject();
+           jsonObject.addProperty("Mobilenumber", M_numbers);
+            jsonObject.addProperty("userId", M_uid);
+            jsonObject.addProperty("MVerificationCode", M_password.getText().toString());
+            MOTPVerification(jsonObject);
         });
     }
 
@@ -132,7 +126,7 @@ public class customerEOTPVerificationActivity extends AppCompatActivity {
             toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.md_white_1000), PorterDuff.Mode.SRC_ATOP);
         }
 
-        toolbar.setTitle("Email OTP Verification");
+        toolbar.setTitle("MOTP Verification");
 
         try {
             toolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
@@ -155,12 +149,12 @@ public class customerEOTPVerificationActivity extends AppCompatActivity {
         }
 
     }
-    public void EOTPVerification(JsonObject jsonObject){
+    public void MOTPVerification(JsonObject jsonObject){
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
-                .BusinessEOTPVerification(jsonObject)
+                .MOTPVerifications1(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<BusinessEOTPVerificationResponse>>() {
+                .subscribe(new Subscriber<List<MOTPVerification>>() {
                     @Override
                     public void onCompleted() {
                         DisplayToast("Successfully Registered");
@@ -178,19 +172,13 @@ public class customerEOTPVerificationActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onNext(List<BusinessEOTPVerificationResponse> responselist) {
-                        BusinessEOTPVerificationResponse response=responselist.get(0);
-                        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedpreferences.edit();
-                        //editor.putString(Emailotp, null);
-                         Intent intent = new Intent(customerEOTPVerificationActivity.this, businessappMOTPVerificationActivity.class);
-                                                intent.putExtra("Mnumber",M_mno);
-                                                intent.putExtra("Uid",E_uid);
-                                               startActivity(intent);
-                        editor.commit();
-                        //startActivity(new Intent(customerEOTPVerificationActivity.this, login_activity.class));
-//                       Intent intent = new Intent(customerEOTPVerificationActivity.this, businessappMOTPVerificationActivity.class);
-//                        intent.putExtra("eotp","");
+                    public void onNext(List<MOTPVerification> responselist) {
+                        MOTPVerification response=responselist.get(0);
+//                        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+//                        SharedPreferences.Editor editor = sharedpreferences.edit();
+//                        editor.putString(Emailotp, null);
+//                        editor.commit();
+                        startActivity(new Intent(businessappMOTPVerificationActivity.this, login_activity.class));
                         finish();
                     }
                 });

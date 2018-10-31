@@ -144,14 +144,21 @@ public class customerSignUpActivity extends AppCompatActivity {
                             ex.printStackTrace();
                         }
                     }
-
                     @Override
                     public void onNext(List<RegisterBusinessUsers> responseList) {
                         DisplayToast("Successfully onNext");
                         RegisterBusinessUsers response=responseList.get(0);
                         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedpreferences.edit();
-                        editor.putString(Username, response.getusername());
+                        //editor.putString(Username, response.getusername());
+                        Intent intent = new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class);
+                        intent.putExtra("eotp", response.getemailotp());
+                        intent.putExtra("uid", response.getusreid());
+                        intent.putExtra("email", response.getemail());
+                        intent.putExtra("username", response.getusreid());
+                        intent.putExtra("motp", response.getmotp());
+                        intent.putExtra("mno", response.getmnumber());
+                        startActivity(intent);
 //                        editor.putString(Phone, response.getPMobNo());
 //                        editor.putString(Email, response.getEmail());
 //                        editor.putString(Password, response.getPassword());
@@ -160,10 +167,8 @@ public class customerSignUpActivity extends AppCompatActivity {
 //                        editor.putString(DRIVERID, response.getDriverId());
 //                        editor.putString(VEHICLEID, response.getVehicleId());
                         editor.commit();
-                        startActivity(new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class));
+                       // startActivity(new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class));
                         finish();
-
-
                     }
                 });
     }
