@@ -49,25 +49,18 @@ public class businessappDriversListActivity extends AppCompatActivity {
     private void initData()
     {
         // get place list
-        JsonObject jsonObject = new JsonObject();
+        //JsonObject jsonObject = new JsonObject();
         //jsonObject.addProperty("Email", "hnmisv@gmail.com");
       //  jsonObject.addProperty("EVerificationCode", etop.getText().toString());
-       // jsonObject.addProperty("userId", "14");
-        GetDriversList(jsonObject);
+       //jsonObject.addProperty("ctryId", "0");
+        GetDriversList("0");
     }
 
     private void initUI()
     {
         initToolbar();
 
-        // get list adapter
-        adapter = new businessappDriverListAdapter(DriverList);
 
-        // get recycler view
-        recyclerView = findViewById(R.id.placeList1RecyclerView);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
     private void initDataBindings()
     {
@@ -77,15 +70,7 @@ public class businessappDriversListActivity extends AppCompatActivity {
     }
     private void initActions()
     {
-        adapter.setOnItemClickListener((view, obj, position) ->
-                {
-        Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, businessappDriverDetailsActivity.class);
-        startActivity(intent);
 
-    }
-
-        );
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +82,13 @@ public class businessappDriversListActivity extends AppCompatActivity {
         initDataBindings();
         initActions();
 
+        // get recycler view
+        recyclerView = findViewById(R.id.placeList1RecyclerView);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+      //recyclerView.setLayoutManager(new LinearLayoutManager(this));
         FloatingActionButton fab = findViewById(R.id.fab);
         FloatingActionButton fabVideo = findViewById(R.id.fab_video);
         FloatingActionButton fabCamera = findViewById(R.id.fab_camera);
@@ -174,9 +166,9 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
     ArrayList<DrivermasterResponse>  response;
 
-    public void GetDriversList(JsonObject jsonObject){
+    public void GetDriversList(String ctryId){
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
-                .DriverMaster(jsonObject)
+                .GetDriverList(ctryId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<DrivermasterResponse>>() {
@@ -205,6 +197,22 @@ public class businessappDriversListActivity extends AppCompatActivity {
                       //  editor.putString(Emailotp, response.getEmail());
                     //    editor.commit();
                         //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
+                        // get list adapter
+                        DriverList = response;
+                        adapter = new businessappDriverListAdapter(DriverList);
+
+
+
+                        adapter.setOnItemClickListener((view, obj, position) ->
+                                {
+                                   // Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(businessappDriversListActivity.this, businessappDriverDetailsActivity.class);
+                                    startActivity(intent);
+
+                                }
+
+                        );
+                        recyclerView.setAdapter(adapter);
                         finish();
 
                     }

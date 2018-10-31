@@ -47,6 +47,9 @@ public interface APIInterface  {
     @POST("/api/BusinessAppUser/BusinessAppUserMOTPverifications")
     public Observable<List<MOTPVerification>> MOTPVerifications1(@Body JsonObject jsonObject);
 
+    @GET("/api/DriverMaster/Master")
+    public Observable<List<DrivermasterResponse>> GetDriverList(@Query("ctryId") String ctryId);
+
     @POST("/api/RegisterDriver/RegisterDrivers")
     public Observable<List<RegisterDriverResponse>> RegisterDriver(@Body JsonObject jsonObject);
 
@@ -108,7 +111,7 @@ public interface APIInterface  {
     public Observable<List<ChangepwdResponse>> ChangePassword(@Body JsonObject jsonObject);
 
     @POST("/api/DriverMaster/Driver")
-    public Observable<List<DrivermasterResponse>> DriverMaster(@Body JsonObject jsonObject);
+   public Observable<List<DrivermasterResponse>> DriverMaster(@Body JsonObject jsonObject);
 
     @POST("/api/VehicleBooking/RideDetails")
     public Observable<List<RideDetailsResponse>> RideDetails(@Body JsonObject jsonObject);
