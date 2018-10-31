@@ -1,9 +1,6 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -17,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessappBasicStepperActivity;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 public class businessappNewDriverActivity extends AppCompatActivity {
@@ -152,6 +150,20 @@ public class businessappNewDriverActivity extends AppCompatActivity {
         });
     }
 
+    private void updatePositionTextView() {
+        imageNoTextView.setText(position + " of " + maxPosition);
+    }
+
+    private void setupFragment(Fragment fragment) {
+        try {
+            this.getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contentLayout, fragment)
+                    .commitAllowingStateLoss();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void initToolbar() {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -184,20 +196,6 @@ public class businessappNewDriverActivity extends AppCompatActivity {
             Log.e("TEAMPS","Error in set display home as up enabled.");
         }
 
-    }
-
-    private void updatePositionTextView() {
-        imageNoTextView.setText(position + " of " + maxPosition);
-    }
-
-    private void setupFragment(Fragment fragment) {
-        try {
-            this.getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentLayout, fragment)
-                    .commitAllowingStateLoss();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
     //endregion
 }

@@ -1,4 +1,4 @@
-package com.webingate.paysmartbusinessapp.activity.businessapp;
+package com.webingate.paysmartbusinessapp.fragment.businessAppFragments;
 
 
 import android.os.Bundle;

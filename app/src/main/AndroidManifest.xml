@@ -203,5 +203,6 @@
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappMOTPVerificationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+
     </application>
 </manifest>
