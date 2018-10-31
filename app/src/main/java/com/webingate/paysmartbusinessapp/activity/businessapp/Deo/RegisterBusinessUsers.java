@@ -33,17 +33,35 @@ public class RegisterBusinessUsers {
     @SerializedName("UserTypeId")
     private String UserTypeId;
 
+    @SerializedName("Emailotp")
+    private String Emailotp;
 
-    public String getusername(){
-        return Usename;
+    @SerializedName("Id")
+    private int Id;
+    @SerializedName("Mobileotp")
+    private String Mobileotp;
+
+
+    public String getemail(){
+        return Email;
     }
-
+    public int getusreid(){return Id;}
+    public String getemailotp(){
+        return Emailotp;
+    }
+    public String getmotp(){return Mobileotp;}
+    public String getmnumber(){return Mobilenumber;}
 
     @Override
     public String toString(){
         return
                 "RegisterBusinessAppusersResponse{" +
+                        "Id = '" + Id + '\'' +
+                        "Email = '" + Email + '\'' +
+                        "Usename = '" + Emailotp + '\'' +
                         "Usename = '" + Usename + '\'' +
+                        "Mobileotp = '" + Mobileotp + '\'' +
+                        "Mobileotp = '" + Mobilenumber + '\'' +
                         "}";
     }
 }

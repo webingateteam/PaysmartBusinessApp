@@ -12,7 +12,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.webingate.paysmartbusinessapp.R;
-import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.object.Place;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
@@ -23,20 +22,20 @@ import java.util.ArrayList;
  * Contact Email : teamps.is.cool@gmail.com
  * Website : http://www.panacea-soft.com
  */
-public class businessappDriverListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class businessappDriverListAdapter_old extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private ArrayList<DrivermasterResponse> placeArrayList;
+    private ArrayList<Place> placeArrayList;
     private OnItemClickListener itemClickListener;
 
     public interface OnItemClickListener {
-        void onItemClick(View view, DrivermasterResponse obj, int position);
+        void onItemClick(View view, Place obj, int position);
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.itemClickListener = mItemClickListener;
     }
 
-    public businessappDriverListAdapter(ArrayList<DrivermasterResponse> placeArrayList) {
+    public businessappDriverListAdapter_old(ArrayList<Place> placeArrayList) {
         this.placeArrayList = placeArrayList;
     }
 
@@ -51,23 +50,23 @@ public class businessappDriverListAdapter extends RecyclerView.Adapter<RecyclerV
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
 
-        if (viewHolder instanceof DriverViewHolder) {
+        if (viewHolder instanceof PlaceViewHolder) {
 
-            DrivermasterResponse place = placeArrayList.get(position);
+            Place place = placeArrayList.get(position);
 
-            DriverViewHolder holder = (DriverViewHolder) viewHolder;
-            holder.placeNameTextView.setText(place.getNAme());
+            PlaceViewHolder holder = (PlaceViewHolder) viewHolder;
+            holder.placeNameTextView.setText(place.name);
 
             Context context = holder.placeHolderCardView.getContext();
 
-            int id = Utils.getDrawableInt(context, place.getPhoto());
+            int id = Utils.getDrawableInt(context, place.imageName);
             Utils.setImageToImageView(context, holder.placeImageView, id);
 
-            holder.typeTextView.setText("12");
-            holder.cityTextView.setText("");
-            holder.placeRatingBar.setRating(Float.parseFloat("4"));
-            holder.totalRatingTextView.setText("4");
-            holder.ratingCountTextView.setText("4");
+            holder.typeTextView.setText(place.type);
+            holder.cityTextView.setText(place.city);
+            holder.placeRatingBar.setRating(Float.parseFloat(place.totalRating));
+            holder.totalRatingTextView.setText(place.totalRating);
+            holder.ratingCountTextView.setText(place.ratingCount);
 
 //            if (place.discount != null && Integer.parseInt(place.discount) > 0) {
 //                holder.promoCardView.setVisibility(View.VISIBLE);
@@ -114,37 +113,5 @@ public class businessappDriverListAdapter extends RecyclerView.Adapter<RecyclerV
             promoCardView = view.findViewById(R.id.promoCardView);
             placeHolderCardView = view.findViewById(R.id.placeHolderCardView);
         }
-
-
-    }
-
-    public class DriverViewHolder extends RecyclerView.ViewHolder {
-        public ImageView placeImageView;
-        public TextView placeNameTextView;
-        public TextView typeTextView;
-        public TextView cityTextView;
-        public TextView totalRatingTextView;
-        public TextView ratingCountTextView;
-        public RatingBar placeRatingBar;
-        //  public TextView promoAmtTextView;
-        public CardView promoCardView;
-        public CardView placeHolderCardView;
-
-        public DriverViewHolder(View view) {
-            super(view);
-
-            placeImageView = view.findViewById(R.id.placeImageView);
-            placeNameTextView = view.findViewById(R.id.placeNameTextView);
-            typeTextView = view.findViewById(R.id.distanceTextView);
-            cityTextView = view.findViewById(R.id.cityTextView);
-            totalRatingTextView = view.findViewById(R.id.totalRatingTextView);
-            ratingCountTextView = view.findViewById(R.id.ratingCountTextView);
-            placeRatingBar = view.findViewById(R.id.placeRatingBar);
-            //   promoAmtTextView = view.findViewById(R.id.promoAmtTextView);
-            promoCardView = view.findViewById(R.id.promoCardView);
-            placeHolderCardView = view.findViewById(R.id.placeHolderCardView);
-        }
-
-
     }
 }
