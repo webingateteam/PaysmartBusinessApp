@@ -3,7 +3,9 @@ package com.webingate.paysmartbusinessapp.activity.businessapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +14,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -26,6 +29,7 @@ import com.webingate.paysmartbusinessapp.repository.DriverListRepository;
 import com.webingate.paysmartbusinessapp.repository.directory.PlaceRepository;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,19 +52,33 @@ public class businessappDriversListActivity extends AppCompatActivity {
     private LinearLayout linearCamera;
     private void initData()
     {
-        // get place list
-        //JsonObject jsonObject = new JsonObject();
-        //jsonObject.addProperty("Email", "hnmisv@gmail.com");
-      //  jsonObject.addProperty("EVerificationCode", etop.getText().toString());
-       //jsonObject.addProperty("ctryId", "0");
-        GetDriversList("0");
+
+        JsonObject object = new JsonObject();
+        object.addProperty("flag", "I");
+        object.addProperty("Firstname", "");
+        object.addProperty("lastname", "");
+        object.addProperty("AuthTypeId", "2");
+        object.addProperty("Password", "");
+        object.addProperty("Mobilenumber", "");
+        object.addProperty("Email", "");
+
+        GetDriversList(object);
     }
 
     private void initUI()
     {
         initToolbar();
 
+        // get list adapter
+        adapter = new businessappDriverListAdapter(DriverList);
 
+        // get recycler view
+        recyclerView = findViewById(R.id.placeList1RecyclerView);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        recyclerView.setAdapter(adapter);
     }
     private void initDataBindings()
     {
@@ -70,7 +88,15 @@ public class businessappDriversListActivity extends AppCompatActivity {
     }
     private void initActions()
     {
+        adapter.setOnItemClickListener((view, obj, position) ->
+                {
+        Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, businessappDriverDetailsActivity.class);
+        startActivity(intent);
 
+    }
+
+        );
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,13 +108,6 @@ public class businessappDriversListActivity extends AppCompatActivity {
         initDataBindings();
         initActions();
 
-        // get recycler view
-        recyclerView = findViewById(R.id.placeList1RecyclerView);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-      //recyclerView.setLayoutManager(new LinearLayoutManager(this));
         FloatingActionButton fab = findViewById(R.id.fab);
         FloatingActionButton fabVideo = findViewById(R.id.fab_video);
         FloatingActionButton fabCamera = findViewById(R.id.fab_camera);
@@ -166,9 +185,9 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
     ArrayList<DrivermasterResponse>  response;
 
-    public void GetDriversList(String ctryId){
+    public void GetDriversList(JsonObject jsonObject){
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
-                .GetDriverList(ctryId)
+                .DriverMaster(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<DrivermasterResponse>>() {
@@ -197,24 +216,8 @@ public class businessappDriversListActivity extends AppCompatActivity {
                       //  editor.putString(Emailotp, response.getEmail());
                     //    editor.commit();
                         //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
-                        // get list adapter
-                        DriverList = response;
-                        adapter = new businessappDriverListAdapter(DriverList);
-
-
-
-                        adapter.setOnItemClickListener((view, obj, position) ->
-                                {
-                                   // Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(businessappDriversListActivity.this, businessappDriverDetailsActivity.class);
-                                    startActivity(intent);
-
-                                }
-
-                        );
-                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
                         finish();
-
                     }
                 });
 
