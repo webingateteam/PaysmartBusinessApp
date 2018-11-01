@@ -205,7 +205,5 @@
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappForgotPasswordActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
     </application>
 </manifest>

@@ -2,6 +2,7 @@ package com.webingate.paysmartbusinessapp.driverapplication.Utils;
 
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessEOTPVerificationResponse;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessappuserValidateResp;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.MOTPVerification;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AcceptRejectBookingResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.ChangepwdResponse;
@@ -46,6 +47,9 @@ public interface APIInterface  {
 
     @POST("/api/BusinessAppUser/BusinessAppUserMOTPverifications")
     public Observable<List<MOTPVerification>> MOTPVerifications1(@Body JsonObject jsonObject);
+
+    @POST("/api/login/BusinessAppUserValidateCredentials")
+    public Observable<List<BusinessappuserValidateResp>> BusinessAppUserValidateCredentials(@Body JsonObject jsonObject);
 
     @GET("/api/DriverMaster/Master")
     public Observable<List<DrivermasterResponse>> GetDriverList(@Query("ctryId") String ctryId);
