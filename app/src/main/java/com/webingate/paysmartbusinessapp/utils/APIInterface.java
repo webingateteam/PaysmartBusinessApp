@@ -1,32 +1,33 @@
-package com.webingate.paysmartbusinessapp.utils;
 
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.AcceptRejectBookingResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.ChangepwdResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.CustomerAccountResponce;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.DefaultResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverDetailsResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverForgotpasswordResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverLoginResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverPasswordVerificationResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverRateTheRideResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverValidateCredentialsResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.EndtripResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetCustomerAccountResponce;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetdriverTripsResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.LoginDriverResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.PendingDocsResponce;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.RegisterDriverResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.RideDetailsResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.SaveSOSNumberResponce;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.SaveVehicleDocResponce;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.StartTripResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.TrackvehicleResponse;
-//import com.webingate.paysmartbusinessapp.driverapplication.Deo.VehicleDetailsResponse;
+package com.webingate.paysmartbusinessapp.utils;
+/*
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.AcceptRejectBookingResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.ChangepwdResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.CustomerAccountResponce;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DefaultResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverDetailsResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverForgotpasswordResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverLoginResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverPasswordVerificationResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverRateTheRideResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverValidateCredentialsResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.EndtripResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetCustomerAccountResponce;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetdriverTripsResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.LoginDriverResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.PendingDocsResponce;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.RegisterDriverResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.RideDetailsResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.SaveSOSNumberResponce;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.SaveVehicleDocResponce;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.StartTripResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.TrackvehicleResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.VehicleDetailsResponse;
 
 
 public interface APIInterface  {
-   /*
+
     @POST("/api/Driverlogin/ValidateDriverCredentials")
     public Observable<List<DriverValidateCredentialsResponse>> ValidateDriver(@Body JsonObject jsonObject);
 
@@ -137,6 +138,7 @@ public interface APIInterface  {
     public Observable<SuccessMsg> DeleteImages(@Body JsonObject jsonObject);
 
 
-    */
+
 
 }
+*/

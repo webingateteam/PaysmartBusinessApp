@@ -45,7 +45,7 @@ public class businessappDriverListAdapter extends RecyclerView.Adapter<RecyclerV
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.businessapp_driverlist_item, parent, false);
 
-        return new PlaceViewHolder(itemView);
+        return new DriverViewHolder(itemView);
     }
 
     @Override
@@ -60,7 +60,8 @@ public class businessappDriverListAdapter extends RecyclerView.Adapter<RecyclerV
 
             Context context = holder.placeHolderCardView.getContext();
 
-            int id = Utils.getDrawableInt(context, place.getPhoto());
+           // int id = Utils.getDrawableInt(context, place.getPhoto());
+            int id = Utils.getDrawableInt(context, "photo_male_7");
             Utils.setImageToImageView(context, holder.placeImageView, id);
 
             holder.typeTextView.setText("12");
