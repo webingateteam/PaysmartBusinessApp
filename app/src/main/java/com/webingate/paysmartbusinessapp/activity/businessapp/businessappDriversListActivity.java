@@ -3,7 +3,9 @@ package com.webingate.paysmartbusinessapp.activity.businessapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +14,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -26,6 +29,7 @@ import com.webingate.paysmartbusinessapp.repository.DriverListRepository;
 import com.webingate.paysmartbusinessapp.repository.directory.PlaceRepository;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,12 +52,17 @@ public class businessappDriversListActivity extends AppCompatActivity {
     private LinearLayout linearCamera;
     private void initData()
     {
-        // get place list
-        JsonObject jsonObject = new JsonObject();
-        //jsonObject.addProperty("Email", "hnmisv@gmail.com");
-      //  jsonObject.addProperty("EVerificationCode", etop.getText().toString());
-       // jsonObject.addProperty("userId", "14");
-        GetDriversList(jsonObject);
+
+        JsonObject object = new JsonObject();
+        object.addProperty("flag", "I");
+        object.addProperty("Firstname", "");
+        object.addProperty("lastname", "");
+        object.addProperty("AuthTypeId", "2");
+        object.addProperty("Password", "");
+        object.addProperty("Mobilenumber", "");
+        object.addProperty("Email", "");
+
+        GetDriversList(object);
     }
 
     private void initUI()
@@ -68,6 +77,8 @@ public class businessappDriversListActivity extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        recyclerView.setAdapter(adapter);
     }
     private void initDataBindings()
     {
@@ -205,8 +216,8 @@ public class businessappDriversListActivity extends AppCompatActivity {
                       //  editor.putString(Emailotp, response.getEmail());
                     //    editor.commit();
                         //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
+                        adapter.notifyDataSetChanged();
                         finish();
-
                     }
                 });
 
