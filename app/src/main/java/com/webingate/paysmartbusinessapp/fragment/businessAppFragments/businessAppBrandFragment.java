@@ -169,8 +169,8 @@ public class businessAppBrandFragment extends Fragment {
                         startActivity(intent2);
                         break;
                     case 3:
-                        intent = new Intent(getActivity(), businessappStatisticsActivity.class);
-                        startActivity(intent);
+                        Intent intent1 = new Intent(getActivity(), businessappStatisticsActivity.class);
+                        startActivity(intent1);
                         break;
                     case 4:
                         Intent intent4 = new Intent(getActivity(), businessappBusinessOwnerListActivity.class);

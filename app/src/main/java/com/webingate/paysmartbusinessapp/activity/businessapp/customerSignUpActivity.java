@@ -6,20 +6,27 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
+import com.rilixtech.CountryCodePicker;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
+import com.webingate.paysmartbusinessapp.adapter.uicollection.CustomSpinnerAdapter;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.RegisterDriverResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.RegisterActivity;
 import com.webingate.paysmartbusinessapp.driverapplication.VerificationActivity;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -52,7 +59,17 @@ public class customerSignUpActivity extends AppCompatActivity {
     TextView forgotTextView, signUpTextView;
    //Button registerButton;
     ImageView bgImageView;
+    CountryCodePicker ccp;
 
+    Spinner spinner;
+    TextView textView;
+    ArrayList<String> list;
+    ArrayAdapter<String> adapter;
+    int loginasOption = -1;
+
+    String[] fruits = {"Driver", "Fleet owner", "Ticket Agent", "Brand ambassador","Business Owner"};
+    int[] icons = {R.drawable.baseline_person_outline_black_24, R.drawable.baseline_person_outline_black_24, R.drawable.baseline_person_outline_black_24
+            , R.drawable.baseline_person_outline_black_24,R.drawable.baseline_person_outline_black_24};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +80,18 @@ public class customerSignUpActivity extends AppCompatActivity {
         initDataBindings();
 
         initActions();
+
+        spinner = findViewById(R.id.spinner);
+        //spinner.setOnItemSelectedListener(this);
+
+        list = new ArrayList<>(Arrays.asList(fruits));
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list);
+
+        CustomSpinnerAdapter uiloginasCustomSpinnerAdapter =new CustomSpinnerAdapter(getApplicationContext(),icons,fruits);
+        spinner.setAdapter(uiloginasCustomSpinnerAdapter);
+        ccp = (CountryCodePicker) findViewById(R.id.ccp);
+        ccp.setCustomMasterCountries("IN,ZW,AF");
 
     }
 
@@ -88,7 +117,7 @@ public class customerSignUpActivity extends AppCompatActivity {
         forgotTextView.setOnClickListener(view -> {
            // Toast.makeText(getApplicationContext(), "Clicked Forgot Password.", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(this, customerForgotPasswordActivity.class);
+            Intent intent = new Intent(this, businessappForgotPasswordActivity.class);
             startActivity(intent);
         });
 

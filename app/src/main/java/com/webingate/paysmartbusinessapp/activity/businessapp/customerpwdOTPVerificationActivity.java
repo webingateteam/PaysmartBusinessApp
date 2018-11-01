@@ -1,6 +1,8 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +12,36 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessEOTPVerificationResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverPasswordVerificationResponse;
 import com.webingate.paysmartbusinessapp.utils.Utils;
+
+import java.util.List;
+
+import butterknife.BindView;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class customerpwdOTPVerificationActivity extends AppCompatActivity {
 
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String Phone = "phoneKey";
+    public static final String Email = "emailKey";
+    public static final String Mobileotp = "mobileotpkey";
+    public static final String Emailotp = "emailotpkey";
+    Toast toast;
+    @BindView(R.id.s_pwd)
+    EditText etop;
+
+    @BindView(R.id.submitOTPButton)
+    Button sbtn;
 
     ImageView bgImageView;
     Button changeButton, resendButton, submitOTPButton;
@@ -61,6 +85,8 @@ public class customerpwdOTPVerificationActivity extends AppCompatActivity {
         resendButton = findViewById(R.id.resendButton);
 
         submitOTPButton = findViewById(R.id.submitOTPButton);
+        sbtn=findViewById(R.id.submitOTPButton);
+        etop=findViewById(R.id.s_pwd);
     }
 
     private void initActions(){
@@ -75,8 +101,19 @@ public class customerpwdOTPVerificationActivity extends AppCompatActivity {
 
         submitOTPButton.setOnClickListener((View v) ->{
             //Toast.makeText(getApplicationContext(),"OTP is Resent.",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, login_activity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(this, customerMOTPVerificationActivity.class);
+//            startActivity(intent);
+            if(etop.getText().toString().matches("")){
+                Toast.makeText(getApplicationContext(),"Please Enter OTP",Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("UserAccountNo", "109917893890990");
+                jsonObject.addProperty("Password", "1234");
+                jsonObject.addProperty("Passwordotp", "14");
+                PWDOTPVerification(jsonObject);
+            }
         });
     }
 
@@ -112,6 +149,51 @@ public class customerpwdOTPVerificationActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.e("TEAMPS", "Error in set display home as up enabled.");
         }
+
+    }
+
+    public void PWDOTPVerification(JsonObject jsonObject){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
+                .Passwordverification(jsonObject)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<DriverPasswordVerificationResponse>>() {
+                    @Override
+                    public void onCompleted() {
+                        DisplayToast("Successfully Registered");
+                        //StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            //Log.d("OnError ", e.getMessage());
+                            DisplayToast("Error");
+                            //StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<DriverPasswordVerificationResponse> responselist) {
+                        DriverPasswordVerificationResponse response=responselist.get(0);
+                        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                        editor.putString(Emailotp, response.getEmail());
+                        editor.commit();
+                        startActivity(new Intent(customerpwdOTPVerificationActivity.this, login_activity.class));
+                        finish();
+                    }
+                });
+    }
+    public void DisplayToast(String text){
+        if(toast!=null){
+            toast.cancel();
+            toast=null;
+
+        }
+        toast= Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT);
+        toast.show();
 
     }
 }

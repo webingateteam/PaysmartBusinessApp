@@ -126,7 +126,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
     private void initActions() {
         forgotTextView.setOnClickListener(view -> {
             //Toast.makeText(getApplicationContext(), "Clicked Forgot Password.", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, customerForgotPasswordActivity.class);
+            Intent intent = new Intent(this, businessappForgotPasswordActivity.class);
             startActivity(intent);
         });
 
