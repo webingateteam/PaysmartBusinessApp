@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.rilixtech.CountryCodePicker;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessappuserValidateResp;
 import com.webingate.paysmartbusinessapp.adapter.uicollection.CustomSpinnerAdapter;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverValidateCredentialsResponse;
@@ -51,7 +52,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
     public static final String Profilepic = "profilepic";
     public static final String DRIVERID = "driverid";
     public static final String VEHICLEID = "vehicleid";
-
+    int  a=0;
     private String response;
     Toast toast;
     ProgressDialog dialog ;
@@ -65,6 +66,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
     Spinner spinner;
     TextView textView;
     ArrayList<String> list;
+    ArrayList<String> list1;
     ArrayAdapter<String> adapter;
     int loginasOption = -1;
     @BindView(R.id.input_mobile)
@@ -90,18 +92,16 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
         initDataBindings();
 
         initActions();
-
         spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
 
         list = new ArrayList<>(Arrays.asList(fruits));
-
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list);
-
         CustomSpinnerAdapter uiloginasCustomSpinnerAdapter =new CustomSpinnerAdapter(getApplicationContext(),icons,fruits);
         spinner.setAdapter(uiloginasCustomSpinnerAdapter);
         ccp = (CountryCodePicker) findViewById(R.id.ccp);
         ccp.setCustomMasterCountries("IN,ZW,AF");
+
     }
 
     //region Init Functions
@@ -140,15 +140,16 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
 
         loginButton.setOnClickListener(view -> {
 
-//            if (mobileNo.getText().toString().matches("") || textPassword.getText().toString().matches("")) {
-//                Toast.makeText(getApplicationContext(), "Please Enter details", Toast.LENGTH_SHORT).show();
-//            } else {
-//                JsonObject jsonObject = new JsonObject();
-//                jsonObject.addProperty("Mobilenumber", mobileNo.getText().toString());
-//                jsonObject.addProperty("Password", textPassword.getText().toString());
-//                DriverLogin(jsonObject);
-//            }
-            GoToDashboard();
+            if (mobileNo.getText().toString().matches("") || textPassword.getText().toString().matches("")) {
+                Toast.makeText(getApplicationContext(), "Please Enter details", Toast.LENGTH_SHORT).show();
+            } else {
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("CountryId", selectype());
+                jsonObject.addProperty("Password", textPassword.getText().toString());
+                jsonObject.addProperty("UserAccountNo", selectype()+ccp.getSelectedCountryCode()+mobileNo.getText().toString());
+                DriverLogin(jsonObject);
+           }
+           // GoToDashboard();
             //Toast.makeText(getApplicationContext(), "Clicked Login.", Toast.LENGTH_SHORT).show();
 
 
@@ -161,6 +162,17 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
 //        twitterCardView.setOnClickListener(view -> {
 //            Toast.makeText(getApplicationContext(), "Clicked Twitter.", Toast.LENGTH_SHORT).show();
 //        });
+    }
+
+    private int selectype(){
+        if(loginasOption==0){
+            return 109;
+        }else if(loginasOption==1){
+            return 110;
+        }
+        else {
+            return 200;
+        }
     }
 
     private void GoToDashboard(){
@@ -221,10 +233,10 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
 
        // StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
-                .ValidateDriver(jsonObject)
+                .BusinessAppUserValidateCredentials(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<DriverValidateCredentialsResponse>>() {
+                .subscribe(new Subscriber<List<BusinessappuserValidateResp>>() {
                     @Override
                     public void onCompleted() {
                         //    DisplayToast("Successfully LoggedIn");
@@ -242,24 +254,24 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
                     }
 
                     @Override
-                    public void onNext(List<DriverValidateCredentialsResponse> responce) {
-                        DriverValidateCredentialsResponse credentialsResponse=responce.get(0);
+                    public void onNext(List<BusinessappuserValidateResp> responce) {
+                        BusinessappuserValidateResp credentialsResponse=responce.get(0);
                         if(credentialsResponse.getCode()!=null){
                             DisplayToast(credentialsResponse.getDescription());
                         }else {
                             SharedPreferences sharedPref = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putString(DRIVERID, credentialsResponse.getDid());
-                            editor.putString(VEHICLEID, credentialsResponse.getVehicleId());
-                            editor.putString(Phone, mobileNo.getText().toString());
-                            editor.putString(Emailotp, null);
-                            editor.putString(Mobileotp, null);
+//                            editor.putString(DRIVERID, credentialsResponse.getDid());
+//                            editor.putString(VEHICLEID, credentialsResponse.getVehicleId());
+//                            editor.putString(Phone, mobileNo.getText().toString());
+//                            editor.putString(Emailotp, null);
+//                            editor.putString(Mobileotp, null);
                             editor.commit();
                             ApplicationConstants.mobileNo = mobileNo.getText().toString();
                             //startActivity(new Intent(this, MainActivity.class));
-                            GoToDashboard();
+                           GoToDashboard();
                             finish();
-                        }
+                       }
 
                     }
                 });
@@ -274,7 +286,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         loginasOption = position;
-    }
+           }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
