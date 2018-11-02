@@ -101,7 +101,14 @@ public class businessappVehicleListAdapter extends RecyclerView.Adapter<Recycler
 
     @Override
     public int getItemCount() {
-        return placeArrayList.size();
+        int a ;
+        if(placeArrayList != null && !placeArrayList.isEmpty()) {
+            a = placeArrayList.size();
+        }
+        else {
+            a = 0;
+        }
+        return a;
     }
 
     public class PlaceViewHolder extends RecyclerView.ViewHolder {

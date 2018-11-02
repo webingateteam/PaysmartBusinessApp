@@ -12,6 +12,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.object.Place;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
@@ -24,18 +25,18 @@ import java.util.ArrayList;
  */
 public class businessappFleetOwnerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private ArrayList<Place> placeArrayList;
+    private ArrayList<DrivermasterResponse> placeArrayList;
     private OnItemClickListener itemClickListener;
 
     public interface OnItemClickListener {
-        void onItemClick(View view, Place obj, int position);
+        void onItemClick(View view, DrivermasterResponse obj, int position);
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.itemClickListener = mItemClickListener;
     }
 
-    public businessappFleetOwnerListAdapter(ArrayList<Place> placeArrayList) {
+    public businessappFleetOwnerListAdapter(ArrayList<DrivermasterResponse> placeArrayList) {
         this.placeArrayList = placeArrayList;
     }
 
@@ -52,22 +53,22 @@ public class businessappFleetOwnerListAdapter extends RecyclerView.Adapter<Recyc
 
         if (viewHolder instanceof PlaceViewHolder) {
 
-            Place place = placeArrayList.get(position);
+            DrivermasterResponse place = placeArrayList.get(position);
 
             PlaceViewHolder holder = (PlaceViewHolder) viewHolder;
-            holder.placeNameTextView.setText(place.name);
+            holder.placeNameTextView.setText(place.getNAme());
 
             Context context = holder.placeHolderCardView.getContext();
 
-            int id = Utils.getDrawableInt(context, place.imageName);
+            // int id = Utils.getDrawableInt(context, place.getPhoto());
+            int id = Utils.getDrawableInt(context, "photo_male_7");
             Utils.setImageToImageView(context, holder.placeImageView, id);
 
-            holder.typeTextView.setText(place.type);
-            holder.cityTextView.setText(place.city);
-            holder.placeRatingBar.setRating(Float.parseFloat(place.totalRating));
-            holder.totalRatingTextView.setText(place.totalRating);
-            holder.ratingCountTextView.setText(place.ratingCount);
-
+            holder.typeTextView.setText("12");
+            holder.cityTextView.setText("");
+            holder.placeRatingBar.setRating(Float.parseFloat("4"));
+            holder.totalRatingTextView.setText("4");
+            holder.ratingCountTextView.setText("4");
 //            if (place.discount != null && Integer.parseInt(place.discount) > 0) {
 //                holder.promoCardView.setVisibility(View.VISIBLE);
 //                String discount = place.discount + " %";
@@ -84,7 +85,14 @@ public class businessappFleetOwnerListAdapter extends RecyclerView.Adapter<Recyc
 
     @Override
     public int getItemCount() {
-        return placeArrayList.size();
+        int a ;
+        if(placeArrayList != null && !placeArrayList.isEmpty()) {
+            a = placeArrayList.size();
+        }
+        else {
+            a = 0;
+        }
+        return a;
     }
 
     public class PlaceViewHolder extends RecyclerView.ViewHolder {

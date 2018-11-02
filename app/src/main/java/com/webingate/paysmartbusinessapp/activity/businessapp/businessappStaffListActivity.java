@@ -17,22 +17,29 @@ import android.widget.Toast;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
 import com.webingate.paysmartbusinessapp.adapter.businessappStaffListAdapter;
+import com.webingate.paysmartbusinessapp.adapter.businessappVehicleListAdapter;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.object.Place;
 import com.webingate.paysmartbusinessapp.repository.DriverListRepository;
 import com.webingate.paysmartbusinessapp.repository.StaffListRepository;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class businessappStaffListActivity extends AppCompatActivity {
 
-    ArrayList<Place> placeArrayList;
+    ArrayList<DrivermasterResponse> StaffList;
     businessappStaffListAdapter adapter;
     // RecyclerView
     RecyclerView recyclerView;
 
     private boolean twist = false;
-
+    Toast toast;
     private LinearLayout linearPhoto;
     private LinearLayout linearVideo;
     private LinearLayout linearCamera;
@@ -40,7 +47,8 @@ public class businessappStaffListActivity extends AppCompatActivity {
     private void initData()
     {
         // get place list
-        placeArrayList = StaffListRepository.getPlaceList();
+       // placeArrayList = StaffListRepository.getPlaceList();
+        GetStafflist("0");
     }
 
     private void initUI()
@@ -48,7 +56,7 @@ public class businessappStaffListActivity extends AppCompatActivity {
         initToolbar();
 
         // get list adapter
-        adapter = new businessappStaffListAdapter(placeArrayList);
+        adapter = new businessappStaffListAdapter(null);
 
         // get recycler view
         recyclerView = findViewById(R.id.placeList1RecyclerView);
@@ -63,15 +71,15 @@ public class businessappStaffListActivity extends AppCompatActivity {
     }
     private void initActions()
     {
-        adapter.setOnItemClickListener((view, obj, position) ->
-                {
-                    Toast.makeText(this, "Selected : " + obj.name, Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(this, businessappStaffDetailsActivity.class);
-                    startActivity(intent);
-
-                }
-
-        );
+//        adapter.setOnItemClickListener((view, obj, position) ->
+//                {
+//                    Toast.makeText(this, "Selected : " + obj.name, Toast.LENGTH_LONG).show();
+//                    Intent intent = new Intent(this, businessappStaffDetailsActivity.class);
+//                    startActivity(intent);
+//
+//                }
+//
+//        );
     }
 
     @Override
@@ -203,6 +211,75 @@ public class businessappStaffListActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    ArrayList<DrivermasterResponse>  response;
+    public void GetStafflist (String ctryId ){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
+                .GetDriverList(ctryId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<DrivermasterResponse>>() {
 
+                    @Override
+                    public void onCompleted() {
+                        DisplayToast("Successfully Registered");
+                        //StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            //Log.d("OnError ", e.getMessage());
+                            DisplayToast("Error");
+                            //StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<DrivermasterResponse> responselist) {
+                        StaffList= (ArrayList <DrivermasterResponse>) responselist;
+                        //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                        //   SharedPreferences.Editor editor = sharedpreferences.edit();
+                        //  editor.putString(Emailotp, response.getEmail());
+                        //    editor.commit();
+                        //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
+                        // DriverList
+                        adapter = new businessappStaffListAdapter(StaffList);
+                        recyclerView.setAdapter(adapter);
+
+                        adapter.setOnItemClickListener((view, obj, position) ->
+                                {
+                                    //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+
+                                    GoToDetails(obj);
+                                }
+                        );
+                        // adapter.notifyDataSetChanged();
+                        // finish();
+                    }
+                });
+
+
+    }
+    public  void GoToDetails(DrivermasterResponse obj)
+    {
+        Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, businessappStaffDetailsActivity.class);
+        startActivity(intent);
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    public void DisplayToast(String text){
+        if(toast!=null){
+            toast.cancel();
+            toast=null;
+
+        }
+        toast= Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT);
+        toast.show();
+
+    }
     //endregion
 }

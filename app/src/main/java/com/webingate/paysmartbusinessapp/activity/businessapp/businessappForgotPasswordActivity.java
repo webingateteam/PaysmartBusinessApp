@@ -41,6 +41,7 @@ public class businessappForgotPasswordActivity extends AppCompatActivity {
 
     @BindView(R.id.resetButton)
     Button sbtn;
+
     @BindView(R.id.s_email)
     EditText email;
 
@@ -97,7 +98,7 @@ public class businessappForgotPasswordActivity extends AppCompatActivity {
             else
             {
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("Email", "109917893890990");
+                jsonObject.addProperty("Email", email.getText().toString());
 //                jsonObject.addProperty("Email", "109917893890990");
                 Forgotpassword(jsonObject);
             }
@@ -107,7 +108,7 @@ public class businessappForgotPasswordActivity extends AppCompatActivity {
 
     public void Forgotpassword(JsonObject jsonObject){
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
-                .Forgotpassword(jsonObject)
+                .Forgotpassword1(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<DriverForgotpasswordResponse>>() {
@@ -133,8 +134,13 @@ public class businessappForgotPasswordActivity extends AppCompatActivity {
                         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedpreferences.edit();
                         editor.putString(passwordotp, response.getPasswordotp());
+                        Intent intent = new Intent(businessappForgotPasswordActivity.this, businessapppwdOTPVerificationActivity.class);
+                        intent.putExtra("Email", response.getemail());
+                        intent.putExtra("passowordotp", response.getPasswordotp());
+                        startActivity(intent);
                         editor.commit();
-                        startActivity(new Intent(businessappForgotPasswordActivity.this, customerpwdOTPVerificationActivity.class));
+
+                        //startActivity(new Intent(businessappForgotPasswordActivity.this, businessapppwdOTPVerificationActivity.class));
                         finish();
                     }
                 });

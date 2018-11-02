@@ -306,12 +306,12 @@ public class DirectoryHome9Repository {
             "]";
     private static String fleetownerJson = "[{\n" +
             "  \"id\": \"product11\",\n" +
-            "  \"icon\": \"home9_rental\",\n" +
+            "  \"icon\": \"baseline_person_outline_black_24\",\n" +
             "   \"name\": \"Drivers\"\n" +
             " },\n" +
             "{\n" +
             "  \"id\": \"product12\",\n" +
-            "  \"icon\": \"home9_flight\",\n" +
+            "  \"icon\": \"home9_rental\",\n" +
             "  \"name\": \"Vehicles\"\n" +
             "},\n" +
             " {\n" +
@@ -331,7 +331,7 @@ public class DirectoryHome9Repository {
             "  },\n" +
             "  {\n" +
             "    \"id\": \"product7\",\n" +
-            "    \"icon\": \"home9_bus\",\n" +
+            "    \"icon\": \"team_icon\",\n" +
             "    \"name\": \"Staff\"\n" +
             "  },\n" +
             "  {\n" +

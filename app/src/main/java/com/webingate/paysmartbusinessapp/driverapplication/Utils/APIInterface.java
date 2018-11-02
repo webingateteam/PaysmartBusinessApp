@@ -45,6 +45,12 @@ public interface APIInterface  {
     @POST("/api/BusinessAppUser/BusinessAppUserEOTPVerification")
     public Observable<List<BusinessEOTPVerificationResponse>> BusinessEOTPVerification(@Body JsonObject jsonObject);
 
+    @POST("/api/DriverForgotpassword/BusinessAppForgotpassword")
+    public Observable<List<DriverForgotpasswordResponse>> Forgotpassword1(@Body JsonObject jsonObject);
+
+    @POST("/api/DriverForgotpassword/BusinessAppForgotpassword")
+    public Observable<List<DriverForgotpasswordResponse>> BusinessappForgotpassword1(@Body JsonObject jsonObject);
+
     @POST("/api/BusinessAppUser/BusinessAppUserMOTPverifications")
     public Observable<List<MOTPVerification>> MOTPVerifications1(@Body JsonObject jsonObject);
 
