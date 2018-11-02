@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -34,7 +35,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class customerSignUpActivity extends AppCompatActivity {
+public class customerSignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String Username = "nameKey";
@@ -82,7 +83,7 @@ public class customerSignUpActivity extends AppCompatActivity {
         initActions();
 
         spinner = findViewById(R.id.spinner);
-        //spinner.setOnItemSelectedListener(this);
+        spinner.setOnItemSelectedListener(this);
 
         list = new ArrayList<>(Arrays.asList(fruits));
 
@@ -140,10 +141,10 @@ public class customerSignUpActivity extends AppCompatActivity {
             object.addProperty("Password", S_password.getText().toString());
             object.addProperty("Mobilenumber",S_mobileNo.getText().toString());
             object.addProperty("Email", S_email.getText().toString());
-            object.addProperty("CountryId","1");
+            object.addProperty("CountryId",ccp.getSelectedCountryCode());
             object.addProperty("CCode","91");
-            object.addProperty("UserAccountNo","10991"+S_mobileNo.getText().toString());
-            object.addProperty("UserTypeId","109");
+            object.addProperty("UserAccountNo",selectype()+ccp.getSelectedCountryCode()+S_mobileNo.getText().toString());
+            object.addProperty("usertypeid",selectype());
             RegisterDriver(object);
 //            Intent intent = new Intent(this, customerEOTPVerificationActivity.class);
 //            startActivity(intent);
@@ -200,6 +201,31 @@ public class customerSignUpActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        loginasOption = position;
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        loginasOption = -1;
+    }
+    private int selectype(){
+        if(loginasOption==0){
+            return 109;
+        }else if(loginasOption==1){
+            return 110;
+        }
+        else if(loginasOption==2){
+            return 149;
+        }else if(loginasOption==3){
+            return 150;
+        }else if(loginasOption==4){
+            return 151;
+        }
+        else {
+            return 200;
+        }
     }
     public void DisplayToast(String text){
         if(toast!=null){

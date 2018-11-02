@@ -51,16 +51,17 @@ public class businessappDriverListAdapter extends RecyclerView.Adapter<RecyclerV
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
 
-        if (viewHolder instanceof DriverViewHolder) {
+        if (viewHolder instanceof PlaceViewHolder) {
 
             DrivermasterResponse place = placeArrayList.get(position);
 
-            DriverViewHolder holder = (DriverViewHolder) viewHolder;
+            PlaceViewHolder holder = (PlaceViewHolder) viewHolder;
             holder.placeNameTextView.setText(place.getNAme());
 
             Context context = holder.placeHolderCardView.getContext();
 
-            int id = Utils.getDrawableInt(context, place.getPhoto());
+            // int id = Utils.getDrawableInt(context, place.getPhoto());
+            int id = Utils.getDrawableInt(context, "photo_male_7");
             Utils.setImageToImageView(context, holder.placeImageView, id);
 
             holder.typeTextView.setText("12");

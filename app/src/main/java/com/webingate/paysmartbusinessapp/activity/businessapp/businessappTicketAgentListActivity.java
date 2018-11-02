@@ -17,20 +17,27 @@ import android.widget.Toast;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
 import com.webingate.paysmartbusinessapp.adapter.businessappTicketAgentListAdapter;
+import com.webingate.paysmartbusinessapp.adapter.businessappVehicleListAdapter;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.object.Place;
 import com.webingate.paysmartbusinessapp.repository.DriverListRepository;
 import com.webingate.paysmartbusinessapp.repository.TicketAgentListRepository;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class businessappTicketAgentListActivity extends AppCompatActivity {
 
-    ArrayList<Place> placeArrayList;
+    ArrayList<DrivermasterResponse> DriverList;
     businessappTicketAgentListAdapter adapter;
     // RecyclerView
     RecyclerView recyclerView;
-
+     Toast toast;
     private boolean twist = false;
 
     private LinearLayout linearPhoto;
@@ -40,7 +47,8 @@ public class businessappTicketAgentListActivity extends AppCompatActivity {
     private void initData()
     {
         // get place list
-        placeArrayList = TicketAgentListRepository.getPlaceList();
+       // placeArrayList = TicketAgentListRepository.getPlaceList();
+        GetTicketAgentlist("0");
     }
 
     private void initUI()
@@ -48,8 +56,8 @@ public class businessappTicketAgentListActivity extends AppCompatActivity {
         initToolbar();
 
         // get list adapter
-        adapter = new businessappTicketAgentListAdapter(placeArrayList);
-
+        //adapter = new businessappTicketAgentListAdapter(placeArrayList);
+        adapter = new businessappTicketAgentListAdapter(null);
         // get recycler view
         recyclerView = findViewById(R.id.placeList1RecyclerView);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -63,15 +71,15 @@ public class businessappTicketAgentListActivity extends AppCompatActivity {
     }
     private void initActions()
     {
-        adapter.setOnItemClickListener((view, obj, position) ->
-                {
-                    Toast.makeText(this, "Selected : " + obj.name, Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(this, businessappTicketAgentDetailsActivity.class);
-                    startActivity(intent);
-
-                }
-
-        );
+//        adapter.setOnItemClickListener((view, obj, position) ->
+//                {
+//                    Toast.makeText(this, "Selected : " + obj.name, Toast.LENGTH_LONG).show();
+//                    Intent intent = new Intent(this, businessappTicketAgentDetailsActivity.class);
+//                    startActivity(intent);
+//
+//                }
+//
+//        );
     }
 
     @Override
@@ -161,6 +169,76 @@ public class businessappTicketAgentListActivity extends AppCompatActivity {
         });
     }
 
+    ArrayList<DrivermasterResponse>  response;
+    public void GetTicketAgentlist(String ctryId ){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(businessappTicketAgentListActivity.this).getrestadapter()
+                .GetDriverList(ctryId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<DrivermasterResponse>>() {
+
+                    @Override
+                    public void onCompleted() {
+                        DisplayToast("Successfully Registered");
+                        //StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            //Log.d("OnError ", e.getMessage());
+                            DisplayToast("Error");
+                            //StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<DrivermasterResponse> responselist) {
+                        DriverList= (ArrayList <DrivermasterResponse>) responselist;
+                        //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                        //   SharedPreferences.Editor editor = sharedpreferences.edit();
+                        //  editor.putString(Emailotp, response.getEmail());
+                        //    editor.commit();
+                        //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
+                        // DriverList
+                        adapter = new businessappTicketAgentListAdapter(DriverList);
+                        recyclerView.setAdapter(adapter);
+
+                        adapter.setOnItemClickListener((view, obj, position) ->
+                                {
+                                    //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+
+                                    GoToDetails(obj);
+                                }
+                        );
+                        // adapter.notifyDataSetChanged();
+                        // finish();
+                    }
+                });
+
+
+    }
+    public  void GoToDetails(DrivermasterResponse obj)
+    {
+        Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, businessappTicketAgentDetailsActivity.class);
+        startActivity(intent);
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    public void DisplayToast(String text){
+        if(toast!=null){
+            toast.cancel();
+            toast=null;
+
+        }
+        toast= Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT);
+        toast.show();
+
+    }
     //region Init Toolbar
     private void initToolbar() {
 
