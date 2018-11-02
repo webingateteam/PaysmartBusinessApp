@@ -444,7 +444,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/roboto"
-                    android:text="1 of 10"
+                    android:text="1 of 5"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/font_body_size"
                     app:layout_constraintBottom_toBottomOf="parent"
