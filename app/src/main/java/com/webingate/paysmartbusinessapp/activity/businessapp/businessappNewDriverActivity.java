@@ -145,17 +145,19 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                 }
                 else
                     if(position == 2){
-                    setupFragment(new businessAppBusinessownerFragment());
+                    setupFragment(new businessAppVehicleDocsFragment());
                 }
             } else {
                 Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
+                //setupFragment(businessappBasicStepperActivity.newInstance(position));
             }
         });
 
         prevButton.setOnClickListener(v -> {
+            Toast.makeText(this, "previous Step.", Toast.LENGTH_SHORT).show();
 
-                if (position < maxPosition) {
-                    position++;
+                if (position > maxPosition) {
+                    position--;
 
                     updatePositionTextView();
 
@@ -170,8 +172,8 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                         setupFragment(new businessAppVehicleDocsFragment());
                     }
 
-                updatePositionTextView();
-                setupFragment(businessappBasicStepperActivity.newInstance(position));
+//                updatePositionTextView();
+//                setupFragment(businessappBasicStepperActivity.newInstance(position));
             } else {
                 Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
             }
