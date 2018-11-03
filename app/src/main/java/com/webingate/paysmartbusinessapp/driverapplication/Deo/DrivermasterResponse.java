@@ -2,7 +2,7 @@ package com.webingate.paysmartbusinessapp.driverapplication.Deo;
 
 import com.google.gson.annotations.SerializedName;
 
-public class DrivermasterResponse{
+public class DrivermasterResponse {
 
 	@SerializedName("PPin")
 	private Object pPin;
@@ -194,9 +194,9 @@ public class DrivermasterResponse{
 	@Override
  	public String toString(){
 		return 
-			"DrivermasterResponse{" + 
-			"pPin = '" + pPin + '\'' + 
-			",bloodGroup = '" + bloodGroup + '\'' + 
+			"DrivermasterResponse{" +
+			"pPin = '" + pPin + '\'' +
+			",bloodGroup = '" + bloodGroup + '\'' +
 			",driverCode = '" + driverCode + '\'' + 
 			",address = '" + address + '\'' + 
 			",companyId = '" + companyId + '\'' + 

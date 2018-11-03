@@ -63,7 +63,8 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
     public static final String Gender = "gender";
     public static final String Paymenttype = "paymenttype";
     public static final String Profilepic = "profilepic";
-    public static final String DRIVERID = "driverid";
+    public static final String UserAccountNumber = "UserAccountNo";
+    public static final String usertypeid = "usertypeid";
     public static final String VEHICLEID = "vehicleid";
     int  a=0;
     private String response;
@@ -73,6 +74,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
     private boolean isServerOn;
     public final static int REQUEST_CODE = 10101;
     String mobNo, id, emailOTP, mobileOTP;
+
     private static final int PERMISSIONS_ALL = 7;
     String[] PERMISSIONS = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -215,6 +217,13 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
         }else if(loginasOption==1){
             return 110;
         }
+        else if(loginasOption==2){
+            return 149;
+        }else if(loginasOption==3){
+            return 150;
+        }else if(loginasOption==4){
+            return 151;
+        }
         else {
             return 200;
         }
@@ -234,12 +243,17 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
 
                 break;
             case 1:
-                Toast.makeText(getApplicationContext(), "Clicked option 1.", Toast.LENGTH_SHORT).show();
-                intent = new Intent(this, businessappFleetownerDashboardActivity.class);
+                //Toast.makeText(getApplicationContext(), "Clicked option 1.", Toast.LENGTH_SHORT).show();
+
+                intent = new Intent(login_activity.this,businessappFleetownerDashboardActivity.class);
+                intent.putExtra("UserAcoountid",UserAccountNumber);
+                intent.putExtra("usertypeid",110);
+                startActivity(intent);
+                //intent = new Intent(this, businessappFleetownerDashboardActivity.class);
                 // EditText editText = (EditText) findViewById(R.id.editText);
                 // String message = editText.getText().toString();
                 //  intent.putExtra(EXTRA_MESSAGE, message);
-                startActivity(intent);
+                //startActivity(intent);
                 break;
 
             case 2:
@@ -306,8 +320,11 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
                         }else {
                             SharedPreferences sharedPref = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPref.edit();
-//                            editor.putString(DRIVERID, credentialsResponse.getDid());
-//                            editor.putString(VEHICLEID, credentialsResponse.getVehicleId());
+//                            SharedPreferences pref = getApplicationContext().getSharedPreferences(MyPREFERENCES, 0);
+//                            Editor editor = pref.edit();
+                            editor.putString(UserAccountNumber, credentialsResponse.getuseraccountno());
+                           // editor.putInt(usertypeid, credentialsResponse.getusertypeid());
+////                            editor.putString(VEHICLEID, credentialsResponse.getVehicleId());
 //                            editor.putString(Phone, mobileNo.getText().toString());
 //                            editor.putString(Emailotp, null);
 //                            editor.putString(Mobileotp, null);

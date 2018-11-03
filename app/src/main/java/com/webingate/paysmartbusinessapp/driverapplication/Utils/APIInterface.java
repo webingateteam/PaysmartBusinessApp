@@ -60,6 +60,9 @@ public interface APIInterface  {
     @GET("/api/DriverMaster/Master")
     public Observable<List<DrivermasterResponse>> GetDriverList(@Query("ctryId") String ctryId);
 
+    @GET("/api/BusinessAppUser/GetBusinessappusersusertypeid")
+    public Observable<List<DrivermasterResponse>> GetDriverList_usertype(@Query("acct") String acct, @Query("uit") int uit);
+
     @POST("/api/RegisterDriver/RegisterDrivers")
     public Observable<List<RegisterDriverResponse>> RegisterDriver(@Body JsonObject jsonObject);
 

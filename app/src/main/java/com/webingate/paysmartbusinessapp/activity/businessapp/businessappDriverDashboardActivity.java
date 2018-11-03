@@ -24,12 +24,13 @@ import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessA
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 public class businessappDriverDashboardActivity extends AppCompatActivity {
-
+     String uacountn;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_driverdashboard_activity);
-
+        Intent intent=getIntent();
+        uacountn=intent.getStringExtra("UserAccountNo");
         initData();
 
         initUI();
@@ -92,6 +93,9 @@ public class businessappDriverDashboardActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 default:
+                    intent = new Intent(this,businessAppDashboardFragment.class);
+                    intent.putExtra("UserAcoountid",uacountn);
+                    startActivity(intent);
                     loadFragment(new businessAppDashboardFragment());
                     break;
             }
