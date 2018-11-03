@@ -178,17 +178,20 @@ public class customerSignUpActivity extends AppCompatActivity implements Adapter
                     public void onNext(List<RegisterBusinessUsers> responseList) {
                         DisplayToast("Successfully onNext");
                         RegisterBusinessUsers response=responseList.get(0);
-                        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedpreferences.edit();
-                        //editor.putString(Username, response.getusername());
-                        Intent intent = new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class);
-                        intent.putExtra("eotp", response.getemailotp());
-                        intent.putExtra("uid", response.getusreid());
-                        intent.putExtra("email", response.getemail());
-                        intent.putExtra("username", response.getusreid());
-                        intent.putExtra("motp", response.getmotp());
-                        intent.putExtra("mno", response.getmnumber());
-                        startActivity(intent);
+                        if(response.getCode()!=null){
+                            DisplayToast(response.getDescription());
+                        }else {
+                            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                            //editor.putString(Username, response.getusername());
+                            Intent intent = new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class);
+                            intent.putExtra("eotp", response.getemailotp());
+                            intent.putExtra("uid", response.getusreid());
+                            intent.putExtra("email", response.getemail());
+                            intent.putExtra("username", response.getusreid());
+                            intent.putExtra("motp", response.getmotp());
+                            intent.putExtra("mno", response.getmnumber());
+                            startActivity(intent);
 //                        editor.putString(Phone, response.getPMobNo());
 //                        editor.putString(Email, response.getEmail());
 //                        editor.putString(Password, response.getPassword());
@@ -196,9 +199,10 @@ public class customerSignUpActivity extends AppCompatActivity implements Adapter
 //                        editor.putString(Emailotp, response.getEmailotp());
 //                        editor.putString(DRIVERID, response.getDriverId());
 //                        editor.putString(VEHICLEID, response.getVehicleId());
-                        editor.commit();
-                       // startActivity(new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class));
-                        finish();
+                            editor.commit();
+                            // startActivity(new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class));
+                            finish();
+                        }
                     }
                 });
     }

@@ -41,6 +41,12 @@ public class RegisterBusinessUsers {
     @SerializedName("Mobileotp")
     private String Mobileotp;
 
+    @SerializedName("Code")
+    private String Code;
+
+    @SerializedName("description")
+    private String description;
+
 
     public String getemail(){
         return Email;
@@ -51,6 +57,12 @@ public class RegisterBusinessUsers {
     }
     public String getmotp(){return Mobileotp;}
     public String getmnumber(){return Mobilenumber;}
+    public String getCode() {
+        return Code;
+    }
+    public String getDescription() {
+        return description;
+    }
 
     @Override
     public String toString(){
