@@ -1,35 +1,18 @@
 package com.webingate.paysmartbusinessapp.fragment.businessAppFragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
-import com.webingate.paysmartbusinessapp.activity.businessapp.customerappFlightBookingSearchActivity;
-import com.webingate.paysmartbusinessapp.activity.businessapp.customerappTrainBookingSearchActivity;
-import com.webingate.paysmartbusinessapp.adapter.customerapp_FlightsAdapter;
-import com.webingate.paysmartbusinessapp.adapter.customerapp_PopularAdapter;
-import com.webingate.paysmartbusinessapp.adapter.customerapp_ProductsAdapter;
-import com.webingate.paysmartbusinessapp.adapter.customerapp_PromotionsAdapter;
-import com.webingate.paysmartbusinessapp.object.DirectoryHome9CategoryVO;
-import com.webingate.paysmartbusinessapp.object.DirectoryHome9FlightsVO;
-import com.webingate.paysmartbusinessapp.object.DirectoryHome9PopularVO;
-import com.webingate.paysmartbusinessapp.object.DirectoryHome9ProductsVO;
-import com.webingate.paysmartbusinessapp.object.DirectoryHome9PromotionsVO;
-import com.webingate.paysmartbusinessapp.repository.directory.DirectoryHome9Repository;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
-import java.util.List;
+import butterknife.BindView;
 
 //import com.webingate.paysmartbusinessapp.businessapp.ApplicationConstants;
 //import com.webingate.paysmartbusinessapp.businessapp.GetaLyft;
@@ -37,6 +20,8 @@ import java.util.List;
 public class businessAppDriverUserInfoFragment extends Fragment {
 
     ImageView profileImageView;
+    @BindView(R.id.s_name)
+    EditText name;
 //    List<DirectoryHome9ProductsVO> productsList;
 //    List<DirectoryHome9CategoryVO> categoryList;
 //    List<DirectoryHome9PromotionsVO> promotionsList;
@@ -88,6 +73,7 @@ public class businessAppDriverUserInfoFragment extends Fragment {
         profileImageView = view.findViewById(R.id.profileImageView);
         int id = R.drawable.profile2;
         Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
+        setName((EditText)view.findViewById(R.id.s_name));
 //
 //        productsAdapter = new customerapp_ProductsAdapter(productsList);
 //       // categoryAdapter = new AppDirectoryHome9CategoryAdapter(categoryList);
@@ -131,6 +117,14 @@ public class businessAppDriverUserInfoFragment extends Fragment {
 //        //loginRegisterTextView = view.findViewById(R.id.loginRegisterTextView);
 
 
+    }
+
+    public EditText getName() {
+        return name;
+    }
+
+    public void setName(EditText name) {
+        this.name = name;
     }
 //
 //    private void initDataBindings() {
