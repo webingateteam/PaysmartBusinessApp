@@ -34,6 +34,12 @@ public class BusinessappuserValidateResp {
     @SerializedName("description")
     private String description;
 
+    @SerializedName("UserAccountNo")
+    private String UserAccountNo;
+
+    @SerializedName("usertypeid")
+    private int usertypeid;
+
     public String getusernamae() { return Username;}
     public String getEmail() {
         return Email;
@@ -46,6 +52,12 @@ public class BusinessappuserValidateResp {
     public String getCode() {
         return Code;
     }
+    public String getuseraccountno() {
+        return UserAccountNo;
+    }
+    public int getusertypeid() {
+        return usertypeid;
+    }
     public String getDescription() {
         return description;
     }
@@ -57,6 +69,8 @@ public class BusinessappuserValidateResp {
                         "Email = '" + Email + '\'' +
                         "Usename = '" + Username + '\'' +
                         "Mobilenumber = '" + Mobilenumber + '\'' +
+                        "usertypeid = '" + usertypeid + '\'' +
+                        "UserAccountNo = '" + UserAccountNo + '\'' +
                         "}";
     }
 }

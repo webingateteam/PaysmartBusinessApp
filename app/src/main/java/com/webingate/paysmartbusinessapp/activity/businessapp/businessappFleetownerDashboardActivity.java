@@ -32,7 +32,8 @@ public class businessappFleetownerDashboardActivity extends AppCompatActivity {
     private LinearLayout linearPhoto;
     private LinearLayout linearVideo;
     private LinearLayout linearCamera;
-
+    String uan;
+    int tid;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,7 +129,6 @@ public class businessappFleetownerDashboardActivity extends AppCompatActivity {
 
     private void initUI() {
         initToolbar();
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.home9BottomNavigation);
         Utils.removeShiftMode(bottomNavigationView);
 

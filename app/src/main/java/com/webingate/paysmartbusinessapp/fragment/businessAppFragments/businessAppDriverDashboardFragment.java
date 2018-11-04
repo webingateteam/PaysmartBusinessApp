@@ -1,6 +1,7 @@
 package com.webingate.paysmartbusinessapp.fragment.businessAppFragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,9 @@ import com.webingate.paysmartbusinessapp.repository.directory.DirectoryHome9Repo
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.webingate.paysmartbusinessapp.activity.businessapp.login_activity.MyPREFERENCES;
 
 //import com.webingate.paysmartbusinessapp.businessapp.ApplicationConstants;
 //import com.webingate.paysmartbusinessapp.businessapp.GetaLyft;
@@ -82,6 +86,7 @@ public class businessAppDriverDashboardFragment extends Fragment {
         promotionsList = DirectoryHome9Repository.getPromotionsList();
         popularList = DirectoryHome9Repository.getPopularList();
         flightsList = DirectoryHome9Repository.getFlightsList();
+
     }
 
     private void initUI(View view) {
@@ -129,6 +134,7 @@ public class businessAppDriverDashboardFragment extends Fragment {
     }
 
     private void initDataBindings() {
+
         int leftImageId = R.drawable.baseline_arrow_right_24;
         int profileImageId = R.drawable.home9_profile;
 
@@ -142,8 +148,13 @@ public class businessAppDriverDashboardFragment extends Fragment {
     }
 
     private void initActions() {
+
         //productsAdapter.setOnItemClickListener((view, product, position) -> Toast.makeText(getContext(), "Clicked : " + product.getName(), Toast.LENGTH_SHORT).show());
         productsAdapter.setOnItemClickListener((view, promotion, position) -> {
+
+            SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+            String usan = (pref.getString("UserAccountNo", ""));
+
 
                 switch(position){
                     case 0:
@@ -241,6 +252,7 @@ public class businessAppDriverDashboardFragment extends Fragment {
         flightsAdapter.setOnItemClickListener((view, flight, position) -> Toast.makeText(getContext(), "Clicked : " + flight.getCountry(), Toast.LENGTH_SHORT).show());
 
     }
+
 
 
 }

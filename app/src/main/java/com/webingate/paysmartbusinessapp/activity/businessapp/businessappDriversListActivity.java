@@ -1,12 +1,7 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -14,22 +9,16 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
-import com.webingate.paysmartbusinessapp.object.Place;
-import com.webingate.paysmartbusinessapp.repository.DriverListRepository;
-import com.webingate.paysmartbusinessapp.repository.directory.PlaceRepository;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +35,8 @@ public class businessappDriversListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     private boolean twist = false;
-
+    String uaccountno;
+    int typid;
     private LinearLayout linearPhoto;
     private LinearLayout linearVideo;
     private LinearLayout linearCamera;
@@ -62,7 +52,11 @@ public class businessappDriversListActivity extends AppCompatActivity {
 //        object.addProperty("Mobilenumber", "");
 //        object.addProperty("Email", "");
 //        object.addProperty("Email", "");
-        GetDriversList("0");
+
+        Intent intent =getIntent();
+        uaccountno=intent.getStringExtra("UserAccountNo");
+        typid=intent.getIntExtra("usertypeid",0);
+        GetDriversList(uaccountno,typid);
     }
 
     private void initUI()
@@ -177,9 +171,9 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
     ArrayList<DrivermasterResponse>  response;
 
-    public void GetDriversList(String ctryId ){
+    public void GetDriversList(String acct,int uit ){
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
-                .GetDriverList(ctryId)
+                .GetDriverList_usertype(acct,uit)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<DrivermasterResponse>>() {

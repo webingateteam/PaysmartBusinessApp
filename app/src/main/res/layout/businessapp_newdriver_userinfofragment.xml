@@ -83,10 +83,10 @@
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_body_s_size"
                     app:layout_constraintStart_toEndOf="@+id/view34"
-                    app:layout_constraintTop_toBottomOf="@+id/cityEditText" />
+                    app:layout_constraintTop_toBottomOf="@+id/s_city" />
 
                 <EditText
-                    android:id="@+id/stateEditText"
+                    android:id="@+id/s_state"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -113,9 +113,9 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
                     android:tint="@color/md_grey_600"
-                    app:layout_constraintBottom_toBottomOf="@+id/stateEditText"
-                    app:layout_constraintEnd_toEndOf="@+id/stateEditText"
-                    app:layout_constraintTop_toTopOf="@+id/stateEditText"
+                    app:layout_constraintBottom_toBottomOf="@+id/s_state"
+                    app:layout_constraintEnd_toEndOf="@+id/s_state"
+                    app:layout_constraintTop_toTopOf="@+id/s_state"
                     app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
 
@@ -128,10 +128,10 @@
                     android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cityEditText" />
+                    app:layout_constraintTop_toBottomOf="@+id/s_city" />
 
                 <EditText
-                    android:id="@+id/postalEditText"
+                    android:id="@+id/s_postal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -150,7 +150,7 @@
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_body_size"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/stateEditText"
+                    app:layout_constraintEnd_toStartOf="@+id/s_state"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/postalTitleTextView"
@@ -169,10 +169,10 @@
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_body_s_size"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cityEditText" />
+                    app:layout_constraintTop_toBottomOf="@+id/s_city" />
 
                 <EditText
-                    android:id="@+id/cityEditText"
+                    android:id="@+id/s_city"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -204,7 +204,7 @@
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_body_s_size"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/addressEditText" />
+                    app:layout_constraintTop_toBottomOf="@+id/s_address" />
 
                 <TextView
                     android:id="@+id/addressTitleTextView"
@@ -218,10 +218,10 @@
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_body_s_size"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/phoneEditText" />
+                    app:layout_constraintTop_toBottomOf="@+id/s_mobileno" />
 
                 <EditText
-                    android:id="@+id/addressEditText"
+                    android:id="@+id/s_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -242,12 +242,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/addressTitleTextView" />
 
                 <EditText
-                    android:id="@+id/phoneEditText"
+                    android:id="@+id/s_mobileno"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
+                    android:layout_height="33dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@drawable/layout_border"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
@@ -274,7 +274,7 @@
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_body_s_size"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+                    app:layout_constraintTop_toBottomOf="@+id/s_email" />
 
                 <TextView
                     android:id="@+id/emailTitleTextView"
@@ -288,10 +288,10 @@
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_body_s_size"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+                    app:layout_constraintTop_toBottomOf="@+id/s_name" />
 
                 <EditText
-                    android:id="@+id/emailEditText"
+                    android:id="@+id/s_email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -312,7 +312,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/emailTitleTextView" />
 
                 <EditText
-                    android:id="@+id/nameEditText"
+                    android:id="@+id/s_name"
                     android:layout_width="198dp"
                     android:layout_height="33dp"
                     android:layout_marginEnd="8dp"

@@ -1,6 +1,8 @@
 package com.webingate.paysmartbusinessapp.fragment.businessAppFragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -39,7 +41,8 @@ import java.util.List;
 //import com.webingate.paysmartbusinessapp.businessapp.GetaLyft;
 
 public class businessAppBusinessownerFragment extends Fragment {
-
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String UserAccountNo = "UserAccountNo";
     List<DirectoryHome9ProductsVO> productsList;
     List<DirectoryHome9CategoryVO> categoryList;
     List<DirectoryHome9PromotionsVO> promotionsList;
@@ -146,12 +149,17 @@ public class businessAppBusinessownerFragment extends Fragment {
     private void initActions() {
         //productsAdapter.setOnItemClickListener((view, product, position) -> Toast.makeText(getContext(), "Clicked : " + product.getName(), Toast.LENGTH_SHORT).show());
         productsAdapter.setOnItemClickListener((view, promotion, position) -> {
-
+            SharedPreferences prefs = this.getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+            String usan = prefs.getString(UserAccountNo, null);
                 switch(position){
                     case 0:
                        // ApplicationConstants.marker = R.mipmap.marker_taxi;
-                      Intent intent = new Intent(getActivity(), businessappDriversListActivity.class);
-                      startActivity(intent);
+                        Intent intent = new Intent(getActivity(), businessappDriversListActivity.class);
+                        intent.putExtra("UserAccountNo", usan);
+                        intent.putExtra("usertypeid", 109);
+//                        intent.putExtra("uid", response.getusreid());
+//                        Intent intent = new Intent(getActivity(), businessappDriversListActivity.class);
+                        startActivity(intent);
                         break;
                     case 1:
                          intent = new Intent(getActivity(), businessappVehicleListActivity.class);
