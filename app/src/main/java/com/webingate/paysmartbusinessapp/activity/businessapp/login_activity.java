@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -34,7 +33,6 @@ import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessappuserValidateResp;
 import com.webingate.paysmartbusinessapp.adapter.uicollection.CustomSpinnerAdapter;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
-import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverValidateCredentialsResponse;
 
 import com.webingate.paysmartbusinessapp.driverapplication.Dialog.ProgressDialog;
 import com.webingate.paysmartbusinessapp.utils.Utils;
@@ -44,7 +42,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -178,8 +175,8 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
         signUpTextView.setOnClickListener((View view) -> {
            // Toast.makeText(getApplicationContext(), "Clicked Sign Up.", Toast.LENGTH_SHORT).show();
 
-            //Intent intent = new Intent(this, customerSignUpActivity.class);
-            Intent intent = new Intent(this, customerSignUpActivity.class);
+            //Intent intent = new Intent(this, businessAppSignUpActivity.class);
+            Intent intent = new Intent(this, businessAppSignUpActivity.class);
             startActivity(intent);
         });
 

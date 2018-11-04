@@ -24,15 +24,44 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/go_online"
+            android:textSize="20dp"
+            android:layout_gravity="top|center"
+            android:background="@color/colorPrimaryDark"/>
+
+        <!--<Button-->
+            <!--android:id="@+id/goonlineBtn"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:layout_marginStart="20dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:fontFamily="@font/roboto_medium"-->
+            <!--android:text="Go Online"-->
+            <!--android:background="@color/red"-->
+            <!--android:textSize="@dimen/font_title_size"-->
+            <!--android:theme="@style/PSButton.Primary"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.0"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
         <FrameLayout
             android:id="@+id/home9Frame"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="479dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toTopOf="@+id/home9BottomNavigation"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/goonlineBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/home9BottomNavigation"

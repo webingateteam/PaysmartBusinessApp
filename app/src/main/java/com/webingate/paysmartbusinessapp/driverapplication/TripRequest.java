@@ -38,7 +38,7 @@ public class TripRequest extends Dialog implements
     private static final int ACCEPTBOOKING = 4;
     private static final int REJECTBOOKING = 5;
     Triprequest triprequest;
-    interface Triprequest{
+    public interface Triprequest{
         public void TripAccepted();
         public void TripRejected();
 

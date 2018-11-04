@@ -44,7 +44,7 @@
         android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.customerSignUpActivity"
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessAppSignUpActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.customerForgotPasswordActivity"
