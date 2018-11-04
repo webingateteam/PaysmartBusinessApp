@@ -43,21 +43,18 @@ public class businessappNewDriverActivity extends AppCompatActivity {
 
     ImageView profileImageView;
 
-    @BindView(R.id.s_name)
-    EditText name;
-    @BindView(R.id.s_email)
-    EditText email;
-    @BindView(R.id.s_address)
-    EditText address;
-    @BindView(R.id.s_city)
-    EditText city;
-    @BindView(R.id.s_mobileno)
-    EditText mno;
-    @BindView(R.id.s_postal)
-    EditText postal;
-    @BindView(R.id.s_state)
-    EditText state;
 
+
+    EditText email;
+    EditText name;
+    EditText address;
+
+    EditText city;
+
+    EditText mno;
+
+    EditText postal;
+    EditText state;
     Toast toast;
 
     businessAppDriverUserInfoFragment   userInfoFragment;
@@ -98,14 +95,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
         nextButton = findViewById(R.id.nextButton);
         prevButton = findViewById(R.id.prevButton);
         imageNoTextView = findViewById(R.id.imageNoTextView);
-        name = findViewById(R.id.s_name);
-        email = findViewById(R.id.s_email);
-        mno = findViewById(R.id.s_mobileno);
-        address = findViewById(R.id.s_address);
-        city = findViewById(R.id.s_city);
-        postal = findViewById(R.id.s_postal);
-        state = findViewById(R.id.s_state);
-        profileImageView = findViewById(R.id.profileImageView);
+
 
 
 
@@ -150,17 +140,27 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                 }
                 if(position == 2)
                 {
+                    //EditText name = (EditText)findViewById(R.id.s_name);
+                    name = findViewById(R.id.s_name);
+                    email = findViewById(R.id.s_email);
+                    mno = findViewById(R.id.s_mobileno);
+                    address = findViewById(R.id.s_address);
+                    city = findViewById(R.id.s_city);
+                    postal = findViewById(R.id.s_postal);
+                    state = findViewById(R.id.s_state);
+                    profileImageView = findViewById(R.id.profileImageView);
+
                     JsonObject object = new JsonObject();
                     object.addProperty("flag", "I");
-                    object.addProperty("Firstname","test");
+                    object.addProperty("Firstname",name.getText().toString());
                     //object.addProperty("lastname","kumar");
                     object.addProperty("AuthTypeId", "");
                     object.addProperty("Password", "123");
-                    object.addProperty("Mobilenumber","21212");
-                    object.addProperty("Email","boddu.saikumar1994541@gmail.com");
+                    object.addProperty("Mobilenumber",mno.getText().toString());
+                    object.addProperty("Email",email.getText().toString());
                     object.addProperty("CountryId","1");
                     object.addProperty("VehicleGroupId","");
-                    object.addProperty("UserAccountNo","1099121212");
+                    object.addProperty("UserAccountNo","10991"+mno.getText().toString());
                     object.addProperty("usertypeid","109");
                     object.addProperty("isDriverOwned","0");
                     object.addProperty("DPhoto","");
@@ -261,7 +261,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
 //                        editor.putString(VEHICLEID, response.getVehicleId());
                             editor.commit();
                             // startActivity(new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class));
-                            finish();
+                            //finish();
                         }
                     }
                 });
