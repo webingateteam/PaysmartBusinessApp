@@ -151,7 +151,7 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
     private void initUI() {
         initToolbar();
         ButterKnife.bind(this);
-        
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.home9BottomNavigation);
         Utils.removeShiftMode(bottomNavigationView);
 
