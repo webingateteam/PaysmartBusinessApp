@@ -150,10 +150,10 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mytrips);
         ButterKnife.bind(this);
-        dialog =  new ProgressDialog.Builder(MyTrips.this)
-                .setTitle("Loading...")
-                .setTitleColorRes(R.color.gray)
-                .build();
+//        dialog =  new ProgressDialog.Builder(MyTrips.this)
+//                .setTitle("Loading...")
+//                .setTitleColorRes(R.color.gray)
+//                .build();
         initGoogleAPIClient();//Init Google API Client
         checkPermissions();//Check Permission
         destlat = Double.parseDouble(ApplicationConstants.sourcelatitude);
@@ -729,7 +729,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 
     public void StartTrip(JsonObject jsonObject){
 
-        StartDialogue();
+      //  StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(MyTrips.this).getrestadapter()
                 .StartTrip(jsonObject)
                 .subscribeOn(Schedulers.io())
@@ -738,7 +738,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                     @Override
                     public void onCompleted() {
                         //  DisplayToast("Successfully Registered");
-                        StopDialogue();
+                   //     StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
@@ -746,7 +746,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 
                             Log.d("OnError ", e.getMessage());
                             DisplayToast("Unable to Register");
-                            StopDialogue();
+                          //  StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -778,7 +778,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 
     public void EndTrip(JsonObject jsonObject){
 
-        StartDialogue();
+      //  StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(MyTrips.this).getrestadapter()
                 .EndTrip(jsonObject)
                 .subscribeOn(Schedulers.io())
@@ -787,7 +787,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                     @Override
                     public void onCompleted() {
                         //  DisplayToast("Successfully Registered");
-                        StopDialogue();
+                     //  StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
@@ -795,7 +795,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 
                             Log.d("OnError ", e.getMessage());
                             DisplayToast("Unable to Register");
-                            StopDialogue();
+                          //  StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -885,7 +885,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 
     public void RateTheRide(JsonObject jsonObject){
 
-        StartDialogue();
+       // StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(MyTrips.this).getrestadapter()
                 .DriverRatingToRide(jsonObject).timeout(TIMEINTERVAL, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
@@ -894,7 +894,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                     @Override
                     public void onCompleted() {
                         //  DisplayToast("Successfully Registered");
-                        StopDialogue();
+                      //  StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
@@ -902,7 +902,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 
                             Log.d("OnError ", e.getMessage());
                             DisplayToast("Unable to Register");
-                            StopDialogue();
+                          // StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }

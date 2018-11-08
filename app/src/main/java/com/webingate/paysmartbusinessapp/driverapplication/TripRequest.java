@@ -44,11 +44,12 @@ public class TripRequest extends Dialog implements
 
     }
 
-    public TripRequest(Activity a, Home fragment) {
+   // public TripRequest(Activity a, Home fragment) {
+   public TripRequest(Activity a) {
         super(a);
         // TODO Auto-generated constructor stub
         this.c = a;
-        triprequest= (Triprequest) fragment;
+        triprequest= (Triprequest) c;
     }
 
     @Override

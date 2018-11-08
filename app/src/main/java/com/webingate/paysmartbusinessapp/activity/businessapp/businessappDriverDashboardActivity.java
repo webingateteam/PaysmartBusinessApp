@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.internal.BottomNavigationItemView;
@@ -98,7 +99,7 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
     private String response;
     private String serverUrl;
     private Timer timer;
-    double latitude = 0.0, longitude = 0.0;
+    double latitude = 17.456455, longitude = 78.412086;
     public final static int REQUEST_CODE = 10101;
     private static final int CHECKBOOKINGS = 3;
     private static final int ACCEPTBOOKING = 4;
@@ -217,8 +218,11 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
 //            DriverGoOnline(jsonObject);
 //        });
     }
+   // R.id.btn_confirmed_trips,
 
-    @OnClick({R.id.status,R.id.btn_confirmed_trips,R.id.btn_statastics,R.id.btn_mylocation,R.id.btn_assigned_taxi,R.id.btn_ongoing_trips,R.id.btn_sos,R.id.btn_logout,R.id.btn_myprofile})
+   @Nullable
+   @OnClick({R.id.status})
+//    @OnClick({R.id.status,R.id.btn_statastics,R.id.btn_mylocation,R.id.btn_assigned_taxi,R.id.btn_ongoing_trips,R.id.btn_sos,R.id.btn_logout,R.id.btn_myprofile})
     void OnClick(View v){
         switch (v.getId()) {
             case R.id.status:
@@ -232,7 +236,7 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
                     object.addProperty("Reason", "");
                     DriverGoOnline(object,DEACTIVEDRIVER);
                 }else {
-                    checkPermissions();
+                    //checkPermissions();
                     Log.i("Driver status", "Driver go offline");
                     JsonObject object=new JsonObject();
                     object.addProperty("loginlogout", "1");
@@ -244,14 +248,15 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
                 }
 
                 break;
-            case R.id.btn_confirmed_trips:
-                GetDriverTrips(ApplicationConstants.mobileNo);
-
-               /* ApplicationConstants.tripflag = GETTRIPS;
-                DriverCallingRequest driverCallingRequest = new DriverCallingRequest();
-                driverCallingRequest.execute();*/
-
-                break;
+//            case R.id.btn_confirmed_trips:
+//                Toast.makeText(getApplicationContext(), "Clicked Btn clickec ", Toast.LENGTH_SHORT).show();
+//                //GetDriverTrips(ApplicationConstants.mobileNo);
+//
+//               /* ApplicationConstants.tripflag = GETTRIPS;
+//                DriverCallingRequest driverCallingRequest = new DriverCallingRequest();
+//                driverCallingRequest.execute();*/
+//
+//                break;
             case R.id.btn_statastics:
 
                 break;
@@ -459,9 +464,9 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
                             ApplicationConstants.destlatitude = c.getDestLatitude();
                             ApplicationConstants.destlongitude = c.getDestLongitude();
                             ApplicationConstants.tripflag = 0;
-//                            TripRequest cdd = new TripRequest(this,businessappDriverDashboardActivity.this);
-//                            cdd.setCanceledOnTouchOutside(false);
-//                            cdd.show();
+                            TripRequest cdd = new TripRequest(businessappDriverDashboardActivity.this);
+                            cdd.setCanceledOnTouchOutside(false);
+                            cdd.show();
                         }
 
                     }
@@ -498,15 +503,17 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
                         AcceptRejectBookingResponse response=responselist.get(0);
                         if(isAccepted){
                             ApplicationConstants.customerMobileNo = response.getCustomerPhoneNo();
-                            //  ApplicationConstants.mapflag = 0;
-                            //  timer.cancel();
-                      //      startActivityForResult(new Intent(this, MyTrips.class), MY_TRIP_ACTIVITY);
+                              ApplicationConstants.mapflag = 0;
+                           // timer.cancel();
+                            startActivityForResult(new Intent(businessappDriverDashboardActivity.this, MyTrips.class), MY_TRIP_ACTIVITY);
                         }else {
                             TrackVehicle();
                         }
                     }
                 });
     }
+
+
 
     public void GetDriverTrips( String driverNo){
 
@@ -620,6 +627,7 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
                 });
     }
 
+    @Override
     public void TripAccepted() {
         Log.i("Driver status", "accepting booking");
         JsonObject object = new JsonObject();
@@ -631,6 +639,7 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
         AcceptRejectBooking(object,true);
     }
 
+    @Override
     public void TripRejected() {
         Log.i("Driver status", "accepting booking");
         JsonObject object = new JsonObject();
