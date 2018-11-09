@@ -156,8 +156,10 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 //                .build();
         initGoogleAPIClient();//Init Google API Client
         checkPermissions();//Check Permission
-        destlat = Double.parseDouble(ApplicationConstants.sourcelatitude);
-        destlong = Double.parseDouble(ApplicationConstants.sourcelongitude);
+//        destlat = Double.parseDouble(ApplicationConstants.sourcelatitude);
+//        destlong = Double.parseDouble(ApplicationConstants.sourcelongitude);
+         destlat=17.456455;
+         destlong=78.412086;
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -271,7 +273,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
         object.addProperty("BNo", ApplicationConstants.bNo);
         object.addProperty("DriverRating", ApplicationConstants.rating);
         object.addProperty("DriverRated", "2");
-        object.addProperty("DriverComments", ApplicationConstants.comments);
+        object.addProperty("DriverComments", "Namasthe");
         RateTheRide(object);
     }
 
@@ -353,19 +355,20 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
         // mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setRotateGesturesEnabled(true);
-        latlngnew = new LatLng(0.0, 0.0);
+        latlngnew = new LatLng( destlat, destlong);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latlngnew);
         markerOptions.title("My Position");
         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_taxi));
         marker = mMap.addMarker(markerOptions);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlngnew));
         if (ApplicationConstants.mapflag == 1) {
 
         } else {
-            markerOptions.position(new LatLng(destlat, destlong));
-            markerOptions.title("Customer ");
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-            markerDest = mMap.addMarker(markerOptions);
+//            markerOptions.position(new LatLng(destlat, destlong));
+//            markerOptions.title("Customer ");
+//            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+//            markerDest = mMap.addMarker(markerOptions);
         }
 
     }
@@ -600,8 +603,11 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
         // Toast.makeText(getApplicationContext(), latitude+"   "+longitude, Toast.LENGTH_SHORT).show();
         latLng = latlngnew;
         latlngnew = new LatLng(latitude, longitude);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latlngnew));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(16.5f));
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latlngnew);
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+
+
         if (ApplicationConstants.mapflag != 1) {
             DirectionsTask directionsTask = new DirectionsTask();
             directionsTask.execute();
@@ -616,6 +622,8 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
             DownloadTask downloadTask = new DownloadTask();
             downloadTask.execute(url);
         }*/
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latlngnew));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(16.5f));
     }
 
 
@@ -722,8 +730,8 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
     public void TrackVehicle(){
         JsonObject object = new JsonObject();
         object.addProperty("PMobNo", ApplicationConstants.mobileNo);
-        object.addProperty("latitude", latitude + "");
-        object.addProperty("longitude", longitude + "");
+        object.addProperty("latitude", destlat+ "");
+        object.addProperty("longitude", destlong + "");
         TrackVehicle(object);
     }
 
@@ -825,6 +833,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                                     paymentmethod = "Debit Card";
                                     break;
                             }
+
                             AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyTrips.this, R.style.Theme_AppCompat_DayNight_Dialog);
                             alertDialog.setCancelable(false);
                             alertDialog.setTitle("Payment Mode - " + paymentmethod);
@@ -838,10 +847,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                                             cdd.show();
                                         }
                                     });
-
-
                             alertDialog.show();
-
                         }
                     }
                 });

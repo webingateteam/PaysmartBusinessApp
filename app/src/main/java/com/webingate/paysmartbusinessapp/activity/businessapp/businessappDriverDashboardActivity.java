@@ -383,9 +383,11 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
                     @Override
                     public void onNext(List<DriverLoginResponse> responselist) {
                         DriverLoginResponse response=responselist.get(0);
+                        int greenColorValue = Color.parseColor("#00ff00");
                         if(flag==ACTIVEDRIVER){
                             if (response.getStatus().matches("1")) {
                                 status.setTextColor(Color.RED);
+                                status.setBackgroundColor(Color.green(greenColorValue));
                                 status.setText("Go Offline");
                                 ApplicationConstants.tripflag = CHECKBOOKINGS;
                                 // ApplicationConstants.bookingList=new ArrayList();
