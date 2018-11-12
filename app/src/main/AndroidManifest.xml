@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name="com.webingate.paysmartbusinessapp.paysmartbusinessapp"
@@ -20,10 +21,12 @@
 
 
         <meta-data
-         android:name="com.google.android.geo.API_KEY"
-         android:value="AIzaSyBdLsoQN4TDHBGdwXvwp35gFo9o9cn8lus" />
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCc5LJh1ZMYHCodjSFQMq-2s1obdt4JTDw" />
 
-
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <!--<activity-->
             <!--android:name=".activity.uicollection.container.spinner.UiContainerCustomSpinnerActivity"-->
             <!--android:theme="@style/AppTheme.NoActionBar" />-->
@@ -205,6 +208,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessapppwdOTPVerificationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappUserDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity

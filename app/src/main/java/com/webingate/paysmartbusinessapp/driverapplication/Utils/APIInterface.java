@@ -23,6 +23,7 @@ import com.webingate.paysmartbusinessapp.driverapplication.Deo.RideDetailsRespon
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.SaveSOSNumberResponce;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.StartTripResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.TrackvehicleResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.VehicleCreationResponce;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.VehicleDetailsResponse;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
 
@@ -134,6 +135,9 @@ public interface APIInterface  {
 
     @POST("api/RegisterDriver/Passwordverification")
     public Observable<List<DriverPasswordVerificationResponse>> Passwordverification(@Body JsonObject jsonObject);
+
+    @POST("api/VehicleMaster/VehicleCreation")
+    public Observable<List<VehicleCreationResponce>> VehicleCreationverification(@Body JsonObject jsonObject);
 
     @POST("/api/SaveSOSNumber")
     public Observable<List<SaveSOSNumberResponce>> SaveSOSNumber(@Body JsonObject jsonObject);//w

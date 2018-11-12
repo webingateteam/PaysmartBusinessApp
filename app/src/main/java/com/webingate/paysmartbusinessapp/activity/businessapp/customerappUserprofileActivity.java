@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,14 +15,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
+import butterknife.BindView;
+
 public class customerappUserprofileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+//  @BindView(R.id.editFAB)
+//  EditText editFAB;
     Toolbar toolbar;
 
     @Override
@@ -30,9 +36,25 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
         setContentView(R.layout.customerapp_userprofile_activity);
 
         initUI();
+        //initActions();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.openDrawer(GravityCompat.START);
+
+        FloatingActionButton fab = findViewById(R.id.editFAB);
+
+        fab.setOnClickListener(
+
+                v ->
+                {
+                    Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, businessappUserDetailsActivity.class);
+                    startActivity(intent);
+                }
+
+                //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show()
+
+        );
     }
 
     @Override
@@ -137,6 +159,27 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
          getMenuInflater().inflate(R.menu.menu_edit, menu);
         return true;
     }
+
+
+//    private void initActions(){
+//
+//        editFAB.setOnClickListener(
+//
+//                v ->
+//                {
+//                    Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(this, businessappNewDriverActivity.class);
+//                    startActivity(intent);
+//                }
+//
+//                //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show()
+//
+//        );
+//
+//        }
+
+
+
     private void initToolbar() {
 
         toolbar = findViewById(R.id.toolbar);
