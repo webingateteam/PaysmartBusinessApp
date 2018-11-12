@@ -210,5 +210,12 @@
         <activity
             android:name="com.webingate.paysmartbusinessapp.driverapplication.MyTrips"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+        android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriversTripsListActivity"
+        android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.driverlistTrips"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 </manifest>
