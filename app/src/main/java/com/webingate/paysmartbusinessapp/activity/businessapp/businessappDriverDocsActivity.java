@@ -16,6 +16,8 @@ import com.webingate.paysmartbusinessapp.utils.Utils;
 
 public class businessappDriverDocsActivity extends AppCompatActivity {
 
+
+
     private ImageView profileImageView;
     private TextView emailTextView;
     private TextView phoneTextView;

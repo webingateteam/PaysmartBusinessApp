@@ -23,6 +23,7 @@ import com.webingate.paysmartbusinessapp.driverapplication.Deo.RideDetailsRespon
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.SaveSOSNumberResponce;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.StartTripResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.TrackvehicleResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.UserInformationResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.VehicleCreationResponce;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.VehicleDetailsResponse;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
@@ -63,6 +64,9 @@ public interface APIInterface  {
 
     @GET("/api/BusinessAppUser/GetBusinessappusersusertypeid")
     public Observable<List<DrivermasterResponse>> GetDriverList_usertype(@Query("acct") String acct, @Query("uit") int uit);
+
+    @GET("/api/BusinessAppUser/GetBusinessappusersuser")
+    public Observable<List<UserInformationResponse>> GetUserInformation(@Query("acct") String acct, @Query("uit") int uit);
 
     @POST("/api/RegisterDriver/RegisterDrivers")
     public Observable<List<RegisterDriverResponse>> RegisterDriver(@Body JsonObject jsonObject);

@@ -1,84 +1,93 @@
 package com.webingate.paysmartbusinessapp.fragment.businessAppFragments;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
 
+import com.webingate.paysmartbusinessapp.utils.RangeSeekBar;
 import com.webingate.paysmartbusinessapp.utils.Utils;
+import com.webingate.paysmartbusinessapp.utils.ViewAnimationUtils;
 
 import java.util.List;
+
+import butterknife.BindView;
 
 //import com.webingate.paysmartbusinessapp.businessapp.ApplicationConstants;
 //import com.webingate.paysmartbusinessapp.businessapp.GetaLyft;
 
 public class businessAppDriverDocsFragment extends Fragment {
 
-//    private ImageView priceRangeUpDownImageView;
-//    private ImageView colorUpDownImageView;
-//    private ImageView sizeUpDownImageView;
-//    private ImageView materialUpDownImageView;
-//
-//    private View priceRangeLayout;
-//    private View colorLayout;
-//    private View sizeLayout;
-//    private View materialLayout;
-//
-//    private ImageView size1BgImageView;
-//    private ImageView size2BgImageView;
-//    private ImageView size3BgImageView;
-//    private ImageView size4BgImageView;
-//    private ImageView size5BgImageView;
-//
-//    private TextView size1TextView;
-//    private TextView size2TextView;
-//    private TextView size3TextView;
-//    private TextView size4TextView;
-//    private TextView size5TextView;
-//
-//    private ImageView color1ImageView;
-//    private ImageView color2ImageView;
-//    private ImageView color3ImageView;
-//    private ImageView color4ImageView;
-//    private ImageView color5ImageView;
-//    private ImageView color6ImageView;
-//    private ImageView color7ImageView;
-//
-//    private TextView sizeTitleValueTextView;
-//    private TextView colorTitleValueTextView;
-//    private TextView priceRangeFromTitleValueTextView;
-//    private TextView priceRangeToTitleValueTextView;
-//    private TextView priceRangeFromValueTextView;
-//    private TextView priceRangeToValueTextView;
-//
-//    private RangeSeekBar seekBar;
+    @BindView(R.id.priceRangeUpDownImageView)
+    ImageView priceupdown;
 
-    //private RangeSeekBar seekBar;
+    @BindView(R.id.colorUpDownImageView)
+    ImageView colorUpDown;
+
+    @BindView(R.id.sizeUpDownImageView)
+    ImageView sizeUpDown;
+
+    @BindView(R.id.materialUpDownImageView)
+    ImageView materialUpDown;
+
+    @BindView(R.id.priceRangeLayout)
+    ImageView priceRangeLayout;
+
+    @BindView(R.id.colorLayout)
+    ImageView colorLayout;
+
+    @BindView(R.id.sizeLayout)
+    ImageView sizeLayout;
+
+    @BindView(R.id.materialLayout)
+    ImageView materialLayout;
+
+    @BindView(R.id.priceRangeFromTitleValueTextView)
+    ImageView priceRangeFromTitleValueTextView;
+
+    @BindView(R.id.priceRangeToTitleValueTextView)
+    ImageView priceRangeToTitleValueTextView;
+
+    @BindView(R.id.priceRangeFromValueTextView)
+    ImageView priceRangeFromValueTextView;
+
+    @BindView(R.id.priceRangeToValueTextView)
+    ImageView priceRangeToValueTextView;
+
+    private RangeSeekBar seekBar;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.businessapp_newdriverdocs_fragment, container, false);
 
-//        initData();
-//
-//        initUI(view);
-//
-//        initDataBindings();
-//
-//        initActions();
-//
+        initData();
+
+        initUI();
+
+        initDataBindings();
+
+        initActions();
+
         return view;
     }
 
@@ -86,53 +95,53 @@ public class businessAppDriverDocsFragment extends Fragment {
 
 
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == android.R.id.home) {
-//            finish();
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    private void initData() {
-//
-//    }
-//
-//    private void initUI() {
-//
-//        // Init Toolbar
-//        initToolbar();
-//
-//        priceRangeUpDownImageView = findViewById(R.id.priceRangeUpDownImageView);
-//        colorUpDownImageView = findViewById(R.id.colorUpDownImageView);
-//        sizeUpDownImageView = findViewById(R.id.sizeUpDownImageView);
-//        materialUpDownImageView = findViewById(R.id.materialUpDownImageView);
-//
-//        priceRangeLayout = findViewById(R.id.priceRangeLayout);
-//        colorLayout = findViewById(R.id.colorLayout);
-//        sizeLayout = findViewById(R.id.sizeLayout);
-//        materialLayout = findViewById(R.id.materialLayout);
-//
-//        priceRangeLayout.setVisibility(View.GONE);
-//        colorLayout.setVisibility(View.GONE);
-//        sizeLayout.setVisibility(View.GONE);
-//        materialLayout.setVisibility(View.GONE);
-//
-//
-//        priceRangeFromTitleValueTextView = findViewById(R.id.priceRangeFromTitleValueTextView);
-//        priceRangeToTitleValueTextView = findViewById(R.id.priceRangeToTitleValueTextView);
-//        priceRangeFromValueTextView = findViewById(R.id.priceRangeFromValueTextView);
-//        priceRangeToValueTextView = findViewById(R.id.priceRangeToValueTextView);
-//
-//
-//        int maxValue2 = 100;
-//        seekBar = new RangeSeekBar<>(0, maxValue2, this);
-//
-//        seekBar.setSelectedMinValue(0);
-//        seekBar.setAbsoluteMaxValue(100);
-//
-//        LinearLayout linearLayout = findViewById(R.id.price_range_bar_container);
-//        linearLayout.addView(seekBar);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            //finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void initData() {
+
+    }
+
+    private void initUI() {
+
+        // Init Toolbar
+        //initToolbar();
+
+        priceupdown = (ImageView) getActivity().findViewById(R.id.priceRangeUpDownImageView);
+        colorUpDown = (ImageView) getActivity().findViewById(R.id.colorUpDownImageView);
+        sizeUpDown = (ImageView) getActivity().findViewById(R.id.sizeUpDownImageView);
+        materialUpDown = (ImageView) getActivity().findViewById(R.id.materialUpDownImageView);
+
+        priceRangeLayout = (ImageView)getActivity().findViewById(R.id.priceRangeLayout);
+        colorLayout = (ImageView) getActivity().findViewById(R.id.colorLayout);
+        sizeLayout = (ImageView) getActivity().findViewById(R.id.sizeLayout);
+        materialLayout = (ImageView) getActivity().findViewById(R.id.materialLayout);
+
+        priceRangeLayout.setVisibility(View.GONE);
+        colorLayout.setVisibility(View.GONE);
+        sizeLayout.setVisibility(View.GONE);
+        materialLayout.setVisibility(View.GONE);
+
+
+        priceRangeFromTitleValueTextView = (ImageView)getActivity().findViewById(R.id.priceRangeFromTitleValueTextView);
+        priceRangeToTitleValueTextView = (ImageView)getActivity().findViewById(R.id.priceRangeToTitleValueTextView);
+        priceRangeFromValueTextView = (ImageView)getActivity().findViewById(R.id.priceRangeFromValueTextView);
+        priceRangeToValueTextView = (ImageView)getActivity().findViewById(R.id.priceRangeToValueTextView);
+
+
+        int maxValue2 = 100;
+        //seekBar = new RangeSeekBar <>(0, maxValue2, this);
+
+        seekBar.setSelectedMinValue(0);
+        seekBar.setAbsoluteMaxValue(100);
+
+        LinearLayout linearLayout = (LinearLayout) getActivity().findViewById(R.id.price_range_bar_container);
+        linearLayout.addView(seekBar);
 //
 //        ImageView color1BgImageView = findViewById(R.id.color1BgImageView);
 //        ImageView color2BgImageView = findViewById(R.id.color2BgImageView);
@@ -158,8 +167,8 @@ public class businessAppDriverDocsFragment extends Fragment {
 //        color6ImageView = findViewById(R.id.color6ImageView);
 //        color7ImageView = findViewById(R.id.color7ImageView);
 //
-//        Drawable selectedList = getApplicationContext().getResources().getDrawable(R.drawable.baseline_selected_list_24);
-//        selectedList.setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        Drawable selectedList = getContext().getResources().getDrawable(R.drawable.baseline_selected_list_24);
+        selectedList.setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 //
 //        size1BgImageView = findViewById(R.id.size1BgImageView);
 //        size2BgImageView = findViewById(R.id.size2BgImageView);
@@ -181,104 +190,105 @@ public class businessAppDriverDocsFragment extends Fragment {
 //
 //        sizeTitleValueTextView = findViewById(R.id.sizeTitleValueTextView);
 //        colorTitleValueTextView = findViewById(R.id.colorTitleValueTextView);
-//
-//
-//        // Set Color Default
-//        color1ImageView.setImageResource(R.drawable.baseline_select_with_check_transparent_24);
-//        color1Status = true;
-//        updateColorTitle();
-//
-//        // Set Size Default
-//        setSelectUnSelectSizeFilter(size3BgImageView, R.color.colorPrimary, size3TextView, R.color.md_white_1000);
-//        size3Status = true;
-//        updateSizeTitle();
-//
-//        // Set Material Default
-//        Button material1Button = findViewById(R.id.material1Button);
-//        material1Button.setSelected(true);
-//
-//    }
-//
-//    private void setDefaultCircleImage(ImageView imageView, int color) {
-//        Utils.setCircleImageToImageView(getApplicationContext(), imageView, R.drawable.white_background, 0, 0);
-//        imageView.setColorFilter(getResources().getColor(color), PorterDuff.Mode.SRC_IN);
-//    }
-//
-//    private void setSelectUnSelectSizeFilter(ImageView imageView, int bgColor, TextView textView, int color) {
-//        imageView.setColorFilter(getResources().getColor(bgColor), PorterDuff.Mode.SRC_IN);
-//        textView.setTextColor(getResources().getColor(color));
-//    }
-//
-//    private Boolean size1Status = false;
-//    private Boolean size2Status = false;
-//    private Boolean size3Status = false;
-//    private Boolean size4Status = false;
-//    private Boolean size5Status = false;
-//
-//    private Boolean color1Status = true;
-//    private Boolean color2Status = false;
-//    private Boolean color3Status = false;
-//    private Boolean color4Status = false;
-//    private Boolean color5Status = false;
-//    private Boolean color6Status = false;
-//    private Boolean color7Status = false;
-//
-//    private void initDataBinding() {
-//
-//    }
-//
-//    private void initActions() {
-//
-//        seekBar.setOnRangeSeekBarChangeListener((bar, minValue, maxValue) -> {
-//
-//            Log.d("TEAMPS", "initUI: " + minValue + " : " + maxValue);
-//
-//            String minStr = "$ " + minValue;
-//            String maxStr = "$ " + maxValue;
-//            priceRangeFromTitleValueTextView.setText(minStr);
-//            priceRangeFromValueTextView.setText(minStr);
-//            priceRangeToTitleValueTextView.setText(maxStr);
-//            priceRangeToValueTextView.setText(maxStr);
-//
-//        });
-//
-//        priceRangeUpDownImageView.setOnClickListener((View v) -> {
-//            boolean show = Utils.toggleUpDownWithAnimation(v);
-//            if (show) {
-//                ViewAnimationUtils.expand(priceRangeLayout);
-//            } else {
-//                ViewAnimationUtils.collapse(priceRangeLayout);
-//            }
-//        });
-//
-//        sizeUpDownImageView.setOnClickListener((View v) -> {
-//            boolean show = Utils.toggleUpDownWithAnimation(v);
-//            if (show) {
-//                ViewAnimationUtils.expand(sizeLayout);
-//            } else {
-//                ViewAnimationUtils.collapse(sizeLayout);
-//            }
-//        });
-//
-//        colorUpDownImageView.setOnClickListener((View v) -> {
-//            boolean show = Utils.toggleUpDownWithAnimation(v);
-//            if (show) {
-//                ViewAnimationUtils.expand(colorLayout);
-//            } else {
-//                ViewAnimationUtils.collapse(colorLayout);
-//            }
-//        });
-//
-//        materialUpDownImageView.setOnClickListener((View v) -> {
-//            boolean show = Utils.toggleUpDownWithAnimation(v);
-//            if (show) {
-//                ViewAnimationUtils.expand(materialLayout);
-//            } else {
-//                ViewAnimationUtils.collapse(materialLayout);
-//            }
-//        });
-//
-//
+
+
+        // Set Color Default
+        //color1ImageView.setImageResource(R.drawable.baseline_select_with_check_transparent_24);
+        color1Status = true;
+        updateColorTitle();
+
+        // Set Size Default
+        //setSelectUnSelectSizeFilter(size3BgImageView, R.color.colorPrimary, size3TextView, R.color.md_white_1000);
+        size3Status = true;
+        updateSizeTitle();
+
+        // Set Material Default
+        Button material1Button = (Button)getActivity().findViewById(R.id.material1Button);
+        material1Button.setSelected(true);
+
+    }
+
+    private void setDefaultCircleImage(ImageView imageView, int color) {
+        Utils.setCircleImageToImageView(getContext(), imageView, R.drawable.white_background, 0, 0);
+        imageView.setColorFilter(getResources().getColor(color), PorterDuff.Mode.SRC_IN);
+    }
+
+    private void setSelectUnSelectSizeFilter(ImageView imageView, int bgColor, TextView textView, int color) {
+        imageView.setColorFilter(getResources().getColor(bgColor), PorterDuff.Mode.SRC_IN);
+        textView.setTextColor(getResources().getColor(color));
+    }
+
+    private Boolean size1Status = false;
+    private Boolean size2Status = false;
+    private Boolean size3Status = false;
+    private Boolean size4Status = false;
+    private Boolean size5Status = false;
+
+    private Boolean color1Status = true;
+    private Boolean color2Status = false;
+    private Boolean color3Status = false;
+    private Boolean color4Status = false;
+    private Boolean color5Status = false;
+    private Boolean color6Status = false;
+    private Boolean color7Status = false;
+
+    private void initDataBindings() {
+
+    }
+
+    private void initActions() {
+
+        seekBar.setOnRangeSeekBarChangeListener((bar, minValue, maxValue) -> {
+
+            Log.d("TEAMPS", "initUI: " + minValue + " : " + maxValue);
+
+            String minStr = "$ " + minValue;
+            String maxStr = "$ " + maxValue;
+            priceRangeFromTitleValueTextView.setTag(minStr);
+            priceRangeFromValueTextView.setTag(minStr);
+            priceRangeToTitleValueTextView.setTag(maxStr);
+            priceRangeToValueTextView.setTag(maxStr);
+
+        });
+
+
+        priceupdown.setOnClickListener((View v) -> {
+            boolean show = Utils.toggleUpDownWithAnimation(v);
+            if (show) {
+                ViewAnimationUtils.expand(priceRangeLayout);
+            } else {
+                ViewAnimationUtils.collapse(priceRangeLayout);
+            }
+        });
+
+        sizeUpDown.setOnClickListener((View v) -> {
+            boolean show = Utils.toggleUpDownWithAnimation(v);
+            if (show) {
+                ViewAnimationUtils.expand(sizeLayout);
+            } else {
+                ViewAnimationUtils.collapse(sizeLayout);
+            }
+        });
+
+        colorUpDown.setOnClickListener((View v) -> {
+            boolean show = Utils.toggleUpDownWithAnimation(v);
+            if (show) {
+                ViewAnimationUtils.expand(colorLayout);
+            } else {
+                ViewAnimationUtils.collapse(colorLayout);
+            }
+        });
+
+        materialUpDown.setOnClickListener((View v) -> {
+            boolean show = Utils.toggleUpDownWithAnimation(v);
+            if (show) {
+                ViewAnimationUtils.expand(materialLayout);
+            } else {
+               ViewAnimationUtils.collapse(materialLayout);
+            }
+        });
+
+
 //        //region Size
 //        size1TextView.setOnClickListener((View v) -> {
 //            if (size1Status) {
@@ -417,105 +427,105 @@ public class businessAppDriverDocsFragment extends Fragment {
 //        });
 //
 //        //endregion
-//
-//
-//    }
-//
-//    private void updateColorTitle() {
-//
-//        int value = 0;
-//
-//        if (color1Status) {
-//            value++;
-//        }
-//
-//        if (color2Status) {
-//            value++;
-//        }
-//
-//        if (color3Status) {
-//            value++;
-//        }
-//
-//        if (color4Status) {
-//            value++;
-//        }
-//
-//        if (color5Status) {
-//            value++;
-//        }
-//
-//        if (color6Status) {
-//            value++;
-//        }
-//
-//        if (color7Status) {
-//            value++;
-//        }
-//
-//        String result;
-//        if (value == 0) {
-//            result = "Not Set.";
-//        } else if (value == 1) {
-//            result = value + " Color";
-//        } else {
-//            result = value + " Colors";
-//        }
-//
-//        colorTitleValueTextView.setText(result);
-//
-//    }
-//
-//    private void updateSizeTitle() {
-//        String value = "";
-//
-//        if (size1Status) {
-//            value = size1TextView.getText().toString();
-//        }
-//
-//        if (size2Status) {
-//            if (value.equals("")) {
-//                value += size2TextView.getText().toString();
-//            } else {
-//                value += ", " + size2TextView.getText().toString();
-//            }
-//        }
-//
-//        if (size3Status) {
-//            if (value.equals("")) {
-//                value += size3TextView.getText().toString();
-//            } else {
-//                value += ", " + size3TextView.getText().toString();
-//            }
-//        }
-//
-//        if (size4Status) {
-//            if (value.equals("")) {
-//                value += size4TextView.getText().toString();
-//            } else {
-//                value += ", " + size4TextView.getText().toString();
-//            }
-//        }
-//
-//        if (size5Status) {
-//            if (value.equals("")) {
-//                value += size5TextView.getText().toString();
-//            } else {
-//                value += ", " + size5TextView.getText().toString();
-//            }
-//        }
-//
-//        if (value.equals("")) {
-//            value = "Not Set.";
-//        }
-//        sizeTitleValueTextView.setText(value);
-//    }
-//
-//    public void clickMaterial(View view) {
-//        if (view != null && view instanceof Button) {
-//            view.setSelected(!view.isSelected());
-//        }
-//    }
+
+
+    }
+
+    private void updateColorTitle() {
+
+        int value = 0;
+
+        if (color1Status) {
+            value++;
+        }
+
+        if (color2Status) {
+            value++;
+        }
+
+        if (color3Status) {
+            value++;
+        }
+
+        if (color4Status) {
+            value++;
+        }
+
+        if (color5Status) {
+            value++;
+        }
+
+        if (color6Status) {
+            value++;
+        }
+
+        if (color7Status) {
+            value++;
+        }
+
+        String result;
+        if (value == 0) {
+            result = "Not Set.";
+        } else if (value == 1) {
+            result = value + " Color";
+        } else {
+            result = value + " Colors";
+        }
+
+        //colorTitleValueTextView.setText(result);
+
+    }
+
+    private void updateSizeTitle() {
+        String value = "";
+
+        if (size1Status) {
+            //value = size1TextView.getText().toString();
+        }
+
+        if (size2Status) {
+            if (value.equals("")) {
+                //value += size2TextView.getText().toString();
+            } else {
+                //value += ", " + size2TextView.getText().toString();
+            }
+        }
+
+        if (size3Status) {
+            if (value.equals("")) {
+                //value += size3TextView.getText().toString();
+            } else {
+                //value += ", " + size3TextView.getText().toString();
+            }
+        }
+
+        if (size4Status) {
+            if (value.equals("")) {
+                //value += size4TextView.getText().toString();
+            } else {
+                //value += ", " + size4TextView.getText().toString();
+            }
+        }
+
+        if (size5Status) {
+            if (value.equals("")) {
+                //value += size5TextView.getText().toString();
+            } else {
+                //value += ", " + size5TextView.getText().toString();
+            }
+        }
+
+        if (value.equals("")) {
+            value = "Not Set.";
+        }
+        //sizeTitleValueTextView.setText(value);
+    }
+
+    public void clickMaterial(View view) {
+        if (view != null && view instanceof Button) {
+            view.setSelected(!view.isSelected());
+        }
+    }
 
 
 

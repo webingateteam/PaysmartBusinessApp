@@ -261,7 +261,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
 //                        editor.putString(VEHICLEID, response.getVehicleId());
                             editor.commit();
                             // startActivity(new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class));
-                            //finish();
+                            finish();
                         }
                     }
                 });

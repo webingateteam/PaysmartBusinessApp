@@ -1,6 +1,8 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,13 +22,34 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetdriverTripsResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.UserInformationResponse;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class customerappUserprofileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-//  @BindView(R.id.editFAB)
+
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String Username = "nameKey";
+    public static final String Phone = "phoneKey";
+    public static final String Email = "emailKey";
+    public static final String UserAccountNumber = "UserAccountNo";
+    public static final String usertypeid = "usertypeid";
+
+    Toast toast;
+
+    String acntno;
+    int utype;
+    //  @BindView(R.id.editFAB)
 //  EditText editFAB;
     Toolbar toolbar;
 
@@ -35,7 +58,10 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customerapp_userprofile_activity);
 
+
+
         initUI();
+        initData();
         //initActions();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -47,7 +73,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 
                 v ->
                 {
-                    Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "User Details", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappUserDetailsActivity.class);
                     startActivity(intent);
                 }
@@ -153,6 +179,9 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
         View headerLayout = navigationView.getHeaderView(0);
         ImageView userImageView = headerLayout.findViewById(R.id.userImageView);
         Utils.setCircleImageToImageView(this, userImageView, R.drawable.profile1, 0, 0);
+
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -160,6 +189,22 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
         return true;
     }
 
+    private void initData(){
+
+
+    }
+
+
+    public void DisplayToast(String text){
+        if(toast!=null){
+            toast.cancel();
+            toast=null;
+
+        }
+        toast=Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT);
+        toast.show();
+
+    }
 
 //    private void initActions(){
 //

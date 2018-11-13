@@ -244,7 +244,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
 
                 intent = new Intent(login_activity.this,businessappFleetownerDashboardActivity.class);
                 intent.putExtra("UserAcoountid",UserAccountNumber);
-                intent.putExtra("usertypeid",110);
+                intent.putExtra("usertypeid",usertypeid);
                 startActivity(intent);
                 //intent = new Intent(this, businessappFleetownerDashboardActivity.class);
                 // EditText editText = (EditText) findViewById(R.id.editText);
@@ -320,6 +320,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
 //                            SharedPreferences pref = getApplicationContext().getSharedPreferences(MyPREFERENCES, 0);
 //                            Editor editor = pref.edit();
                             editor.putString(UserAccountNumber, credentialsResponse.getuseraccountno());
+                            editor.putInt(usertypeid, credentialsResponse.getusertypeid());
                            // editor.putInt(usertypeid, credentialsResponse.getusertypeid());
 ////                            editor.putString(VEHICLEID, credentialsResponse.getVehicleId());
 //                            editor.putString(Phone, mobileNo.getText().toString());
@@ -424,14 +425,29 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
             if (dialog.isShowing())
                 dialog.dismiss();
             if (isServerOn) {
-                if (mobNo != null && emailOTP == null && mobileOTP == null) {
-                    //ApplicationConstants.mobileNo = mobNo;
+//                if (mobNo != null && emailOTP == null && mobileOTP == null) {
+//                    //ApplicationConstants.mobileNo = mobNo;
+//                    ApplicationConstants.id = id;
+//                    startActivity(new Intent(login_activity.this, businessappMOTPVerificationActivity.class));
+//                    finish();
+//                } else if (mobNo != null && (emailOTP != null || mobileOTP != null)) {
+//                    startActivity(new Intent(login_activity.this, businessappEOTPVerificationActivity.class));
+//                    finish();
+//                }
+                if (emailOTP != null && mobileOTP != null) {
+                    ApplicationConstants.mobileNo = mobNo;
                     ApplicationConstants.id = id;
-                    startActivity(new Intent(login_activity.this, businessappMOTPVerificationActivity.class));
+                    startActivity(new Intent(login_activity.this,customerEOTPVerificationActivity.class));
                     finish();
-                } else if (mobNo != null && (emailOTP != null || mobileOTP != null)) {
-                    startActivity(new Intent(login_activity.this, businessappEOTPVerificationActivity.class));
-                    finish();
+                } else {
+                    if (emailOTP == null && mobileOTP != null) {
+                        startActivity(new Intent(login_activity.this, customerMOTPVerificationActivity.class));
+                        finish();
+                    } else if(emailOTP != null && mobileOTP == null){
+
+                        startActivity(new Intent(login_activity.this,customerEOTPVerificationActivity.class));
+                        finish();
+                    }
                 }
             } else {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(login_activity.this, R.style.Theme_AppCompat_DayNight_Dialog);
