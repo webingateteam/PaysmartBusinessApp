@@ -60,7 +60,8 @@ public class driverlistTrips extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.confirmed_trips);
+        //setContentView(R.layout.confirmed_trips);
+        setContentView(R.layout.businessapp_driverstripslist_tabfragment);
         ButterKnife.bind(this);
 
         dialog =  new ProgressDialog.Builder(driverlistTrips.this)
@@ -77,11 +78,11 @@ public class driverlistTrips extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         //Generate list View from ArrayList
-        displayListView();
+
     }
 
     private void initData() {
-        String mb="7893890990";
+        String mb= com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants.mobileNo;
         GetDriverTrips(mb);
     }
 
@@ -245,6 +246,7 @@ public class driverlistTrips extends AppCompatActivity {
                     public void onNext(List<GetdriverTripsResponse> trips) {
                         DrivertripList= (ArrayList <GetdriverTripsResponse>) trips;
                         DisplayToast("Next to Register");
+                        displayListView();
                         //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                         //   SharedPreferences.Editor editor = sharedpreferences.edit();
                         //  editor.putString(Emailotp, response.getEmail());
