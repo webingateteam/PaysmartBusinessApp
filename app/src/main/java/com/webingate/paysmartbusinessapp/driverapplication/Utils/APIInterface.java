@@ -68,8 +68,12 @@ public interface APIInterface  {
     @GET("/api/BusinessAppUser/GetBusinessappusersuser")
     public Observable<List<UserInformationResponse>> GetUserInformation(@Query("acct") String acct, @Query("uit") int uit);
 
+    @GET("/api/Driverlogin/GetdrivertripsBookingno")
+    public Observable<List<GetdriverTripsResponse>> Getdrivertripsbookingno(@Query("DriverNo") String driverNo, @Query("bno") String bno);
+
     @POST("/api/RegisterDriver/RegisterDrivers")
     public Observable<List<RegisterDriverResponse>> RegisterDriver(@Body JsonObject jsonObject);
+
 
     //responce 1
     @POST("/api/DriverMaster/SaveDriverDocuments")
@@ -88,7 +92,7 @@ public interface APIInterface  {
     public Observable<List<DriverRateTheRideResponse>> DriverRatingToRide(@Body JsonObject jsonObject);
 
     @GET("/api/Driverlogin/Getdrivertrips")
-    public Observable<List<GetdriverTripsResponse>> Getdrivertrips(@Query("DriverNo") String driverNo);
+    public Observable<List<GetdriverTripsResponse>> Getdrivertrips(@Query("DriverNo") String driverNo,@Query("status") int status);
 
     @GET("/api/DriverMaster/GetDriverDetails")
     public Observable<DriverDetailsResponse> GetDriverDetails(@Query("DID") String did);

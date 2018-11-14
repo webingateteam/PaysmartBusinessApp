@@ -43,7 +43,7 @@ public class driverlistTrips extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.listView1)
     ListView listView1;
-    private String bookingno;
+    private int bookingno;
     private String response;
 
     Toast toast;
@@ -222,7 +222,7 @@ public class driverlistTrips extends AppCompatActivity {
 
         //StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
-                .Getdrivertrips(driverNo)
+                .Getdrivertrips(driverNo,1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<GetdriverTripsResponse>>() {

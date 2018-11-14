@@ -188,7 +188,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
                 Toast.makeText(getApplicationContext(), "Please Enter details", Toast.LENGTH_SHORT).show();
             } else {
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("CountryId", selectype());
+                jsonObject.addProperty("usertypeid", selectype());
                 jsonObject.addProperty("Password", textPassword.getText().toString());
                 jsonObject.addProperty("UserAccountNo", selectype()+ccp.getSelectedCountryCode()+mobileNo.getText().toString());
                 DriverLogin(jsonObject);
