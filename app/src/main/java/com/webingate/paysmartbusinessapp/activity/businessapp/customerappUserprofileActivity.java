@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
@@ -48,16 +49,26 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
     Toast toast;
 
     String acntno;
+    String em,us,ph;
     int utype;
     //  @BindView(R.id.editFAB)
 //  EditText editFAB;
     Toolbar toolbar;
-
+     @BindView(R.id.emailTextView)
+     TextView email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customerapp_userprofile_activity);
+        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(UserAccountNumber, Email);
+        editor.commit();
 
+      SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        em= prefs.getString(Email, null);
+       ph= prefs.getString(Phone, null);
+       us= prefs.getString(Username, null);
 
 
         initUI();
@@ -66,6 +77,8 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.openDrawer(GravityCompat.START);
+
+
 
         FloatingActionButton fab = findViewById(R.id.editFAB);
 
@@ -179,8 +192,10 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
         View headerLayout = navigationView.getHeaderView(0);
         ImageView userImageView = headerLayout.findViewById(R.id.userImageView);
         Utils.setCircleImageToImageView(this, userImageView, R.drawable.profile1, 0, 0);
-
-
+        TextView tt = findViewById(R.id.emailTextView);
+        TextView pht = findViewById(R.id.phoneTextView);
+        tt.setText(em);
+        pht.setText(ph);
 
     }
     @Override

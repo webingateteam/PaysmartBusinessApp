@@ -1,5 +1,7 @@
 package com.webingate.paysmartbusinessapp.fragment.businessAppFragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import butterknife.BindView;
@@ -20,6 +23,12 @@ import butterknife.BindView;
 //import com.webingate.paysmartbusinessapp.businessapp.GetaLyft;
 
 public class businessAppFleetOwnerInfoFragment extends Fragment {
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String Username = "nameKey";
+    public static final String Phone = "phoneKey";
+    public static final String Email = "emailKey";
+    public static final String UserAccountNumber = "UserAccountNo";
+    public static final String usertypeid = "usertypeid";
 
     ImageView profileImageView;
     @BindView(R.id.s_Regno)
@@ -37,7 +46,7 @@ public class businessAppFleetOwnerInfoFragment extends Fragment {
     @BindView(R.id.s_state)
     EditText state;
     Toast toast;
-
+    String email1;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -77,6 +86,7 @@ public class businessAppFleetOwnerInfoFragment extends Fragment {
         vtype = view.findViewById(R.id.s_vtype);
         modelyear = view.findViewById(R.id.s_modelyear);
         state = view.findViewById(R.id.s_state);
+        RegNo.setText(ApplicationConstants.email);
     }
 
     public EditText getRegNo() {
