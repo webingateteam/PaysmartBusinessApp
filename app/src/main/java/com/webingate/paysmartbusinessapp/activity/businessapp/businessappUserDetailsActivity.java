@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppFleetOwnerInfoFragment;
@@ -36,7 +37,9 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String Username = "nameKey";
     public static final String Phone = "phoneKey";
-
+    public static final String Email = "emailKey";
+    public static final String UserAccountNumber = "UserAccountNo";
+    public static final String usertypeid = "usertypeid";
     private int position = 1;
     private int maxPosition = 5;
     private Button nextButton, prevButton;
@@ -49,7 +52,7 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
     EditText address;
 
     EditText city;
-
+    String email1;
     EditText mno;
 
     EditText postal;
@@ -62,6 +65,10 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_userdetails_activity);
+
+        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+         ApplicationConstants.email= prefs.getString(Email, null);
+
 
         initData();
 
@@ -107,12 +114,11 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
         prevButton = findViewById(R.id.prevButton);
         imageNoTextView = findViewById(R.id.imageNoTextView);
 
-
+        findViewById(R.id.nextButton);
 
 
         updatePositionTextView();
         setupFragment(new businessAppFleetOwnerInfoFragment());
-
     }
 
     private void updatePositionTextView() {
