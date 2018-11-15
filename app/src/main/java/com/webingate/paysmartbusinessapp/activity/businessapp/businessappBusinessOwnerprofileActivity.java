@@ -1,7 +1,6 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
@@ -12,40 +11,22 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
-import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
-import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
-import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetdriverTripsResponse;
-import com.webingate.paysmartbusinessapp.driverapplication.Deo.PendingDocsResponce;
-import com.webingate.paysmartbusinessapp.driverapplication.Deo.PendingDocsTable1Item;
-import com.webingate.paysmartbusinessapp.driverapplication.Deo.PendingDocsTableItem;
-import com.webingate.paysmartbusinessapp.driverapplication.Deo.UserInformationResponse;
-import com.webingate.paysmartbusinessapp.driverapplication.MainActivity;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
-public class customerappUserprofileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class businessappBusinessOwnerprofileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
     public static final String MyPREFERENCES = "MyPrefs";
@@ -68,8 +49,6 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
      TextView email;
      @BindView(R.id.UsernameTextView)
      TextView username;
-
-    private int serverrequestFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -228,6 +207,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 
 
     }
+
 
     public void DisplayToast(String text){
         if(toast!=null){

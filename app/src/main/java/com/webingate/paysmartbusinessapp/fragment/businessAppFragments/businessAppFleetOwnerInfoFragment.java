@@ -29,20 +29,22 @@ public class businessAppFleetOwnerInfoFragment extends Fragment {
     public static final String Email = "emailKey";
     public static final String UserAccountNumber = "UserAccountNo";
     public static final String usertypeid = "usertypeid";
+    public static final String gender = "GenderKey";
+    public static final String Address = "AddressKey";
 
     ImageView profileImageView;
-    @BindView(R.id.s_Regno)
-    EditText RegNo;
-    @BindView(R.id.s_chasisno)
-    EditText chasisno;
-    @BindView(R.id.s_engineno)
-    EditText engineno;
-    @BindView(R.id.s_vgroup)
-    Spinner vgroup;
-    @BindView(R.id.s_vtype)
-    Spinner vtype;
-    @BindView(R.id.s_modelyear)
-    EditText modelyear;
+    @BindView(R.id.s_name)
+    EditText name;
+    @BindView(R.id.s_email)
+    EditText email;
+    @BindView(R.id.s_mobileno)
+    EditText mbno;
+    @BindView(R.id.s_address)
+    EditText address;
+    @BindView(R.id.s_city)
+    EditText city;
+    @BindView(R.id.s_postal)
+    EditText postal;
     @BindView(R.id.s_state)
     EditText state;
     Toast toast;
@@ -76,25 +78,29 @@ public class businessAppFleetOwnerInfoFragment extends Fragment {
 
         profileImageView = view.findViewById(R.id.profileImageView);
         int id = R.drawable.profile2;
-        Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
-        setRegNo((EditText)view.findViewById(R.id.s_Regno));
+        Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2, R.color.md_white_1000);
+        setname((EditText) view.findViewById(R.id.s_name));
 
-        RegNo = view.findViewById(R.id.s_Regno);
-        chasisno = view.findViewById(R.id.s_chasisno);
-        engineno = view.findViewById(R.id.s_engineno);
-        vgroup = view.findViewById(R.id.s_vgroup);
-        vtype = view.findViewById(R.id.s_vtype);
-        modelyear = view.findViewById(R.id.s_modelyear);
+        name = view.findViewById(R.id.s_name);
+        email = view.findViewById(R.id.s_email);
+        mbno = view.findViewById(R.id.s_mobileno);
+        address = view.findViewById(R.id.s_address);
+        city = view.findViewById(R.id.s_city);
+        postal = view.findViewById(R.id.s_postal);
         state = view.findViewById(R.id.s_state);
-        RegNo.setText(ApplicationConstants.email);
+        name.setText(ApplicationConstants.username);
+        email.setText(ApplicationConstants.email);
+        mbno.setText(ApplicationConstants.mobileNo);
+        address.setText(ApplicationConstants.address);
+        city.setText(ApplicationConstants.gender);
     }
 
-    public EditText getRegNo() {
-        return RegNo;
+    public EditText getName() {
+        return name;
     }
 
-    public void setRegNo(EditText RegNo) {
-        this.RegNo = RegNo;
+    public void setname(EditText name) {
+        this.name = name;
     }
 
 }

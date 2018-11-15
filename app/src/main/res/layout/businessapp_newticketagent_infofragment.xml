@@ -43,7 +43,7 @@
                     android:layout_marginLeft="32dp"
                     android:layout_marginStart="32dp"
                     android:fontFamily="@font/roboto"
-                    android:text="TICKET AGENT INFORMATION"
+                    android:text="USER INFORMATION"
                     android:textAlignment="viewStart"
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_title_size"
@@ -83,7 +83,7 @@
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_body_s_size"
                     app:layout_constraintStart_toEndOf="@+id/view34"
-                    app:layout_constraintTop_toBottomOf="@+id/s_vtype" />
+                    app:layout_constraintTop_toBottomOf="@+id/s_city" />
 
                 <EditText
                     android:id="@+id/s_state"
@@ -128,10 +128,10 @@
                     android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/s_vtype" />
+                    app:layout_constraintTop_toBottomOf="@+id/s_city" />
 
                 <EditText
-                    android:id="@+id/s_modelyear"
+                    android:id="@+id/s_postal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -143,7 +143,7 @@
                     android:background="@drawable/layout_border"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
-                    android:hint="Model year"
+                    android:hint="Zip/Postal"
                     android:inputType="textPersonName"
                     android:padding="@dimen/space_8"
                     android:textAlignment="viewStart"
@@ -153,79 +153,96 @@
                     app:layout_constraintEnd_toStartOf="@+id/s_state"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/modelyearTitleTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/postalTitleTextView"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
-                    android:id="@+id/modelyearTitleTextView"
+                    android:id="@+id/postalTitleTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/roboto"
-                    android:text="MODEL YEAR"
+                    android:text="Zip/Postal"
                     android:textAlignment="viewStart"
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_body_s_size"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/s_vtype" />
-
-
-                <TextView
-                    android:id="@+id/vehicletypeTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/roboto"
-                    android:text="VEHICLE TYPE"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/colorTextLight"
-                    android:textSize="@dimen/font_body_s_size"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/s_vgroup" />
-
-
-                <Spinner
-                    android:id="@+id/s_vtype"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_marginTop="@dimen/space_8"
-                    android:layout_weight="1"
-                    android:textAlignment="viewStart"
-                    app:layout_constraintDimensionRatio="w,1:1"
-                    app:layout_constraintStart_toEndOf="@+id/vehicletypeTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/vehicletypeTextView" />
-
-                <TextView
-                    android:id="@+id/vehiclegroupTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/roboto"
-                    android:text="VEHICLE GROUP"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/colorTextLight"
-                    android:textSize="@dimen/font_body_s_size"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/s_engineno" />
-
-
-                <Spinner
-                    android:id="@+id/s_vgroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_marginTop="@dimen/space_8"
-                    android:layout_weight="1"
-                    android:textAlignment="viewStart"
-                    app:layout_constraintDimensionRatio="w,1:1"
-                    app:layout_constraintStart_toEndOf="@+id/vehiclegroupTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/vehiclegroupTextView" />
+                    app:layout_constraintTop_toBottomOf="@+id/s_city" />
 
                 <EditText
-                    android:id="@+id/s_engineno"
+                    android:id="@+id/s_city"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/layout_border"
+                    android:ems="10"
+                    android:fontFamily="@font/roboto"
+                    android:hint="City"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/space_8"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorTextLight"
+                    android:textSize="@dimen/font_body_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cityTitleTextView" />
+
+                <TextView
+                    android:id="@+id/cityTitleTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="City"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorTextLight"
+                    android:textSize="@dimen/font_body_s_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/s_address" />
+
+                <TextView
+                    android:id="@+id/addressTitleTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Address"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorTextLight"
+                    android:textSize="@dimen/font_body_s_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/s_mobileno" />
+
+                <EditText
+                    android:id="@+id/s_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/layout_border"
+                    android:ems="10"
+                    android:fontFamily="@font/roboto"
+                    android:hint="Address"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/space_8"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorTextLight"
+                    android:textSize="@dimen/font_body_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/addressTitleTextView" />
+
+                <EditText
+                    android:id="@+id/s_mobileno"
                     android:layout_width="0dp"
                     android:layout_height="33dp"
                     android:layout_marginStart="16dp"
@@ -234,7 +251,7 @@
                     android:background="@drawable/layout_border"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
-                    android:hint="Engine No"
+                    android:hint="Phone"
                     android:inputType="textPersonName"
                     android:padding="@dimen/space_8"
                     android:textAlignment="viewStart"
@@ -252,12 +269,12 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/roboto"
-                    android:text="ENGINE NO"
+                    android:text="Phone"
                     android:textAlignment="viewStart"
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_body_s_size"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/s_chasisno" />
+                    app:layout_constraintTop_toBottomOf="@+id/s_email" />
 
                 <TextView
                     android:id="@+id/emailTitleTextView"
@@ -266,15 +283,15 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/roboto"
-                    android:text="CHASIS NO"
+                    android:text="E-Mail"
                     android:textAlignment="viewStart"
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_body_s_size"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/s_Regno" />
+                    app:layout_constraintTop_toBottomOf="@+id/s_name" />
 
                 <EditText
-                    android:id="@+id/s_chasisno"
+                    android:id="@+id/s_email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -283,7 +300,7 @@
                     android:background="@drawable/layout_border"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
-                    android:hint="Chasis No"
+                    android:hint="E-Mail"
                     android:inputType="textPersonName"
                     android:padding="@dimen/space_8"
                     android:textAlignment="viewStart"
@@ -295,16 +312,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/emailTitleTextView" />
 
                 <EditText
-                    android:id="@+id/s_Regno"
+                    android:id="@+id/s_name"
                     android:layout_width="198dp"
-                    android:layout_height="34dp"
+                    android:layout_height="33dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/layout_border"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
-                    android:hint="Registartion No"
+                    android:hint="Name"
                     android:inputType="textPersonName"
                     android:padding="@dimen/space_8"
                     android:textAlignment="viewStart"
@@ -323,7 +340,7 @@
                     android:layout_marginStart="168dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/roboto"
-                    android:text="REGISTRATION NO"
+                    android:text="Name"
                     android:textAlignment="viewStart"
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_body_s_size"

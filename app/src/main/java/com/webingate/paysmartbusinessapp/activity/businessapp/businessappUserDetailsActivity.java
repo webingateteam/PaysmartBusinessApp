@@ -40,6 +40,7 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
     public static final String Email = "emailKey";
     public static final String UserAccountNumber = "UserAccountNo";
     public static final String usertypeid = "usertypeid";
+    public static final String gender = "GenderKey";
     private int position = 1;
     private int maxPosition = 5;
     private Button nextButton, prevButton;
@@ -67,7 +68,8 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.businessapp_userdetails_activity);
 
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-         ApplicationConstants.email= prefs.getString(Email, null);
+        ApplicationConstants.username= prefs.getString(Username, null);
+        ApplicationConstants.email= prefs.getString(Email, null);
 
 
         initData();
@@ -164,19 +166,21 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
                     profileImageView = findViewById(R.id.profileImageView);
 
                     JsonObject object = new JsonObject();
-                    object.addProperty("flag", "I");
+                    object.addProperty("flag", "U");
                     object.addProperty("Firstname",name.getText().toString());
                     //object.addProperty("lastname","kumar");
                     object.addProperty("AuthTypeId", "");
                     object.addProperty("Password", "123");
                     object.addProperty("Mobilenumber",mno.getText().toString());
                     object.addProperty("Email",email.getText().toString());
-                    object.addProperty("CountryId","1");
+                    object.addProperty("CountryId","101");
                     object.addProperty("VehicleGroupId","");
-                    object.addProperty("UserAccountNo","10991"+mno.getText().toString());
-                    object.addProperty("usertypeid","109");
+                    object.addProperty("UserAccountNo","11091"+mno.getText().toString());
+                    object.addProperty("usertypeid","110");
                     object.addProperty("isDriverOwned","0");
                     object.addProperty("DPhoto","");
+                    object.addProperty("Address",address.getText().toString());
+                    object.addProperty("Gender","44");
                     RegisterDriver(object);
 
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();

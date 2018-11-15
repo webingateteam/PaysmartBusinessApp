@@ -159,7 +159,7 @@ public class businessappBrandDashboardActivity extends AppCompatActivity {
                 case R.id.profileMenu:
                     //loadFragment(new AppDirectoryHome4Fragment());
 
-                    Intent intent = new Intent(this, customerappUserprofileActivity.class);
+                    Intent intent = new Intent(this, businessappBrandAmbassadorprofileActivity.class);
                     startActivity(intent);
                     break;
                 default:

@@ -161,7 +161,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/roboto"
-                    android:text="Website"
+                    android:text="User Name"
                     android:textAlignment="viewStart"
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_body_size"
@@ -170,7 +170,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/phoneTextView" />
 
                 <TextView
-                    android:id="@+id/websiteTextView"
+                    android:id="@+id/UsernameTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -193,7 +193,7 @@
                     android:layout_marginTop="16dp"
                     android:tint="@color/md_grey_600"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/websiteTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/UsernameTextView"
                     app:srcCompat="@drawable/baseline_person_outline_black_24" />
 
                 <TextView
@@ -204,26 +204,25 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/roboto"
-                    android:text="About"
+                    android:text="First Name "
                     android:textAlignment="viewStart"
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_body_size"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/imageView55"
-                    app:layout_constraintTop_toBottomOf="@+id/websiteTextView" />
+                    app:layout_constraintTop_toBottomOf="@+id/UsernameTextView" />
 
                 <TextView
-                    android:id="@+id/textView27"
+                    android:id="@+id/FirstnameTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/roboto"
-                    android:text="The driver with best ratings and customer feedback"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/colorTextLight"
+                    android:textColor="@color/md_blue_600"
                     android:textSize="@dimen/font_body_size"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView55"
@@ -237,7 +236,7 @@
                     android:layout_marginTop="16dp"
                     android:tint="@color/md_grey_600"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView27"
+                    app:layout_constraintTop_toBottomOf="@+id/FirstnameTextView"
                     app:srcCompat="@drawable/baseline_date_range_black_24" />
 
                 <TextView
@@ -254,7 +253,7 @@
                     android:textSize="@dimen/font_body_size"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView26"
-                    app:layout_constraintTop_toBottomOf="@+id/textView27" />
+                    app:layout_constraintTop_toBottomOf="@+id/FirstnameTextView" />
 
                 <TextView
                     android:id="@+id/textView31"

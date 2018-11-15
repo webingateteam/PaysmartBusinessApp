@@ -157,7 +157,7 @@ public class businessappBusinessownerDashboardActivity extends AppCompatActivity
                 case R.id.profileMenu:
                     //loadFragment(new AppDirectoryHome4Fragment());
 
-                    Intent intent = new Intent(this, customerappUserprofileActivity.class);
+                    Intent intent = new Intent(this, businessappBusinessOwnerprofileActivity.class);
                     startActivity(intent);
                     break;
                 default:

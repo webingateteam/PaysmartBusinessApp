@@ -131,7 +131,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
 
             JsonObject object = new JsonObject();
             object.addProperty("flag", "I");
-            object.addProperty("Usename",S_username.getText().toString());
+            object.addProperty("Username",S_username.getText().toString());
 //            object.addProperty("lastname", "kumar");
             object.addProperty("AuthTypeId", "");
             object.addProperty("Password", S_password.getText().toString());
