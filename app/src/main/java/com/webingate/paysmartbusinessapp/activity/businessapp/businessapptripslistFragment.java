@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.customerapp.ConfirmedTripsDetails;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetdriverTripsResponse;
 
 import java.util.ArrayList;
@@ -306,15 +307,18 @@ public class businessapptripslistFragment extends Fragment {
                     @Override
                     public void onNext(List<GetdriverTripsResponse> trips) {
                         GetdriverTripsResponse response=trips.get(0);
-                        Intent intent = new Intent(getActivity(), ConfirmedTripsDetails.class);
-                        intent.putExtra("Amount",response.getAmount());
-                        intent.putExtra("BNo",response.getBNo());
-                        intent.putExtra("Amount",response.getBookedDate());
-                        //intent.putExtra("details",response.getClass());
-//                        intent.putExtra("Amount",response.getAmount());
-//                        intent.putExtra("Amount",response.getAmount());
-//                        intent.putExtra("Amount",response.getAmount());
-//                        intent.putExtra("Amount",response.getAmount());
+                        Intent intent = new Intent(getActivity(), DriverTripsDetails.class);
+                        intent.putExtra("driverdetails",response.getDriverId());
+                        intent.putExtra("comment",response.getComments());
+                        intent.putExtra("startTime",response.getBookedDate());
+                        intent.putExtra("endTime",response.getDepartureTime());
+                        intent.putExtra("source",response.getSrc());
+                        intent.putExtra("destination",response.getDest());
+                        intent.putExtra("amount",response.getAmount());
+                        intent.putExtra("srclat",response.getSrcLatitude());
+                        intent.putExtra("srclogt",response.getSrcLongitude());
+                        intent.putExtra("destlat",response.getDestLatitude());
+                        intent.putExtra("destlogt",response.getDestLongitude());
                         startActivity(intent);
 
 

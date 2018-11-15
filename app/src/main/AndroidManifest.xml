@@ -230,6 +230,9 @@
         <activity
             android:name="com.webingate.paysmartbusinessapp.customerapp.ConfirmedTripsDetails"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.DriverTripsDetails"
+            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 </manifest>

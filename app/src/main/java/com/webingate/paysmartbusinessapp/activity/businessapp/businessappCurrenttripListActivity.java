@@ -43,7 +43,7 @@ public class businessappCurrenttripListActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new businessapptripslistFragment(), "Current & in progress");
         adapter.addFragment(new businessapptripscompletedlistFragment(), "Completed");
-        adapter.addFragment(new customerappClosedTicketsFragment(), "Cancelled");
+        adapter.addFragment(new businessapptripscancellistFragment(), "Cancelled");
        //adapter.addFragment(new UiContainerTabLayoutTab3Fragment(), "Tab 3");
         viewPager.setAdapter(adapter);
     }

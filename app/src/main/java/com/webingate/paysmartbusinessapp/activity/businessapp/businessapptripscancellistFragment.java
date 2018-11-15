@@ -27,7 +27,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class businessapptripscompletedlistFragment extends Fragment {
+public class businessapptripscancellistFragment extends Fragment {
     Toast toast;
     private Context context;
     private String bookingno;
@@ -38,7 +38,7 @@ public class businessapptripscompletedlistFragment extends Fragment {
     List<GetdriverTripsResponse> list;
     ArrayList <GetdriverTripsResponse> completetripList;
     com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog dialog ;
-    public businessapptripscompletedlistFragment() {
+    public businessapptripscancellistFragment() {
     }
 
     @Override
@@ -61,7 +61,7 @@ public class businessapptripscompletedlistFragment extends Fragment {
 
     private void initData() {
         mb= com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants.mobileNo;
-        int tt=2;
+        int tt=3;
         GetDrivercompleteTrips(mb,tt);
     }
 
