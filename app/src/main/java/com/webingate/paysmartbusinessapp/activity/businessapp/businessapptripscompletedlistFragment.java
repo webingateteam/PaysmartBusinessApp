@@ -17,48 +17,35 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
-import com.webingate.paysmartbusinessapp.customerapp.ConfirmedTripsDetails;
-import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetdriverTripsResponse;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.*;
 
 import butterknife.BindView;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class businessapptripslistFragment extends Fragment {
-
-
+public class businessapptripscompletedlistFragment extends Fragment {
     Toast toast;
     private Context context;
-    ListView listView1;
     private String bookingno;
-    private String response;
-
-    String mb;
     @BindView(R.id.listView1)
     ListView listView2;
-
-
+    String mb;
     MyCustomAdapter dataAdapter = null;
-
     List<GetdriverTripsResponse> list;
-    ArrayList <GetdriverTripsResponse> DrivertripList;
+    ArrayList <GetdriverTripsResponse> completetripList;
     com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog dialog ;
-    public businessapptripslistFragment() {
-
-        // Required empty public constructor
+    public businessapptripscompletedlistFragment() {
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View view = inflater.inflate(R.layout.businessapp_driverstripslist_tabfragment, container, false);
+       View view = inflater.inflate(R.layout.businessapp_driverstripscompletedlist_tabfragment, container, false);
 
         initData();
 
@@ -74,54 +61,25 @@ public class businessapptripslistFragment extends Fragment {
 
     private void initData() {
         mb= com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants.mobileNo;
-        int tt=1;
-        GetDriverTrips(mb,tt);
+        int tt=2;
+        GetDrivercompleteTrips(mb,tt);
     }
 
     private void initUI() {
-        //initToolbar();
-//             Intent intent=new Intent(getActivity(),driverlistTrips.class);
-//             startActivity(intent);
-//        viewDetailsTextView1 = view.findViewById(R.id.viewDetailsTextView1);
-//        viewDetailsTextView2 = view.findViewById(R.id.viewDetailsTextView2);
-//        viewDetailsTextView3 = view.findViewById(R.id.viewDetailsTextView3);
-//        viewDetailsTextView4 = view.findViewById(R.id.viewDetailsTextView4);
-
     }
 
     private void initDataBinding() {
-
     }
 
     private void initActions() {
-
-//        viewDetailsTextView1.setOnClickListener(view -> {
-//            //Toast.makeText(getActivity().getApplicationContext(), "Click View Details", Toast.LENGTH_SHORT).show();
-//            GoToDetails();
-//        });
-//
-//        viewDetailsTextView2.setOnClickListener(view -> {
-//          //  Toast.makeText(getActivity().getApplicationContext(), "Click View Details", Toast.LENGTH_SHORT).show();
-//            GoToDetails();
-//        });
-//
-//        viewDetailsTextView3.setOnClickListener(view -> {
-//            //Toast.makeText(getActivity().getApplicationContext(), "Click View Details", Toast.LENGTH_SHORT).show();
-//            GoToDetails();
-//        });
-//
-//        viewDetailsTextView4.setOnClickListener(view -> {
-//            //Toast.makeText(getActivity().getApplicationContext(), "Click View Details", Toast.LENGTH_SHORT).show();
-//            GoToDetails();
-//        });
     }
 
-    private void displayListView() {
+    private void displayListView1() {
 
 
         //create an ArrayAdaptar from the String Array
 
-        dataAdapter = new MyCustomAdapter(getActivity(),R.layout.layout_tripscustom, DrivertripList);
+        dataAdapter = new MyCustomAdapter(getActivity(),R.layout.layout_tripscustom, completetripList);
 
         // Assign adapter to ListView
         dataAdapter.notifyDataSetChanged();
@@ -154,7 +112,7 @@ public class businessapptripslistFragment extends Fragment {
         public MyCustomAdapter(Context context, int textViewResourceId,
                                ArrayList<GetdriverTripsResponse> logsSelected) {
             super(context, textViewResourceId, logsSelected);
-            this.logsselected = DrivertripList;
+            this.logsselected = completetripList;
             this.logsselected.addAll(logsSelected);
         }
 
@@ -210,7 +168,7 @@ public class businessapptripslistFragment extends Fragment {
 
     }
 
-    public void GetDriverTrips( String driverNo, int status){
+    public void GetDrivercompleteTrips( String driverNo, int status){
 
         //StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(getActivity()).getrestadapter()
@@ -236,16 +194,16 @@ public class businessapptripslistFragment extends Fragment {
 
                     @Override
                     public void onNext(List<GetdriverTripsResponse> trips) {
-                        DrivertripList= (ArrayList<GetdriverTripsResponse>) trips;
+                        completetripList= (ArrayList<GetdriverTripsResponse>) trips;
                         DisplayToast("Next to Register");
-                        displayListView();
+                        displayListView1();
                         //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                         //   SharedPreferences.Editor editor = sharedpreferences.edit();
                         //  editor.putString(Emailotp, response.getEmail());
                         //    editor.commit();
                         //startActivity(new Intent(busianessappEOTPVerificationActivity.this, login_activity.class));
                         // DriverList
-                        //adapter = new businessappDriverTripslistAdapter(DrivertripList);
+                        //adapter = new businessappDriverTripslistAdapter(completetripList);
                         //recyclerView.setAdapter(adapter);
 
 //                       // adapter.setOnItemClickListener((view, obj, position) ->
@@ -279,6 +237,7 @@ public class businessapptripslistFragment extends Fragment {
         }
 
     }
+
 
     public void GetDriverTripsDetails(String driverNo,String bno){
 
@@ -315,10 +274,6 @@ public class businessapptripslistFragment extends Fragment {
                         intent.putExtra("source",response.getSrc());
                         intent.putExtra("destination",response.getDest());
                         intent.putExtra("amount",response.getAmount());
-                        intent.putExtra("srclat",response.getSrcLatitude());
-                        intent.putExtra("srclogt",response.getSrcLongitude());
-                        intent.putExtra("destlat",response.getDestLatitude());
-                        intent.putExtra("destlogt",response.getDestLongitude());
                         startActivity(intent);
 
 
@@ -326,7 +281,6 @@ public class businessapptripslistFragment extends Fragment {
                     }
                 });
     }
-
 //    @Override
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 //                             Bundle savedInstanceState) {

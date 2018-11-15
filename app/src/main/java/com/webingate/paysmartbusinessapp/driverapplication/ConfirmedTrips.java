@@ -50,7 +50,7 @@ public class ConfirmedTrips extends AppCompatActivity {
     @BindView(R.id.listView1)
     ListView listView1;
 
-    private String bookingno;
+    private int bookingno;
     private String response;
 
     Toast toast;

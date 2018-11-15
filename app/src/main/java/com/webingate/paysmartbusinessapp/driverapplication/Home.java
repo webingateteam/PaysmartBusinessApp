@@ -724,7 +724,7 @@ public class Home extends Fragment implements GoogleApiClient.ConnectionCallback
 
         StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(getActivity()).getrestadapter()
-                .Getdrivertrips(driverNo)
+                .Getdrivertrips(driverNo,1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<GetdriverTripsResponse>>() {
