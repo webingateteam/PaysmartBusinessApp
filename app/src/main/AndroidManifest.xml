@@ -234,5 +234,29 @@
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.DriverTripsDetails"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappBrandAmbassadorprofileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappBusinessOwnerprofileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappTicketAgentprofileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriverprofileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappStaffprofileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappDocumentUploadActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 </manifest>
