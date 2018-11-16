@@ -82,7 +82,7 @@ public class businessAppDriverDocsFragment extends Fragment {
 
         initData();
 
-        initUI();
+        //initUI();
 
         initDataBindings();
 
@@ -107,106 +107,106 @@ public class businessAppDriverDocsFragment extends Fragment {
 
     }
 
-    private void initUI() {
-
-        // Init Toolbar
-        //initToolbar();
-
-        priceupdown = (ImageView) getActivity().findViewById(R.id.priceRangeUpDownImageView);
-        colorUpDown = (ImageView) getActivity().findViewById(R.id.colorUpDownImageView);
-        sizeUpDown = (ImageView) getActivity().findViewById(R.id.sizeUpDownImageView);
-        materialUpDown = (ImageView) getActivity().findViewById(R.id.materialUpDownImageView);
-
-        priceRangeLayout = (ImageView)getActivity().findViewById(R.id.priceRangeLayout);
-        colorLayout = (ImageView) getActivity().findViewById(R.id.colorLayout);
-        sizeLayout = (ImageView) getActivity().findViewById(R.id.sizeLayout);
-        materialLayout = (ImageView) getActivity().findViewById(R.id.materialLayout);
-
-        priceRangeLayout.setVisibility(View.GONE);
-        colorLayout.setVisibility(View.GONE);
-        sizeLayout.setVisibility(View.GONE);
-        materialLayout.setVisibility(View.GONE);
-
-
-        priceRangeFromTitleValueTextView = (ImageView)getActivity().findViewById(R.id.priceRangeFromTitleValueTextView);
-        priceRangeToTitleValueTextView = (ImageView)getActivity().findViewById(R.id.priceRangeToTitleValueTextView);
-        priceRangeFromValueTextView = (ImageView)getActivity().findViewById(R.id.priceRangeFromValueTextView);
-        priceRangeToValueTextView = (ImageView)getActivity().findViewById(R.id.priceRangeToValueTextView);
-
-
-        int maxValue2 = 100;
-        //seekBar = new RangeSeekBar <>(0, maxValue2, this);
-
-        seekBar.setSelectedMinValue(0);
-        seekBar.setAbsoluteMaxValue(100);
-
-        LinearLayout linearLayout = (LinearLayout) getActivity().findViewById(R.id.price_range_bar_container);
-        linearLayout.addView(seekBar);
+//    private void initUI() {
 //
-//        ImageView color1BgImageView = findViewById(R.id.color1BgImageView);
-//        ImageView color2BgImageView = findViewById(R.id.color2BgImageView);
-//        ImageView color3BgImageView = findViewById(R.id.color3BgImageView);
-//        ImageView color4BgImageView = findViewById(R.id.color4BgImageView);
-//        ImageView color5BgImageView = findViewById(R.id.color5BgImageView);
-//        ImageView color6BgImageView = findViewById(R.id.color6BgImageView);
-//        ImageView color7BgImageView = findViewById(R.id.color7BgImageView);
+//        // Init Toolbar
+//        //initToolbar();
 //
-//        setDefaultCircleImage(color1BgImageView, R.color.md_white_1000);
-//        setDefaultCircleImage(color2BgImageView, R.color.md_grey_400);
-//        setDefaultCircleImage(color3BgImageView, R.color.md_yellow_400);
-//        setDefaultCircleImage(color4BgImageView, R.color.md_green_500);
-//        setDefaultCircleImage(color5BgImageView, R.color.md_green_900);
-//        setDefaultCircleImage(color6BgImageView, R.color.md_blue_500);
-//        setDefaultCircleImage(color7BgImageView, R.color.md_black_1000);
+//        priceupdown = (ImageView) getActivity().findViewById(R.id.priceRangeUpDownImageView);
+//        colorUpDown = (ImageView) getActivity().findViewById(R.id.colorUpDownImageView);
+//        sizeUpDown = (ImageView) getActivity().findViewById(R.id.sizeUpDownImageView);
+//        materialUpDown = (ImageView) getActivity().findViewById(R.id.materialUpDownImageView);
 //
-//        color1ImageView = findViewById(R.id.color1ImageView);
-//        color2ImageView = findViewById(R.id.color2ImageView);
-//        color3ImageView = findViewById(R.id.color3ImageView);
-//        color4ImageView = findViewById(R.id.color4ImageView);
-//        color5ImageView = findViewById(R.id.color5ImageView);
-//        color6ImageView = findViewById(R.id.color6ImageView);
-//        color7ImageView = findViewById(R.id.color7ImageView);
+//        priceRangeLayout = (ImageView)getActivity().findViewById(R.id.priceRangeLayout);
+//        colorLayout = (ImageView) getActivity().findViewById(R.id.colorLayout);
+//        sizeLayout = (ImageView) getActivity().findViewById(R.id.sizeLayout);
+//        materialLayout = (ImageView) getActivity().findViewById(R.id.materialLayout);
 //
-        Drawable selectedList = getContext().getResources().getDrawable(R.drawable.baseline_selected_list_24);
-        selectedList.setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+//        priceRangeLayout.setVisibility(View.GONE);
+//        colorLayout.setVisibility(View.GONE);
+//        sizeLayout.setVisibility(View.GONE);
+//        materialLayout.setVisibility(View.GONE);
 //
-//        size1BgImageView = findViewById(R.id.size1BgImageView);
-//        size2BgImageView = findViewById(R.id.size2BgImageView);
-//        size3BgImageView = findViewById(R.id.size3BgImageView);
-//        size4BgImageView = findViewById(R.id.size4BgImageView);
-//        size5BgImageView = findViewById(R.id.size5BgImageView);
 //
-//        setDefaultCircleImage(size1BgImageView, R.color.md_grey_400);
-//        setDefaultCircleImage(size2BgImageView, R.color.md_grey_400);
-//        setDefaultCircleImage(size3BgImageView, R.color.md_grey_400);
-//        setDefaultCircleImage(size4BgImageView, R.color.md_grey_400);
-//        setDefaultCircleImage(size5BgImageView, R.color.md_grey_400);
+//        priceRangeFromTitleValueTextView = (ImageView)getActivity().findViewById(R.id.priceRangeFromTitleValueTextView);
+//        priceRangeToTitleValueTextView = (ImageView)getActivity().findViewById(R.id.priceRangeToTitleValueTextView);
+//        priceRangeFromValueTextView = (ImageView)getActivity().findViewById(R.id.priceRangeFromValueTextView);
+//        priceRangeToValueTextView = (ImageView)getActivity().findViewById(R.id.priceRangeToValueTextView);
 //
-//        size1TextView = findViewById(R.id.size1TextView);
-//        size2TextView = findViewById(R.id.size2TextView);
-//        size3TextView = findViewById(R.id.size3TextView);
-//        size4TextView = findViewById(R.id.size4TextView);
-//        size5TextView = findViewById(R.id.size5TextView);
 //
-//        sizeTitleValueTextView = findViewById(R.id.sizeTitleValueTextView);
-//        colorTitleValueTextView = findViewById(R.id.colorTitleValueTextView);
-
-
-        // Set Color Default
-        //color1ImageView.setImageResource(R.drawable.baseline_select_with_check_transparent_24);
-        color1Status = true;
-        updateColorTitle();
-
-        // Set Size Default
-        //setSelectUnSelectSizeFilter(size3BgImageView, R.color.colorPrimary, size3TextView, R.color.md_white_1000);
-        size3Status = true;
-        updateSizeTitle();
-
-        // Set Material Default
-        Button material1Button = (Button)getActivity().findViewById(R.id.material1Button);
-        material1Button.setSelected(true);
-
-    }
+//        int maxValue2 = 100;
+//        //seekBar = new RangeSeekBar <>(0, maxValue2, this);
+//
+//        seekBar.setSelectedMinValue(0);
+//        seekBar.setAbsoluteMaxValue(100);
+//
+//        LinearLayout linearLayout = (LinearLayout) getActivity().findViewById(R.id.price_range_bar_container);
+//        linearLayout.addView(seekBar);
+////
+////        ImageView color1BgImageView = findViewById(R.id.color1BgImageView);
+////        ImageView color2BgImageView = findViewById(R.id.color2BgImageView);
+////        ImageView color3BgImageView = findViewById(R.id.color3BgImageView);
+////        ImageView color4BgImageView = findViewById(R.id.color4BgImageView);
+////        ImageView color5BgImageView = findViewById(R.id.color5BgImageView);
+////        ImageView color6BgImageView = findViewById(R.id.color6BgImageView);
+////        ImageView color7BgImageView = findViewById(R.id.color7BgImageView);
+////
+////        setDefaultCircleImage(color1BgImageView, R.color.md_white_1000);
+////        setDefaultCircleImage(color2BgImageView, R.color.md_grey_400);
+////        setDefaultCircleImage(color3BgImageView, R.color.md_yellow_400);
+////        setDefaultCircleImage(color4BgImageView, R.color.md_green_500);
+////        setDefaultCircleImage(color5BgImageView, R.color.md_green_900);
+////        setDefaultCircleImage(color6BgImageView, R.color.md_blue_500);
+////        setDefaultCircleImage(color7BgImageView, R.color.md_black_1000);
+////
+////        color1ImageView = findViewById(R.id.color1ImageView);
+////        color2ImageView = findViewById(R.id.color2ImageView);
+////        color3ImageView = findViewById(R.id.color3ImageView);
+////        color4ImageView = findViewById(R.id.color4ImageView);
+////        color5ImageView = findViewById(R.id.color5ImageView);
+////        color6ImageView = findViewById(R.id.color6ImageView);
+////        color7ImageView = findViewById(R.id.color7ImageView);
+////
+//        Drawable selectedList = getContext().getResources().getDrawable(R.drawable.baseline_selected_list_24);
+//        selectedList.setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+////
+////        size1BgImageView = findViewById(R.id.size1BgImageView);
+////        size2BgImageView = findViewById(R.id.size2BgImageView);
+////        size3BgImageView = findViewById(R.id.size3BgImageView);
+////        size4BgImageView = findViewById(R.id.size4BgImageView);
+////        size5BgImageView = findViewById(R.id.size5BgImageView);
+////
+////        setDefaultCircleImage(size1BgImageView, R.color.md_grey_400);
+////        setDefaultCircleImage(size2BgImageView, R.color.md_grey_400);
+////        setDefaultCircleImage(size3BgImageView, R.color.md_grey_400);
+////        setDefaultCircleImage(size4BgImageView, R.color.md_grey_400);
+////        setDefaultCircleImage(size5BgImageView, R.color.md_grey_400);
+////
+////        size1TextView = findViewById(R.id.size1TextView);
+////        size2TextView = findViewById(R.id.size2TextView);
+////        size3TextView = findViewById(R.id.size3TextView);
+////        size4TextView = findViewById(R.id.size4TextView);
+////        size5TextView = findViewById(R.id.size5TextView);
+////
+////        sizeTitleValueTextView = findViewById(R.id.sizeTitleValueTextView);
+////        colorTitleValueTextView = findViewById(R.id.colorTitleValueTextView);
+//
+//
+//        // Set Color Default
+//        //color1ImageView.setImageResource(R.drawable.baseline_select_with_check_transparent_24);
+//        color1Status = true;
+//        updateColorTitle();
+//
+//        // Set Size Default
+//        //setSelectUnSelectSizeFilter(size3BgImageView, R.color.colorPrimary, size3TextView, R.color.md_white_1000);
+//        size3Status = true;
+//        updateSizeTitle();
+//
+//        // Set Material Default
+//        Button material1Button = (Button)getActivity().findViewById(R.id.material1Button);
+//        material1Button.setSelected(true);
+//
+//    }
 
     private void setDefaultCircleImage(ImageView imageView, int color) {
         Utils.setCircleImageToImageView(getContext(), imageView, R.drawable.white_background, 0, 0);

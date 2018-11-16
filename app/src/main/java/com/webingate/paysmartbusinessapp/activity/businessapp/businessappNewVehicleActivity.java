@@ -173,6 +173,8 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
                     object.addProperty("ModelYear",modelyear.getText().toString());
                     object.addProperty("VehicleCode","12345");
                     object.addProperty("CountryId","India");
+                    object.addProperty("change","2");
+                    object.addProperty("type","1");
                     VehicleCreation(object);
 
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();

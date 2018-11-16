@@ -141,12 +141,15 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
             object.addProperty("CCode","91");
             object.addProperty("UserAccountNo",selectype()+ccp.getSelectedCountryCode()+S_mobileNo.getText().toString());
             object.addProperty("usertypeid",selectype());
+            object.addProperty("change",selectype());
+            object.addProperty("type","1");
             RegisterDriver(object);
 //            Intent intent = new Intent(this, customerEOTPVerificationActivity.class);
 //            startActivity(intent);
         });
 
     }
+
     public void RegisterDriver(JsonObject jsonObject){
 
         //StartDialogue();
