@@ -243,7 +243,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
                 //Toast.makeText(getApplicationContext(), "Clicked option 1.", Toast.LENGTH_SHORT).show();
 
                 intent = new Intent(login_activity.this,businessappFleetownerDashboardActivity.class);
-                intent.putExtra("UserAcoountid",UserAccountNumber);
+                intent.putExtra("UserAccountNo",UserAccountNumber);
                 intent.putExtra("usertypeid",usertypeid);
                 startActivity(intent);
                 //intent = new Intent(this, businessappFleetownerDashboardActivity.class);
