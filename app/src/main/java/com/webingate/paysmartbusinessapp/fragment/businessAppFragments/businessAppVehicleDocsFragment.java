@@ -40,6 +40,9 @@ import butterknife.BindView;
 
 public class businessAppVehicleDocsFragment extends Fragment {
 
+
+    ImageView sizeUpDownImageView;
+    private View sizeLayout;
 //    @BindView(R.id.priceRangeToTitleValueTextView)
 //    EditText pricetitlevalue;
 //
@@ -86,7 +89,7 @@ public class businessAppVehicleDocsFragment extends Fragment {
 //
 //        initDataBindings();
 //
-//        initActions();
+        initActions();
 
         return view;
     }
@@ -107,6 +110,12 @@ public class businessAppVehicleDocsFragment extends Fragment {
 //        pricerange = (ImageView)getActivity().findViewById(R.id.priceRangeLayout);
 //
 //        editsearch = (EditText)getActivity().findViewById(R.id.minimumEditText2);
+
+        sizeUpDownImageView  = (ImageView) getActivity().findViewById(R.id.sizeUpDownImageView);
+     //   sizeLayout = getActivity().findViewById(R.id.sizeLayout);
+
+       // sizeLayout.setVisibility(View.GONE);
+
     }
 
 //    private void initDataBindings() {
@@ -122,18 +131,18 @@ public class businessAppVehicleDocsFragment extends Fragment {
 //       // loginRegisterTextView.setOnClickListener(view -> Toast.makeText(getContext(), "Clicked : Log in and Register", Toast.LENGTH_SHORT).show());
 //    }
 //
-//    private void initActions() {
-//
-//        priceRangeUpDownImageView.setOnClickListener((View v) -> {
-//            boolean show = Utils.toggleUpDownWithAnimation(v);
-//            if (show) {
-//                ViewAnimationUtils.expand(pricerange);
-//            } else {
-//                ViewAnimationUtils.collapse(pricerange);
-//            }
-//        });
-//
-//    }
+    private void initActions() {
+
+        sizeUpDownImageView.setOnClickListener((View v) -> {
+            boolean show = Utils.toggleUpDownWithAnimation(v);
+            if (show) {
+                ViewAnimationUtils.expand(sizeLayout);
+            } else {
+                ViewAnimationUtils.collapse(sizeLayout);
+            }
+        });
+
+    }
 
 
 }

@@ -5,6 +5,8 @@ import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessEOTPVe
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessappuserValidateResp;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.MOTPVerification;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AcceptRejectBookingResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.AllocatedDriverListResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.AssignDriverResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.ChangepwdResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DefaultResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverDetailsResponse;
@@ -62,6 +64,10 @@ public interface APIInterface  {
     @GET("/api/DriverMaster/Master")
     public Observable<List<DrivermasterResponse>> GetDriverList(@Query("ctryId") String ctryId);
 
+    @GET("/api/allocatedriver/Getallocatedriver")
+    public Observable<List<AllocatedDriverListResponse>> Getallocatedriver(@Query("VID") int VID);
+
+
     @GET("/api/BusinessAppUser/GetBusinessappusersusertypeid")
     public Observable<List<DrivermasterResponse>> GetDriverList_usertype(@Query("acct") String acct, @Query("uit") int uit);
 
@@ -74,7 +80,8 @@ public interface APIInterface  {
     @POST("/api/RegisterDriver/RegisterDrivers")
     public Observable<List<RegisterDriverResponse>> RegisterDriver(@Body JsonObject jsonObject);
 
-
+    @POST("/api/allocatedriver/AllocateDriver")
+    public Observable<List<AssignDriverResponse>> AssignDriver(@Body JsonObject jsonObject);
     //responce 1
     @POST("/api/DriverMaster/SaveDriverDocuments")
     public Observable<List<DefaultResponse>> SaveDriverDocuments(@Body JsonObject jsonObject);

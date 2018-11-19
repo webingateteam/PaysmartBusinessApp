@@ -258,5 +258,13 @@
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappDocumentUploadActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappAssignDriverActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappNewAssignDriverActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 </manifest>

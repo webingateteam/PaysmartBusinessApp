@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.activity.businessapp.businessappAssignDriverActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriversListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappStaffListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappStatisticsActivity;
@@ -177,8 +178,10 @@ public class businessAppFleetownerFragment extends Fragment  {
 //                                .commitAllowingStateLoss();
                         break;
                     case 2:
-
-
+                        intent = new Intent(getActivity(), businessappAssignDriverActivity.class);
+                        intent.putExtra("UserAccountNo", usan);
+                        intent.putExtra("usertypeid", 109);
+                        startActivity(intent);
                         break;
                     case 3:
                         intent = new Intent(getActivity(), businessappStatisticsActivity.class);
