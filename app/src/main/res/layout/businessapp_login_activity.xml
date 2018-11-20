@@ -128,8 +128,6 @@
                             android:layout_width="100dp"
                             android:layout_height="21dp"
                             app:ccp_hideNameCode="true"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginLeft="16dp"
                             app:layout_constraintBottom_toBottomOf="@+id/mobileNo"
                             tools:layout_editor_absoluteX="16dp" />
 

@@ -18,6 +18,7 @@ import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverValidateCre
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.EndtripResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetCustomerAccountResponce;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetVehicleListResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetdriverTripsResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.PendingDocsResponce;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.RegisterDriverResponse;
@@ -76,6 +77,9 @@ public interface APIInterface  {
 
     @GET("/api/Driverlogin/GetdrivertripsBookingno")
     public Observable<List<GetdriverTripsResponse>> Getdrivertripsbookingno(@Query("DriverNo") String driverNo, @Query("bno") String bno);
+
+    @GET("/api/VehicleMaster/GetVehcileList")
+    public Observable<List<GetVehicleListResponse>> GetVehiclesList(@Query("ctryId") int ctryid,@Query("fid") int fid,@Query("vgId") int vgid);
 
     @POST("/api/RegisterDriver/RegisterDrivers")
     public Observable<List<RegisterDriverResponse>> RegisterDriver(@Body JsonObject jsonObject);

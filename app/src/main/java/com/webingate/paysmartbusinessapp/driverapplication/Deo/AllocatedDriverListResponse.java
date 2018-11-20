@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class AllocatedDriverListResponse {
 
 	@SerializedName("RegistrationNo")
-	private Object RegistrationNo;
+	private String RegistrationNo;
 
 	@SerializedName("BloodGroup")
 	private Object bloodGroup;
@@ -55,11 +55,11 @@ public class AllocatedDriverListResponse {
 	@SerializedName("DOJ")
 	private Object dOJ;
 
-	public void setRegistrationNo(Object RegistrationNo){
+	public void setRegistrationNo(String RegistrationNo){
 		this.RegistrationNo = RegistrationNo;
 	}
 
-	public Object getRegistrationNo(){
+	public String getRegistrationNo(){
 		return RegistrationNo;
 	}
 

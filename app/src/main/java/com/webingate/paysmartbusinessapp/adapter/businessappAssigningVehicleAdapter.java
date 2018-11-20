@@ -12,9 +12,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.webingate.paysmartbusinessapp.R;
-import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetVehicleListResponse;
-import com.webingate.paysmartbusinessapp.object.Place;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import java.util.ArrayList;
@@ -24,7 +22,7 @@ import java.util.ArrayList;
  * Contact Email : teamps.is.cool@gmail.com
  * Website : http://www.panacea-soft.com
  */
-public class businessappVehicleListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class businessappAssigningVehicleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private ArrayList<GetVehicleListResponse> placeArrayList;
     private OnItemClickListener itemClickListener;
@@ -37,14 +35,14 @@ public class businessappVehicleListAdapter extends RecyclerView.Adapter<Recycler
         this.itemClickListener = mItemClickListener;
     }
 
-    public businessappVehicleListAdapter(ArrayList<GetVehicleListResponse> placeArrayList) {
+    public businessappAssigningVehicleAdapter(ArrayList<GetVehicleListResponse> placeArrayList) {
         this.placeArrayList = placeArrayList;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.businessapp_vehiclelist_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.businessapp_assigningvehicle_item, parent, false);
 
         return new VehicleViewHolder(itemView);
     }

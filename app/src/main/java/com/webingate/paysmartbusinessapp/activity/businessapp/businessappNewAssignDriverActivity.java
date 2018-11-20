@@ -6,24 +6,42 @@ import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
+import com.webingate.paysmartbusinessapp.adapter.businessappAllocatedDriverListAdapter;
+import com.webingate.paysmartbusinessapp.adapter.businessappAssigningVehicleAdapter;
+import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
+import com.webingate.paysmartbusinessapp.adapter.businessappVehicleListAdapter;
+import com.webingate.paysmartbusinessapp.adapter.uicollection.CustomSpinnerAdapter;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.AllocatedDriverListResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AssignDriverResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetVehicleListResponse;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppUploadDocsFragment;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,18 +53,36 @@ import rx.schedulers.Schedulers;
 public class businessappNewAssignDriverActivity extends AppCompatActivity {
 
     public static final String MyPREFERENCES = "MyPrefs";
+    public static final String ID = "idKey";
     public static final String RegistrationNo = "RegistrationNoKey";
     public static final String Phone = "phoneKey";
 
     Toast toast;
+    String regno,vgroup,id,cmpid,mbno;
 
-    @BindView(R.id.submit)
+    ArrayList<GetVehicleListResponse> VehicleList;
+    businessappAssigningVehicleAdapter adapter;
+
+    ArrayList<DrivermasterResponse> DriverList;
+    businessappDriverListAdapter adapter1;
+    RecyclerView recyclerView;
+    Spinner spinner;
+
+
+    @BindView(R.id.fab)
     Button submit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_newallocateddriver_activity);
+        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        regno = prefs.getString(RegistrationNo, null);
+        id = prefs.getString(ID, null);
+        mbno = prefs.getString(Phone, null);
+//        mobileOTP = prefs.getString(Mobileotp, null);
+//        ApplicationConstants.username = prefs.getString(Name, null);
 
         initData();
 
@@ -70,6 +106,11 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
 
     //region Init Functions
     private void initData() {
+        //GetVehiclesList();
+        int ctryid = -1;
+        int fid = -1;
+        int vgid = -1;
+        GetVehiclesList(ctryid,fid,vgid);
 
     }
 
@@ -77,7 +118,15 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
 
         initToolbar();
 
-        submit = findViewById(R.id.submit);
+        adapter = new businessappAssigningVehicleAdapter(null);
+
+        // get recycler view
+        recyclerView = findViewById(R.id.placeList1RecyclerView);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        submit = findViewById(R.id.fab);
 
     }
 
@@ -85,29 +134,23 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
 
     private void initDataBinding() {
 
+        recyclerView.setAdapter(adapter);
+        //recyclerView.setAdapter(adapter1);
 
     }
 
+
+
     private void initActions() {
-
-        submit.setOnClickListener((View v) ->{
-            Toast.makeText(getApplicationContext(),"Details Of Assign Driver.",Toast.LENGTH_SHORT).show();
-            JsonObject object = new JsonObject();
-            object.addProperty("flag", "I");
-            object.addProperty("Id", "");
-            object.addProperty("CompanyId", "1");
-            object.addProperty("PhoneNo", "7893890990");
-            object.addProperty("VehicleGroupId", "Hailing Car");
-            object.addProperty("RegistrationNo", "Ts01235");
-            object.addProperty("DriverName", "Krish");
-            object.addProperty("DriverId", "1");
-            object.addProperty("VechID", "1");
-            object.addProperty("EffectiveDate", "");
-            object.addProperty("EffectiveTill", "");
-            RegisterAllocatedDriver(object);
-        });
-
-
+//        submit.setOnClickListener(
+//
+//                v ->
+//                {
+//                    String ctryId = "91";
+//                    GetDriversList(ctryId);
+//
+//                    Toast.makeText(getApplicationContext(), "Assign New Driver", Toast.LENGTH_SHORT).show();
+//                });
     }
 
     public void RegisterAllocatedDriver(JsonObject jsonObject){
@@ -166,6 +209,175 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
                 });
     }
 
+    ArrayList<GetVehicleListResponse>  response;
+    public void GetVehiclesList(int ctryid,int fid,int vgid){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
+                .GetVehiclesList(ctryid,fid,vgid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<GetVehicleListResponse>>() {
+
+                    @Override
+                    public void onCompleted() {
+                        DisplayToast("Successfully Registered");
+                        //StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            //Log.d("OnError ", e.getMessage());
+                            DisplayToast("Error");
+                            //StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<GetVehicleListResponse> responselist) {
+                        VehicleList= (ArrayList <GetVehicleListResponse>) responselist;
+//                        if(AllocatedDriverList.getCode()!=null){
+//                            DisplayToast(AllocatedDriverList.getDescription());
+//                        }else {
+//                            SharedPreferences sharedPref = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+//                            SharedPreferences.Editor editor = sharedPref.edit();
+////                            SharedPreferences pref = getApplicationContext().getSharedPreferences(MyPREFERENCES, 0);
+////                            Editor editor = pref.edit();
+//                            editor.putString(RegistrationNo, r);
+//                            editor.putInt(Phone, AllocatedDriverList.getusertypeid());
+                        //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                        //   SharedPreferences.Editor editor = sharedpreferences.edit();
+                        //  editor.putString(Emailotp, response.getEmail());
+                        //    editor.commit();
+                        //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
+                        // DriverList
+                        adapter = new businessappAssigningVehicleAdapter(VehicleList);
+                        recyclerView.setAdapter(adapter);
+                        adapter.setOnItemClickListener((view, obj, position) ->
+                                {
+
+                                    Toast.makeText(getApplicationContext(), "Selected : " + obj.getRegistrationNo(), Toast.LENGTH_LONG).show();
+
+                                    GetDriversList("1");
+                                }
+                        );
+                        //}
+                        // adapter.notifyDataSetChanged();
+                        // finish();
+                    }
+                });
+
+
+    }
+
+    public  void GoToDetails(GetVehicleListResponse obj)
+    {
+        Toast.makeText(this, "Selected : " + obj.getRegistrationNo(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, businessappNewAssignDriverActivity.class);
+        startActivity(intent);
+    }
+
+    public void GetDriversList(String ctryId){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
+                .GetDriverList(ctryId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<DrivermasterResponse>>() {
+
+                    @Override
+                    public void onCompleted() {
+                        DisplayToast("Successfully Registered");
+                        //StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            //Log.d("OnError ", e.getMessage());
+                            DisplayToast("Error");
+                            //StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<DrivermasterResponse> responselist) {
+                        DriverList= (ArrayList <DrivermasterResponse>) responselist;
+                        //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                        //   SharedPreferences.Editor editor = sharedpreferences.edit();
+                        //  editor.putString(Emailotp, response.getEmail());
+                        //    editor.commit();
+                        //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
+                        // DriverList
+//                        adapter1 = new businessappDriverListAdapter(DriverList);
+//                        recyclerView.setAdapter(adapter1);
+//
+//                        adapter1.setOnItemClickListener((view, obj, position) ->
+//                                {
+//                                    //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+//
+//                                    //GoToDetails(obj);
+//                                }
+//                        );
+                        // adapter.notifyDataSetChanged();
+                        // finish();
+                    }
+                });
+
+
+    }
+
+
+//    public void GetVehiclesList(){
+//        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
+//                .GetVehiclesList()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<List<GetVehicleListResponse>>() {
+//
+//                    @Override
+//                    public void onCompleted() {
+//                        DisplayToast("Successfully Registered");
+//                        //StopDialogue();
+//                    }
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        try {
+//                            //Log.d("OnError ", e.getMessage());
+//                            DisplayToast("Error");
+//                            //StopDialogue();
+//                        } catch (Exception ex) {
+//                            ex.printStackTrace();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onNext(List<GetVehicleListResponse> responselist) {
+//                        VehiclesList= (ArrayList<GetVehicleListResponse>) responselist;
+//                        //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+//                        //   SharedPreferences.Editor editor = sharedpreferences.edit();
+//                        //  editor.putString(Emailotp, response.getEmail());
+//                        //    editor.commit();
+//                        //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
+//                        // DriverList
+//                        adapter = new businessappDriverListAdapter(VehiclesList);
+//                        recyclerView.setAdapter(adapter);
+//
+//                        adapter.setOnItemClickListener((view, obj, position) ->
+//                                {
+//                                    //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+//
+//                                    GoToDetails(obj);
+//                                }
+//                        );
+//                        // adapter.notifyDataSetChanged();
+//                        // finish();
+//                    }
+//                });
+//
+//
+//    }
+
 
     //region Init Toolbar
     private void initToolbar() {
@@ -178,7 +390,7 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
             toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.md_white_1000), PorterDuff.Mode.SRC_ATOP);
         }
 
-        toolbar.setTitle("New driver creation");
+        toolbar.setTitle("New Assign Driver");
 
         try {
             toolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));

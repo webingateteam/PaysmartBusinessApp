@@ -18,6 +18,7 @@ import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
 import com.webingate.paysmartbusinessapp.adapter.businessappVehicleListAdapter;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetVehicleListResponse;
 import com.webingate.paysmartbusinessapp.object.Place;
 import com.webingate.paysmartbusinessapp.repository.DriverListRepository;
 import com.webingate.paysmartbusinessapp.repository.VehicleListRepository;
@@ -37,7 +38,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
     // RecyclerView
     RecyclerView recyclerView;
 
-    ArrayList<DrivermasterResponse> DriverList;
+    ArrayList<GetVehicleListResponse> VehicleList;
 
     private boolean twist = false;
     Toast toast;
@@ -49,7 +50,10 @@ public class businessappVehicleListActivity extends AppCompatActivity {
     {
         // get place list
         //placeArrayList = VehicleListRepository.getPlaceList();
-        GetVehilcelist("0");
+        int ctryid = -1;
+        int fid = -1;
+        int vgid = -1;
+        GetVehilcelist(ctryid,fid,vgid);
     }
 
     private void initUI()
@@ -177,13 +181,13 @@ public class businessappVehicleListActivity extends AppCompatActivity {
 
 
     }
-    ArrayList<DrivermasterResponse>  response;
-    public void GetVehilcelist(String ctryId ){
+    ArrayList<GetVehicleListResponse>  response;
+    public void GetVehilcelist(int ctryid,int fid,int vgid){
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(businessappVehicleListActivity.this).getrestadapter()
-                .GetDriverList(ctryId)
+                .GetVehiclesList(ctryid,fid,vgid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<DrivermasterResponse>>() {
+                .subscribe(new Subscriber<List<GetVehicleListResponse>>() {
 
                     @Override
                     public void onCompleted() {
@@ -202,15 +206,15 @@ public class businessappVehicleListActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onNext(List<DrivermasterResponse> responselist) {
-                        DriverList= (ArrayList <DrivermasterResponse>) responselist;
+                    public void onNext(List<GetVehicleListResponse> responselist) {
+                        VehicleList= (ArrayList <GetVehicleListResponse>) responselist;
                         //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                         //   SharedPreferences.Editor editor = sharedpreferences.edit();
                         //  editor.putString(Emailotp, response.getEmail());
                         //    editor.commit();
                         //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
                         // DriverList
-                        adapter = new businessappVehicleListAdapter(DriverList);
+                        adapter = new businessappVehicleListAdapter(VehicleList);
                         recyclerView.setAdapter(adapter);
 
                         adapter.setOnItemClickListener((view, obj, position) ->
@@ -227,9 +231,9 @@ public class businessappVehicleListActivity extends AppCompatActivity {
 
 
     }
-    public  void GoToDetails(DrivermasterResponse obj)
+    public  void GoToDetails(GetVehicleListResponse obj)
     {
-        Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Selected : " + obj.getRegistrationNo(), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, businessappDriverDetailsActivity.class);
         startActivity(intent);
     }
