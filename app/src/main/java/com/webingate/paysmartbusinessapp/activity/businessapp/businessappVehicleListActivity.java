@@ -1,6 +1,10 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,14 +13,17 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
 import com.webingate.paysmartbusinessapp.adapter.businessappVehicleListAdapter;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetVehicleListResponse;
 import com.webingate.paysmartbusinessapp.object.Place;
@@ -33,11 +40,16 @@ import rx.schedulers.Schedulers;
 
 public class businessappVehicleListActivity extends AppCompatActivity {
 
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String Username = "nameKey";
+    public static final String Phone = "phoneKey";
+    public static final String Photo = "PhotoKey";
+
    // ArrayList<Place> placeArrayList;
     businessappVehicleListAdapter adapter;
     // RecyclerView
     RecyclerView recyclerView;
-
+ImageView photo;
     ArrayList<GetVehicleListResponse> VehicleList;
 
     private boolean twist = false;
@@ -91,6 +103,9 @@ public class businessappVehicleListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_vehicleslist_activity);
+        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+//        ApplicationConstants.username= prefs.getString(Username, null);
+//        ApplicationConstants.photo= prefs.getString(Photo, null);
 
         initData();
         initUI();
@@ -172,14 +187,6 @@ public class businessappVehicleListActivity extends AppCompatActivity {
             startActivity(intent);
 
         });
-
-
-
-
-
-
-
-
     }
     ArrayList<GetVehicleListResponse>  response;
     public void GetVehilcelist(int ctryid,int fid,int vgid){
@@ -208,9 +215,12 @@ public class businessappVehicleListActivity extends AppCompatActivity {
                     @Override
                     public void onNext(List<GetVehicleListResponse> responselist) {
                         VehicleList= (ArrayList <GetVehicleListResponse>) responselist;
-                        //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                        //   SharedPreferences.Editor editor = sharedpreferences.edit();
-                        //  editor.putString(Emailotp, response.getEmail());
+                           SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                           SharedPreferences.Editor editor = sharedpreferences.edit();
+//                          editor.putString(Photo, responselist.get(0).getPhoto().toString());
+                          byte[] decodedString= Base64.decode(ApplicationConstants.getPhoto().substring(ApplicationConstants.getPhoto().indexOf(",")+1), Base64.DEFAULT);
+                         Bitmap image = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                         photo.setImageBitmap(image);
                         //    editor.commit();
                         //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
                         // DriverList
@@ -234,7 +244,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
     public  void GoToDetails(GetVehicleListResponse obj)
     {
         Toast.makeText(this, "Selected : " + obj.getRegistrationNo(), Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, businessappDriverDetailsActivity.class);
+        Intent intent = new Intent(this, businessappVehicleDetailsActivity.class);
         startActivity(intent);
     }
     protected void onDestroy() {

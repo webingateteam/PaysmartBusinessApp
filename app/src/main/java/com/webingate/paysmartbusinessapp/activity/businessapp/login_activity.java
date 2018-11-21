@@ -34,6 +34,7 @@ import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.Businessappuse
 import com.webingate.paysmartbusinessapp.adapter.uicollection.CustomSpinnerAdapter;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.ActiveCountries;
 import com.webingate.paysmartbusinessapp.driverapplication.Dialog.ProgressDialog;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
@@ -135,6 +136,8 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
 
         initDataBindings();
 
+        initData();
+
         initActions();
         spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
@@ -144,7 +147,8 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
         CustomSpinnerAdapter uiloginasCustomSpinnerAdapter =new CustomSpinnerAdapter(getApplicationContext(),icons,fruits);
         spinner.setAdapter(uiloginasCustomSpinnerAdapter);
         ccp = (CountryCodePicker) findViewById(R.id.ccp);
-        ccp.setCustomMasterCountries("IN,ZW,AF");
+
+
 
     }
 
@@ -160,6 +164,10 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
 //        facebookCardView = findViewById(R.id.facebookCardView);
 //        twitterCardView = findViewById(R.id.twitterCardView);
         bgImageView = findViewById(R.id.bgImageView);
+    }
+
+    private void initData(){
+        GetActiveCountries(1);
     }
 
     private void initDataBindings() {
@@ -333,6 +341,58 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
                             finish();
                        }
 
+                    }
+                });
+    }
+
+    public void GetActiveCountries(int active){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(login_activity.this).getrestadapter()
+                .GetActiveCountry(active)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<ActiveCountries>>() {
+                    @Override
+                    public void onCompleted() {
+                        //DisplayToast("Successfully Registered");
+                        //StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            Log.d("OnError ", e.getMessage());
+                            DisplayToast("Error");
+                            //StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<ActiveCountries> list) {
+
+                        List<ActiveCountries> response= list ;
+                        int countrycount = response.size();
+                        if (countrycount == 0) {
+                            DisplayToast("Please configure countries of operation.");
+                        } else {
+
+                            String countriesList = "";
+                            for(int i=0; i < countrycount ; i++){
+                                if(i == countrycount-1)
+                                    countriesList += response.get(i).getISOCode();
+                                else
+                                    countriesList += response.get(i).getISOCode()+ ",";
+                            }
+
+                            ccp.setCustomMasterCountries(countriesList);
+
+//                            ccp = (CountryCodePicker) findViewById(R.id.ccp);
+//                            ccp.setCustomMasterCountries(response.getISOCode());
+//                            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+//                            SharedPreferences.Editor editor = sharedpreferences.edit();
+//                            editor.putString(Isocode, response.getISOCode());
+//                            editor.commit();
+                        }
                     }
                 });
     }

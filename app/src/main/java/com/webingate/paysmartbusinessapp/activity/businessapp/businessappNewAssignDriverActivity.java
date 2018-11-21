@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,12 +56,21 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
 
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String ID = "idKey";
+    public static final String VehicleID = "VehicleIdKey";
+    public static final String DId = "didKey";
     public static final String RegistrationNo = "RegistrationNoKey";
+    public static final String Name = "NAmeKey";
     public static final String Phone = "phoneKey";
+    public static final String VehicleGroup = "VehicleGroupKey";
+    public static final String VehicleType = "VehicleTypeKey";
 
     Toast toast;
-    String regno,vgroup,id,cmpid,mbno;
 
+    String regno,vgroup,cmpid,mbno,id;
+    int vechid;
+    String[] fruits;
+    ArrayAdapter<String> adapter2;
+    ArrayList<String> list;
     ArrayList<GetVehicleListResponse> VehicleList;
     businessappAssigningVehicleAdapter adapter;
 
@@ -67,10 +78,13 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
     businessappDriverListAdapter adapter1;
     RecyclerView recyclerView;
     Spinner spinner;
+    List<String> values = new ArrayList<String>();
 
-
+    private List<String> dlist = new ArrayList<String>();
     @BindView(R.id.fab)
     Button submit;
+    String vgrp,vtype;
+    int DriverId;
 
 
     @Override
@@ -81,6 +95,9 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
         regno = prefs.getString(RegistrationNo, null);
         id = prefs.getString(ID, null);
         mbno = prefs.getString(Phone, null);
+        DriverId = prefs.getInt(DId, 0);
+        vgrp = prefs.getString(VehicleGroup, null);
+        vtype = prefs.getString(VehicleType, null);
 //        mobileOTP = prefs.getString(Mobileotp, null);
 //        ApplicationConstants.username = prefs.getString(Name, null);
 
@@ -236,14 +253,10 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
                     @Override
                     public void onNext(List<GetVehicleListResponse> responselist) {
                         VehicleList= (ArrayList <GetVehicleListResponse>) responselist;
+
 //                        if(AllocatedDriverList.getCode()!=null){
 //                            DisplayToast(AllocatedDriverList.getDescription());
 //                        }else {
-//                            SharedPreferences sharedPref = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
-//                            SharedPreferences.Editor editor = sharedPref.edit();
-////                            SharedPreferences pref = getApplicationContext().getSharedPreferences(MyPREFERENCES, 0);
-////                            Editor editor = pref.edit();
-//                            editor.putString(RegistrationNo, r);
 //                            editor.putInt(Phone, AllocatedDriverList.getusertypeid());
                         //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                         //   SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -258,7 +271,15 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
 
                                     Toast.makeText(getApplicationContext(), "Selected : " + obj.getRegistrationNo(), Toast.LENGTH_LONG).show();
 
-                                    GetDriversList("1");
+                                    SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                                    editor.putInt(VehicleID, obj.getId());
+                                    editor.putString(RegistrationNo, obj.getRegistrationNo());
+                                    editor.putString(VehicleGroup, obj.getVehicleGroup());
+                                    editor.putString(VehicleType, obj.getVehicleType());
+                                    editor.commit();
+
+                                    GetDriversList("91");
                                 }
                         );
                         //}
@@ -273,8 +294,8 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
     public  void GoToDetails(GetVehicleListResponse obj)
     {
         Toast.makeText(this, "Selected : " + obj.getRegistrationNo(), Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, businessappNewAssignDriverActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, businessappNewAssignDriverActivity.class);
+//        startActivity(intent);
     }
 
     public void GetDriversList(String ctryId){
@@ -303,28 +324,95 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
                     @Override
                     public void onNext(List<DrivermasterResponse> responselist) {
                         DriverList= (ArrayList <DrivermasterResponse>) responselist;
-                        //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                        //   SharedPreferences.Editor editor = sharedpreferences.edit();
-                        //  editor.putString(Emailotp, response.getEmail());
-                        //    editor.commit();
-                        //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
-                        // DriverList
-//                        adapter1 = new businessappDriverListAdapter(DriverList);
-//                        recyclerView.setAdapter(adapter1);
+                        for(int i=0;i<=responselist.size()-1;i++){
+                            dlist.add(responselist.get(i).getNAme());
+                        }
+                           SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                           SharedPreferences.Editor editor = sharedpreferences.edit();
+                           editor.putInt(DId, responselist.get(0).getDId());
+                           editor.putString(Phone, responselist.get(0).getPMobNo());
+//                        if(dlist!=null || !dlist.isEmpty()) {
+//                        for (int i=0;i<=dlist.size()-1;i++){
+//                            if(dlist.get(i)!=null || !dlist.get(i).isEmpty())
+//                            values.add(dlist.get(i));
+//                        }
+//                        }
+
+//                           SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+//                           SharedPreferences.Editor editor = sharedpreferences.edit();
+//                          editor.putString(Name, DriverList.getNAme().toString());
+//                            editor.commit();
+
+
+                        View view = getLayoutInflater().inflate(R.layout.businessapp_bottomdialog, null);
+
+                        BottomSheetDialog dialog = new BottomSheetDialog(businessappNewAssignDriverActivity.this);
+
+                        //list = new ArrayList<DrivermasterResponse>(Arrays.asList(DriverList));
+                        adapter2 = new ArrayAdapter<>(businessappNewAssignDriverActivity.this, android.R.layout.simple_list_item_1, dlist);
+                        ListView listView = view.findViewById(R.id.bsDialogListView);
+
+                        listView.setAdapter(adapter2);
+
+                        dialog.setContentView(view);
+                        dialog.show();
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        public void onItemClick(AdapterView <?> adapter, View v, int position, long id) {
+
+                            DrivermasterResponse selItem = DriverList.get(position);
+
+                            SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                            regno = prefs.getString(RegistrationNo, null);
+                            vechid = prefs.getInt(VehicleID, 0);
+                            vgrp = prefs.getString(VehicleGroup, null);
+                            vtype = prefs.getString(VehicleType, null);
+                            //String value = selItem.;
+                            JsonObject  jsonObject = new JsonObject();
+                            jsonObject.addProperty("flag","I");
+                            jsonObject.addProperty("Id","");
+                            jsonObject.addProperty("DriverName",selItem.getNAme());
+                            jsonObject.addProperty("RegistrationNo",regno);
+                            jsonObject.addProperty("VechID",vechid);
+                            jsonObject.addProperty("VehicleGroupId",vgrp);
+                            jsonObject.addProperty("VehicleType",vtype);
+                            jsonObject.addProperty("DriverId",selItem.getDId());
+                            jsonObject.addProperty("PhoneNo",selItem.getPMobNo());
+                            RegisterAllocatedDriver(jsonObject);
+                            //DisplayToast(selItem.getNAme());
+                        }
+                    });
+//                        view.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                Context cxt = view.getContext();
+//                                AssignDriverDetails(cxt.getPackageName().toString());
 //
-//                        adapter1.setOnItemClickListener((view, obj, position) ->
+//                            }
+//                        });
+                        //listView.setOnItemClickListener((this,view,position) ->
+//                        {
+//                            AssignDriverDetails(view);
+//                        });
+//                        listView.setOnItemClickListener((view1, obj, position) ->
 //                                {
 //                                    //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
-//
-//                                    //GoToDetails(obj);
-//                                }
-//                        );
-                        // adapter.notifyDataSetChanged();
-                        // finish();
+//                                    JsonObject jsonObject = new JsonObject();
+//                                    jsonObject.addProperty("Email", E_email.toString());
+//                                    jsonObject.addProperty("EVerificationCode", etop.getText().toString());
+//                                    jsonObject.addProperty("userId", E_uid);
+//                                    EOTPVerification(jsonObject);
+//                                    AssignDriverDetails(obj);
+//                                });
                     }
                 });
+    }
 
-
+    public void AssignDriverDetails(String str)
+    {
+       // Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+//        Intent intent = new Intent(.this);
+//        startActivity(intent);
     }
 
 

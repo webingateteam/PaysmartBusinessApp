@@ -4,8 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class GetVehicleListResponse {
 
+	@SerializedName("Id")
+	private int Id;
+
 	@SerializedName("RegistrationNo")
-	private Object RegistrationNo;
+	private String RegistrationNo;
 
 	@SerializedName("VehicleGroup")
 	private String VehicleGroup;
@@ -24,11 +27,11 @@ public class GetVehicleListResponse {
 
 
 
-	public void setRegistrationNo(Object RegistrationNo){
+	public void setRegistrationNo(String RegistrationNo){
 		this.RegistrationNo = RegistrationNo;
 	}
 
-	public Object getRegistrationNo(){
+	public String getRegistrationNo(){
 		return RegistrationNo;
 	}
 
@@ -72,6 +75,14 @@ public class GetVehicleListResponse {
 		return photo;
 	}
 
+	public void setId(int Id){
+		this.Id = Id;
+	}
+
+	public int getId(){
+		return Id;
+	}
+
 
 	@Override
  	public String toString(){
@@ -82,7 +93,7 @@ public class GetVehicleListResponse {
 			",VehicleGroup = '" + VehicleGroup +
 		    ",VehicleType = '" + VehicleType + '\''+
 		    ",Photo = '" + photo + '\''+
-
+		    ",Id = '" + Id + '\''+
 			"}";
 		}
 }

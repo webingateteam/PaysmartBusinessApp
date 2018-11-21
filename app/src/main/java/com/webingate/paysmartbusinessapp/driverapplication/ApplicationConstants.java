@@ -51,7 +51,10 @@ public class ApplicationConstants {
     public static String document_expire_date;
     public static String document_data;
     public static String document_format;
+    private static String photo;
 
 
-
+    public static String getPhoto() {
+        return photo;
+    }
 }

@@ -5,6 +5,7 @@ import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessEOTPVe
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessappuserValidateResp;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.MOTPVerification;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AcceptRejectBookingResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.ActiveCountries;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AllocatedDriverListResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AssignDriverResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.ChangepwdResponse;
@@ -160,6 +161,10 @@ public interface APIInterface  {
 
     @POST("/api/SaveSOSNumber")
     public Observable<List<SaveSOSNumberResponce>> SaveSOSNumber(@Body JsonObject jsonObject);//w
+
+    @GET("/api/Common/GetCountry")
+    public Observable<List<ActiveCountries>> GetActiveCountry(@Query("active") int active);//i
+
 
 
 

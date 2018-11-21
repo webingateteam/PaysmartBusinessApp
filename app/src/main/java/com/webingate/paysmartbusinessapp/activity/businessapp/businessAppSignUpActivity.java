@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,7 @@ import com.rilixtech.CountryCodePicker;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
 import com.webingate.paysmartbusinessapp.adapter.uicollection.CustomSpinnerAdapter;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.ActiveCountries;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import java.util.ArrayList;
@@ -78,6 +80,8 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
 
         initActions();
 
+        initData();
+
         spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
 
@@ -88,7 +92,8 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
         CustomSpinnerAdapter uiloginasCustomSpinnerAdapter =new CustomSpinnerAdapter(getApplicationContext(),icons,fruits);
         spinner.setAdapter(uiloginasCustomSpinnerAdapter);
         ccp = (CountryCodePicker) findViewById(R.id.ccp);
-        ccp.setCustomMasterCountries("IN,ZW,AF");
+
+
 
     }
 
@@ -150,6 +155,10 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
 
     }
 
+    private void initData(){
+        GetActiveCountries(1);
+    }
+
     public void RegisterDriver(JsonObject jsonObject){
 
         //StartDialogue();
@@ -201,6 +210,58 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
                             editor.commit();
                             // startActivity(new Intent(businessAppSignUpActivity.this, customerEOTPVerificationActivity.class));
                             finish();
+                        }
+                    }
+                });
+    }
+
+    public void GetActiveCountries(int active){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(businessAppSignUpActivity.this).getrestadapter()
+                .GetActiveCountry(active)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<ActiveCountries>>() {
+                    @Override
+                    public void onCompleted() {
+                        //DisplayToast("Successfully Registered");
+                        //StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            Log.d("OnError ", e.getMessage());
+                            DisplayToast("Error");
+                            //StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<ActiveCountries> list) {
+
+                        List<ActiveCountries> response= list ;
+                        int countrycount = response.size();
+                        if (countrycount == 0) {
+                            DisplayToast("Please configure countries of operation.");
+                        } else {
+
+                            String countriesList = "";
+                            for(int i=0; i < countrycount ; i++){
+                                if(i == countrycount-1)
+                                    countriesList += response.get(i).getISOCode();
+                                else
+                                    countriesList += response.get(i).getISOCode()+ ",";
+                            }
+
+                            ccp.setCustomMasterCountries(countriesList);
+
+//                            ccp = (CountryCodePicker) findViewById(R.id.ccp);
+//                            ccp.setCustomMasterCountries(response.getISOCode());
+//                            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+//                            SharedPreferences.Editor editor = sharedpreferences.edit();
+//                            editor.putString(Isocode, response.getISOCode());
+//                            editor.commit();
                         }
                     }
                 });
