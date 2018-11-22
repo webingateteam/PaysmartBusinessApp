@@ -265,6 +265,15 @@
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappNewAssignDriverActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappEwalletActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappEwalletMOTPVerificationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.DashboardEWallet"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappEOTPVerificationActivity"

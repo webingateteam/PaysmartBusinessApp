@@ -142,6 +142,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 
         } else if (id == R.id.nav_ewallet) {
             Toast.makeText(this, "Clicked nav_ewallet.", Toast.LENGTH_SHORT).show();
+            startActivity( new Intent(customerappUserprofileActivity.this, businessappEwalletActivity.class));
         } else if (id == R.id.nav_notification) {
             Toast.makeText(this, "Clicked nav_notification.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_alerts) {
