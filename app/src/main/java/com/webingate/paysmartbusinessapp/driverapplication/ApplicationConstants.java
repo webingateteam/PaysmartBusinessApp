@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ApplicationConstants {
     public static String id="";
+    public static String userAccountNo="";
     public static String username="";
     public static String mobileNo ="";
     public static String address ="";

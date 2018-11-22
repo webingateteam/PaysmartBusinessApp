@@ -336,6 +336,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
 //                            editor.putString(Mobileotp, null);
                             editor.commit();
                             ApplicationConstants.mobileNo = mobileNo.getText().toString();
+                            ApplicationConstants.userAccountNo=credentialsResponse.getuseraccountno();
                             //startActivity(new Intent(this, MainActivity.class));
                            GoToDashboard();
                             finish();
@@ -495,18 +496,18 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
 //                    finish();
 //                }
                 if (emailOTP != null && mobileOTP != null) {
-                    ApplicationConstants.mobileNo = mobNo;
-                    ApplicationConstants.id = id;
-                    startActivity(new Intent(login_activity.this,customerEOTPVerificationActivity.class));
-                    finish();
+//                    ApplicationConstants.mobileNo = mobNo;
+//                    ApplicationConstants.id = id;
+//                    startActivity(new Intent(login_activity.this,customerEOTPVerificationActivity.class));
+//                    finish();
                 } else {
                     if (emailOTP == null && mobileOTP != null) {
-                        startActivity(new Intent(login_activity.this, customerMOTPVerificationActivity.class));
-                        finish();
+//                        startActivity(new Intent(login_activity.this, customerMOTPVerificationActivity.class));
+//                        finish();
                     } else if(emailOTP != null && mobileOTP == null){
 
-                        startActivity(new Intent(login_activity.this,customerEOTPVerificationActivity.class));
-                        finish();
+//                        startActivity(new Intent(login_activity.this,customerEOTPVerificationActivity.class));
+//                        finish();
                     }
                 }
             } else {
