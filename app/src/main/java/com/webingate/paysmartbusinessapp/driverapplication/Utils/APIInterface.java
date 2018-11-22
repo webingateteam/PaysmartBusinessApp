@@ -8,6 +8,7 @@ import com.webingate.paysmartbusinessapp.driverapplication.Deo.AcceptRejectBooki
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.ActiveCountries;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AllocatedDriverListResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AssignDriverResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.BusinessResendOTPResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.ChangepwdResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DefaultResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverDetailsResponse;
@@ -51,11 +52,15 @@ public interface APIInterface  {
     @POST("/api/BusinessAppUser/BusinessAppUserEOTPVerification")
     public Observable<List<BusinessEOTPVerificationResponse>> BusinessEOTPVerification(@Body JsonObject jsonObject);
 
-    @POST("/api/DriverForgotpassword/BusinessAppForgotpassword")
+    @POST("/api/BusinessAppUser/BusinessAppUserForgotpassword")
     public Observable<List<DriverForgotpasswordResponse>> Forgotpassword1(@Body JsonObject jsonObject);
 
-    @POST("/api/DriverForgotpassword/BusinessAppForgotpassword")
-    public Observable<List<DriverForgotpasswordResponse>> BusinessappForgotpassword1(@Body JsonObject jsonObject);
+    @POST("/api/BusinessAppUser/BusinessAppUserResendOTP")
+    public Observable<List<BusinessResendOTPResponse>> BusinessAppResendOTP(@Body JsonObject jsonObject);
+
+
+    @POST("/api/BusinessAppUser/BusinessAppUserPasswordverification")
+    public Observable<List<DriverPasswordVerificationResponse>> BusinessappForgotpassword(@Body JsonObject jsonObject);
 
     @POST("/api/BusinessAppUser/BusinessAppUserMOTPverifications")
     public Observable<List<MOTPVerification>> MOTPVerifications1(@Body JsonObject jsonObject);

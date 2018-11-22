@@ -37,7 +37,7 @@ public class RegisterBusinessUsers {
     private String Emailotp;
 
     @SerializedName("Id")
-    private int Id;
+    private String Id;
     @SerializedName("Mobileotp")
     private String Mobileotp;
 
@@ -51,7 +51,7 @@ public class RegisterBusinessUsers {
     public String getemail(){
         return Email;
     }
-    public int getusreid(){return Id;}
+
     public String getemailotp(){
         return Emailotp;
     }
@@ -63,6 +63,12 @@ public class RegisterBusinessUsers {
     public String getDescription() {
         return description;
     }
+    public void setId(String Id){this.Id = Id;}
+    public String getId(){return Id;}
+    public void setUserAccountNo(String UserAccountNo){this.UserAccountNo = UserAccountNo;}
+    public String getUserAccountNo() {
+        return UserAccountNo;
+    }
 
     @Override
     public String toString(){
@@ -70,10 +76,11 @@ public class RegisterBusinessUsers {
                 "RegisterBusinessAppusersResponse{" +
                         "Id = '" + Id + '\'' +
                         "Email = '" + Email + '\'' +
-                        "Usename = '" + Emailotp + '\'' +
+                        "Emailotp = '" + Emailotp + '\'' +
                         "Usename = '" + Usename + '\'' +
                         "Mobileotp = '" + Mobileotp + '\'' +
-                        "Mobileotp = '" + Mobilenumber + '\'' +
+                        "Mobilenumber = '" + Mobilenumber + '\'' +
+                        "UserAccountNo = '" + UserAccountNo + '\'' +
                         "}";
     }
 }

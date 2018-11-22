@@ -29,11 +29,14 @@ public class DriverPasswordVerificationResponse{
 	@SerializedName("Description")
 	private String  Description;
 
-	@SerializedName("PMobNo")
-	private String pMobNo;
+	@SerializedName("Username")
+	private String Username;
 
-	@SerializedName("NAme")
-	private String nAme;
+	@SerializedName("MobileNumber")
+	private String MobileNumber;
+
+	@SerializedName("UserAccountNo")
+	private String UserAccountNo;
 
 	public void setEmail(String email){
 		this.email = email;
@@ -43,29 +46,38 @@ public class DriverPasswordVerificationResponse{
 		return email;
 	}
 
-	public void setPMobNo(String pMobNo){
-		this.pMobNo = pMobNo;
+	public void setUsername(String Username){
+		this.Username = Username;
 	}
 
-	public String getPMobNo(){
-		return pMobNo;
+	public String getUsername(){
+		return Username;
 	}
 
-	public void setNAme(String nAme){
-		this.nAme = nAme;
+	public void setMobileNumber(String MobileNumber){
+		this.MobileNumber = MobileNumber;
 	}
 
-	public String getNAme(){
-		return nAme;
+	public String getMobileNumber(){
+		return MobileNumber;
+	}
+
+	public void setUserAccountNo(String UserAccountNo){
+		this.UserAccountNo = UserAccountNo;
+	}
+
+	public String getUserAccountNo(){
+		return UserAccountNo;
 	}
 
 	@Override
  	public String toString(){
 		return 
 			"DriverPasswordVerificationResponse{" + 
-			"email = '" + email + '\'' + 
-			",pMobNo = '" + pMobNo + '\'' + 
-			",nAme = '" + nAme + '\'' + 
+			"Email = '" + email + '\'' +
+			",Username = '" + Username + '\'' +
+			",MobileNumber = '" + MobileNumber + '\'' +
+			",UserAccountNo = '" + UserAccountNo + '\'' +
 			"}";
 		}
 }

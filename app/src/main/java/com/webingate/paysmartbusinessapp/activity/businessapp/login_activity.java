@@ -503,10 +503,6 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
                     if (emailOTP == null && mobileOTP != null) {
                         startActivity(new Intent(login_activity.this, customerMOTPVerificationActivity.class));
                         finish();
-                    } else if(emailOTP != null && mobileOTP == null){
-
-                        startActivity(new Intent(login_activity.this,customerEOTPVerificationActivity.class));
-                        finish();
                     }
                 }
             } else {
