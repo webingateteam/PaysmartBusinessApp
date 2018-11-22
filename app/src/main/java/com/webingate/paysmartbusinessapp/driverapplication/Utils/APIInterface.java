@@ -4,10 +4,11 @@ import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessEOTPVerificationResponse;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessappuserValidateResp;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.MOTPVerification;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.MOTPVerificationResponse;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.WalletBalanceResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AcceptRejectBookingResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.ActiveCountries;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AllocatedDriverListResponse;
-import com.webingate.paysmartbusinessapp.driverapplication.Deo.AssignDriverResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.ChangepwdResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DefaultResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverDetailsResponse;
@@ -41,6 +42,19 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 public interface APIInterface  {
+
+    @POST("/api/UserAccount/DriverEwalletOTPSending")
+    public Observable<List<MOTPVerificationResponse>> EwalletSendOTP(@Body JsonObject jsonObject);//
+
+    @POST("/api/UserAccount/DriverEwalletOTPVerification")
+    public Observable<List<MOTPVerificationResponse>> EwalletMOTPVerifications(@Body JsonObject jsonObject);
+
+    @GET("/api/WalletBalance/Getcurrentbalance")
+    public Observable<List<WalletBalanceResponse>> Getcurrentbalance1(@Query("mobileno") String mobileNo);
+
+    @POST("/api/WalletBalance/WalletBalance")
+    public Observable<List<WalletBalanceResponse>> WalletBalance(@Body JsonObject jsonObject);
+
 
     @POST("/api/Driverlogin/ValidateDriverCredentials")
     public Observable<List<DriverValidateCredentialsResponse>> ValidateDriver(@Body JsonObject jsonObject);
@@ -85,8 +99,8 @@ public interface APIInterface  {
     @POST("/api/RegisterDriver/RegisterDrivers")
     public Observable<List<RegisterDriverResponse>> RegisterDriver(@Body JsonObject jsonObject);
 
-    @POST("/api/allocatedriver/AllocateDriver")
-    public Observable<List<AssignDriverResponse>> AssignDriver(@Body JsonObject jsonObject);
+//    @POST("/api/allocatedriver/AllocateDriver")
+//    public Observable<List<AssignDriverResponse>> AssignDriver(@Body JsonObject jsonObject);
     //responce 1
     @POST("/api/DriverMaster/SaveDriverDocuments")
     public Observable<List<DefaultResponse>> SaveDriverDocuments(@Body JsonObject jsonObject);
