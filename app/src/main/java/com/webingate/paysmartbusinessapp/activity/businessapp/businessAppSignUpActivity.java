@@ -36,6 +36,7 @@ import rx.schedulers.Schedulers;
 public class businessAppSignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     public static final String MyPREFERENCES = "MyPrefs";
+    public static final String ID = "idKey";
     public static final String Username = "nameKey";
     public static final String Phone = "phoneKey";
     public static final String Email = "emailKey";
@@ -44,6 +45,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
     public static final String Emailotp = "emailotpkey";
     public static final String DRIVERID = "driverid";
     public static final String VEHICLEID = "vehicleid";
+    public static final String UserAccountNo = "UserAccountNoKey";
     Toast toast;
     @BindView(R.id.registerButton)
     Button registerButton;
@@ -191,14 +193,20 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
                         }else {
                             SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedpreferences.edit();
-                            //editor.putString(Username, response.getusername());
-                            Intent intent = new Intent(businessAppSignUpActivity.this, customerEOTPVerificationActivity.class);
-                            intent.putExtra("eotp", response.getemailotp());
-                            intent.putExtra("uid", response.getusreid());
-                            intent.putExtra("email", response.getemail());
-                            intent.putExtra("username", response.getusreid());
-                            intent.putExtra("motp", response.getmotp());
-                            intent.putExtra("mno", response.getmnumber());
+                            Intent intent = new Intent(businessAppSignUpActivity.this, businessappEOTPVerificationActivity.class);
+                            editor.putString(UserAccountNo, response.getUserAccountNo());
+                            editor.putString(ID, response.getId());
+                            editor.putString(Phone, response.getmnumber());
+                            editor.putString(Email, response.getemail());
+                            editor.putString(Emailotp, response.getemailotp());
+
+//                            intent.putExtra("eotp", response.getemailotp());
+//                            intent.putExtra("uid", response.getusreid());
+//                            intent.putExtra("email", response.getemail());
+//                            intent.putExtra("username", response.getusreid());
+//                            intent.putExtra("motp", response.getmotp());
+//                            intent.putExtra("mno", response.getmnumber());
+
                             startActivity(intent);
 //                        editor.putString(Phone, response.getPMobNo());
 //                        editor.putString(Email, response.getEmail());
