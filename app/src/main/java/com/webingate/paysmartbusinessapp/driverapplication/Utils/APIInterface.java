@@ -4,6 +4,8 @@ import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessEOTPVerificationResponse;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessappuserValidateResp;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.MOTPVerification;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.MOTPVerificationResponse;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.WalletBalanceResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AcceptRejectBookingResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.ActiveCountries;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AllocatedDriverListResponse;
@@ -42,7 +44,17 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 public interface APIInterface  {
+    @POST("/api/UserAccount/DriverEwalletOTPSending")
+    public Observable<List<MOTPVerificationResponse>> EwalletSendOTP(@Body JsonObject jsonObject);//
 
+    @POST("/api/UserAccount/DriverEwalletOTPVerification")
+    public Observable<List<MOTPVerificationResponse>> EwalletMOTPVerifications(@Body JsonObject jsonObject);
+
+    @GET("/api/WalletBalance/Getcurrentbalance")
+    public Observable<List<WalletBalanceResponse>> Getcurrentbalance1(@Query("mobileno") String mobileNo);
+
+    @POST("/api/WalletBalance/WalletBalance")
+    public Observable<List<WalletBalanceResponse>> WalletBalance(@Body JsonObject jsonObject);
     @POST("/api/Driverlogin/ValidateDriverCredentials")
     public Observable<List<DriverValidateCredentialsResponse>> ValidateDriver(@Body JsonObject jsonObject);
 
