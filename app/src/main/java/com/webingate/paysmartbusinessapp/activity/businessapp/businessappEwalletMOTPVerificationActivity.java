@@ -128,7 +128,7 @@ public class businessappEwalletMOTPVerificationActivity extends AppCompatActivit
             else
             {
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("Mobilenumber","7893890990");
+                jsonObject.addProperty("Mobilenumber", com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants.mobileNo);
                 jsonObject.addProperty("MVerificationCode", motp.getText().toString());
                 jsonObject.addProperty("UserAccountNo", com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants.userAccountNo);
                 EMOTPVerifications(jsonObject);
