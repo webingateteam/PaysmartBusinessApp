@@ -86,7 +86,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
         initToolbar();
 
         bgImageView = findViewById(R.id.bgImageView);
-        int id = Utils.getDrawableInt(getApplicationContext(), "verification3");
+        int id = Utils.getDrawableInt(getApplicationContext(), "EOTP Verification");
         Utils.setImageToImageView(getApplicationContext(), bgImageView, id);
         changeButton = findViewById(R.id.changeButton);
         resendButton = findViewById(R.id.resendButton);
@@ -142,7 +142,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
             toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.md_white_1000), PorterDuff.Mode.SRC_ATOP);
         }
 
-        toolbar.setTitle("Verification 3");
+        toolbar.setTitle("EOTP Verification");
 
         try {
             toolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));

@@ -3,8 +3,11 @@ package com.webingate.paysmartbusinessapp.activity.businessapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +27,7 @@ import com.webingate.paysmartbusinessapp.adapter.uicollection.CustomSpinnerAdapt
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.ActiveCountries;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

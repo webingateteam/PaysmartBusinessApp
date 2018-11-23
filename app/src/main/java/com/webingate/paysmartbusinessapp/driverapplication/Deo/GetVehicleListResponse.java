@@ -22,8 +22,8 @@ public class GetVehicleListResponse {
 	@SerializedName("CompanyId")
 	private Object companyId;
 
-	@SerializedName("photo")
-	private String photo;
+	@SerializedName("Photo")
+	private String Photo;
 
 
 
@@ -67,12 +67,12 @@ public class GetVehicleListResponse {
 		return companyId;
 	}
 
-	public void setPhoto(String photo){
-		this.photo = photo;
+	public void setPhoto(String Photo){
+		this.Photo = Photo;
 	}
 
 	public String getPhoto(){
-		return photo;
+		return Photo;
 	}
 
 	public void setId(int Id){
@@ -92,7 +92,7 @@ public class GetVehicleListResponse {
 			",VehicleCode = '" + VehicleCode + '\'' +
 			",VehicleGroup = '" + VehicleGroup +
 		    ",VehicleType = '" + VehicleType + '\''+
-		    ",Photo = '" + photo + '\''+
+		    ",Photo = '" + Photo + '\''+
 		    ",Id = '" + Id + '\''+
 			"}";
 		}

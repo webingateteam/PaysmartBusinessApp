@@ -26,6 +26,7 @@ import com.webingate.paysmartbusinessapp.adapter.businessappVehicleListAdapter;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetVehicleListResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.VehicleListResponse;
 import com.webingate.paysmartbusinessapp.object.Place;
 import com.webingate.paysmartbusinessapp.repository.DriverListRepository;
 import com.webingate.paysmartbusinessapp.repository.VehicleListRepository;
@@ -34,6 +35,7 @@ import com.webingate.paysmartbusinessapp.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -49,7 +51,8 @@ public class businessappVehicleListActivity extends AppCompatActivity {
     businessappVehicleListAdapter adapter;
     // RecyclerView
     RecyclerView recyclerView;
-ImageView photo;
+    @BindView(R.id.placeImageView)
+     ImageView photo;
     ArrayList<GetVehicleListResponse> VehicleList;
 
     private boolean twist = false;
@@ -80,6 +83,7 @@ ImageView photo;
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
     }
     private void initDataBindings()
     {
@@ -187,6 +191,7 @@ ImageView photo;
             startActivity(intent);
 
         });
+        photo = findViewById(R.id.placeImageView);
     }
     ArrayList<GetVehicleListResponse>  response;
     public void GetVehilcelist(int ctryid,int fid,int vgid){
@@ -217,10 +222,11 @@ ImageView photo;
                         VehicleList= (ArrayList <GetVehicleListResponse>) responselist;
                            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                            SharedPreferences.Editor editor = sharedpreferences.edit();
-//                          editor.putString(Photo, responselist.get(0).getPhoto().toString());
-                          byte[] decodedString= Base64.decode(ApplicationConstants.getPhoto().substring(ApplicationConstants.getPhoto().indexOf(",")+1), Base64.DEFAULT);
-                         Bitmap image = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                         photo.setImageBitmap(image);
+                         editor.putString(Photo, responselist.get(0).getPhoto().toString());
+                        ApplicationConstants.profilepic = responselist.get(0).getPhoto().toString();
+//                          byte[] decodedString= Base64.decode(ApplicationConstants.profilepic.substring(ApplicationConstants.profilepic.indexOf(",")+1), Base64.DEFAULT);
+//                         Bitmap image = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+//                        photo.setImageBitmap(image);
                         //    editor.commit();
                         //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
                         // DriverList
