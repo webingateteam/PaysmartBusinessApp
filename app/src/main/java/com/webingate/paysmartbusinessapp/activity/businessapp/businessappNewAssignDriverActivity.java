@@ -1,13 +1,10 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,31 +16,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
-import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
-import com.webingate.paysmartbusinessapp.adapter.businessappAllocatedDriverListAdapter;
 import com.webingate.paysmartbusinessapp.adapter.businessappAssigningVehicleAdapter;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
-import com.webingate.paysmartbusinessapp.adapter.businessappVehicleListAdapter;
-import com.webingate.paysmartbusinessapp.adapter.uicollection.CustomSpinnerAdapter;
-import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
-import com.webingate.paysmartbusinessapp.driverapplication.Deo.AllocatedDriverListResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AssignDriverResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetVehicleListResponse;
-import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment;
-import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppUploadDocsFragment;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;

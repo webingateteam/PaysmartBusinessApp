@@ -50,6 +50,7 @@ public class DashboardEWallet extends AppCompatActivity {
     private NestedScrollView nested_scroll_view;
     @BindView(R.id.send)
     LinearLayout send;
+
     @BindView(R.id.recieve)
     LinearLayout recieve;
     @BindView(R.id.balance)
@@ -65,18 +66,19 @@ public class DashboardEWallet extends AppCompatActivity {
     private String amount,text1,mno;
     private int flag;
     Toast toast;
+    String mibleno;
     ArrayList<WalletBalanceResponse> traslist,traslist1;
     //ArrayList<GetCurrentBalanceResponse> traslist1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard_wallet1);
-        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        mno=prefs.getString(Phone, null);
-        send=findViewById(R.id.send);
-        recieve=findViewById(R.id.recieve);
-        balance=findViewById(R.id.balance);
-
+        setContentView(R.layout.activity_dashboard_wallet);
+//        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+//        mno=prefs.getString(Phone, null);
+          send=(LinearLayout) findViewById(R.id.send);
+            recieve=(LinearLayout) findViewById(R.id.recieve);
+          balance=(TextView) findViewById(R.id.balance);
+        mibleno= com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants.mobileNo;
 
         initToolbar();
         initActions();
@@ -84,18 +86,19 @@ public class DashboardEWallet extends AppCompatActivity {
         initUI();
         initComponent();
 
+
     }
     private void initUI(){
         adapter = new businessapp_transactionsAdapter(null);
         // get recycler view
-        recyclerView = findViewById(R.id.placeList1RecyclerView);
+        recyclerView =(RecyclerView) findViewById(R.id.placeList1RecyclerView);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
     private void initData(){
 
-        Getcurrentbalance(mno);
+       Getcurrentbalance(mibleno);
     }
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -159,12 +162,12 @@ public class DashboardEWallet extends AppCompatActivity {
     }
     private void initActions()
     {
-        final JsonObject object = new JsonObject();
 
+        final JsonObject object = new JsonObject();
         send.setOnClickListener(view -> {
             //startActivity( new Intent(this, EWallet.class));
             object.addProperty("flag", "T");
-            object.addProperty("Mobilenumber", mno);
+            object.addProperty("Mobilenumber", mibleno);
 
             object.addProperty("Status", "1");
             text1 = "Transfer";
@@ -193,7 +196,7 @@ public class DashboardEWallet extends AppCompatActivity {
                                 object.addProperty("Amount", amount + "");
 //                                Intent intent=new Intent(DashboardEWallet.this,customerappEwalletSendTransactionslistActivity.class);
 //                                startActivity(intent);
-                               WalletBalance(object);
+                                WalletBalance(object);
 
                                    /* GetBalance getBalance = new GetBalance();
                                     getBalance.execute();*/
@@ -203,10 +206,11 @@ public class DashboardEWallet extends AppCompatActivity {
                     });
             alertDialog.show();
         });
+
         recieve.setOnClickListener(view -> {
             //startActivity( new Intent(this, EWallet.class));
             object.addProperty("flag", "A");
-            object.addProperty("Mobilenumber", mno);
+            object.addProperty("Mobilenumber", mibleno);
 
             object.addProperty("Status", "1");
             text1 = "Recieve";

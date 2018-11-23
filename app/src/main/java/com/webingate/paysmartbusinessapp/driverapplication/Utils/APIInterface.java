@@ -50,10 +50,10 @@ public interface APIInterface  {
     @POST("/api/UserAccount/DriverEwalletOTPVerification")
     public Observable<List<MOTPVerificationResponse>> EwalletMOTPVerifications(@Body JsonObject jsonObject);
 
-    @GET("/api/WalletBalance/Getcurrentbalance")
+    @GET("/api/WalletBalance/DriverGetcurrentbalance")
     public Observable<List<WalletBalanceResponse>> Getcurrentbalance1(@Query("mobileno") String mobileNo);
 
-    @POST("/api/WalletBalance/WalletBalance")
+    @POST("/api/WalletBalance/DriverWalletBalance")
     public Observable<List<WalletBalanceResponse>> WalletBalance(@Body JsonObject jsonObject);
     @POST("/api/Driverlogin/ValidateDriverCredentials")
     public Observable<List<DriverValidateCredentialsResponse>> ValidateDriver(@Body JsonObject jsonObject);
