@@ -32,7 +32,6 @@
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_medium"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="+246 100-100-11234"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/md_white_1000"

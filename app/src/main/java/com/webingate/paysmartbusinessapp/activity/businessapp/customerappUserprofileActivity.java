@@ -28,7 +28,9 @@ import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
+import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetdriverTripsResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.PendingDocsResponce;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.PendingDocsTable1Item;
@@ -36,6 +38,8 @@ import com.webingate.paysmartbusinessapp.driverapplication.Deo.PendingDocsTableI
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.UserInformationResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.MainActivity;
 import com.webingate.paysmartbusinessapp.utils.Utils;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,8 +70,16 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
     Toolbar toolbar;
      @BindView(R.id.emailTextView)
      TextView email;
+     @BindView(R.id.phoneTextView)
+     TextView pphone;
      @BindView(R.id.UsernameTextView)
      TextView username;
+     @BindView(R.id.FirstnameTextView)
+     TextView fname;
+//     @BindView(R.id.textView31)
+//     TextView joindate;
+     @BindView(R.id. textView228)
+     TextView nhphone;
 
     private int serverrequestFlag;
 
@@ -91,8 +103,6 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
         initData();
         //initActions();
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.openDrawer(GravityCompat.START);
 
 
 
@@ -227,6 +237,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 
     private void initData(){
 
+        GetDriverDetails("109917893890990",109);
 
     }
 
@@ -257,9 +268,6 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 //        );
 //
 //        }
-
-
-
     private void initToolbar() {
 
         toolbar = findViewById(R.id.toolbar);
@@ -291,6 +299,55 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
         } catch (Exception e) {
             Log.e("TEAMPS", "Error in set display home as up enabled.");
         }
+
+    }
+    public void GetDriverDetails(String acct,int uit ){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
+                .GetUserInformation(acct,uit)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<UserInformationResponse>>() {
+
+                    @Override
+                    public void onCompleted() {
+                        DisplayToast("Successfully Registered");
+                        //StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            //Log.d("OnError ", e.getMessage());
+                            DisplayToast("Error");
+                            //StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<UserInformationResponse> responselist) {
+                        UserInformationResponse res = responselist.get(0);
+                        //DisplayToast("Successfully Registered");
+
+                        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                        email=(TextView)findViewById(R.id.emailTextView);
+                        pphone=(TextView)findViewById(R.id.phoneTextView);
+                        username=(TextView)findViewById(R.id.UsernameTextView);
+                        fname=(TextView)findViewById(R.id.FirstnameTextView);
+                        //joindate=(TextView)findViewById(R.id.textView31);
+                       nhphone=(TextView)findViewById(R.id.textView228);
+
+                         nhphone.setText(res.getMobilenumber());
+                         pphone.setText(res.getMobilenumber());
+                         username.setText(res.getUsername());
+                         fname.setText(res.getUsername());
+                        // joindate.setText(res.getUserAccountNo());
+                         email.setText(res.getEmail());
+
+                        drawer.openDrawer(GravityCompat.START);
+                    }
+                });
+
 
     }
 }
