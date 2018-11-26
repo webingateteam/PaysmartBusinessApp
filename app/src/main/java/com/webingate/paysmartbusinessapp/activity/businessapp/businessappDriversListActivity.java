@@ -1,6 +1,8 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -28,6 +30,8 @@ import rx.schedulers.Schedulers;
 
 public class businessappDriversListActivity extends AppCompatActivity {
 
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String pphoto= "pphoto";
     Toast toast;
     ArrayList<DrivermasterResponse> DriverList;
     businessappDriverListAdapter adapter;
@@ -224,6 +228,10 @@ public class businessappDriversListActivity extends AppCompatActivity {
     public  void GoToDetails(DrivermasterResponse obj)
     {
         Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+           SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+           SharedPreferences.Editor editor = sharedpreferences.edit();
+           editor.putString(pphoto, (obj.getUserPhoto()!=null?obj.getUserPhoto():null));
+           editor.commit();
         Intent intent = new Intent(this, businessappDriverDetailsActivity.class);
         startActivity(intent);
     }

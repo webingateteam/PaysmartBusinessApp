@@ -32,6 +32,7 @@ import com.webingate.paysmartbusinessapp.repository.DriverListRepository;
 import com.webingate.paysmartbusinessapp.repository.VehicleListRepository;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +55,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
     @BindView(R.id.placeImageView)
      ImageView photo;
     ArrayList<GetVehicleListResponse> VehicleList;
+    List<GetVehicleListResponse> VehicleList1;
 
     private boolean twist = false;
     Toast toast;
@@ -110,7 +112,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 //        ApplicationConstants.username= prefs.getString(Username, null);
 //        ApplicationConstants.photo= prefs.getString(Photo, null);
-
+        photo =(ImageView) findViewById(R.id.placeImageView);
         initData();
         initUI();
         initDataBindings();
@@ -191,7 +193,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
             startActivity(intent);
 
         });
-        photo = findViewById(R.id.placeImageView);
+
     }
     ArrayList<GetVehicleListResponse>  response;
     public void GetVehilcelist(int ctryid,int fid,int vgid){
@@ -225,8 +227,8 @@ public class businessappVehicleListActivity extends AppCompatActivity {
                          editor.putString(Photo, responselist.get(0).getPhoto().toString());
                         ApplicationConstants.profilepic = responselist.get(0).getPhoto().toString();
 //                          byte[] decodedString= Base64.decode(ApplicationConstants.profilepic.substring(ApplicationConstants.profilepic.indexOf(",")+1), Base64.DEFAULT);
-//                         Bitmap image = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-//                        photo.setImageBitmap(image);
+//                        Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+//                        photo.setImageBitmap(image1);
                         //    editor.commit();
                         //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
                         // DriverList
@@ -238,6 +240,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
                                     //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
 
                                     GoToDetails(obj);
+
                                 }
                         );
                         // adapter.notifyDataSetChanged();
@@ -250,6 +253,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
     public  void GoToDetails(GetVehicleListResponse obj)
     {
         Toast.makeText(this, "Selected : " + obj.getRegistrationNo(), Toast.LENGTH_LONG).show();
+        ApplicationConstants.photo1=obj.getPhoto();
         Intent intent = new Intent(this, businessappVehicleDetailsActivity.class);
         startActivity(intent);
     }

@@ -40,7 +40,7 @@ public class ApplicationConstants {
     public static String sourcelongitude="0.00";
     public static int tripflag=0;
     public static String customerMobileNo="";
-
+    public static String photo1="";
     public static String rating,comments;
     public static List confirmedTrips;
     public static List paymentMethods;
@@ -52,7 +52,8 @@ public class ApplicationConstants {
     public static String document_expire_date;
     public static String document_data;
     public static String document_format;
-    private static String photo;
+    public static String photo;
+
 
 
     public static String getPhoto() {

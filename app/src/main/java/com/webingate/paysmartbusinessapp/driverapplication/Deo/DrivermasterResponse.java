@@ -24,6 +24,8 @@ public class DrivermasterResponse {
 
 	@SerializedName("photo")
 	private String photo;
+	@SerializedName("UserPhoto")
+	private String UserPhoto;
 
 	@SerializedName("PAddress")
 	private Object pAddress;
@@ -109,6 +111,9 @@ public class DrivermasterResponse {
 
 	public String getPhoto(){
 		return photo;
+	}
+	public String getUserPhoto(){
+		return UserPhoto;
 	}
 
 	public void setPAddress(Object pAddress){
@@ -201,8 +206,9 @@ public class DrivermasterResponse {
 			",address = '" + address + '\'' + 
 			",companyId = '" + companyId + '\'' + 
 			",pMobNo = '" + pMobNo + '\'' + 
-			",photo = '" + photo + '\'' + 
-			",pAddress = '" + pAddress + '\'' + 
+			",photo = '" + photo + '\'' +
+			",UserPhoto = '" + UserPhoto + '\'' +
+			",pAddress = '" + pAddress + '\'' +
 			",city = '" + city + '\'' + 
 			",nAme = '" + nAme + '\'' + 
 			",offMobileNo = '" + offMobileNo + '\'' + 
