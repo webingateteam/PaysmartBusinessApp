@@ -149,6 +149,31 @@ public class DataGenerator {
         items.add(meteredtaxi);
         return items;
     }
+    public static List<BookingType> getDoctypes(Context ctx) {
+        List<BookingType> items = new ArrayList<>();
+        BookingType dlicense = new BookingType("Driver License",true);
+        BookingType driverin = new BookingType("Driver Insurance",true);
+        BookingType addressProof = new BookingType("Address Proof",true);
+
+
+        // TypedArray drw_arr = ctx.getResources().obtainTypedArray(R.array.people_images);
+        //String name_arr[] = ctx.getResources().getStringArray(R.array.people_names);
+
+//        for (int i = 0; i < drw_arr.length(); i++) {
+//            People obj = new People();
+//            obj.image = drw_arr.getResourceId(i, -1);
+//            obj.name = name_arr[i];
+//            obj.email = Tools.getEmailFromName(obj.name);
+//            obj.imageDrw = ctx.getResources().getDrawable(obj.image);
+//            items.add(obj);
+//        }
+        // Collections.shuffle(items);
+
+        items.add(dlicense);
+        items.add(driverin);
+        items.add(addressProof);
+        return items;
+    }
 
     /**
      * Generate dummy data social

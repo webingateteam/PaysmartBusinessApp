@@ -54,6 +54,12 @@ public class DrivermasterResponse {
 	@SerializedName("DId")
 	private int dId;
 
+	@SerializedName("Email")
+	private String Email;
+
+	@SerializedName("Mno")
+	private String Mobilenumber;
+
 	@SerializedName("DOJ")
 	private Object dOJ;
 
@@ -114,6 +120,12 @@ public class DrivermasterResponse {
 	}
 	public String getUserPhoto(){
 		return UserPhoto;
+	}
+	public String getEmail(){
+		return Email;
+	}
+	public String getMobilenumber(){
+		return Mobilenumber;
 	}
 
 	public void setPAddress(Object pAddress){
@@ -217,7 +229,33 @@ public class DrivermasterResponse {
 			",dOB = '" + dOB + '\'' + 
 			",pCity = '" + pCity + '\'' + 
 			",dId = '" + dId + '\'' + 
-			",dOJ = '" + dOJ + '\'' + 
-			"}";
+			",dOJ = '" + dOJ + '\'' +
+			",Email = '" + Email + '\'' +
+					",Mno = '" + Mobilenumber + '\'' +
+//					",Email = '" + Email + '\'' +
+//					",Email = '" + Email + '\'' +
+//					",Email = '" + Email + '\'' +
+//					",Email = '" + Email + '\'' +
+					"}";
 		}
 }
+//		,[Mobilenumber]
+//		,[Password]
+//		,[Firstname]
+//		,[lastname]
+//		,[AuthTypeId]
+//		,[AltPhonenumber]
+//		,[Altemail]
+//		,[AccountNo]
+//		,[Amount]
+//		,[UserPhoto]
+//		,[Gender]
+//		,[Emailotp]
+//		,[Mobileotp]
+//		,[CountryId]
+//		,CurrentStateId
+//		,PaymentModeId
+//		,[Active]
+//		,[CCode]
+//		,[UserAccountNo]
+//		,[usertypeid]
