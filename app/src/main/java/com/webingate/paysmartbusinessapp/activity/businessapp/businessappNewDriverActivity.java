@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
+import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDocCheckingFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppUploadDocsFragment;
@@ -168,7 +169,8 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                     //RegisterDriver(object);
 
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppUploadDocsFragment());
+                    //setupFragment(new businessAppUploadDocsFragment());
+                    setupFragment(new businessAppDocCheckingFragment());
 
                 }
 
@@ -182,7 +184,6 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                 Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
             }
         });
-
         prevButton.setOnClickListener(v -> {
 
             if (position > 1) {
@@ -209,8 +210,6 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                 Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 
     public void RegisterDriver(JsonObject jsonObject){

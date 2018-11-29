@@ -19,152 +19,30 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/placeList1RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_anchor="@+id/constraintLayout2"
-        app:layout_anchorGravity="top|center"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_margin="@dimen/space_4"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/space_16"
+        android:paddingLeft="@dimen/space_16"
+        android:paddingRight="@dimen/space_16"
+        android:paddingTop="@dimen/space_16"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <FrameLayout
-            android:id="@+id/contentLayout"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout40"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <android.support.v4.widget.NestedScrollView
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
 
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/md_white_1000">
 
-                <TextView
-                    android:id="@+id/sortByTextView2"
-                    android:layout_width="0dp"
-                    android:layout_height="28dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginStart="32dp"
-                    android:fontFamily="@font/roboto"
-                    android:text="ASSIGN DRIVER"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorTextLight"
-                    android:textSize="@dimen/font_title_size"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imageView46" />
+        </android.support.constraint.ConstraintLayout>
 
-
-                <TextView
-                    android:id="@+id/DriverTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/roboto"
-                    android:text="DRIVERS"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/colorTextLight"
-                    android:textSize="@dimen/font_body_s_size"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/s_vehicle" />
-
-
-                <Spinner
-                    android:id="@+id/s_driver"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_marginTop="@dimen/space_8"
-                    android:layout_weight="1"
-                    android:textAlignment="viewStart"
-                    app:layout_constraintDimensionRatio="w,1:1"
-                    app:layout_constraintStart_toEndOf="@+id/DriverTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/DriverTextView" />
-
-
-                <TextView
-                    android:id="@+id/vehicleTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/roboto"
-                    android:text="VEHICLES"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/colorTextLight"
-                    android:textSize="@dimen/font_body_s_size"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/s_vgroup" />
-
-
-                <Spinner
-                    android:id="@+id/s_vehicle"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_marginTop="@dimen/space_8"
-                    android:layout_weight="1"
-                    android:textAlignment="viewStart"
-                    app:layout_constraintDimensionRatio="w,1:1"
-                    app:layout_constraintStart_toEndOf="@+id/vehicleTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/vehicleTextView" />
-
-                <TextView
-                    android:id="@+id/vehiclegroupTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/roboto"
-                    android:text="VEHICLE GROUP"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/colorTextLight"
-                    android:textSize="@dimen/font_body_s_size"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/sortByTextView2" />
-
-
-                <Spinner
-                    android:id="@+id/s_vgroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_marginTop="@dimen/space_8"
-                    android:layout_weight="1"
-                    android:textAlignment="viewStart"
-                    app:layout_constraintDimensionRatio="w,1:1"
-                    app:layout_constraintStart_toEndOf="@+id/vehiclegroupTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/vehiclegroupTextView" />
-
-
-                <android.support.v7.widget.AppCompatButton
-                    android:id="@+id/submit"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="236dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="SUBMIT"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/s_driver"
-                    app:layout_constraintTop_toBottomOf="@+id/s_driver" />
-
-
-            </android.support.constraint.ConstraintLayout>
-
-        </android.support.v4.widget.NestedScrollView>
-
-    </android.support.constraint.ConstraintLayout>
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

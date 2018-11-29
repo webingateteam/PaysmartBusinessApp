@@ -1,12 +1,9 @@
 package com.webingate.paysmartbusinessapp.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +12,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.webingate.paysmartbusinessapp.R;
-import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
-import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetVehicleListResponse;
-import com.webingate.paysmartbusinessapp.object.Place;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import java.util.ArrayList;
@@ -28,7 +22,7 @@ import java.util.ArrayList;
  * Contact Email : teamps.is.cool@gmail.com
  * Website : http://www.panacea-soft.com
  */
-public class businessappVehicleListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class businessappAssigningVehicleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private ArrayList<GetVehicleListResponse> placeArrayList;
     private OnItemClickListener itemClickListener;
@@ -41,14 +35,14 @@ public class businessappVehicleListAdapter extends RecyclerView.Adapter<Recycler
         this.itemClickListener = mItemClickListener;
     }
 
-    public businessappVehicleListAdapter(ArrayList<GetVehicleListResponse> placeArrayList) {
+    public businessappAssigningVehicleAdapter(ArrayList<GetVehicleListResponse> placeArrayList) {
         this.placeArrayList = placeArrayList;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.businessapp_vehiclelist_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.businessapp_assigningvehicle_item, parent, false);
 
         return new VehicleViewHolder(itemView);
     }
@@ -62,19 +56,13 @@ public class businessappVehicleListAdapter extends RecyclerView.Adapter<Recycler
 
             VehicleViewHolder holder = (VehicleViewHolder) viewHolder;
             holder.placeNameTextView.setText(place.getRegistrationNo().toString());
+
             Context context = holder.placeHolderCardView.getContext();
 
             // int id = Utils.getDrawableInt(context, place.getPhoto());
-            if(place.getPhoto()!=null){
-                byte[] decodedString= Base64.decode(place.getPhoto().substring(place.getPhoto().indexOf(",")+1), Base64.DEFAULT);
-                Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                holder.placeImageView.setImageBitmap(image1);
-            }
-            else
-            {
-                int id = Utils.getDrawableInt(context, "photo_male_7");
-                Utils.setImageToImageView(context, holder.placeImageView, id);
-            }
+            int id = Utils.getDrawableInt(context, "photo_male_7");
+            Utils.setImageToImageView(context, holder.placeImageView, id);
+
             holder.typeTextView.setText(place.getVehicleGroup());
             holder.cityTextView.setText(place.getVehicleType());
             holder.placeRatingBar.setRating(Float.parseFloat("4"));

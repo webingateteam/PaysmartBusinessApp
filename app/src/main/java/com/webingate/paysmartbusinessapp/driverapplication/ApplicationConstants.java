@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ApplicationConstants {
     public static String id="";
+    public static String userAccountNo="";
     public static String username="";
     public static String mobileNo ="";
     public static String address ="";
@@ -39,7 +40,7 @@ public class ApplicationConstants {
     public static String sourcelongitude="0.00";
     public static int tripflag=0;
     public static String customerMobileNo="";
-
+    public static String photo1="";
     public static String rating,comments;
     public static List confirmedTrips;
     public static List paymentMethods;
@@ -51,7 +52,11 @@ public class ApplicationConstants {
     public static String document_expire_date;
     public static String document_data;
     public static String document_format;
+    public static String photo;
 
 
 
+    public static String getPhoto() {
+        return photo;
+    }
 }

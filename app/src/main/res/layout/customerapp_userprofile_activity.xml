@@ -9,7 +9,7 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/customerapp_userprofile_view_layout"
+        layout="@layout/customerapp_userprofile_view_layout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

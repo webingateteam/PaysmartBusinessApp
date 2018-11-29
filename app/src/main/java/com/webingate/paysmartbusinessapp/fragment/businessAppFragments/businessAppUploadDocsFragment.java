@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
@@ -38,6 +40,7 @@ import com.webingate.paysmartbusinessapp.utils.Utils;
 import com.webingate.paysmartbusinessapp.utils.ViewAnimationUtils;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -64,7 +67,9 @@ public class businessAppUploadDocsFragment extends Fragment {
     AppCompatButton chooseFile;
     @BindView(R.id.submit)
     AppCompatButton submit;
-
+    @BindView(R.id.test)
+    ImageView imag;
+    public static final int GET_FROM_GALLERY = 3;
     private android.app.DatePickerDialog DatePickerDialog;
     public Dialog d;
 
@@ -79,21 +84,22 @@ public class businessAppUploadDocsFragment extends Fragment {
 //        //setting <-- button to toolbar
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        setDateTimeField();
-        expireDate = (TextView)getActivity().findViewById(R.id.expire_date);
-        chooseFile = (AppCompatButton)getActivity().findViewById(R.id.choose_file);
-        submit = (AppCompatButton)getActivity().findViewById(R.id.submit);
+
+        initUI(view);
+        initActions();
 //        expireDate.setOnClickListener(getActivity());
 //        chooseFile.setOnClickListener();
 //        submit.setOnClickListener();
+
+
 //        DriverDetailsTable1Item documentsModel = (DriverDetailsTable1Item) ApplicationConstants.documentslist.get(ApplicationConstants.documentNo);
-//       if(documentsModel!=null){
 //        documentName.setText(documentsModel.getDocName());
 //        documentNo.setText(documentsModel.getDocumentNo());
 //        expireDate.setText(documentsModel.getExpiryDate());
-//       }
+
         return view;
     }
+
 
     private void setDateTimeField() {
         Calendar newCalendar = Calendar.getInstance();
@@ -109,7 +115,10 @@ public class businessAppUploadDocsFragment extends Fragment {
 
         }, year, month, day);
     }
+    private void browsePhoto(String imageName) {
 
+        startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+    }
 //    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //
@@ -168,6 +177,25 @@ public class businessAppUploadDocsFragment extends Fragment {
 //    }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //Detects request codes
+        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+            Uri selectedImage = data.getData();
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImage);
+                imag.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             //finish();
@@ -179,8 +207,12 @@ public class businessAppUploadDocsFragment extends Fragment {
 
     }
 
-    private void initUI() {
-
+    private void initUI( View view) {
+        expireDate = view.findViewById(R.id.expire_date);
+        chooseFile = view.findViewById(R.id.choose_file);
+        submit = view.findViewById(R.id.submit);
+        imag = view.findViewById(R.id.test);
+        setDateTimeField();
     }
 
     private void initDataBindings() {
@@ -188,7 +220,12 @@ public class businessAppUploadDocsFragment extends Fragment {
     }
 
     private void initActions() {
-
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                browsePhoto("");
+            }
+        });
     }
 
 

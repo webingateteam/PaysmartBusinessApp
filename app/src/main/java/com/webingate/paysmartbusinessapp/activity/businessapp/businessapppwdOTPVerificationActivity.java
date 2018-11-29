@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -36,12 +37,14 @@ public class businessapppwdOTPVerificationActivity extends AppCompatActivity {
     public static final String Email = "emailKey";
     public static final String Mobileotp = "mobileotpkey";
     public static final String Emailotp = "emailotpkey";
+    public static final String passwordotp = "pwdotpkey";
+    public static final String UserAccountNo = "UserAccountNoKey";
     Toast toast;
-    @BindView(R.id.s_pwd)
-    EditText etop;
-    String E_mail;
-    @BindView(R.id.submitOTPButton)
-    Button sbtn;
+    @BindView(R.id.s_passwordotp)
+    EditText potp;
+    @BindView(R.id.s_newpassword)
+    EditText newpwd;
+    String mobNo;
 
     ImageView bgImageView;
     Button changeButton, resendButton, submitOTPButton;
@@ -49,11 +52,9 @@ public class businessapppwdOTPVerificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.customerapp_pwdotpverification_activity);
-
-        Intent intent = getIntent();
-        E_mail=intent.getStringExtra("Email");
-
+        setContentView(R.layout.businessapp_pwdotpverification_activity);
+        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        mobNo = prefs.getString(UserAccountNo, null);
 
         initUI();
 
@@ -81,41 +82,43 @@ public class businessapppwdOTPVerificationActivity extends AppCompatActivity {
         initToolbar();
 
         bgImageView = findViewById(R.id.bgImageView);
-        int id = Utils.getDrawableInt(getApplicationContext(), "verification3");
+        int id = Utils.getDrawableInt(getApplicationContext(), "Password Verification");
         Utils.setImageToImageView(getApplicationContext(), bgImageView, id);
 
         changeButton = findViewById(R.id.changeButton);
-
         resendButton = findViewById(R.id.resendButton);
-
         submitOTPButton = findViewById(R.id.submitOTPButton);
-        sbtn=findViewById(R.id.submitOTPButton);
-        etop=findViewById(R.id.s_pwd);
+        newpwd = findViewById(R.id.s_newpassword);
+        potp = findViewById(R.id.s_passwordotp);
+
     }
 
     private void initActions(){
         changeButton.setOnClickListener((View v) ->{
            Toast.makeText(getApplicationContext(),"Clicked Change Email.",Toast.LENGTH_SHORT).show();
-
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"+"email_to"));
+            intent.putExtra(Intent.EXTRA_SUBJECT, "email_subject");
+            intent.putExtra(Intent.EXTRA_TEXT, "email_body");
+            startActivity(intent);
         });
 
         resendButton.setOnClickListener((View v) ->{
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("UserAccountNo", mobNo);
+            Forgotpassword(jsonObject);
             Toast.makeText(getApplicationContext(),"OTP is Resent.",Toast.LENGTH_SHORT).show();
         });
 
         submitOTPButton.setOnClickListener((View v) ->{
-            //Toast.makeText(getApplicationContext(),"OTP is Resent.",Toast.LENGTH_SHORT).show();
-//            Intent intent = new Intent(this, customerMOTPVerificationActivity.class);
-//            startActivity(intent);
-            if(etop.getText().toString().matches("")){
+            if(potp.getText().toString().matches("")){
                 Toast.makeText(getApplicationContext(),"Please Enter OTP",Toast.LENGTH_SHORT).show();
             }
             else
             {
                 JsonObject jsonObject = new JsonObject();
-
-                jsonObject.addProperty("Email", E_mail.toString());
-                jsonObject.addProperty("passwordotp",etop.getText().toString());
+                jsonObject.addProperty("UserAccountNo",mobNo);
+                jsonObject.addProperty("Password",newpwd.getText().toString());
+                jsonObject.addProperty("Passwordotp",potp.getText().toString());
                 PWDOTPVerification(jsonObject);
             }
         });
@@ -132,7 +135,7 @@ public class businessapppwdOTPVerificationActivity extends AppCompatActivity {
             toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.md_white_1000), PorterDuff.Mode.SRC_ATOP);
         }
 
-        toolbar.setTitle("Verification 3");
+        toolbar.setTitle("Password Verification");
 
         try {
             toolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
@@ -156,15 +159,15 @@ public class businessapppwdOTPVerificationActivity extends AppCompatActivity {
 
     }
 
-    public void PWDOTPVerification(JsonObject jsonObject){
+    public void Forgotpassword(JsonObject jsonObject){
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
-                .BusinessappForgotpassword1(jsonObject)
+                .Forgotpassword1(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<DriverForgotpasswordResponse>>() {
                     @Override
                     public void onCompleted() {
-                        DisplayToast("Successfully Registered");
+                        DisplayToast("Successfully Sent Email");
                         //StopDialogue();
                     }
                     @Override
@@ -183,9 +186,50 @@ public class businessapppwdOTPVerificationActivity extends AppCompatActivity {
                         DriverForgotpasswordResponse response=responselist.get(0);
                         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedpreferences.edit();
-                        //editor.putString(Emailotp, response.getEmail());
+                        editor.putString(passwordotp, response.getPasswordotp());
+                        Intent intent = new Intent(businessapppwdOTPVerificationActivity.this, businessapppwdOTPVerificationActivity.class);
+                        intent.putExtra("Email", response.getemail());
+                        intent.putExtra("passowordotp", response.getPasswordotp());
+                        startActivity(intent);
                         editor.commit();
-                        startActivity(new Intent(businessapppwdOTPVerificationActivity.this, login_activity.class));
+
+                        //startActivity(new Intent(businessappForgotPasswordActivity.this, businessapppwdOTPVerificationActivity.class));
+                        finish();
+                    }
+                });
+    }
+
+    public void PWDOTPVerification(JsonObject jsonObject){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
+                .BusinessappForgotpassword(jsonObject)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<DriverPasswordVerificationResponse>>() {
+                    @Override
+                    public void onCompleted() {
+                        DisplayToast("Verification Successfully");
+                        //StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            //Log.d("OnError ", e.getMessage());
+                            DisplayToast("Error");
+                            //StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<DriverPasswordVerificationResponse> responselist) {
+                        DriverPasswordVerificationResponse response=responselist.get(0);
+                        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                        Intent intent = new Intent(businessapppwdOTPVerificationActivity.this, login_activity.class);
+                        editor.putString(UserAccountNo, response.getUserAccountNo());
+                        editor.commit();
+                        startActivity(intent);
                         finish();
                     }
                 });

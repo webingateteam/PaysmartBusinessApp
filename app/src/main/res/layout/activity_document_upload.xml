@@ -25,65 +25,76 @@
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_margin="@dimen/dots_height"
-            android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="410dp"
+                    android:layout_margin="@dimen/dots_height"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/enter_document_no"
-            android:textColor="@color/black"
-            android:textSize="15dp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/enter_document_no"
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
 
 
-        <EditText
-            android:id="@+id/document_no"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:gravity="center"
-            android:background="@drawable/rectangle_layoutboarder_slim"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/enter_expire_dt"
-            android:textColor="@color/black"
-            android:textSize="15dp"/>
+                        <EditText
+                            android:id="@+id/document_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangle_layoutboarder_slim"
+                            android:gravity="center"
+                            android:inputType="text" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/enter_expire_dt"
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
 
 
-        <TextView
-            android:id="@+id/expire_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:gravity="center"
-            android:background="@drawable/rectangle_layoutboarder_slim"
-            />
+                        <TextView
+                            android:id="@+id/expire_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangle_layoutboarder_slim"
+                            android:gravity="center"
+                            android:inputType="text" />
 
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/choose_file"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:background="@color/colorPrimary"
-            android:text="@string/choose_file"
-            android:textColor="@color/white" />
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:background="@color/colorPrimary"
-            android:text="@string/submit"
-            android:textColor="@color/white" />
-        </LinearLayout>
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/choose_file"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/fab_margin"
+                            android:background="@color/colorPrimary"
+                            android:text="@string/choose_file"
+                            android:textColor="@color/white" />
 
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/submit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/fab_margin"
+                            android:background="@color/colorPrimary"
+                            android:text="@string/submit"
+                            android:textColor="@color/white" />
+
+                        <ImageView
+                            android:id="@+id/test"
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                             />
+                </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>

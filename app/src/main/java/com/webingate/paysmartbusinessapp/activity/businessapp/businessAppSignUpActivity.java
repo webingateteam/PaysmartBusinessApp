@@ -3,8 +3,12 @@ package com.webingate.paysmartbusinessapp.activity.businessapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,8 +24,10 @@ import com.rilixtech.CountryCodePicker;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
 import com.webingate.paysmartbusinessapp.adapter.uicollection.CustomSpinnerAdapter;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.ActiveCountries;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,6 +40,7 @@ import rx.schedulers.Schedulers;
 public class businessAppSignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     public static final String MyPREFERENCES = "MyPrefs";
+    public static final String ID = "idKey";
     public static final String Username = "nameKey";
     public static final String Phone = "phoneKey";
     public static final String Email = "emailKey";
@@ -42,6 +49,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
     public static final String Emailotp = "emailotpkey";
     public static final String DRIVERID = "driverid";
     public static final String VEHICLEID = "vehicleid";
+    public static final String UserAccountNo = "UserAccountNoKey";
     Toast toast;
     @BindView(R.id.registerButton)
     Button registerButton;
@@ -78,6 +86,8 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
 
         initActions();
 
+        initData();
+
         spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
 
@@ -88,7 +98,8 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
         CustomSpinnerAdapter uiloginasCustomSpinnerAdapter =new CustomSpinnerAdapter(getApplicationContext(),icons,fruits);
         spinner.setAdapter(uiloginasCustomSpinnerAdapter);
         ccp = (CountryCodePicker) findViewById(R.id.ccp);
-        ccp.setCustomMasterCountries("IN,ZW,AF");
+
+
 
     }
 
@@ -150,6 +161,10 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
 
     }
 
+    private void initData(){
+        GetActiveCountries(1);
+    }
+
     public void RegisterDriver(JsonObject jsonObject){
 
         //StartDialogue();
@@ -182,14 +197,20 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
                         }else {
                             SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedpreferences.edit();
-                            //editor.putString(Username, response.getusername());
-                            Intent intent = new Intent(businessAppSignUpActivity.this, customerEOTPVerificationActivity.class);
-                            intent.putExtra("eotp", response.getemailotp());
-                            intent.putExtra("uid", response.getusreid());
-                            intent.putExtra("email", response.getemail());
-                            intent.putExtra("username", response.getusreid());
-                            intent.putExtra("motp", response.getmotp());
-                            intent.putExtra("mno", response.getmnumber());
+                            Intent intent = new Intent(businessAppSignUpActivity.this, businessappEOTPVerificationActivity.class);
+                            editor.putString(UserAccountNo, response.getUserAccountNo());
+                            editor.putString(ID, response.getId());
+                            editor.putString(Phone, response.getmnumber());
+                            editor.putString(Email, response.getemail());
+                            editor.putString(Emailotp, response.getemailotp());
+
+//                            intent.putExtra("eotp", response.getemailotp());
+//                            intent.putExtra("uid", response.getusreid());
+//                            intent.putExtra("email", response.getemail());
+//                            intent.putExtra("username", response.getusreid());
+//                            intent.putExtra("motp", response.getmotp());
+//                            intent.putExtra("mno", response.getmnumber());
+
                             startActivity(intent);
 //                        editor.putString(Phone, response.getPMobNo());
 //                        editor.putString(Email, response.getEmail());
@@ -201,6 +222,58 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
                             editor.commit();
                             // startActivity(new Intent(businessAppSignUpActivity.this, customerEOTPVerificationActivity.class));
                             finish();
+                        }
+                    }
+                });
+    }
+
+    public void GetActiveCountries(int active){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(businessAppSignUpActivity.this).getrestadapter()
+                .GetActiveCountry(active)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<ActiveCountries>>() {
+                    @Override
+                    public void onCompleted() {
+                        //DisplayToast("Successfully Registered");
+                        //StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            Log.d("OnError ", e.getMessage());
+                            DisplayToast("Error");
+                            //StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<ActiveCountries> list) {
+
+                        List<ActiveCountries> response= list ;
+                        int countrycount = response.size();
+                        if (countrycount == 0) {
+                            DisplayToast("Please configure countries of operation.");
+                        } else {
+
+                            String countriesList = "";
+                            for(int i=0; i < countrycount ; i++){
+                                if(i == countrycount-1)
+                                    countriesList += response.get(i).getISOCode();
+                                else
+                                    countriesList += response.get(i).getISOCode()+ ",";
+                            }
+
+                            ccp.setCustomMasterCountries(countriesList);
+
+//                            ccp = (CountryCodePicker) findViewById(R.id.ccp);
+//                            ccp.setCustomMasterCountries(response.getISOCode());
+//                            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+//                            SharedPreferences.Editor editor = sharedpreferences.edit();
+//                            editor.putString(Isocode, response.getISOCode());
+//                            editor.commit();
                         }
                     }
                 });

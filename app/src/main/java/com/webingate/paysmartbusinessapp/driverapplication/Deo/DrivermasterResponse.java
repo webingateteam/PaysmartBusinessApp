@@ -24,6 +24,8 @@ public class DrivermasterResponse {
 
 	@SerializedName("photo")
 	private String photo;
+	@SerializedName("UserPhoto")
+	private String UserPhoto;
 
 	@SerializedName("PAddress")
 	private Object pAddress;
@@ -51,6 +53,12 @@ public class DrivermasterResponse {
 
 	@SerializedName("DId")
 	private int dId;
+
+	@SerializedName("Email")
+	private String Email;
+
+	@SerializedName("Mno")
+	private String Mobilenumber;
 
 	@SerializedName("DOJ")
 	private Object dOJ;
@@ -109,6 +117,15 @@ public class DrivermasterResponse {
 
 	public String getPhoto(){
 		return photo;
+	}
+	public String getUserPhoto(){
+		return UserPhoto;
+	}
+	public String getEmail(){
+		return Email;
+	}
+	public String getMobilenumber(){
+		return Mobilenumber;
 	}
 
 	public void setPAddress(Object pAddress){
@@ -201,8 +218,9 @@ public class DrivermasterResponse {
 			",address = '" + address + '\'' + 
 			",companyId = '" + companyId + '\'' + 
 			",pMobNo = '" + pMobNo + '\'' + 
-			",photo = '" + photo + '\'' + 
-			",pAddress = '" + pAddress + '\'' + 
+			",photo = '" + photo + '\'' +
+			",UserPhoto = '" + UserPhoto + '\'' +
+			",pAddress = '" + pAddress + '\'' +
 			",city = '" + city + '\'' + 
 			",nAme = '" + nAme + '\'' + 
 			",offMobileNo = '" + offMobileNo + '\'' + 
@@ -211,7 +229,33 @@ public class DrivermasterResponse {
 			",dOB = '" + dOB + '\'' + 
 			",pCity = '" + pCity + '\'' + 
 			",dId = '" + dId + '\'' + 
-			",dOJ = '" + dOJ + '\'' + 
-			"}";
+			",dOJ = '" + dOJ + '\'' +
+			",Email = '" + Email + '\'' +
+					",Mno = '" + Mobilenumber + '\'' +
+//					",Email = '" + Email + '\'' +
+//					",Email = '" + Email + '\'' +
+//					",Email = '" + Email + '\'' +
+//					",Email = '" + Email + '\'' +
+					"}";
 		}
 }
+//		,[Mobilenumber]
+//		,[Password]
+//		,[Firstname]
+//		,[lastname]
+//		,[AuthTypeId]
+//		,[AltPhonenumber]
+//		,[Altemail]
+//		,[AccountNo]
+//		,[Amount]
+//		,[UserPhoto]
+//		,[Gender]
+//		,[Emailotp]
+//		,[Mobileotp]
+//		,[CountryId]
+//		,CurrentStateId
+//		,PaymentModeId
+//		,[Active]
+//		,[CCode]
+//		,[UserAccountNo]
+//		,[usertypeid]

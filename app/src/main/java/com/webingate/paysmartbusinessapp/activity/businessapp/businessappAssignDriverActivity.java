@@ -1,6 +1,7 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -30,6 +31,12 @@ import rx.schedulers.Schedulers;
 
 public class businessappAssignDriverActivity extends AppCompatActivity {
 
+
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String ID = "idKey";
+    public static final String RegistrationNo = "RegistrationNoKey";
+    public static final String Phone = "phoneKey";
+
     Toast toast;
     ArrayList<AllocatedDriverListResponse> AllocatedDriverList;
     businessappAllocatedDriverListAdapter adapter;
@@ -44,7 +51,7 @@ public class businessappAssignDriverActivity extends AppCompatActivity {
 //        Intent intent =getIntent();
 //        uaccountno=intent.getStringExtra("UserAccountNo");
 //        typid=intent.getIntExtra("usertypeid",0);
-        GetAllocatedDriverList(1);
+        GetAllocatedDriverList(-1);
     }
 
 
@@ -127,22 +134,32 @@ public class businessappAssignDriverActivity extends AppCompatActivity {
                     @Override
                     public void onNext(List<AllocatedDriverListResponse> responselist) {
                         AllocatedDriverList= (ArrayList <AllocatedDriverListResponse>) responselist;
-                     //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                     //   SharedPreferences.Editor editor = sharedpreferences.edit();
-                      //  editor.putString(Emailotp, response.getEmail());
-                    //    editor.commit();
-                        //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
-                       // DriverList
-                        adapter = new businessappAllocatedDriverListAdapter(AllocatedDriverList);
-                        recyclerView.setAdapter(adapter);
+//                        if(AllocatedDriverList.getCode()!=null){
+//                            DisplayToast(AllocatedDriverList.getDescription());
+//                        }else {
+//                            SharedPreferences sharedPref = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+//                            SharedPreferences.Editor editor = sharedPref.edit();
+////                            SharedPreferences pref = getApplicationContext().getSharedPreferences(MyPREFERENCES, 0);
+////                            Editor editor = pref.edit();
+//                            editor.putString(RegistrationNo, r);
+//                            editor.putInt(Phone, AllocatedDriverList.getusertypeid());
+                            //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                            //   SharedPreferences.Editor editor = sharedpreferences.edit();
+                            //  editor.putString(Emailotp, response.getEmail());
+                            //    editor.commit();
+                            //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
+                            // DriverList
+                            adapter = new businessappAllocatedDriverListAdapter(AllocatedDriverList);
+                            recyclerView.setAdapter(adapter);
 
-                        adapter.setOnItemClickListener((view, obj, position) ->
-                                {
-                                    //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+                            adapter.setOnItemClickListener((view, obj, position) ->
+                                    {
+                                        //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
 
-                                    GoToDetails(obj);
-                                }
-                        );
+                                        GoToDetails(obj);
+                                    }
+                            );
+                        //}
                        // adapter.notifyDataSetChanged();
                        // finish();
                     }

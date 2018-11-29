@@ -1,6 +1,10 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,35 +13,49 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
 import com.webingate.paysmartbusinessapp.adapter.businessappVehicleListAdapter;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetVehicleListResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.VehicleListResponse;
 import com.webingate.paysmartbusinessapp.object.Place;
 import com.webingate.paysmartbusinessapp.repository.DriverListRepository;
 import com.webingate.paysmartbusinessapp.repository.VehicleListRepository;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class businessappVehicleListActivity extends AppCompatActivity {
 
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String Username = "nameKey";
+    public static final String Phone = "phoneKey";
+    public static final String Photo = "PhotoKey";
+
    // ArrayList<Place> placeArrayList;
     businessappVehicleListAdapter adapter;
     // RecyclerView
     RecyclerView recyclerView;
-
-    ArrayList<DrivermasterResponse> DriverList;
+    @BindView(R.id.placeImageView)
+     ImageView photo;
+    ArrayList<GetVehicleListResponse> VehicleList;
+    List<GetVehicleListResponse> VehicleList1;
 
     private boolean twist = false;
     Toast toast;
@@ -49,7 +67,10 @@ public class businessappVehicleListActivity extends AppCompatActivity {
     {
         // get place list
         //placeArrayList = VehicleListRepository.getPlaceList();
-        GetVehilcelist("0");
+        int ctryid = -1;
+        int fid = -1;
+        int vgid = -1;
+        GetVehilcelist(ctryid,fid,vgid);
     }
 
     private void initUI()
@@ -64,6 +85,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
     }
     private void initDataBindings()
     {
@@ -87,7 +109,10 @@ public class businessappVehicleListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_vehicleslist_activity);
-
+        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+//        ApplicationConstants.username= prefs.getString(Username, null);
+//        ApplicationConstants.photo= prefs.getString(Photo, null);
+        photo =(ImageView) findViewById(R.id.placeImageView);
         initData();
         initUI();
         initDataBindings();
@@ -169,21 +194,14 @@ public class businessappVehicleListActivity extends AppCompatActivity {
 
         });
 
-
-
-
-
-
-
-
     }
-    ArrayList<DrivermasterResponse>  response;
-    public void GetVehilcelist(String ctryId ){
+    ArrayList<GetVehicleListResponse>  response;
+    public void GetVehilcelist(int ctryid,int fid,int vgid){
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(businessappVehicleListActivity.this).getrestadapter()
-                .GetDriverList(ctryId)
+                .GetVehiclesList(ctryid,fid,vgid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<DrivermasterResponse>>() {
+                .subscribe(new Subscriber<List<GetVehicleListResponse>>() {
 
                     @Override
                     public void onCompleted() {
@@ -202,15 +220,19 @@ public class businessappVehicleListActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onNext(List<DrivermasterResponse> responselist) {
-                        DriverList= (ArrayList <DrivermasterResponse>) responselist;
-                        //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                        //   SharedPreferences.Editor editor = sharedpreferences.edit();
-                        //  editor.putString(Emailotp, response.getEmail());
+                    public void onNext(List<GetVehicleListResponse> responselist) {
+                        VehicleList= (ArrayList <GetVehicleListResponse>) responselist;
+                           SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                           SharedPreferences.Editor editor = sharedpreferences.edit();
+                         editor.putString(Photo, responselist.get(0).getPhoto().toString());
+                        ApplicationConstants.profilepic = responselist.get(0).getPhoto().toString();
+//                          byte[] decodedString= Base64.decode(ApplicationConstants.profilepic.substring(ApplicationConstants.profilepic.indexOf(",")+1), Base64.DEFAULT);
+//                        Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+//                        photo.setImageBitmap(image1);
                         //    editor.commit();
                         //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
                         // DriverList
-                        adapter = new businessappVehicleListAdapter(DriverList);
+                        adapter = new businessappVehicleListAdapter(VehicleList);
                         recyclerView.setAdapter(adapter);
 
                         adapter.setOnItemClickListener((view, obj, position) ->
@@ -218,6 +240,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
                                     //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
 
                                     GoToDetails(obj);
+
                                 }
                         );
                         // adapter.notifyDataSetChanged();
@@ -227,10 +250,11 @@ public class businessappVehicleListActivity extends AppCompatActivity {
 
 
     }
-    public  void GoToDetails(DrivermasterResponse obj)
+    public  void GoToDetails(GetVehicleListResponse obj)
     {
-        Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, businessappDriverDetailsActivity.class);
+        Toast.makeText(this, "Selected : " + obj.getRegistrationNo(), Toast.LENGTH_LONG).show();
+        ApplicationConstants.photo1=obj.getPhoto();
+        Intent intent = new Intent(this, businessappVehicleDetailsActivity.class);
         startActivity(intent);
     }
     protected void onDestroy() {

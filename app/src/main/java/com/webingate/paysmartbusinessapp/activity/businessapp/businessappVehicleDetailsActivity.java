@@ -2,12 +2,15 @@ package com.webingate.paysmartbusinessapp.activity.businessapp;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -15,7 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetVehicleListResponse;
 import com.webingate.paysmartbusinessapp.utils.Utils;
+
+import java.util.List;
+
+import butterknife.ButterKnife;
 
 public class businessappVehicleDetailsActivity extends AppCompatActivity {
 
@@ -24,16 +33,14 @@ public class businessappVehicleDetailsActivity extends AppCompatActivity {
     private TextView phoneTextView;
     private TextView websiteTextView;
     private FloatingActionButton editFAB;
-
+    String photo;
+    List<GetVehicleListResponse> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_vehicledetails_activity);
-
-        initData();
-
         initUI();
-
+        initData();
         initActions();
 
     }
@@ -52,15 +59,25 @@ public class businessappVehicleDetailsActivity extends AppCompatActivity {
 
     //region Init Functions
     private void initData() {
-
+      if(ApplicationConstants.photo1!=null){
+           byte[] decodedString= Base64.decode(ApplicationConstants.photo1.substring(ApplicationConstants.photo1.indexOf(",")+1), Base64.DEFAULT);
+           Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+           profileImageView.setImageBitmap(image1);
+       }
+       else {
+          profileImageView = findViewById(R.id.profileImageView);
+          int id = R.drawable.profile2;
+          Utils.setCornerRadiusImageToImageView(getApplicationContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
+      }
     }
 
     private void initUI() {
         initToolbar();
 
         profileImageView = findViewById(R.id.profileImageView);
-        int id = R.drawable.profile2;
-        Utils.setCornerRadiusImageToImageView(getApplicationContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
+
+//        int id = R.drawable.profile2;
+//        Utils.setCornerRadiusImageToImageView(getApplicationContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
 
       //  ImageView coverUserImageView = findViewById(R.id.coverUserImageView);
        // Utils.setImageToImageView(getApplicationContext(), coverUserImageView, id);
