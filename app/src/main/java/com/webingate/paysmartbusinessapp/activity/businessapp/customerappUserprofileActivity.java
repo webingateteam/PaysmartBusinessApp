@@ -146,6 +146,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
             Toast.makeText(this, "Clicked nav_notification.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_alerts) {
             Toast.makeText(this, "Clicked nav_alerts.", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this,businessappDriverDocList.class));
         } else if (id == R.id.nav_preferences) {
             Toast.makeText(this, "Clicked nav_preferences.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_coupons) {

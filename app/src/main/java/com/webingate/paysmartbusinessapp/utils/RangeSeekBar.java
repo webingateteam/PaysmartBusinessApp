@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.ImageView;
 
+
 import com.webingate.paysmartbusinessapp.R;
 
 import java.math.BigDecimal;

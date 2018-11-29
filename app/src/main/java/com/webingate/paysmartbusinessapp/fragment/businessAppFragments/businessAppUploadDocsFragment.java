@@ -86,11 +86,12 @@ public class businessAppUploadDocsFragment extends Fragment {
 //        expireDate.setOnClickListener(getActivity());
 //        chooseFile.setOnClickListener();
 //        submit.setOnClickListener();
-        DriverDetailsTable1Item documentsModel = (DriverDetailsTable1Item) ApplicationConstants.documentslist.get(ApplicationConstants.documentNo);
-        documentName.setText(documentsModel.getDocName());
-        documentNo.setText(documentsModel.getDocumentNo());
-        expireDate.setText(documentsModel.getExpiryDate());
-
+//        DriverDetailsTable1Item documentsModel = (DriverDetailsTable1Item) ApplicationConstants.documentslist.get(ApplicationConstants.documentNo);
+//       if(documentsModel!=null){
+//        documentName.setText(documentsModel.getDocName());
+//        documentNo.setText(documentsModel.getDocumentNo());
+//        expireDate.setText(documentsModel.getExpiryDate());
+//       }
         return view;
     }
 
