@@ -21,6 +21,7 @@ import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDocCheckingFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsFragment;
+import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsListFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppUploadDocsFragment;
 
@@ -170,7 +171,8 @@ public class businessappNewDriverActivity extends AppCompatActivity {
 
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
                     //setupFragment(new businessAppUploadDocsFragment());
-                    setupFragment(new businessAppDocCheckingFragment());
+                    //setupFragment(new businessAppDocCheckingFragment());
+                    setupFragment(new businessAppDriverDocsListFragment());
 
                 }
 

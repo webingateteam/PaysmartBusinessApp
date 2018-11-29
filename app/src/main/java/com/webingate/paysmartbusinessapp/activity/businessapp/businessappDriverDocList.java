@@ -38,7 +38,7 @@ public class businessappDriverDocList extends AppCompatActivity {
 
     private TextView size1TextView;
     private TextView size2TextView;
-    private TextView size3TextView;
+   // private TextView size3TextView;
     private TextView size4TextView;
     private TextView size5TextView;
 
@@ -163,7 +163,7 @@ public class businessappDriverDocList extends AppCompatActivity {
 
         size1TextView = findViewById(R.id.size1TextView);
         size2TextView = findViewById(R.id.size2TextView);
-        size3TextView = findViewById(R.id.size3TextView);
+       // size3TextView = findViewById(R.id.size3TextView);
         size4TextView = findViewById(R.id.size4TextView);
         size5TextView = findViewById(R.id.size5TextView);
 
@@ -177,9 +177,9 @@ public class businessappDriverDocList extends AppCompatActivity {
         updateColorTitle();
 
         // Set Size Default
-        setSelectUnSelectSizeFilter(size3BgImageView, R.color.colorPrimary, size3TextView, R.color.md_white_1000);
-        size3Status = true;
-        updateSizeTitle();
+        //setSelectUnSelectSizeFilter(size3BgImageView, R.color.colorPrimary, size3TextView, R.color.md_white_1000);
+       // size3Status = true;
+       // updateSizeTitle();
 
         // Set Material Default
         Button material1Button = findViewById(R.id.material1Button);
@@ -290,16 +290,16 @@ public class businessappDriverDocList extends AppCompatActivity {
             updateSizeTitle();
         });
 
-        size3TextView.setOnClickListener((View v) -> {
-            if (size3Status) {
-                setSelectUnSelectSizeFilter(size3BgImageView, R.color.md_grey_400, size3TextView, R.color.md_grey_800);
-                size3Status = false;
-            } else {
-                setSelectUnSelectSizeFilter(size3BgImageView, R.color.colorPrimary, size3TextView, R.color.md_white_1000);
-                size3Status = true;
-            }
-            updateSizeTitle();
-        });
+//        size3TextView.setOnClickListener((View v) -> {
+//            if (size3Status) {
+//                setSelectUnSelectSizeFilter(size3BgImageView, R.color.md_grey_400, size3TextView, R.color.md_grey_800);
+//                size3Status = false;
+//            } else {
+//                setSelectUnSelectSizeFilter(size3BgImageView, R.color.colorPrimary, size3TextView, R.color.md_white_1000);
+//                size3Status = true;
+//            }
+//            updateSizeTitle();
+//        });
 
         size4TextView.setOnClickListener((View v) -> {
             if (size4Status) {
@@ -469,13 +469,13 @@ public class businessappDriverDocList extends AppCompatActivity {
             }
         }
 
-        if (size3Status) {
-            if (value.equals("")) {
-                value += size3TextView.getText().toString();
-            } else {
-                value += ", " + size3TextView.getText().toString();
-            }
-        }
+//        if (size3Status) {
+//            if (value.equals("")) {
+//                value += size3TextView.getText().toString();
+//            } else {
+//                value += ", " + size3TextView.getText().toString();
+//            }
+//        }
 
         if (size4Status) {
             if (value.equals("")) {
