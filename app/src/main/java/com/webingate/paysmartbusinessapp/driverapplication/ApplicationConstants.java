@@ -23,6 +23,8 @@ public class ApplicationConstants {
     public static String vehicleType="";
     public static String vehiclepic="";
     public static String driverpic="";
+    public static String vehiclegroup="";
+    public static String vehiclecode="";
 
 
     public static boolean isResetPasswordfirstWondow=true;

@@ -19,15 +19,16 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
-import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDocCheckingFragment;
+import com.webingate.paysmartbusinessapp.customerapp.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsFragment;
-import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsListFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment;
+import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment1;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppUploadDocsFragment;
 
 import java.util.List;
 
 import butterknife.BindView;
+import cropper.CropImage;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -45,6 +46,9 @@ public class businessappNewDriverActivity extends AppCompatActivity {
     private TextView imageNoTextView;
 
     ImageView profileImageView;
+
+    @BindView(R.id.edituserphoto)
+    Button userphoto;
 
 
 
@@ -73,6 +77,8 @@ public class businessappNewDriverActivity extends AppCompatActivity {
         initDataBinding();
 
         initActions();
+
+
     }
 
     @Override
@@ -104,6 +110,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
 
         updatePositionTextView();
         setupFragment(new businessAppDriverUserInfoFragment());
+        // startActivity(new Intent(businessappNewDriverActivity.this, businessAppDriverUserInfoFragment1.class));
 
     }
 
@@ -136,10 +143,10 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                 updatePositionTextView();
                 if(position == 1) {
                     Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
-                    userInfoFragment =      new businessAppDriverUserInfoFragment();
+                    //       userInfoFragment =      new businessAppDriverUserInfoFragment();
 
-                    setupFragment(userInfoFragment);
-
+                    // setupFragment(userInfoFragment);
+                    // startActivity(new Intent(businessappNewDriverActivity.this, businessAppDriverUserInfoFragment.class));
                 }
                 if(position == 2)
                 {
@@ -167,25 +174,24 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                     object.addProperty("usertypeid","109");
                     object.addProperty("isDriverOwned","0");
                     object.addProperty("DPhoto","");
-                    //RegisterDriver(object);
+                    RegisterDriver(object);
 
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
-                    //setupFragment(new businessAppUploadDocsFragment());
-                    //setupFragment(new businessAppDocCheckingFragment());
-                    setupFragment(new businessAppDriverDocsListFragment());
+                    setupFragment(new businessAppUploadDocsFragment());
 
                 }
 
 
                 if(position == 3) {
                     Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppDriverUserInfoFragment());
+                    //setupFragment(new businessAppDriverUserInfoFragment());
                 }
 
             } else {
                 Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
             }
         });
+
         prevButton.setOnClickListener(v -> {
 
             if (position > 1) {
@@ -211,6 +217,10 @@ public class businessappNewDriverActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        userphoto.setOnClickListener(v ->{
+            Toast.makeText(this, "Clicked On camera.", Toast.LENGTH_SHORT).show();
         });
     }
 

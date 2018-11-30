@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -46,6 +47,8 @@ public class businessAppDriverUserInfoFragment extends Fragment {
     @BindView(R.id.s_state)
     EditText state;
     Toast toast;
+    @BindView(R.id.edituserphoto)
+    ImageView userphoto;
 
     @Nullable
     @Override
@@ -86,6 +89,7 @@ public class businessAppDriverUserInfoFragment extends Fragment {
         city = view.findViewById(R.id.s_city);
         postal = view.findViewById(R.id.s_postal);
         state = view.findViewById(R.id.s_state);
+        userphoto = view.findViewById(R.id.edituserphoto);
     }
 
     public EditText getName() {

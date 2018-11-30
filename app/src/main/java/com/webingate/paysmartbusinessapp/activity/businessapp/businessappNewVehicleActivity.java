@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.VehicleCreationResponce;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment;
@@ -32,6 +33,8 @@ import java.util.List;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants.photo1;
 
 public class businessappNewVehicleActivity extends AppCompatActivity {
 
@@ -94,8 +97,10 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
         nextButton = findViewById(R.id.nextButton);
         prevButton = findViewById(R.id.prevButton);
         imageNoTextView = findViewById(R.id.imageNoTextView);
-
-
+//        if(ApplicationConstants.registrationNo!=null){
+//        RegNo = findViewById(R.id.s_Regno);
+//        RegNo.setText(ApplicationConstants.registrationNo);
+//        }
 
 
         updatePositionTextView();
@@ -145,6 +150,8 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
                     userInfoFragment =  new businessAppVehicleInfoFragment();
 
                     setupFragment(userInfoFragment);
+//                    RegNo = findViewById(R.id.s_Regno);
+//                    RegNo.setText(ApplicationConstants.registrationNo);
 
                 }
                 if(position == 2)

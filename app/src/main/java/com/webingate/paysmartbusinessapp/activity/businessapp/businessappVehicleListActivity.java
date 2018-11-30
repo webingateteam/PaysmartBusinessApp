@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.maps.model.VehicleType;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
 import com.webingate.paysmartbusinessapp.adapter.businessappVehicleListAdapter;
@@ -44,9 +45,14 @@ import rx.schedulers.Schedulers;
 public class businessappVehicleListActivity extends AppCompatActivity {
 
     public static final String MyPREFERENCES = "MyPrefs";
-    public static final String Username = "nameKey";
+    public static final String RegistrationNo = "RegNoKey";
+    public static final String VehicleGroup = "vgrpKey";
+    public static final String VehicleType = "vtypeKey";
+    public static final String VehicleCode = "vcodeKey";
     public static final String Phone = "phoneKey";
     public static final String Photo = "PhotoKey";
+
+    String regno,vimage,vgrp,vtype,vcode;
 
    // ArrayList<Place> placeArrayList;
     businessappVehicleListAdapter adapter;
@@ -109,10 +115,17 @@ public class businessappVehicleListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_vehicleslist_activity);
+        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(RegistrationNo, RegistrationNo);
+        editor.commit();
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 //        ApplicationConstants.username= prefs.getString(Username, null);
-//        ApplicationConstants.photo= prefs.getString(Photo, null);
-        photo =(ImageView) findViewById(R.id.placeImageView);
+//        ApplicationConstants.photo= prefs.getString(Photo, null);em= prefs.getString(Email, null);
+        regno= prefs.getString(RegistrationNo, null);
+        vgrp = prefs.getString(VehicleGroup,null);
+        vtype = prefs.getString(VehicleType,null);
+        vcode = prefs.getString(VehicleCode,null);
         initData();
         initUI();
         initDataBindings();
@@ -224,8 +237,17 @@ public class businessappVehicleListActivity extends AppCompatActivity {
                         VehicleList= (ArrayList <GetVehicleListResponse>) responselist;
                            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                            SharedPreferences.Editor editor = sharedpreferences.edit();
-                         editor.putString(Photo, responselist.get(0).getPhoto().toString());
-                        ApplicationConstants.profilepic = responselist.get(0).getPhoto().toString();
+                           editor.putString(RegistrationNo, responselist.get(0).getRegistrationNo());
+                           editor.putString(VehicleGroup, responselist.get(0).getVehicleGroup());
+                        editor.putString(VehicleType, responselist.get(0).getVehicleType());
+                        editor.putString(VehicleCode, responselist.get(0).getVehicleCode());
+                           editor.putString(Photo, responselist.get(0).getPhoto().toString());
+                           editor.commit();
+                           ApplicationConstants.profilepic = responselist.get(0).getPhoto().toString();
+                        ApplicationConstants.registrationNo= responselist.get(0).getRegistrationNo().toString();
+                        ApplicationConstants.vehiclegroup= responselist.get(0).getVehicleGroup().toString();
+                        ApplicationConstants.vehicleType= responselist.get(0).getVehicleType().toString();
+                        ApplicationConstants.vehiclecode= responselist.get(0).getVehicleCode().toString();
 //                          byte[] decodedString= Base64.decode(ApplicationConstants.profilepic.substring(ApplicationConstants.profilepic.indexOf(",")+1), Base64.DEFAULT);
 //                        Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 //                        photo.setImageBitmap(image1);
@@ -254,6 +276,10 @@ public class businessappVehicleListActivity extends AppCompatActivity {
     {
         Toast.makeText(this, "Selected : " + obj.getRegistrationNo(), Toast.LENGTH_LONG).show();
         ApplicationConstants.photo1=obj.getPhoto();
+        ApplicationConstants.registrationNo = obj.getRegistrationNo();
+        ApplicationConstants.vehiclegroup = obj.getVehicleGroup();
+        ApplicationConstants.vehicleType = obj.getVehicleType();
+        ApplicationConstants.vehiclecode = obj.getVehicleCode();
         Intent intent = new Intent(this, businessappVehicleDetailsActivity.class);
         startActivity(intent);
     }

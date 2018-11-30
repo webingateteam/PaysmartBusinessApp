@@ -1,8 +1,11 @@
 package com.webingate.paysmartbusinessapp.fragment.businessAppFragments;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.customerapp.RegisterActivity;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import butterknife.BindView;
@@ -66,18 +70,32 @@ public class businessAppVehicleInfoFragment extends Fragment {
 //
     private void initUI(View view) {
 
-        profileImageView = view.findViewById(R.id.profileImageView);
-        int id = R.drawable.profile2;
-        Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
+//        profileImageView = view.findViewById(R.id.profileImageView);
+//        int id = R.drawable.profile2;
+//        Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
+
         setRegNo((EditText)view.findViewById(R.id.s_Regno));
 
         RegNo = view.findViewById(R.id.s_Regno);
+        RegNo.setText(ApplicationConstants.registrationNo);
         chasisno = view.findViewById(R.id.s_chasisno);
         engineno = view.findViewById(R.id.s_engineno);
         vgroup = view.findViewById(R.id.s_vgroup);
         vtype = view.findViewById(R.id.s_vtype);
         modelyear = view.findViewById(R.id.s_modelyear);
         state = view.findViewById(R.id.s_state);
+
+        if(ApplicationConstants.photo1!=null){
+            profileImageView = view.findViewById(R.id.profileImageView);
+            byte[] decodedString= Base64.decode(ApplicationConstants.photo1.substring(ApplicationConstants.photo1.indexOf(",")+1), Base64.DEFAULT);
+            Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            profileImageView.setImageBitmap(image1);
+        }
+        else {
+            profileImageView = view.findViewById(R.id.profileImageView);
+            int id = R.drawable.profile2;
+            Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
+        }
     }
 
     public EditText getRegNo() {

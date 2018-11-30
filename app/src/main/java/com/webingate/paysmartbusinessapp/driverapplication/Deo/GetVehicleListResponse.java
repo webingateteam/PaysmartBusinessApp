@@ -7,6 +7,9 @@ public class GetVehicleListResponse {
 	@SerializedName("Id")
 	private int Id;
 
+	@SerializedName("ModelYear")
+	private String modelyear;
+
 	@SerializedName("RegistrationNo")
 	private String RegistrationNo;
 
@@ -83,6 +86,14 @@ public class GetVehicleListResponse {
 		return Id;
 	}
 
+	public void setmodelyear(String modelyear){
+		this.modelyear = modelyear;
+	}
+
+	public String getmodelyear(){
+		return modelyear;
+	}
+
 
 	@Override
  	public String toString(){
@@ -94,6 +105,7 @@ public class GetVehicleListResponse {
 		    ",VehicleType = '" + VehicleType + '\''+
 		    ",Photo = '" + Photo + '\''+
 		    ",Id = '" + Id + '\''+
+			",ModelYear = '" + modelyear + '\''+
 			"}";
 		}
 }
