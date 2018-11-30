@@ -19,16 +19,18 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
-import com.webingate.paysmartbusinessapp.customerapp.ApplicationConstants;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DefaultResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverDetailsTableItem;
+import com.webingate.paysmartbusinessapp.driverapplication.DriverDetails;
+import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDocCheckingFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsFragment;
+import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsListFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment;
-import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment1;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppUploadDocsFragment;
 
 import java.util.List;
 
 import butterknife.BindView;
-import cropper.CropImage;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -47,9 +49,6 @@ public class businessappNewDriverActivity extends AppCompatActivity {
 
     ImageView profileImageView;
 
-    @BindView(R.id.edituserphoto)
-    Button userphoto;
-
 
 
     EditText email;
@@ -63,7 +62,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
     EditText postal;
     EditText state;
     Toast toast;
-
+    RegisterBusinessUsers rlist;
     businessAppDriverUserInfoFragment   userInfoFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +76,6 @@ public class businessappNewDriverActivity extends AppCompatActivity {
         initDataBinding();
 
         initActions();
-
-
     }
 
     @Override
@@ -110,7 +107,6 @@ public class businessappNewDriverActivity extends AppCompatActivity {
 
         updatePositionTextView();
         setupFragment(new businessAppDriverUserInfoFragment());
-        // startActivity(new Intent(businessappNewDriverActivity.this, businessAppDriverUserInfoFragment1.class));
 
     }
 
@@ -143,10 +139,10 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                 updatePositionTextView();
                 if(position == 1) {
                     Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
-                    //       userInfoFragment =      new businessAppDriverUserInfoFragment();
+                    userInfoFragment =      new businessAppDriverUserInfoFragment();
 
-                    // setupFragment(userInfoFragment);
-                    // startActivity(new Intent(businessappNewDriverActivity.this, businessAppDriverUserInfoFragment.class));
+                    setupFragment(userInfoFragment);
+
                 }
                 if(position == 2)
                 {
@@ -168,30 +164,31 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                     object.addProperty("Password", "123");
                     object.addProperty("Mobilenumber",mno.getText().toString());
                     object.addProperty("Email",email.getText().toString());
-                    object.addProperty("CountryId","1");
+                    object.addProperty("CountryId","91");
                     object.addProperty("VehicleGroupId","");
                     object.addProperty("UserAccountNo","10991"+mno.getText().toString());
                     object.addProperty("usertypeid","109");
                     object.addProperty("isDriverOwned","0");
                     object.addProperty("DPhoto","");
-                    RegisterDriver(object);
+                   // RegisterDriver(object);
 
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppUploadDocsFragment());
+                    //setupFragment(new businessAppUploadDocsFragment());
+                    //setupFragment(new businessAppDocCheckingFragment());
+                    setupFragment(new businessAppDriverDocsListFragment());
 
                 }
 
 
                 if(position == 3) {
                     Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
-                    //setupFragment(new businessAppDriverUserInfoFragment());
+                    setupFragment(new businessAppDriverUserInfoFragment());
                 }
 
             } else {
                 Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
             }
         });
-
         prevButton.setOnClickListener(v -> {
 
             if (position > 1) {
@@ -217,10 +214,6 @@ public class businessappNewDriverActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
             }
-        });
-
-        userphoto.setOnClickListener(v ->{
-            Toast.makeText(this, "Clicked On camera.", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -272,7 +265,9 @@ public class businessappNewDriverActivity extends AppCompatActivity {
 //                        editor.putString(Emailotp, response.getEmailotp());
 //                        editor.putString(DRIVERID, response.getDriverId());
 //                        editor.putString(VEHICLEID, response.getVehicleId());
+                             List<RegisterBusinessUsers> rlist=responseList;
                             editor.commit();
+
                             // startActivity(new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class));
                             finish();
                         }
