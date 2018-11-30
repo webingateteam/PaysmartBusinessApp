@@ -14,6 +14,7 @@ import com.webingate.paysmartbusinessapp.driverapplication.Deo.BusinessResendOTP
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.ChangepwdResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DefaultResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverDetailsResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverDocumentsResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverForgotpasswordResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverLoginResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverPasswordVerificationResponse;
@@ -107,6 +108,8 @@ public interface APIInterface  {
     //responce 1
     @POST("/api/DriverMaster/SaveDriverDocuments")
     public Observable<List<DefaultResponse>> SaveDriverDocuments(@Body JsonObject jsonObject);
+    @POST("/api/DriverMaster/SaveDriverDocuments")
+    public Observable<List<DriverDocumentsResponse>> SaveDriverDocuments1(@Body JsonObject jsonObject);
 
     @POST("/api/Driverlogin/Driverlogin")
     public Observable<List<DriverLoginResponse>> DriverLogin(@Body JsonObject jsonObject);

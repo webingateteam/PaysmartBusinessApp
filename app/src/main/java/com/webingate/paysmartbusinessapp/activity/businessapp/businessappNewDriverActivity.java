@@ -19,6 +19,9 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DefaultResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverDetailsTableItem;
+import com.webingate.paysmartbusinessapp.driverapplication.DriverDetails;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDocCheckingFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsListFragment;
@@ -59,7 +62,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
     EditText postal;
     EditText state;
     Toast toast;
-
+    RegisterBusinessUsers rlist;
     businessAppDriverUserInfoFragment   userInfoFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,13 +164,13 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                     object.addProperty("Password", "123");
                     object.addProperty("Mobilenumber",mno.getText().toString());
                     object.addProperty("Email",email.getText().toString());
-                    object.addProperty("CountryId","1");
+                    object.addProperty("CountryId","91");
                     object.addProperty("VehicleGroupId","");
                     object.addProperty("UserAccountNo","10991"+mno.getText().toString());
                     object.addProperty("usertypeid","109");
                     object.addProperty("isDriverOwned","0");
                     object.addProperty("DPhoto","");
-                    //RegisterDriver(object);
+                   // RegisterDriver(object);
 
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
                     //setupFragment(new businessAppUploadDocsFragment());
@@ -262,7 +265,9 @@ public class businessappNewDriverActivity extends AppCompatActivity {
 //                        editor.putString(Emailotp, response.getEmailotp());
 //                        editor.putString(DRIVERID, response.getDriverId());
 //                        editor.putString(VEHICLEID, response.getVehicleId());
+                             List<RegisterBusinessUsers> rlist=responseList;
                             editor.commit();
+
                             // startActivity(new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class));
                             finish();
                         }
