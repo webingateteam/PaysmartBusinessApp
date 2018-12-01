@@ -4,21 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="?android:attr/actionBarSize"-->
-            <!--android:background="@color/colorPrimary"-->
-            <!--app:popupTheme="@style/AppTheme.PopupOverlay" />-->
-
-    </android.support.design.widget.AppBarLayout>
-
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,241 +12,13 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="1dp"
             android:orientation="vertical">
-
-            <!--<EditText-->
-                <!--android:id="@+id/minimumEditText2"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginEnd="16dp"-->
-                <!--android:layout_marginStart="16dp"-->
-                <!--android:layout_marginTop="16dp"-->
-                <!--android:background="@drawable/layout_border"-->
-                <!--android:ems="10"-->
-                <!--android:fontFamily="@font/roboto"-->
-                <!--android:hint="Search ..."-->
-                <!--android:inputType="text"-->
-                <!--android:padding="@dimen/space_8"-->
-                <!--android:textAlignment="viewStart"-->
-                <!--android:textColor="@color/colorTextLight"-->
-                <!--android:textSize="@dimen/font_body_size"-->
-                <!--app:layout_constraintEnd_toEndOf="parent"-->
-                <!--app:layout_constraintStart_toStartOf="parent"-->
-                <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-            <!--<android.support.v7.widget.CardView-->
-                <!--android:id="@+id/priceRangeCardView"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="16dp"-->
-                <!--app:layout_constraintEnd_toEndOf="parent"-->
-                <!--app:layout_constraintHorizontal_bias="1.0"-->
-                <!--app:layout_constraintStart_toStartOf="parent"-->
-                <!--app:layout_constraintTop_toBottomOf="@+id/minimumEditText2">-->
-
-                <!--<android.support.constraint.ConstraintLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical">-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/priceRangeToTitleValueTextView"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginBottom="8dp"-->
-                        <!--android:layout_marginTop="8dp"-->
-                        <!--android:fontFamily="@font/roboto"-->
-                        <!--android:text="$ 100"-->
-                        <!--android:textColor="@color/colorPrimary"-->
-                        <!--android:textSize="@dimen/font_body_size"-->
-                        <!--app:layout_constraintBottom_toBottomOf="@+id/priceRangeUpDownImageView"-->
-                        <!--app:layout_constraintEnd_toStartOf="@+id/priceRangeUpDownImageView"-->
-                        <!--app:layout_constraintTop_toTopOf="@+id/priceRangeUpDownImageView"-->
-                        <!--app:layout_constraintVertical_bias="0.0" />-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/priceRangeToTitleTextView"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginBottom="8dp"-->
-                        <!--android:layout_marginEnd="8dp"-->
-                        <!--android:layout_marginTop="8dp"-->
-                        <!--android:fontFamily="@font/roboto"-->
-                        <!--android:text="To"-->
-                        <!--android:textColor="@color/md_grey_600"-->
-                        <!--android:textSize="@dimen/font_body_size"-->
-                        <!--app:layout_constraintBottom_toBottomOf="@+id/priceRangeUpDownImageView"-->
-                        <!--app:layout_constraintEnd_toStartOf="@+id/priceRangeToTitleValueTextView"-->
-                        <!--app:layout_constraintTop_toTopOf="@+id/priceRangeUpDownImageView"-->
-                        <!--app:layout_constraintVertical_bias="0.0" />-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/priceRangeFromTitleValueTextView"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginBottom="8dp"-->
-                        <!--android:layout_marginEnd="8dp"-->
-                        <!--android:layout_marginTop="8dp"-->
-                        <!--android:fontFamily="@font/roboto"-->
-                        <!--android:text="$ 0"-->
-                        <!--android:textColor="@color/colorPrimary"-->
-                        <!--android:textSize="@dimen/font_body_size"-->
-                        <!--app:layout_constraintBottom_toBottomOf="@+id/priceRangeUpDownImageView"-->
-                        <!--app:layout_constraintEnd_toStartOf="@+id/priceRangeToTitleTextView"-->
-                        <!--app:layout_constraintTop_toTopOf="@+id/priceRangeUpDownImageView"-->
-                        <!--app:layout_constraintVertical_bias="0.0" />-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/priceRangeFromTitleTextView"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginBottom="8dp"-->
-                        <!--android:layout_marginEnd="8dp"-->
-                        <!--android:layout_marginTop="8dp"-->
-                        <!--android:fontFamily="@font/roboto"-->
-                        <!--android:text="From"-->
-                        <!--android:textColor="@color/md_grey_600"-->
-                        <!--android:textSize="@dimen/font_body_size"-->
-                        <!--app:layout_constraintBottom_toBottomOf="@+id/priceRangeUpDownImageView"-->
-                        <!--app:layout_constraintEnd_toStartOf="@+id/priceRangeFromTitleValueTextView"-->
-                        <!--app:layout_constraintTop_toTopOf="@+id/priceRangeUpDownImageView"-->
-                        <!--app:layout_constraintVertical_bias="0.0" />-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/priceRangeTitleTextView"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="15dp"-->
-                        <!--android:layout_marginStart="8dp"-->
-                        <!--android:layout_marginTop="8dp"-->
-                        <!--android:layout_marginBottom="8dp"-->
-                        <!--android:fontFamily="@font/roboto"-->
-                        <!--android:text="Driver License"-->
-                        <!--android:textColor="@color/md_grey_800"-->
-                        <!--android:textSize="@dimen/font_body_size"-->
-                        <!--app:layout_constraintBottom_toBottomOf="@+id/priceRangeUpDownImageView"-->
-                        <!--app:layout_constraintStart_toStartOf="parent"-->
-                        <!--app:layout_constraintTop_toTopOf="@+id/priceRangeUpDownImageView" />-->
-
-                    <!--<ImageView-->
-                        <!--android:id="@+id/priceRangeUpDownImageView"-->
-                        <!--android:layout_width="50dp"-->
-                        <!--android:layout_height="36dp"-->
-                        <!--android:layout_marginTop="8dp"-->
-                        <!--android:scaleType="center"-->
-                        <!--app:layout_constraintEnd_toEndOf="parent"-->
-                        <!--app:layout_constraintTop_toTopOf="parent"-->
-                        <!--app:srcCompat="@drawable/baseline_down_arrow_black_24" />-->
-
-
-                    <!--<View-->
-                        <!--android:id="@+id/view24"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="1dp"-->
-                        <!--android:layout_marginTop="8dp"-->
-                        <!--android:background="@color/colorLine"-->
-                        <!--app:layout_constraintTop_toBottomOf="@+id/priceRangeUpDownImageView" />-->
-
-                    <!--<android.support.constraint.ConstraintLayout-->
-                        <!--android:id="@+id/priceRangeLayout"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:background="@color/md_grey_100"-->
-                        <!--android:orientation="vertical"-->
-                        <!--app:layout_constraintEnd_toEndOf="parent"-->
-                        <!--app:layout_constraintHorizontal_bias="0.0"-->
-                        <!--app:layout_constraintStart_toStartOf="parent"-->
-                        <!--app:layout_constraintTop_toBottomOf="@+id/view24">-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/priceRangeToTextView"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginBottom="16dp"-->
-                            <!--android:layout_marginEnd="8dp"-->
-                            <!--android:layout_marginTop="8dp"-->
-                            <!--android:fontFamily="@font/roboto"-->
-                            <!--android:text="To"-->
-                            <!--android:textColor="@color/md_grey_600"-->
-                            <!--android:textSize="@dimen/font_body_size"-->
-                            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                            <!--app:layout_constraintEnd_toStartOf="@+id/priceRangeToValueTextView"-->
-                            <!--app:layout_constraintTop_toBottomOf="@+id/price_range_bar_container"-->
-                            <!--app:layout_constraintVertical_bias="0.0" />-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/priceRangeToValueTextView"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginBottom="16dp"-->
-                            <!--android:layout_marginEnd="16dp"-->
-                            <!--android:layout_marginTop="8dp"-->
-                            <!--android:fontFamily="@font/roboto"-->
-                            <!--android:text="$ 0"-->
-                            <!--android:textColor="@color/colorPrimary"-->
-                            <!--android:textSize="@dimen/font_body_size"-->
-                            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                            <!--app:layout_constraintEnd_toEndOf="parent"-->
-                            <!--app:layout_constraintTop_toBottomOf="@+id/price_range_bar_container"-->
-                            <!--app:layout_constraintVertical_bias="0.0" />-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/priceRangeFromValueTextView"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginBottom="16dp"-->
-                            <!--android:layout_marginStart="8dp"-->
-                            <!--android:layout_marginTop="8dp"-->
-                            <!--android:fontFamily="@font/roboto"-->
-                            <!--android:text="$ 0"-->
-                            <!--android:textColor="@color/colorPrimary"-->
-                            <!--android:textSize="@dimen/font_body_size"-->
-                            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                            <!--app:layout_constraintStart_toEndOf="@+id/priceRangeFromTextView"-->
-                            <!--app:layout_constraintTop_toBottomOf="@+id/price_range_bar_container"-->
-                            <!--app:layout_constraintVertical_bias="0.0" />-->
-
-                        <!--<LinearLayout-->
-                            <!--android:id="@+id/price_range_bar_container"-->
-                            <!--android:layout_width="fill_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginEnd="8dp"-->
-                            <!--android:layout_marginStart="8dp"-->
-                            <!--android:layout_marginTop="16dp"-->
-                            <!--android:orientation="vertical"-->
-                            <!--app:layout_constraintEnd_toEndOf="parent"-->
-                            <!--app:layout_constraintStart_toStartOf="parent"-->
-                            <!--app:layout_constraintTop_toTopOf="parent">-->
-
-                        <!--</LinearLayout>-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/priceRangeFromTextView"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginBottom="16dp"-->
-                            <!--android:layout_marginStart="16dp"-->
-                            <!--android:layout_marginTop="8dp"-->
-                            <!--android:fontFamily="@font/roboto"-->
-                            <!--android:text="From"-->
-                            <!--android:textColor="@color/md_grey_600"-->
-                            <!--android:textSize="@dimen/font_body_size"-->
-                            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                            <!--app:layout_constraintStart_toStartOf="parent"-->
-                            <!--app:layout_constraintTop_toBottomOf="@+id/price_range_bar_container" />-->
-
-
-                    <!--</android.support.constraint.ConstraintLayout>-->
-
-                <!--</android.support.constraint.ConstraintLayout>-->
-
-            <!--</android.support.v7.widget.CardView>-->
-
             <android.support.v7.widget.CardView
                 android:id="@+id/sizeCardView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                >
@@ -274,7 +31,7 @@
                     <TextView
                         android:id="@+id/sizeTitleTextView"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
@@ -339,9 +96,9 @@
 
                     <android.support.constraint.ConstraintLayout
                         android:id="@+id/sizeLayout"
-                        android:layout_width="0dp"
+                        android:layout_width="383dp"
                         android:layout_height="193dp"
-                        android:background="@color/md_grey_200"
+                        android:background="@color/md_grey_100"
                         android:orientation="vertical"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -1111,6 +868,4 @@
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
-
-
 </android.support.design.widget.CoordinatorLayout>
