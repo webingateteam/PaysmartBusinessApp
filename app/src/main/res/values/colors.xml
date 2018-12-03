@@ -198,5 +198,8 @@
     <color name="light_gray">#C7C7CC</color>
     <!--gradient-->
     <color name="overlay_dark_10">#1A000000</color>
-
+    <color name="grey_900">#212121</color>
+    <color name="md_amber_800">#FF8F00</color>
+    <color name="amber_800">#FF8F00</color>
+    <color name="blue_grey_800">#37474F</color>
 </resources>

@@ -112,7 +112,7 @@ public class businessappBrandAmbassadorprofileActivity extends AppCompatActivity
             Toast.makeText(this, "Clicked nav_profile.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_paymentmode) {
           //  Toast.makeText(this, "Clicked nav_paymentmode.", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, customerappPaymentModeActivity.class);
+            Intent intent = new Intent(this, businessappPaymentModeActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_bookings) {
             //Toast.makeText(this, "Clicked nav_bookings.", Toast.LENGTH_SHORT).show();

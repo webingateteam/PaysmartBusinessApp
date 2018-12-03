@@ -1,6 +1,7 @@
 package com.webingate.paysmartbusinessapp.driverapplication.Utils;
 
 import com.google.gson.JsonObject;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.AddCardResponse;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessEOTPVerificationResponse;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessappuserValidateResp;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.MOTPVerification;
@@ -45,6 +46,10 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 public interface APIInterface  {
+
+    @POST("/api/Payment/SaveCardsGroup")
+    public Observable<List<AddCardResponse>> SaveAddCard(@Body JsonObject jsonObject);//
+
     @POST("/api/UserAccount/DriverEwalletOTPSending")
     public Observable<List<MOTPVerificationResponse>> EwalletSendOTP(@Body JsonObject jsonObject);//
 

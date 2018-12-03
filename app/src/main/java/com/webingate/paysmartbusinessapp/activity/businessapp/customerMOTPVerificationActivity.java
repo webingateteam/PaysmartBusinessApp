@@ -76,7 +76,7 @@ public class customerMOTPVerificationActivity extends AppCompatActivity {
         submitOTPButton.setOnClickListener((View v) ->{
             //Toast.makeText(getApplicationContext(),"OTP is Resent.",Toast.LENGTH_SHORT).show();
             //Intent intent = new Intent(this, login_activity.class);
-            Intent intent = new Intent(this, customerappPaymentModeActivity.class);
+            Intent intent = new Intent(this, businessappPaymentModeActivity.class);
             startActivity(intent);
         });
     }

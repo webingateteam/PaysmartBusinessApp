@@ -1,5 +1,6 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,20 +9,21 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
 
 
-public class customerappPaymentModeActivity extends AppCompatActivity {
+public class businessappPaymentModeActivity extends AppCompatActivity {
 
     private Button confirmButton;
-
+    private LinearLayout addcards;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.customerapp_paymentmode_activity);
-
+        setContentView(R.layout.businessapp_paymentmode_activity);
+        addcards=(LinearLayout)findViewById(R.id.addcards);
         initData();
 
         initUI();
@@ -60,7 +62,11 @@ public class customerappPaymentModeActivity extends AppCompatActivity {
     private void initActions() {
 
         confirmButton.setOnClickListener(v -> Toast.makeText(this, "Clicked Confirm and Checkout.", Toast.LENGTH_SHORT).show());
+        addcards.setOnClickListener(v ->{
+            Toast.makeText(this, "clicked one Add Card", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(businessappPaymentModeActivity.this,businessappPaymentCardDetails.class));
 
+        });
     }
 
     private void initToolbar() {
