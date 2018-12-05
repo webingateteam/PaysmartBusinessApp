@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
@@ -60,7 +61,7 @@ public class businessappDriversListActivity extends AppCompatActivity {
         Intent intent =getIntent();
         uaccountno=intent.getStringExtra("UserAccountNo");
         typid=intent.getIntExtra("usertypeid",0);
-        GetDriversList(uaccountno,typid);
+        GetDriversList( ApplicationConstants.userAccountNo,109);
     }
 
     private void initUI()

@@ -66,7 +66,8 @@ public class businessappDriverListAdapter extends RecyclerView.Adapter<RecyclerV
                 holder.placeImageView.setImageBitmap(image1);
             }
             else{
-            int id = Utils.getDrawableInt(context, "photo_male_7");
+//            int id = Utils.getDrawableInt(context, "user_round_button");
+                int id = Utils.getDrawableInt(context, "user_driver");
             Utils.setImageToImageView(context, holder.placeImageView, id);
             }
             holder.typeTextView.setText("12");

@@ -256,9 +256,9 @@ public class businessAppDriverDocsListFragment extends Fragment {
                 ApplicationConstants.document_data = encodedImage;
                 JsonObject object = new JsonObject();
                 object.addProperty("Id", "");
-                object.addProperty("DriverId",1003 );
+                object.addProperty("DriverId",1015 );
                 object.addProperty("FileName", ApplicationConstants.document_format);
-                object.addProperty("DocTypeId", 78);
+                object.addProperty("DocTypeId", 86);
                 object.addProperty("ExpiryDate", ApplicationConstants.document_expire_date);
                 object.addProperty("UpdatedById", 1);
                 object.addProperty("DueDate", ApplicationConstants.document_expire_date);

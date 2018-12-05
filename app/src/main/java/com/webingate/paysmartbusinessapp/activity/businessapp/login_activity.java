@@ -337,6 +337,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
                             editor.commit();
                             ApplicationConstants.mobileNo = mobileNo.getText().toString();
                             ApplicationConstants.userAccountNo=credentialsResponse.getuseraccountno();
+                            ApplicationConstants.usertypeid=credentialsResponse.getusertypeid();
                             //startActivity(new Intent(this, MainActivity.class));
                            GoToDashboard();
                             finish();

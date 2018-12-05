@@ -8,6 +8,7 @@ import java.util.List;
  */
 
 public class ApplicationConstants {
+    public static int usertypeid=0;
     public static String id="";
     public static String userAccountNo="";
     public static String username="";

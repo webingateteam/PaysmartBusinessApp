@@ -153,6 +153,7 @@ public class businessAppBrandFragment extends Fragment {
                 switch(position){
                     case 0:
                         Intent intent0 = new Intent(getActivity(), businessappDriversListActivity.class);
+
                         startActivity(intent0);
                         break;
                     case 1:

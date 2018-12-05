@@ -238,7 +238,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 
     private void initData(){
 
-        GetDriverDetails("109917893890990",109);
+        GetDriverDetails( ApplicationConstants.userAccountNo, ApplicationConstants.usertypeid);
 
     }
 

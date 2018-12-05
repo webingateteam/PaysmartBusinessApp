@@ -169,7 +169,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
 
                 v ->
                 {
-                    Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Open fab clicked", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappNewVehicleActivity.class);
                     startActivity(intent);
                 }

@@ -170,7 +170,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                     object.addProperty("usertypeid","109");
                     object.addProperty("isDriverOwned","0");
                     object.addProperty("DPhoto","");
-                   // RegisterDriver(object);
+                    RegisterDriver(object);
 
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
                     //setupFragment(new businessAppUploadDocsFragment());
