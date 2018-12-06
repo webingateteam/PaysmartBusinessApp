@@ -22,6 +22,8 @@ import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
+import org.joda.time.convert.Converter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +35,10 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String pphoto= "pphoto";
+    public static final String email="email";
+    public static final String mobileno= "mobileno";
+    public static final String name="name";
+
     Toast toast;
     ArrayList<DrivermasterResponse> DriverList;
     businessappDriverListAdapter adapter;
@@ -232,7 +238,16 @@ public class businessappDriversListActivity extends AppCompatActivity {
            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
            SharedPreferences.Editor editor = sharedpreferences.edit();
            editor.putString(pphoto, (obj.getUserPhoto()!=null?obj.getUserPhoto():null));
+           editor.putString(email,obj.getEmail());
+           editor.putString(mobileno,obj.getPMobNo());
+           editor .putString(name,obj.getNAme());
            editor.commit();
+           ApplicationConstants.drivername=obj.getNAme();
+           ApplicationConstants.drivermno=obj.getMobilenumber();
+           ApplicationConstants.driveremail=obj.getEmail();
+           ApplicationConstants.driverpic=(obj.getUserPhoto()!=null?obj.getUserPhoto():null);
+//           ApplicationConstants.driverid=Integer.toString(obj.getDId());
+        ApplicationConstants.driverid=obj.getUserAccountNo();
         Intent intent = new Intent(this, businessappDriverDetailsActivity.class);
         startActivity(intent);
     }

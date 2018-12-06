@@ -20,17 +20,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 public class businessappDriverDetailsActivity extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String photo= "pphoto";
+    public static final String email="email";
+    public static final String mobileno= "mobileno";
+    public static final String name="name";
+
     private ImageView profileImageView;
     private TextView emailTextView;
     private TextView phoneTextView;
     private TextView websiteTextView;
     private FloatingActionButton editFAB;
-    String pt;
+    String pt,em,mo,dname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,10 @@ public class businessappDriverDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.businessapp_driverdetails_activity);
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         pt= prefs.getString(photo, null);
+        em= prefs.getString(email, null);
+        mo=prefs.getString(mobileno,null);
+        dname=prefs.getString(dname,null);
+
         initUI();
         initData();
         initActions();
@@ -87,7 +96,8 @@ public class businessappDriverDetailsActivity extends AppCompatActivity {
         websiteTextView = findViewById(R.id.websiteTextView);
 
         editFAB = findViewById(R.id.editFAB);
-
+        emailTextView.setText(em);
+        phoneTextView.setText(ApplicationConstants.mobileNo);
     }
 
     private void initActions() {
@@ -127,8 +137,12 @@ public class businessappDriverDetailsActivity extends AppCompatActivity {
         editFAB.setOnClickListener(view -> {
 
             Toast.makeText(getApplicationContext(), "Click Edit FAB", Toast.LENGTH_SHORT).show();
+            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putString(photo, pt);
 
-            Intent intent = new Intent(this, businessappNewDriverActivity.class);
+            editor.commit();
+            Intent intent = new Intent(this, businessappEditDriverActivity.class);
             startActivity(intent);
 
         });

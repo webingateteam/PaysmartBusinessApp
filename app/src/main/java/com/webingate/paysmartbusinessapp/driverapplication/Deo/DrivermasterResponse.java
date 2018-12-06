@@ -60,6 +60,9 @@ public class DrivermasterResponse {
 	@SerializedName("Mno")
 	private String Mobilenumber;
 
+	@SerializedName("UserAccountNo")
+	private String UserAccountNo;
+
 	@SerializedName("DOJ")
 	private Object dOJ;
 
@@ -123,6 +126,9 @@ public class DrivermasterResponse {
 	}
 	public String getEmail(){
 		return Email;
+	}
+	public String getUserAccountNo(){
+		return UserAccountNo;
 	}
 	public String getMobilenumber(){
 		return Mobilenumber;
@@ -212,6 +218,7 @@ public class DrivermasterResponse {
  	public String toString(){
 		return 
 			"DrivermasterResponse{" +
+			",UserAccountNo = '" + UserAccountNo + '\'' +
 			"pPin = '" + pPin + '\'' +
 			",bloodGroup = '" + bloodGroup + '\'' +
 			",driverCode = '" + driverCode + '\'' + 
@@ -232,7 +239,7 @@ public class DrivermasterResponse {
 			",dOJ = '" + dOJ + '\'' +
 			",Email = '" + Email + '\'' +
 					",Mno = '" + Mobilenumber + '\'' +
-//					",Email = '" + Email + '\'' +
+
 //					",Email = '" + Email + '\'' +
 //					",Email = '" + Email + '\'' +
 //					",Email = '" + Email + '\'' +

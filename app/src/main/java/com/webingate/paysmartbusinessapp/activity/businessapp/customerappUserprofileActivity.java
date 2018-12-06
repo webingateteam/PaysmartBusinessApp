@@ -217,9 +217,14 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 //            navigationView.setTextDirection(View.TEXT_DIRECTION_LTR);
 //        }
 
+
         View headerLayout = navigationView.getHeaderView(0);
         ImageView userImageView = headerLayout.findViewById(R.id.userImageView);
         Utils.setCircleImageToImageView(this, userImageView, R.drawable.profile1, 0, 0);
+
+//        ImageView userImageView1 = findViewById(R.id.userImageView1);
+//        Utils.setCircleImageToImageView(this, userImageView1, R.drawable.profile1, 0, 0);
+
         TextView tt = findViewById(R.id.emailTextView);
         TextView pht = findViewById(R.id.phoneTextView);
         TextView username = findViewById(R.id.UsernameTextView);
