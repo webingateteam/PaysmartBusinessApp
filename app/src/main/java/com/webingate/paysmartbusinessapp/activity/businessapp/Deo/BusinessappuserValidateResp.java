@@ -31,6 +31,9 @@ public class BusinessappuserValidateResp {
     @SerializedName("Code")
     private String Code;
 
+    @SerializedName("UserPhoto")
+    private String UserPhoto;
+
     @SerializedName("description")
     private String description;
 
@@ -61,6 +64,7 @@ public class BusinessappuserValidateResp {
     public String getDescription() {
         return description;
     }
+    public String getUserPhoto(){return UserPhoto;}
     @Override
     public String toString(){
         return
@@ -71,6 +75,7 @@ public class BusinessappuserValidateResp {
                         "Mobilenumber = '" + Mobilenumber + '\'' +
                         "usertypeid = '" + usertypeid + '\'' +
                         "UserAccountNo = '" + UserAccountNo + '\'' +
+                                "UserPhoto = '" + UserPhoto + '\'' +
                         "}";
     }
 }

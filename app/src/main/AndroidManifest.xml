@@ -71,9 +71,9 @@
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.customerappUserprofileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
-            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.customerappPaymentModeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity-->
+            <!--android:name="com.webingate.paysmartbusinessapp.activity.businessapp.customerappPaymentModeActivity"-->
+            <!--android:theme="@style/AppTheme.NoActionBar" />-->
 
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.customerappaboutusactivity"
@@ -179,7 +179,7 @@
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappNewBusinessOwnerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriverDetailsActivity"
+            android:name=".activity.businessapp.businessappDriverDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappBusinessOwnerDetailsActivity"
@@ -287,9 +287,9 @@
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappEditDriverActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment1"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity-->
+            <!--android:name="com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment1"-->
+            <!--android:theme="@style/AppTheme.NoActionBar" />-->
 
         <activity
             android:name="cropper.CropImageActivity"

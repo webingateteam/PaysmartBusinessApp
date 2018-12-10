@@ -262,7 +262,7 @@ public class businessAppDriverDocsListFragment extends Fragment {
                 object.addProperty("ExpiryDate", ApplicationConstants.document_expire_date);
                 object.addProperty("UpdatedById", 1);
                 object.addProperty("DueDate", ApplicationConstants.document_expire_date);
-                object.addProperty("FileContent", "data:" + ApplicationConstants.document_format + ";base64," + ApplicationConstants.document_data);
+                object.addProperty("FileContent", "data:" + ApplicationConstants.document_format + ";base64," + ApplicationConstants.picdata);
                 object.addProperty("change", "I");
                 object.addProperty("loggedinUserId", 1);
                 object.addProperty("DocumentNo", ApplicationConstants.document_number);

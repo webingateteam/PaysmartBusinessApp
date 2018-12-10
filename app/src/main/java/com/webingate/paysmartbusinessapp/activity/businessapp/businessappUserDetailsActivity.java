@@ -21,6 +21,7 @@ import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsFragment;
+import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsListFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppFleetOwnerInfoFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppFleetownerFragment;
@@ -47,7 +48,7 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
     private TextView imageNoTextView;
 
     ImageView profileImageView;
-
+    ImageView userImageView;
     EditText email;
     EditText name;
     EditText address;
@@ -165,6 +166,7 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
                     state = findViewById(R.id.s_state);
                     profileImageView = findViewById(R.id.profileImageView);
 
+
                     JsonObject object = new JsonObject();
                     object.addProperty("flag", "U");
                     object.addProperty("Firstname",name.getText().toString());
@@ -175,16 +177,16 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
                     object.addProperty("Email",email.getText().toString());
                     object.addProperty("CountryId","101");
                     object.addProperty("VehicleGroupId","");
-                    object.addProperty("UserAccountNo","11091"+mno.getText().toString());
-                    object.addProperty("usertypeid","110");
+                    object.addProperty("UserAccountNo",ApplicationConstants.userAccountNo);
+                    object.addProperty("usertypeid",ApplicationConstants.usertypeid);
                     object.addProperty("isDriverOwned","0");
-                    object.addProperty("DPhoto","");
+                    object.addProperty("UserPhoto","data:" + ApplicationConstants.document_format + ";base64," +  ApplicationConstants.picdata);
                     object.addProperty("Address",address.getText().toString());
                     object.addProperty("Gender","44");
                     RegisterDriver(object);
 
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppDriverDocsFragment());
+                    setupFragment(new businessAppDriverDocsListFragment());
                 }
 
 

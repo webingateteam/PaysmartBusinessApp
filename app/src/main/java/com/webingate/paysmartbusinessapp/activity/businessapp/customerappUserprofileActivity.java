@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +17,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -80,7 +83,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 //     TextView joindate;
      @BindView(R.id. textView228)
      TextView nhphone;
-
+    @BindView(R.id.userImageView) ImageView upict;
     private int serverrequestFlag;
 
     @Override
@@ -220,6 +223,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 
         View headerLayout = navigationView.getHeaderView(0);
         ImageView userImageView = headerLayout.findViewById(R.id.userImageView);
+        upict=headerLayout.findViewById(R.id.userImageView);
         Utils.setCircleImageToImageView(this, userImageView, R.drawable.profile1, 0, 0);
 
 //        ImageView userImageView1 = findViewById(R.id.userImageView1);
@@ -349,6 +353,17 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
                          fname.setText(res.getUsername());
                         // joindate.setText(res.getUserAccountNo());
                          email.setText(res.getEmail());
+
+                         // to check profile pic null or not
+                        if(ApplicationConstants.upic==null){
+                            Utils.setCircleImageToImageView(getApplicationContext(), upict, R.drawable.profile1, 0, 0);
+                        }
+                        else
+                        {
+                            byte[] decodedString= Base64.decode( ApplicationConstants.upic.substring( ApplicationConstants.upic.indexOf(",")+1), Base64.DEFAULT);
+                            Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                            upict.setImageBitmap(Utils.getCircularBitmapWithBorder(image1,1,0));
+                        }
 
                         drawer.openDrawer(GravityCompat.START);
                     }

@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
+import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverEditUserInfoFragment;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 public class businessappDriverDetailsActivity extends AppCompatActivity {
@@ -46,6 +47,16 @@ public class businessappDriverDetailsActivity extends AppCompatActivity {
         em= prefs.getString(email, null);
         mo=prefs.getString(mobileno,null);
         dname=prefs.getString(dname,null);
+
+//        Bundle bundle = new Bundle();
+//        bundle.putString("photo", pt);
+//        bundle.putString("Email", em);
+//        bundle.putString("Mobileno", mo);
+//        bundle.putString("Drivername", dname);
+
+       // set Fragmentclass Arguments
+//        businessAppDriverEditUserInfoFragment fragobj = new businessAppDriverEditUserInfoFragment();
+//        fragobj.setArguments(bundle);
 
         initUI();
         initData();
@@ -97,7 +108,7 @@ public class businessappDriverDetailsActivity extends AppCompatActivity {
 
         editFAB = findViewById(R.id.editFAB);
         emailTextView.setText(em);
-        phoneTextView.setText(ApplicationConstants.mobileNo);
+        phoneTextView.setText(mo);
     }
 
     private void initActions() {
@@ -140,8 +151,11 @@ public class businessappDriverDetailsActivity extends AppCompatActivity {
             SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedpreferences.edit();
             editor.putString(photo, pt);
-
+            editor.putString(email,em);
+            editor.putString(mobileno,mo);
+            editor .putString(name,dname);
             editor.commit();
+
             Intent intent = new Intent(this, businessappEditDriverActivity.class);
             startActivity(intent);
 

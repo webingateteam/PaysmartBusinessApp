@@ -33,6 +33,7 @@
         android:fontFamily="@font/roboto_medium"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:textAlignment="center"
+        android:hint="7893890990"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/md_white_1000"
         android:textSize="@dimen/font_title_size"

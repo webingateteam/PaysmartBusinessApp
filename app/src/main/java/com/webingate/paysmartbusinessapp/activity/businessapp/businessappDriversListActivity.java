@@ -239,9 +239,10 @@ public class businessappDriversListActivity extends AppCompatActivity {
            SharedPreferences.Editor editor = sharedpreferences.edit();
            editor.putString(pphoto, (obj.getUserPhoto()!=null?obj.getUserPhoto():null));
            editor.putString(email,obj.getEmail());
-           editor.putString(mobileno,obj.getPMobNo());
+           editor.putString(mobileno,obj.getMobilenumber());
            editor .putString(name,obj.getNAme());
            editor.commit();
+
            ApplicationConstants.drivername=obj.getNAme();
            ApplicationConstants.drivermno=obj.getMobilenumber();
            ApplicationConstants.driveremail=obj.getEmail();

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsListFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverEditUserInfoFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment;
@@ -55,6 +56,7 @@ public class businessappEditDriverActivity extends AppCompatActivity {
     EditText postal;
     EditText state;
     Toast toast;
+
     String pt,em,mo,dname;
     RegisterBusinessUsers rlist;
 
@@ -64,11 +66,21 @@ public class businessappEditDriverActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_newdriver_activity);
+
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         pt= prefs.getString(photo, null);
         em= prefs.getString(email1, null);
         mo=prefs.getString(mobileno,null);
         dname=prefs.getString(name1,null);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("photo", pt);
+        bundle.putString("Email", em);
+        bundle.putString("Mobileno", mo);
+        bundle.putString("Drivername", dname);
+         //set Fragmentclass Arguments
+        businessAppDriverEditUserInfoFragment fragobj = new businessAppDriverEditUserInfoFragment();
+        fragobj.setArguments(bundle);
 
         initData();
 
@@ -159,6 +171,7 @@ public class businessappEditDriverActivity extends AppCompatActivity {
                     profileImageView = findViewById(R.id.profileImageView);
 
                     JsonObject object = new JsonObject();
+
                     object.addProperty("flag", "U");
                     object.addProperty("Firstname",name.getText().toString());
                     //object.addProperty("lastname","kumar");
@@ -168,17 +181,15 @@ public class businessappEditDriverActivity extends AppCompatActivity {
                     object.addProperty("Email",email.getText().toString());
                     object.addProperty("CountryId","91");
                     object.addProperty("VehicleGroupId","");
-                    object.addProperty("UserAccountNo","10991"+mno.getText().toString());
+                    object.addProperty("UserAccountNo",ApplicationConstants.driverid);
                     object.addProperty("usertypeid","109");
                     object.addProperty("isDriverOwned","0");
-                    object.addProperty("DPhoto","");
+                    object.addProperty("UserPhoto","data:" + ApplicationConstants.document_format + ";base64," +  ApplicationConstants.picdata);
                     RegisterDriver(object);
-
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
                     //setupFragment(new businessAppUploadDocsFragment());
                     //setupFragment(new businessAppDocCheckingFragment());
                     setupFragment(new businessAppDriverDocsListFragment());
-
                 }
 
 

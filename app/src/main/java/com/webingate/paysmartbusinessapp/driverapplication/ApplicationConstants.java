@@ -60,7 +60,8 @@ public class ApplicationConstants {
     public static String document_data;
     public static String document_format;
     public static String photo;
-
+    public static String picdata;
+    public static String upic;
 
 
     public static String getPhoto() {

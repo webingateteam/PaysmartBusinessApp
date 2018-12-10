@@ -57,7 +57,7 @@ public class DrivermasterResponse {
 	@SerializedName("Email")
 	private String Email;
 
-	@SerializedName("Mno")
+	@SerializedName("Mobilenumber")
 	private String Mobilenumber;
 
 	@SerializedName("UserAccountNo")
@@ -238,7 +238,7 @@ public class DrivermasterResponse {
 			",dId = '" + dId + '\'' + 
 			",dOJ = '" + dOJ + '\'' +
 			",Email = '" + Email + '\'' +
-					",Mno = '" + Mobilenumber + '\'' +
+					",Mobilenumber = '" + Mobilenumber + '\'' +
 
 //					",Email = '" + Email + '\'' +
 //					",Email = '" + Email + '\'' +
