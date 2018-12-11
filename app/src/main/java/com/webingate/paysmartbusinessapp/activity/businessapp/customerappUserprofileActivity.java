@@ -68,9 +68,8 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
     String acntno;
     String em,us,ph,firstname,lastname;
     int utype;
-    //  @BindView(R.id.editFAB)
-//  EditText editFAB;
-    Toolbar toolbar;
+     Toolbar toolbar;
+
      @BindView(R.id.emailTextView)
      TextView email;
      @BindView(R.id.phoneTextView)
@@ -79,12 +78,11 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
      TextView username;
      @BindView(R.id.FirstnameTextView)
      TextView fname;
-//     @BindView(R.id.textView31)
-//     TextView joindate;
-     @BindView(R.id. textView228)
+     @BindView(R.id.phoneno)
      TextView nhphone;
-    @BindView(R.id.userImageView) ImageView upict;
-    private int serverrequestFlag;
+     @BindView(R.id.userImageView) ImageView upict;
+     private int serverrequestFlag;
+     @BindView(R.id.userImageView1) ImageView pimage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -224,7 +222,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
         View headerLayout = navigationView.getHeaderView(0);
         ImageView userImageView = headerLayout.findViewById(R.id.userImageView);
         upict=headerLayout.findViewById(R.id.userImageView);
-        Utils.setCircleImageToImageView(this, userImageView, R.drawable.profile1, 0, 0);
+//        Utils.setCircleImageToImageView(this, userImageView, R.drawable.profile1, 0, 0);
 
 //        ImageView userImageView1 = findViewById(R.id.userImageView1);
 //        Utils.setCircleImageToImageView(this, userImageView1, R.drawable.profile1, 0, 0);
@@ -233,10 +231,15 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
         TextView pht = findViewById(R.id.phoneTextView);
         TextView username = findViewById(R.id.UsernameTextView);
         TextView fname = findViewById(R.id.FirstnameTextView);
+        TextView pht1= findViewById(R.id.textView228);
+        pimage=findViewById(R.id.userImageView1);
+        nhphone=findViewById(R.id.phoneno);
+
         tt.setText(em);
         pht.setText(ph);
         username.setText(us);
         fname.setText(firstname);
+
 
     }
     @Override
@@ -339,32 +342,35 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
                         UserInformationResponse res = responselist.get(0);
                         //DisplayToast("Successfully Registered");
 
-                        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
                         email=(TextView)findViewById(R.id.emailTextView);
                         pphone=(TextView)findViewById(R.id.phoneTextView);
                         username=(TextView)findViewById(R.id.UsernameTextView);
                         fname=(TextView)findViewById(R.id.FirstnameTextView);
                         //joindate=(TextView)findViewById(R.id.textView31);
-                       nhphone=(TextView)findViewById(R.id.textView228);
-
+                        nhphone=(TextView)findViewById(R.id.phoneno);
+                        TextView pht1= findViewById(R.id.textView228);
                          nhphone.setText(res.getMobilenumber());
                          pphone.setText(res.getMobilenumber());
                          username.setText(res.getUsername());
                          fname.setText(res.getUsername());
+                        pht1.setText(res.getMobilenumber());
                         // joindate.setText(res.getUserAccountNo());
                          email.setText(res.getEmail());
 
                          // to check profile pic null or not
                         if(ApplicationConstants.upic==null){
                             Utils.setCircleImageToImageView(getApplicationContext(), upict, R.drawable.profile1, 0, 0);
+                            Utils.setCircleImageToImageView(getApplicationContext(), pimage, R.drawable.profile1, 0, 0);
                         }
                         else
                         {
                             byte[] decodedString= Base64.decode( ApplicationConstants.upic.substring( ApplicationConstants.upic.indexOf(",")+1), Base64.DEFAULT);
                             Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                            upict.setImageBitmap(Utils.getCircularBitmapWithBorder(image1,1,0));
+                            pimage.setImageBitmap(image1);
+                            upict.setImageBitmap(Utils.getCircularBitmapWithBorder(image1,0,0));
                         }
-
+                        DrawerLayout drawer = findViewById(R.id.drawer_layout);
                         drawer.openDrawer(GravityCompat.START);
                     }
                 });

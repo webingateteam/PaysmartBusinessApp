@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -45,8 +46,8 @@ public class businessAppFleetOwnerInfoFragment extends Fragment {
     public static final String Address = "AddressKey";
     private static final int GET_FROM_GALLERY = 0;
 
-    ImageView profileImageView;
 
+    @BindView(R.id.profileImageView) ImageView profileImageView;
     @BindView(R.id.imageView46) ImageView ppic;
     @BindView(R.id.s_name)
     EditText name;
@@ -99,11 +100,22 @@ private void initActions(View view) {
 }
     private void initUI(View view) {
 
+
+        if(ApplicationConstants.upic==null)
+        {
+            profileImageView = view.findViewById(R.id.profileImageView);
+            byte[] decodedString= Base64.decode( ApplicationConstants.upic.substring( ApplicationConstants.upic.indexOf(",")+1), Base64.DEFAULT);
+            Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            profileImageView.setImageBitmap(image1);
+        }
+        else
+        {
         profileImageView = view.findViewById(R.id.profileImageView);
         int id = R.drawable.profile2;
         Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2, R.color.md_white_1000);
-        setname((EditText) view.findViewById(R.id.s_name));
+        }
 
+        setname((EditText) view.findViewById(R.id.s_name));
         name = view.findViewById(R.id.s_name);
         email = view.findViewById(R.id.s_email);
         mbno = view.findViewById(R.id.s_mobileno);
