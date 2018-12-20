@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -90,6 +91,7 @@ public class businessAppDriverEditUserInfoFragment extends Fragment {
 
     private void initActions(View view) {
 
+
         userphoto.setOnClickListener((View v) -> {
             Toast.makeText(getActivity(), "Clicked on Pen of Profile", Toast.LENGTH_SHORT).show();
 //            startActivity(new Intent(getActivity(), customerappTrainBookingSearchActivity.class));
@@ -108,11 +110,18 @@ public class businessAppDriverEditUserInfoFragment extends Fragment {
 //
     private void initUI(View view) {
 
-        profileImageView = view.findViewById(R.id.profileImageView);
-        int id = R.drawable.profile2;
-        Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
+        if(ApplicationConstants.pic!=null){
+            profileImageView = view.findViewById(R.id.profileImageView);
+            byte[] decodedString= Base64.decode(ApplicationConstants.pic.substring(ApplicationConstants.pic.indexOf(",")+1), Base64.DEFAULT);
+            Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            profileImageView.setImageBitmap(image1);
+        }
+        else {
+            profileImageView = view.findViewById(R.id.profileImageView);
+            int id = R.drawable.profile2;
+            Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2, R.color.md_white_1000);
 //        setName((EditText)view.findViewById(R.id.s_name));
-
+        }
         name = view.findViewById(R.id.s_name);
         email = view.findViewById(R.id.s_email);
         mno = view.findViewById(R.id.s_mobileno);

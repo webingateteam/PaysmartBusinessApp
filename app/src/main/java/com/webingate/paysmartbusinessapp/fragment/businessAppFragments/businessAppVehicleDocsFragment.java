@@ -133,14 +133,14 @@ public class businessAppVehicleDocsFragment extends Fragment {
 //
     private void initActions() {
 
-        sizeUpDownImageView.setOnClickListener((View v) -> {
-            boolean show = Utils.toggleUpDownWithAnimation(v);
-            if (show) {
-                ViewAnimationUtils.expand(sizeLayout);
-            } else {
-                ViewAnimationUtils.collapse(sizeLayout);
-            }
-        });
+//        sizeUpDownImageView.setOnClickListener((View v) -> {
+//            boolean show = Utils.toggleUpDownWithAnimation(v);
+//            if (show) {
+//                ViewAnimationUtils.expand(sizeLayout);
+//            } else {
+//                ViewAnimationUtils.collapse(sizeLayout);
+//            }
+//        });
 
     }
 
