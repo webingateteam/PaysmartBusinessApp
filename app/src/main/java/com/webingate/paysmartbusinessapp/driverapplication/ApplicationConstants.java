@@ -62,6 +62,12 @@ public class ApplicationConstants {
     public static String photo;
     public static String picdata;
     public static String upic;
+    public static String pic;
+    public static String chasisNo;
+    public static String engineNo;
+    public static String vpicdata;
+    public static String document_vformat;
+
 
 
     public static String getPhoto() {

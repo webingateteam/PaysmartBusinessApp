@@ -266,7 +266,6 @@ public class businessappDriverDocList extends AppCompatActivity {
             }
         });
 
-
         //region Size
         size1TextView.setOnClickListener((View v) -> {
             if (size1Status) {

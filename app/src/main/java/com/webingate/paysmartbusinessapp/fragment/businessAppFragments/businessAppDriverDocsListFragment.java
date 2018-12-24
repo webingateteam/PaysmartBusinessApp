@@ -73,7 +73,7 @@ public class businessAppDriverDocsListFragment extends Fragment {
 //    private View sizeLayout;
 //    private View materialLayout;
     @BindView(R.id.Upload)  Button Uploading;
-    @BindView(R.id.Updoc)  ImageView Doc;
+//    @BindView(R.id.Updoc)  ImageView Doc;
 //    @BindView(R.id.status)  ImageView status;
 //    @BindView(R.id.expdate)  Button expdate;
 //    @BindView(R.id.dateofex)  TextView dateofex;
@@ -120,7 +120,7 @@ public class businessAppDriverDocsListFragment extends Fragment {
         docadapter = new businessappDriverDocAdapter(getContext(),items);
         placeList1RecyclerView.setAdapter(docadapter);
         Uploading = view.findViewById(R.id.Upload);
-         Doc=view.findViewById(R.id.Updoc);
+        //Doc=view.findViewById(R.id.Updoc);
 //
 //        sizeUpDownImageView = view.findViewById(R.id.sizeUpDownImageView);
 //        expdate=view.findViewById(R.id.expdate);

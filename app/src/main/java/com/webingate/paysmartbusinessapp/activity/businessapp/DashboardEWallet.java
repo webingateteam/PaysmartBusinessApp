@@ -2,6 +2,7 @@ package com.webingate.paysmartbusinessapp.activity.businessapp;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -46,7 +48,7 @@ import rx.schedulers.Schedulers;
 public class DashboardEWallet extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String Phone = "phoneKey";
-    private TabLayout tab_layout;
+    //private TabLayout tab_layout;
     private NestedScrollView nested_scroll_view;
     @BindView(R.id.send)
     LinearLayout send;
@@ -55,6 +57,8 @@ public class DashboardEWallet extends AppCompatActivity {
     LinearLayout recieve;
     @BindView(R.id.balance)
     TextView balance;
+    @BindView(R.id.shistory)
+    Button hist;
     businessapp_transactionsAdapter adapter;
     // RecyclerView
     RecyclerView recyclerView;
@@ -78,6 +82,7 @@ public class DashboardEWallet extends AppCompatActivity {
           send=(LinearLayout) findViewById(R.id.send);
             recieve=(LinearLayout) findViewById(R.id.recieve);
           balance=(TextView) findViewById(R.id.balance);
+          hist = (Button) findViewById(R.id.shistory);
         mibleno= com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants.mobileNo;
 
         initToolbar();
@@ -112,34 +117,34 @@ public class DashboardEWallet extends AppCompatActivity {
     }
 
     private void initComponent() {
-        nested_scroll_view = (NestedScrollView) findViewById(R.id.nested_scroll_view);
-        tab_layout = (TabLayout) findViewById(R.id.tab_layout);
-        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_equalizer), 0);
-        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_credit_card), 1);
-        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_pie_chart_outline), 2);
-        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_person), 3);
-
-        // set icon color pre-selected
-        tab_layout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.light_blue_100), PorterDuff.Mode.SRC_IN);
-        tab_layout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.light_blue_700), PorterDuff.Mode.SRC_IN);
-        tab_layout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(R.color.light_blue_700), PorterDuff.Mode.SRC_IN);
-        tab_layout.getTabAt(3).getIcon().setColorFilter(getResources().getColor(R.color.light_blue_700), PorterDuff.Mode.SRC_IN);
-
-        tab_layout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                tab.getIcon().setColorFilter(getResources().getColor(R.color.light_blue_100), PorterDuff.Mode.SRC_IN);
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                tab.getIcon().setColorFilter(getResources().getColor(R.color.light_blue_700), PorterDuff.Mode.SRC_IN);
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
+//        nested_scroll_view = (NestedScrollView) findViewById(R.id.nested_scroll_view);
+//        tab_layout = (TabLayout) findViewById(R.id.tab_layout);
+//        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_equalizer), 0);
+//        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_credit_card), 1);
+//        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_pie_chart_outline), 2);
+//        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ic_person), 3);
+//
+//        // set icon color pre-selected
+//        tab_layout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.light_blue_100), PorterDuff.Mode.SRC_IN);
+//        tab_layout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.light_blue_700), PorterDuff.Mode.SRC_IN);
+//        tab_layout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(R.color.light_blue_700), PorterDuff.Mode.SRC_IN);
+//        tab_layout.getTabAt(3).getIcon().setColorFilter(getResources().getColor(R.color.light_blue_700), PorterDuff.Mode.SRC_IN);
+//
+//        tab_layout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                tab.getIcon().setColorFilter(getResources().getColor(R.color.light_blue_100), PorterDuff.Mode.SRC_IN);
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//                tab.getIcon().setColorFilter(getResources().getColor(R.color.light_blue_700), PorterDuff.Mode.SRC_IN);
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//            }
+//        });
     }
 
 
@@ -249,6 +254,12 @@ public class DashboardEWallet extends AppCompatActivity {
                     });
             alertDialog.show();
         });
+
+        hist.setOnClickListener(view ->{
+            DisplayToast("Clicked History");
+            Intent intent = new Intent(DashboardEWallet.this,DashboardEWalletHistory.class);
+            startActivity(intent);
+        });
     }
     public void Getcurrentbalance(String mobileNo){
 
@@ -278,7 +289,13 @@ public class DashboardEWallet extends AppCompatActivity {
                     public void onNext(List<WalletBalanceResponse> responselist) {
                         WalletBalanceResponse response=responselist.get(0);
                         ApplicationConstants.walletBalance = response.getAmount();
+                        if(response.getAmount()!=null){
                         balance.setText(response.getAmount() + " $");
+                        }
+                        else
+                        {
+                            balance.setText("0.00 $");
+                        }
                         traslist1= (ArrayList<WalletBalanceResponse>) responselist;
                         adapter = new businessapp_transactionsAdapter(traslist1);
                         recyclerView.setAdapter(adapter);

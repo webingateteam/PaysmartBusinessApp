@@ -290,6 +290,9 @@
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappEditVehicleActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.DashboardEWalletHistory"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!--<activity-->
             <!--android:name="com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment1"-->
             <!--android:theme="@style/AppTheme.NoActionBar" />-->

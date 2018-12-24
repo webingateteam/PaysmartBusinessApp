@@ -59,6 +59,9 @@ public interface APIInterface  {
     @GET("/api/WalletBalance/DriverGetcurrentbalance")
     public Observable<List<WalletBalanceResponse>> Getcurrentbalance1(@Query("mobileno") String mobileNo);
 
+    @GET("/api/WalletBalance/DriverGetEwalletHistory")
+    public Observable<List<WalletBalanceResponse>> GetEwalletHistory(@Query("mobileno") String mobileNo);
+
     @POST("/api/WalletBalance/DriverWalletBalance")
     public Observable<List<WalletBalanceResponse>> WalletBalance(@Body JsonObject jsonObject);
     @POST("/api/Driverlogin/ValidateDriverCredentials")
