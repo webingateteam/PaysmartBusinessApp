@@ -26,6 +26,11 @@ public class ApplicationConstants {
     public static String driverpic="";
     public static String vehiclegroup="";
     public static String vehiclecode="";
+    public static String pic ="";
+    public static String chasisNo ="";
+    public static String engineNo ="";
+    public static String document_vformat ="";
+    public static String vpicdata ="";
 
     public static String drivername="";
     public static String drivermno="";

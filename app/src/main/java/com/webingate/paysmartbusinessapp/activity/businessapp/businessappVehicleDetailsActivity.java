@@ -23,6 +23,7 @@ import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetVehicleListResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.VehicleCreationResponce;
+import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppVehicleEditInfoFragment;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import java.util.ArrayList;
@@ -159,7 +160,7 @@ public class businessappVehicleDetailsActivity extends AppCompatActivity {
             ApplicationConstants.vehicleType = websiteTextView.getText().toString();
             ApplicationConstants.vehiclecode = textView27.getText().toString();
 
-            Intent intent = new Intent(this, businessappNewVehicleActivity.class);
+            Intent intent = new Intent(this, businessappEditVehicleActivity.class);
             startActivity(intent);
 
         });

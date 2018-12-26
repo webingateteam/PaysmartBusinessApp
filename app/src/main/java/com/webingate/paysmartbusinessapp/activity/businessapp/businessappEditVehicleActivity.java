@@ -12,84 +12,61 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
-import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
-import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsListFragment;
-import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverEditUserInfoFragment;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.VehicleCreationResponce;
+import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment;
-import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppUploadDocsFragment;
+import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppVehicleDocsFragment;
+import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppVehicleEditInfoFragment;
+import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppVehicleInfoFragment;
 
 import java.util.List;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-//import com.webingate.paysmartbusinessapp.pa;
 
-public class businessappEditDriverActivity extends AppCompatActivity {
-
+public class businessappEditVehicleActivity extends AppCompatActivity {
 
     public static final String MyPREFERENCES = "MyPrefs";
-    public static final String photo= "pphoto";
-    public static final String email1="email";
-    public static final String mobileno= "mobileno";
-    public static final String name1="name";
+    public static final String RegistrationNo = "RegistrationNoKey";
+
     private int position = 1;
     private int maxPosition = 5;
     private Button nextButton, prevButton;
     private TextView imageNoTextView;
-
     ImageView profileImageView;
 
 
 
-    EditText email;
-    EditText name;
-    EditText address;
-    EditText city;
-    EditText mno;
-    EditText postal;
+    EditText RegNo;
+    EditText chasisno;
+    EditText engineno;
+    Spinner vgroup;
+    Spinner vtype;
+    EditText modelyear;
     EditText state;
     Toast toast;
 
-    String pt,em,mo,dname;
-    RegisterBusinessUsers rlist;
-
-    businessAppDriverEditUserInfoFragment   userInfoFragment;
+    businessAppVehicleEditInfoFragment userInfoFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.businessapp_newdriver_activity);
-
-        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        pt= prefs.getString(photo, null);
-        em= prefs.getString(email1, null);
-        mo=prefs.getString(mobileno,null);
-        dname=prefs.getString(name1,null);
-
-        Bundle bundle = new Bundle();
-        bundle.putString("photo", pt);
-        bundle.putString("Email", em);
-        bundle.putString("Mobileno", mo);
-        bundle.putString("Drivername", dname);
-        ApplicationConstants.pic = prefs.getString(photo, null);
-         //set Fragmentclass Arguments
-        businessAppDriverEditUserInfoFragment fragobj = new businessAppDriverEditUserInfoFragment();
-        fragobj.setArguments(bundle);
+        setContentView(R.layout.businessapp_editvehicle_activity);
 
         initData();
 
         initUI();
 
-        initDataBinding();
-
         initActions();
+
     }
 
     @Override
@@ -102,6 +79,7 @@ public class businessappEditDriverActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //endregion
 
     //region Init Functions
     private void initData() {
@@ -109,18 +87,33 @@ public class businessappEditDriverActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-
         initToolbar();
+
 
         nextButton = findViewById(R.id.nextButton);
         prevButton = findViewById(R.id.prevButton);
         imageNoTextView = findViewById(R.id.imageNoTextView);
-
-
+//        if(ApplicationConstants.registrationNo!=null){
+//        RegNo = findViewById(R.id.s_Regno);
+//        RegNo.setText(ApplicationConstants.registrationNo);
+//        }
 
 
         updatePositionTextView();
-        setupFragment(new businessAppDriverEditUserInfoFragment());
+        setupFragment(new businessAppVehicleEditInfoFragment());
+
+//        profileImageView = findViewById(R.id.profileImageView);
+//        int id = R.drawable.profile2;
+//        Utils.setCornerRadiusImageToImageView(getApplicationContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
+
+        //ImageView coverUserImageView = findViewById(R.id.coverUserImageView);
+        //Utils.setImageToImageView(getApplicationContext(), coverUserImageView, id);
+
+//        emailTextView = findViewById(R.id.emailTextView);
+//        phoneTextView = findViewById(R.id.phoneTextView);
+//        websiteTextView = findViewById(R.id.websiteTextView);
+
+        //editFAB = findViewById(R.id.editFAB);
 
     }
 
@@ -133,17 +126,13 @@ public class businessappEditDriverActivity extends AppCompatActivity {
             this.getSupportFragmentManager().beginTransaction()
                     .replace(R.id.contentLayout, fragment)
                     .commitAllowingStateLoss();
-            TextView tt=findViewById(R.id.s_name);
-            } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void initDataBinding() {
-
-    }
-
     private void initActions() {
+
         nextButton.setOnClickListener(v -> {
 
             if (position < maxPosition) {
@@ -154,55 +143,59 @@ public class businessappEditDriverActivity extends AppCompatActivity {
                 updatePositionTextView();
                 if(position == 1) {
                     Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
-                    userInfoFragment =      new businessAppDriverEditUserInfoFragment();
+                    userInfoFragment =  new businessAppVehicleEditInfoFragment();
 
                     setupFragment(userInfoFragment);
+//                    RegNo = findViewById(R.id.s_Regno);
+//                    RegNo.setText(ApplicationConstants.registrationNo);
 
                 }
                 if(position == 2)
                 {
                     //EditText name = (EditText)findViewById(R.id.s_name);
-                    name = findViewById(R.id.s_name);
-                    email = findViewById(R.id.s_email);
-                    mno = findViewById(R.id.s_mobileno);
-                    address = findViewById(R.id.s_address);
-                    city = findViewById(R.id.s_city);
-                    postal = findViewById(R.id.s_postal);
+                    RegNo = findViewById(R.id.s_Regno);
+                    chasisno = findViewById(R.id.s_chasisno);
+                    engineno = findViewById(R.id.s_engineno);
+                    vgroup = findViewById(R.id.s_vgroup);
+                    vtype = findViewById(R.id.s_vtype);
+                    modelyear = findViewById(R.id.s_modelyear);
                     state = findViewById(R.id.s_state);
-                    profileImageView = findViewById(R.id.profileImageView);
 
                     JsonObject object = new JsonObject();
-
                     object.addProperty("flag", "U");
-                    object.addProperty("Firstname",name.getText().toString());
-                    //object.addProperty("lastname","kumar");
-                    object.addProperty("AuthTypeId", "");
-                    object.addProperty("Password", "123");
-                    object.addProperty("Mobilenumber",mno.getText().toString());
-                    object.addProperty("Email",email.getText().toString());
-                    object.addProperty("CountryId","91");
-                    object.addProperty("VehicleGroupId","");
-                    object.addProperty("UserAccountNo",ApplicationConstants.driverid);
-                    object.addProperty("usertypeid","109");
-                    object.addProperty("isDriverOwned","0");
-                    object.addProperty("UserPhoto","data:" + ApplicationConstants.document_format + ";base64," +  ApplicationConstants.picdata);
-                    RegisterDriver(object);
+                    object.addProperty("Id","");
+                    object.addProperty("VID", "");
+                    object.addProperty("CompanyId", "");
+                    object.addProperty("RegistrationNo",RegNo.getText().toString());
+                    object.addProperty("ChasisNo",chasisno.getText().toString());
+                    object.addProperty("Engineno",engineno.getText().toString());
+                    object.addProperty("FleetOwnerCode","");
+                    object.addProperty("VehicleTypeId","Sedan");
+                    object.addProperty("VehicleModelId","");
+                    object.addProperty("VehicleGroupId","Hailing Car");
+                    object.addProperty("ModelYear",modelyear.getText().toString());
+                    object.addProperty("Photo", "data:" + ApplicationConstants.document_vformat + ";base64," +  ApplicationConstants.vpicdata);
+                    object.addProperty("VehicleCode","12345");
+                    object.addProperty("CountryId","India");
+                    object.addProperty("change","2");
+                    object.addProperty("type","1");
+                    VehicleCreation(object);
+
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
-                    //setupFragment(new businessAppUploadDocsFragment());
-                    //setupFragment(new businessAppDocCheckingFragment());
-                    setupFragment(new businessAppDriverDocsListFragment());
+                    setupFragment(new businessAppVehicleDocsFragment());
                 }
 
 
                 if(position == 3) {
                     Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppDriverUserInfoFragment());
+                    setupFragment(new businessAppVehicleInfoFragment());
                 }
 
             } else {
                 Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
             }
         });
+
         prevButton.setOnClickListener(v -> {
 
             if (position > 1) {
@@ -211,12 +204,12 @@ public class businessappEditDriverActivity extends AppCompatActivity {
                 updatePositionTextView();
                 if(position == 1) {
                     Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppDriverUserInfoFragment());
+                    setupFragment(new businessAppVehicleInfoFragment());
                 }
                 if(position == 2)
                 {
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppUploadDocsFragment());
+                    setupFragment(new businessAppDriverDocsFragment());
                 }
 
 
@@ -229,19 +222,20 @@ public class businessappEditDriverActivity extends AppCompatActivity {
                 Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
             }
         });
+//
     }
 
-    public void RegisterDriver(JsonObject jsonObject){
+    public void VehicleCreation(JsonObject jsonObject){
 
         //StartDialogue();
-        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(businessappEditDriverActivity.this).getrestadapter()
-                .Savebusinessappusers(jsonObject)
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(businessappEditVehicleActivity.this).getrestadapter()
+                .VehicleCreationverification(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<RegisterBusinessUsers>>() {
+                .subscribe(new Subscriber<List<VehicleCreationResponce>>() {
                     @Override
                     public void onCompleted() {
-                        DisplayToast("Successfully onCompleted");
+                        DisplayToast("Vehicle Created Successfully");
                         //StopDialogue();
                     }
                     @Override
@@ -255,15 +249,15 @@ public class businessappEditDriverActivity extends AppCompatActivity {
                         }
                     }
                     @Override
-                    public void onNext(List<RegisterBusinessUsers> responseList) {
+                    public void onNext(List<VehicleCreationResponce> responseList) {
 //                        DisplayToast("Successfully onNext");
-                        RegisterBusinessUsers response=responseList.get(0);
+                        VehicleCreationResponce response=responseList.get(0);
                         if(response.getCode()!=null){
                             DisplayToast(response.getDescription());
                         }else {
                             SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedpreferences.edit();
-                            //editor.putString(Username, response.getusername());
+                            editor.putString(RegistrationNo, response.getRegistrationNo());
 //                            Intent intent = new Intent(businessappNewDriverActivity.this, customerEOTPVerificationActivity.class);
 //                            intent.putExtra("eotp", response.getemailotp());
 //                            intent.putExtra("uid", response.getusreid());
@@ -279,9 +273,7 @@ public class businessappEditDriverActivity extends AppCompatActivity {
 //                        editor.putString(Emailotp, response.getEmailotp());
 //                        editor.putString(DRIVERID, response.getDriverId());
 //                        editor.putString(VEHICLEID, response.getVehicleId());
-                             List<RegisterBusinessUsers> rlist=responseList;
                             editor.commit();
-
                             // startActivity(new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class));
                             //finish();
                         }
@@ -289,41 +281,40 @@ public class businessappEditDriverActivity extends AppCompatActivity {
                 });
     }
 
-
-    //region Init Toolbar
     private void initToolbar() {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         toolbar.setNavigationIcon(R.drawable.baseline_menu_black_24);
 
-        if (toolbar.getNavigationIcon() != null) {
+        if(toolbar.getNavigationIcon() != null) {
             toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.md_white_1000), PorterDuff.Mode.SRC_ATOP);
         }
 
-        toolbar.setTitle("Edit Diver Details");
+        toolbar.setTitle("Edit Vehicle");
 
         try {
             toolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
-        } catch (Exception e) {
-            Log.e("TEAMPS", "Can't set color.");
+        }catch (Exception e){
+            Log.e("TEAMPS","Can't set color.");
         }
 
         try {
             setSupportActionBar(toolbar);
-        } catch (Exception e) {
-            Log.e("TEAMPS", "Error in set support action bar.");
+        }catch (Exception e) {
+            Log.e("TEAMPS","Error in set support action bar.");
         }
 
         try {
             if (getSupportActionBar() != null) {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
-        } catch (Exception e) {
-            Log.e("TEAMPS", "Error in set display home as up enabled.");
+        }catch (Exception e) {
+            Log.e("TEAMPS","Error in set display home as up enabled.");
         }
 
     }
+
     public void DisplayToast(String text){
         if(toast!=null){
             toast.cancel();
@@ -334,6 +325,5 @@ public class businessappEditDriverActivity extends AppCompatActivity {
         toast.show();
 
     }
-
     //endregion
 }
