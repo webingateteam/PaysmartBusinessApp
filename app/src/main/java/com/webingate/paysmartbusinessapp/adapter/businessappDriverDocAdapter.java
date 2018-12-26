@@ -72,7 +72,7 @@ public class businessappDriverDocAdapter extends RecyclerView.Adapter<RecyclerVi
     private View materialLayout;
     @BindView(R.id.Upload)
     Button Uploading;
-    @BindView(R.id.Updoc)  ImageView Doc;
+    //@BindView(R.id.Updoc)  ImageView Doc;
     @BindView(R.id.status)  ImageView status;
     @BindView(R.id.expdate)  Button expdate;
     @BindView(R.id.dateofex)  TextView dateofex;
@@ -98,7 +98,8 @@ public class businessappDriverDocAdapter extends RecyclerView.Adapter<RecyclerVi
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.feature_expandable_ecommerce_expandable_1_activity, parent, false);
+       View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.feature_expandable_ecommerce_expandable_1_activity, parent, false);
+      //  View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.driverdoclistitms, parent, false);
         return new PlaceViewHolder(itemView);
     }
 
@@ -108,18 +109,18 @@ public class businessappDriverDocAdapter extends RecyclerView.Adapter<RecyclerVi
         if (viewHolder instanceof PlaceViewHolder) {
             BookingType place = placeArrayList.get(position);
             PlaceViewHolder holder = (PlaceViewHolder) viewHolder;
-//            holder.placeNameTextView.setText(place.getNAme());
+
             Context context = holder.placeHolderCardView.getContext();
             Drawable selectedList = context.getResources().getDrawable(R.drawable.baseline_selected_list_24);
             selectedList.setColorFilter(context.getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
             Uploading = ((PlaceViewHolder) viewHolder).Uploading.findViewById(R.id.Upload);
             sizeUpDownImageView = ((PlaceViewHolder) viewHolder).sizeUpDownImageView.findViewById(R.id.sizeUpDownImageView);
-            submit = ((PlaceViewHolder) viewHolder).submit.findViewById(R.id.submit);
-            expdate=((PlaceViewHolder) viewHolder).expdate.findViewById(R.id.expdate);
-            dateofex=((PlaceViewHolder) viewHolder).dateofex.findViewById(R.id.dateofex);
-            expdate=((PlaceViewHolder) viewHolder).expdate.findViewById(R.id.expdate);
-            expdate=((PlaceViewHolder) viewHolder).expdate.findViewById(R.id.expdate);
-            Doc=((PlaceViewHolder) viewHolder).Doc.findViewById(R.id.Updoc);
+           // submit = ((PlaceViewHolder) viewHolder).submit.findViewById(R.id.submit);
+            //expdate=((PlaceViewHolder) viewHolder).expdate.findViewById(R.id.expdate);
+//            dateofex=((PlaceViewHolder) viewHolder).dateofex.findViewById(R.id.dateofex);
+//            expdate=((PlaceViewHolder) viewHolder).expdate.findViewById(R.id.expdate);
+//            expdate=((PlaceViewHolder) viewHolder).expdate.findViewById(R.id.expdate);
+//            Doc=((PlaceViewHolder) viewHolder).Doc.findViewById(R.id.Updoc);
             sizeTitleTextView=((PlaceViewHolder) viewHolder).sizeTitleTextView.findViewById(R.id.sizeTitleTextView);
             sizeTitleValueTextView=((PlaceViewHolder) viewHolder).sizeTitleValueTextView.findViewById(R.id.sizeTitleValueTextView);
             sizeLayout=((PlaceViewHolder) viewHolder).sizeLayout.findViewById(R.id.sizeLayout);
@@ -170,30 +171,30 @@ public class businessappDriverDocAdapter extends RecyclerView.Adapter<RecyclerVi
 //                    browsePhoto(view);
 //                }
 //            });
-            expdate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    openDatePicker(view);
-                }
-            });
-            submit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    JsonObject object = new JsonObject();
-                    object.addProperty("Id", "");
-                    object.addProperty("DriverId",1003 );
-                    object.addProperty("FileName", document_format);
-                    object.addProperty("DocTypeId", 86);
-                    object.addProperty("ExpiryDate", document_expire_date);
-                    object.addProperty("UpdatedById", 1);
-                    object.addProperty("DueDate", document_expire_date);
-                    object.addProperty("FileContent", "data:" + document_format + ";base64," + document_data);
-                    object.addProperty("change", "I");
-                    object.addProperty("loggedinUserId", 1);
-                    object.addProperty("DocumentNo", document_number);
-                    //UploadDocument(object);
-                }
-            });
+//            expdate.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    openDatePicker(view);
+//                }
+//            });
+//            submit.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    JsonObject object = new JsonObject();
+//                    object.addProperty("Id", "");
+//                    object.addProperty("DriverId",1003 );
+//                    object.addProperty("FileName", document_format);
+//                    object.addProperty("DocTypeId", 86);
+//                    object.addProperty("ExpiryDate", document_expire_date);
+//                    object.addProperty("UpdatedById", 1);
+//                    object.addProperty("DueDate", document_expire_date);
+//                    object.addProperty("FileContent", "data:" + document_format + ";base64," + document_data);
+//                    object.addProperty("change", "I");
+//                    object.addProperty("loggedinUserId", 1);
+//                    object.addProperty("DocumentNo", document_number);
+//                    //UploadDocument(object);
+//                }
+//            });
             sizeUpDownImageView.setOnClickListener((View v) -> {
                 boolean show = Utils.toggleUpDownWithAnimation(v);
                 if (show) {
@@ -219,15 +220,15 @@ public class businessappDriverDocAdapter extends RecyclerView.Adapter<RecyclerVi
 
     public class PlaceViewHolder extends RecyclerView.ViewHolder {
         public CardView placeHolderCardView;
-        public ImageView Doc;
+        //public ImageView Doc;
         public ImageView status;
         public TextView missing;
-        public TextView dateofex;
+//        public TextView dateofex;
         public TextView sts;
         public TextView sizeTitleTextView;
         public TextView sizeTitleValueTextView;
-        public Button expdate;
-        public Button submit;
+//        public Button expdate;
+//        public Button submit;
         public Button Uploading;
         public ImageView sizeUpDownImageView;
         Calendar dateTime = Calendar.getInstance();
@@ -237,12 +238,12 @@ public class businessappDriverDocAdapter extends RecyclerView.Adapter<RecyclerVi
             super(view);
             placeHolderCardView=view.findViewById(R.id.sizeCardView);
             Uploading = view.findViewById(R.id.Upload);
-            Doc=view.findViewById(R.id.Updoc);
+            //Doc=view.findViewById(R.id.Updoc);
             sizeTitleTextView=view.findViewById(R.id.sizeTitleTextView);
             sizeUpDownImageView = view.findViewById(R.id.sizeUpDownImageView);
-            expdate=view.findViewById(R.id.expdate);
-            dateofex=view.findViewById(R.id.dateofex);
-            submit=view.findViewById(R.id.submit);
+//            expdate=view.findViewById(R.id.expdate);
+//            dateofex=view.findViewById(R.id.dateofex);
+//            submit=view.findViewById(R.id.submit);
             missing=view.findViewById(R.id.missing);
             status=view.findViewById(R.id.status);
             sizeTitleValueTextView=view.findViewById(R.id.sizeTitleValueTextView);
@@ -351,7 +352,7 @@ public class businessappDriverDocAdapter extends RecyclerView.Adapter<RecyclerVi
         //ApplicationConstants.date = shortTimeStr;
         document_expire_date=shortTimeStr;
         document_expire_date=shortTimeStr;
-        dateofex.setText(document_expire_date);
+//        dateofex.setText(document_expire_date);
         sizeTitleValueTextView.setText(document_expire_date);
     }
 }

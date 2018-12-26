@@ -80,6 +80,8 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
      TextView fname;
      @BindView(R.id.phoneno)
      TextView nhphone;
+
+
      @BindView(R.id.userImageView) ImageView upict;
      private int serverrequestFlag;
      @BindView(R.id.userImageView1) ImageView pimage;
@@ -201,7 +203,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 
     }
 
-    private void initUI() {
+        private void initUI() {
         initToolbar();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
