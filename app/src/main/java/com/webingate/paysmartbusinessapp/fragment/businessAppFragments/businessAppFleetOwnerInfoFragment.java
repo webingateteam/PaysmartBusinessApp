@@ -101,13 +101,13 @@ private void initActions(View view) {
     private void initUI(View view) {
 
 
-        if(ApplicationConstants.upic==null)
+        if(ApplicationConstants.upic!=null)
         {
             profileImageView = view.findViewById(R.id.profileImageView);
             byte[] decodedString= Base64.decode( ApplicationConstants.upic.substring( ApplicationConstants.upic.indexOf(",")+1), Base64.DEFAULT);
             Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             profileImageView.setImageBitmap(image1);
-        }
+    }
         else
         {
         profileImageView = view.findViewById(R.id.profileImageView);

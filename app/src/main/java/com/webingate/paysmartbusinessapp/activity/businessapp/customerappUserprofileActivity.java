@@ -115,6 +115,8 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 
                 v ->
                 {
+                    ApplicationConstants.email=Email;
+                    ApplicationConstants.username=Username;
                     Toast.makeText(getApplicationContext(), "User Details", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappUserDetailsActivity.class);
                     startActivity(intent);
@@ -124,6 +126,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 
         );
     }
+
 
     @Override
     public void onBackPressed() {
@@ -343,6 +346,11 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
                     public void onNext(List<UserInformationResponse> responselist) {
                         UserInformationResponse res = responselist.get(0);
                         //DisplayToast("Successfully Registered");
+                        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                        editor.putString(Username, res.getUsername());
+                        editor.putString(Email, res.getEmail());
+                        editor.commit();
 
 
                         email=(TextView)findViewById(R.id.emailTextView);
@@ -359,6 +367,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
                         pht1.setText(res.getMobilenumber());
                         // joindate.setText(res.getUserAccountNo());
                          email.setText(res.getEmail());
+
 
                          // to check profile pic null or not
                         if(ApplicationConstants.upic==null){

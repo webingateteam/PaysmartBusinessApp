@@ -3,6 +3,8 @@ package com.webingate.paysmartbusinessapp.activity.businessapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,9 +25,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.UserInformationResponse;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
+import java.util.List;
+
 import butterknife.BindView;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class businessappBusinessOwnerprofileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -45,10 +55,21 @@ public class businessappBusinessOwnerprofileActivity extends AppCompatActivity i
     //  @BindView(R.id.editFAB)
 //  EditText editFAB;
     Toolbar toolbar;
-     @BindView(R.id.emailTextView)
-     TextView email;
-     @BindView(R.id.UsernameTextView)
-     TextView username;
+    @BindView(R.id.emailTextView)
+    TextView email;
+    @BindView(R.id.phoneTextView)
+    TextView pphone;
+    @BindView(R.id.UsernameTextView)
+    TextView username;
+    @BindView(R.id.FirstnameTextView)
+    TextView fname;
+    @BindView(R.id.phoneno)
+    TextView nhphone;
+
+
+    @BindView(R.id.userImageView) ImageView upict;
+    private int serverrequestFlag;
+    @BindView(R.id.userImageView1) ImageView pimage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,11 +207,17 @@ public class businessappBusinessOwnerprofileActivity extends AppCompatActivity i
 
         View headerLayout = navigationView.getHeaderView(0);
         ImageView userImageView = headerLayout.findViewById(R.id.userImageView);
-        Utils.setCircleImageToImageView(this, userImageView, R.drawable.profile1, 0, 0);
+        upict=headerLayout.findViewById(R.id.userImageView);
+
         TextView tt = findViewById(R.id.emailTextView);
         TextView pht = findViewById(R.id.phoneTextView);
         TextView username = findViewById(R.id.UsernameTextView);
         TextView fname = findViewById(R.id.FirstnameTextView);
+        TextView pht1= findViewById(R.id.textView228);
+        pimage=findViewById(R.id.userImageView1);
+        nhphone=findViewById(R.id.phoneno);
+
+
         tt.setText(em);
         pht.setText(ph);
         username.setText(us);
@@ -204,6 +231,70 @@ public class businessappBusinessOwnerprofileActivity extends AppCompatActivity i
     }
 
     private void initData(){
+
+        GetDriverDetails( ApplicationConstants.userAccountNo, ApplicationConstants.usertypeid);
+    }
+
+    public void GetDriverDetails(String acct,int uit ){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
+                .GetUserInformation(acct,uit)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<UserInformationResponse>>() {
+
+                    @Override
+                    public void onCompleted() {
+                        DisplayToast("Successfully Registered");
+                        //StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            //Log.d("OnError ", e.getMessage());
+                            DisplayToast("Error");
+                            //StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<UserInformationResponse> responselist) {
+                        UserInformationResponse res = responselist.get(0);
+                        //DisplayToast("Successfully Registered");
+
+
+                        email=(TextView)findViewById(R.id.emailTextView);
+                        pphone=(TextView)findViewById(R.id.phoneTextView);
+                        username=(TextView)findViewById(R.id.UsernameTextView);
+                        fname=(TextView)findViewById(R.id.FirstnameTextView);
+                        //joindate=(TextView)findViewById(R.id.textView31);
+                        nhphone=(TextView)findViewById(R.id.phoneno);
+                        TextView pht1= findViewById(R.id.textView228);
+                        nhphone.setText(res.getMobilenumber());
+                        pphone.setText(res.getMobilenumber());
+                        username.setText(res.getUsername());
+                        fname.setText(res.getUsername());
+                        pht1.setText(res.getMobilenumber());
+                        // joindate.setText(res.getUserAccountNo());
+                        email.setText(res.getEmail());
+
+                        // to check profile pic null or not
+                        if(ApplicationConstants.upic==null){
+                            Utils.setCircleImageToImageView(getApplicationContext(), upict, R.drawable.profile1, 0, 0);
+                            Utils.setCircleImageToImageView(getApplicationContext(), pimage, R.drawable.profile1, 0, 0);
+                        }
+                        else
+                        {
+                            byte[] decodedString= Base64.decode( ApplicationConstants.upic.substring( ApplicationConstants.upic.indexOf(",")+1), Base64.DEFAULT);
+                            Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                            pimage.setImageBitmap(image1);
+                            upict.setImageBitmap(Utils.getCircularBitmapWithBorder(image1,0,0));
+                        }
+                        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                        drawer.openDrawer(GravityCompat.START);
+                    }
+                });
 
 
     }

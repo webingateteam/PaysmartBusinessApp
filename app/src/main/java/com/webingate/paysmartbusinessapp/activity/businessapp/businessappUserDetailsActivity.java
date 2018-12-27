@@ -208,12 +208,14 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
                 updatePositionTextView();
                 if(position == 1) {
                     Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppDriverUserInfoFragment());
+                    userInfoFragment =      new businessAppFleetOwnerInfoFragment();
+
+                    setupFragment(userInfoFragment);
                 }
                 if(position == 2)
                 {
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppDriverDocsFragment());
+                    setupFragment(new businessAppDriverDocsListFragment());
                 }
 
 

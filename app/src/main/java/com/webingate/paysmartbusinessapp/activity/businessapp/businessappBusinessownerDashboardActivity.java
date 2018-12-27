@@ -1,6 +1,8 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,21 +23,42 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.UserInformationResponse;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppBusinessownerFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDashboardFragment;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
+import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
 public class businessappBusinessownerDashboardActivity extends AppCompatActivity {
 
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String Username = "nameKey";
+    public static final String Phone = "phoneKey";
+    public static final String Email = "emailKey";
+    public static final String UserAccountNumber = "UserAccountNo";
+    public static final String usertypeid = "usertypeid";
+
     private boolean twist = false;
+
+    String acntno;
+    int utype;
 
     private LinearLayout linearPhoto;
     private LinearLayout linearVideo;
     private LinearLayout linearCamera;
+    Toast toast;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_busninessownerdashboard_activity);
+        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        acntno = prefs.getString(UserAccountNumber, null);
+        utype = prefs.getInt(usertypeid, 0);
 
         initData();
 
@@ -156,9 +179,9 @@ public class businessappBusinessownerDashboardActivity extends AppCompatActivity
 //                    break;
                 case R.id.profileMenu:
                     //loadFragment(new AppDirectoryHome4Fragment());
-
-                    Intent intent = new Intent(this, businessappBusinessOwnerprofileActivity.class);
-                    startActivity(intent);
+                    GetUserInformation(acntno,utype);
+//                    Intent intent = new Intent(this, businessappBusinessOwnerprofileActivity.class);
+//                    startActivity(intent);
                     break;
                 default:
                     loadFragment(new businessAppDashboardFragment());
@@ -178,6 +201,68 @@ public class businessappBusinessownerDashboardActivity extends AppCompatActivity
     }
 
     private void initAction() {
+    }
+
+    public void GetUserInformation(String acct,int uit){
+
+        //StartDialogue();
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
+                .GetUserInformation(acct,uit)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<UserInformationResponse>>() {
+                    @Override
+                    public void onCompleted() {
+                        DisplayToast("User Information Succesfull");
+                        //   StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            Log.d("OnError ", e.getMessage());
+                            //DisplayToast("User Information Failed");
+//                            StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<UserInformationResponse> responseList) {
+                        UserInformationResponse response=responseList.get(0);
+                        if(response.getCode()!=null){
+                            DisplayToast(response.getDescription());
+                        }else {
+                            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                            editor.putString(UserAccountNumber, response.getUserAccountNo());
+                            editor.putString(Email, response.getEmail());
+                            editor.putString(Username, response.getUsername());
+                            editor.putString(Phone, response.getMobilenumber());
+                            //Intent intent = new Intent(customerappUserprofileActivity.this,customerappUserprofileActivity.class);
+                            editor.commit();
+                            startActivity(new Intent(businessappBusinessownerDashboardActivity.this, customerappUserprofileActivity.class));
+                            finish();
+                        }
+
+                        //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                        //   SharedPreferences.Editor editor = sharedpreferences.edit();
+                        //  editor.putString(Emailotp, response.getEmail());
+                        //    editor.commit();
+                        //startActivity(new Intent(busianessappEOTPVerificationActivity.this, login_activity.class));
+                        // DriverList
+                        //adapter = new businessappDriverTripslistAdapter(DrivertripList);
+                        //recyclerView.setAdapter(adapter);
+
+//                       // adapter.setOnItemClickListener((view, obj, position) ->
+//                                {
+//                                    //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+//
+//                                    GoToDetails(obj);
+//                                }
+//                        );
+                    }
+                });
     }
 
     private void initToolbar() {
@@ -217,5 +302,15 @@ public class businessappBusinessownerDashboardActivity extends AppCompatActivity
         this.getSupportFragmentManager().beginTransaction()
                 .replace(R.id.home9Frame, fragment)
                 .commitAllowingStateLoss();
+    }
+    public void DisplayToast(String text){
+        if(toast!=null){
+            toast.cancel();
+            toast=null;
+
+        }
+        toast=Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT);
+        toast.show();
+
     }
 }
