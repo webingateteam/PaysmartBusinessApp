@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -44,10 +45,16 @@ import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import cropper.CropImage;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -85,6 +92,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
      @BindView(R.id.userImageView) ImageView upict;
      private int serverrequestFlag;
      @BindView(R.id.userImageView1) ImageView pimage;
+     ImageView profileImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -388,4 +396,5 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 
 
     }
+
 }

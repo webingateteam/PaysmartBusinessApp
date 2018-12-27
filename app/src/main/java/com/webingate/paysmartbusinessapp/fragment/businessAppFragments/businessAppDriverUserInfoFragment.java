@@ -22,6 +22,8 @@ import com.webingate.paysmartbusinessapp.utils.Utils;
 import java.util.List;
 
 import butterknife.BindView;
+import cropper.CropImage;
+import cropper.CropImageView;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -62,7 +64,7 @@ public class businessAppDriverUserInfoFragment extends Fragment {
 //
 //        initDataBindings();
 //
-//        initActions();
+        initActions(view);
 //
         return view;
     }
@@ -91,7 +93,22 @@ public class businessAppDriverUserInfoFragment extends Fragment {
         state = view.findViewById(R.id.s_state);
         userphoto = view.findViewById(R.id.edituserphoto);
     }
+    private void initActions(View view) {
 
+
+        userphoto.setOnClickListener((View v) -> {
+            Toast.makeText(getActivity(), "Clicked on Pen of Profile", Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(getActivity(), customerappTrainBookingSearchActivity.class));
+            //startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+            CropImage.activity()
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setActivityTitle("My Crop")
+                    .setCropMenuCropButtonTitle("Done")
+                    .setRequestedSize(400, 800)
+                    .setCropMenuCropButtonIcon(R.drawable.badge_menu)
+                    .start(this.getActivity());
+        });
+    }
     public EditText getName() {
         return name;
     }

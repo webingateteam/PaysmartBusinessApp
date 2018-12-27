@@ -297,9 +297,8 @@
             <!--android:name="com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment1"-->
             <!--android:theme="@style/AppTheme.NoActionBar" />-->
 
-        <activity
-            android:name="cropper.CropImageActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme" />
+
+
+        <activity android:name="cropper.CropImageActivity" android:theme="@style/Theme.AppCompat.Light"/>
     </application>
 </manifest>
