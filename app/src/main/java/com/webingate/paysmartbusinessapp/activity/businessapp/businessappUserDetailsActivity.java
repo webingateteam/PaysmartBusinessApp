@@ -1,13 +1,18 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -27,8 +32,14 @@ import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessA
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppFleetownerFragment;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
+import cropper.CropImage;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -213,7 +224,7 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
                 if(position == 2)
                 {
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppDriverDocsFragment());
+                   // setupFragment(new businessAppDriverDocsFragment());
                 }
 
 
@@ -317,7 +328,59 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
         }
 
     }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            Bitmap bitmap=null;
+            if (resultCode == -1) {
+                try {
+                    Uri uri = result.getUri();
+                    Uri uri1=data.getData();
+                    bitmap = BitmapFactory.decodeFile(uri.getPath());
+                    ApplicationConstants.document_format = "image/jpeg";
 
+                    //getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    InputStream inputStream = getContentResolver().openInputStream(uri);
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(
+                            inputStream));
+                    StringBuilder stringBuilder = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+                    inputStream.close();
+                    String encodedImage = Base64.encodeToString(stringBuilder.toString().getBytes(), Base64.DEFAULT);
+//                    ApplicationConstants.pic_data = encodedImage;
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] imageBytes = baos.toByteArray();
+                    ApplicationConstants.picdata = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                finally {
+                    Toast.makeText(this, "Cropping successful, Sample: " + result.getSampleSize(), Toast.LENGTH_LONG)
+                            .show();
+
+                    Toast.makeText(this, "Cropping successful, URI: " + result.getUri(), Toast.LENGTH_LONG)
+                            .show();
+//                ephoto=(ImageView) findViewById(R.id.Edituserphoto);
+//                ephoto.setImageURI(result.getUri());
+
+                    profileImageView = findViewById(R.id.profileImageView);
+                    //ephoto.setImageURI(result.getUri());
+                    profileImageView.setImageBitmap(bitmap);
+                }
+
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Toast.makeText(this, "Cropping failed: " + result.getError(), Toast.LENGTH_LONG).show();
+            }
+
+
+        }
+    }
     public void DisplayToast(String text){
         if(toast!=null){
             toast.cancel();

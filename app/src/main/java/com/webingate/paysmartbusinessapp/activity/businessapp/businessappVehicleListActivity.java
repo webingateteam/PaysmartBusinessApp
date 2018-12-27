@@ -280,6 +280,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
         ApplicationConstants.vehiclegroup = obj.getVehicleGroup();
         ApplicationConstants.vehicleType = obj.getVehicleType();
         ApplicationConstants.vehiclecode = obj.getVehicleCode();
+        ApplicationConstants.Vid=Integer.toString(obj.getId()); ;
         Intent intent = new Intent(this, businessappVehicleDetailsActivity.class);
         startActivity(intent);
     }

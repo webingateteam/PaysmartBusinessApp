@@ -33,6 +33,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import butterknife.BindView;
+import cropper.CropImage;
+import cropper.CropImageView;
 
 import static com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppUploadDocsFragment.GET_FROM_GALLERY;
 
@@ -95,7 +97,14 @@ public class businessAppDriverEditUserInfoFragment extends Fragment {
         userphoto.setOnClickListener((View v) -> {
             Toast.makeText(getActivity(), "Clicked on Pen of Profile", Toast.LENGTH_SHORT).show();
 //            startActivity(new Intent(getActivity(), customerappTrainBookingSearchActivity.class));
-            startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+            //startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+            CropImage.activity()
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setActivityTitle("My Crop")
+                    .setCropMenuCropButtonTitle("Done")
+                    .setRequestedSize(400, 800)
+                    .setCropMenuCropButtonIcon(R.drawable.badge_menu)
+                    .start(this.getActivity());
         });
     }
 
@@ -117,7 +126,7 @@ public class businessAppDriverEditUserInfoFragment extends Fragment {
             profileImageView.setImageBitmap(image1);
         }
         else {
-            profileImageView = view.findViewById(R.id.profileImageView);
+                profileImageView = view.findViewById(R.id.profileImageView);
             int id = R.drawable.profile2;
             Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2, R.color.md_white_1000);
 //        setName((EditText)view.findViewById(R.id.s_name));
@@ -150,57 +159,57 @@ public class businessAppDriverEditUserInfoFragment extends Fragment {
         this.name = name;
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-      super.onActivityResult(requestCode, resultCode, data);
-        //Detects request codes
-
-        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
-            Uri selectedImage = data.getData();
-            Bitmap bitmap = null;
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
-
-                Toast.makeText(getActivity(), "Successfully Uploaded", Toast.LENGTH_SHORT).show();
-//                missing.setText("Upload");
-//                missing.setTextColor(ctx.getResources().getColor(R.color.md_yellow_500));
-//                status.setColorFilter(ctx.getResources().getColor(R.color.md_yellow_500));
-//                Doc.setImageBitmap(bitmap);
-
-                // for coverting the file to send ///
-                profileImageView.setImageBitmap(bitmap);
-                Uri uri = data.getData();
-                ApplicationConstants.document_format = getActivity().getContentResolver().getType(uri);
-
-//                InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
-//                BufferedReader reader = new BufferedReader(new InputStreamReader(
-//                        inputStream));
-//                StringBuilder stringBuilder = new StringBuilder();
-//                String line;
-//                while ((line = reader.readLine()) != null) {
-//                    stringBuilder.append(line);
-//                }
-//                inputStream.close();
-//                String encodedImage = Base64.encodeToString(stringBuilder.toString().getBytes(), Base64.DEFAULT);
-
-
-
-
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                byte[] imageBytes = baos.toByteArray();
-                ApplicationConstants.picdata = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-                //ApplicationConstants.document_data = encodedImage;
-                //ApplicationConstants.picdata=encodedImage;
-                // email.setText(encodedImage);
-
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//      super.onActivityResult(requestCode, resultCode, data);
+//        //Detects request codes
 //
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-    }
+//        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+//            Uri selectedImage = data.getData();
+//            Bitmap bitmap = null;
+//            try {
+//                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+//
+//                Toast.makeText(getActivity(), "Successfully Uploaded", Toast.LENGTH_SHORT).show();
+////                missing.setText("Upload");
+////                missing.setTextColor(ctx.getResources().getColor(R.color.md_yellow_500));
+////                status.setColorFilter(ctx.getResources().getColor(R.color.md_yellow_500));
+////                Doc.setImageBitmap(bitmap);
+//
+//                // for coverting the file to send ///
+//                profileImageView.setImageBitmap(bitmap);
+//                Uri uri = data.getData();
+//                ApplicationConstants.document_format = getActivity().getContentResolver().getType(uri);
+//
+////                InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
+////                BufferedReader reader = new BufferedReader(new InputStreamReader(
+////                        inputStream));
+////                StringBuilder stringBuilder = new StringBuilder();
+////                String line;
+////                while ((line = reader.readLine()) != null) {
+////                    stringBuilder.append(line);
+////                }
+////                inputStream.close();
+////                String encodedImage = Base64.encodeToString(stringBuilder.toString().getBytes(), Base64.DEFAULT);
+//
+//
+//
+//
+//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//                byte[] imageBytes = baos.toByteArray();
+//                ApplicationConstants.picdata = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+//                //ApplicationConstants.document_data = encodedImage;
+//                //ApplicationConstants.picdata=encodedImage;
+//                // email.setText(encodedImage);
+//
+////
+//            } catch (FileNotFoundException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 }

@@ -67,6 +67,7 @@ public class ApplicationConstants {
     public static String photo;
     public static String picdata;
     public static String upic;
+    public static String Vid;
 
 
 

@@ -18,6 +18,10 @@ public class VehicleCreationResponce {
 
 	@SerializedName("Description")
 	private String description;
+	@SerializedName("Photo")
+	private String Photo;
+	@SerializedName("Id")
+	private int Id;
 
 	public void setRegistrationNo(String RegistrationNo){
 		this.RegistrationNo = RegistrationNo;
@@ -50,6 +54,12 @@ public class VehicleCreationResponce {
 	public String getCode(){
 		return code;
 	}
+	public String getPhoto(){
+		return Photo;
+	}
+	public int getid(){
+		return Id;
+	}
 
 	public void setDescription(String description){
 		this.description = description;
@@ -66,6 +76,8 @@ public class VehicleCreationResponce {
 			"RegistrationNo = '" + RegistrationNo + '\'' +
 			",VehicleGroup = '" + VehicleGroup + '\'' +
 			",VehicleType = '" + VehicleType + '\'' +
+					",Photo = '" + Photo + '\'' +
+					",Id = '" + Id + '\'' +
 			"}";
 		}
 }
