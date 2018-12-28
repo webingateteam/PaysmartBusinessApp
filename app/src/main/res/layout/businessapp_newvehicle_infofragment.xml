@@ -63,13 +63,12 @@
                     tools:srcCompat="@drawable/baseline_image_black_24" />
 
                 <ImageView
-                    android:id="@+id/imageView46"
+                    android:id="@+id/edituserphoto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
                     app:layout_constraintEnd_toEndOf="@+id/profileImageView"
-                    app:layout_constraintTop_toTopOf="@+id/profileImageView"
-                    app:srcCompat="@drawable/baseline_pen_circle_24" />
+                    app:srcCompat="@drawable/baseline_pen_circle_24"
+                    tools:layout_editor_absoluteY="20dp" />
 
                 <TextView
                     android:id="@+id/stateTitleTextView"

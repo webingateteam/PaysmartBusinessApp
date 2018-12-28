@@ -20,6 +20,8 @@ import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import butterknife.BindView;
+import cropper.CropImage;
+import cropper.CropImageView;
 
 //import com.webingate.paysmartbusinessapp.businessapp.ApplicationConstants;
 //import com.webingate.paysmartbusinessapp.businessapp.GetaLyft;
@@ -41,6 +43,8 @@ public class businessAppVehicleInfoFragment extends Fragment {
     EditText modelyear;
     @BindView(R.id.s_state)
     EditText state;
+    @BindView(R.id.edituserphoto)
+    ImageView userphoto;
     Toast toast;
 
     @Nullable
@@ -55,7 +59,7 @@ public class businessAppVehicleInfoFragment extends Fragment {
 //
 //        initDataBindings();
 //
-//        initActions();
+        initActions(view);
 //
         return view;
     }
@@ -83,21 +87,29 @@ public class businessAppVehicleInfoFragment extends Fragment {
         vtype = view.findViewById(R.id.s_vtype);
         modelyear = view.findViewById(R.id.s_modelyear);
         state = view.findViewById(R.id.s_state);
-        RegNo.setText(ApplicationConstants.registrationNo);
-        chasisno.setText(ApplicationConstants.chasisNo);
-        engineno.setText(ApplicationConstants.engineNo);
+        userphoto = view.findViewById(R.id.edituserphoto);
+//        RegNo.setText(ApplicationConstants.registrationNo);
+//        chasisno.setText(ApplicationConstants.chasisNo);
+//        engineno.setText(ApplicationConstants.engineNo);
 
-        if(ApplicationConstants.photo1!=null){
-            profileImageView = view.findViewById(R.id.profileImageView);
-            byte[] decodedString= Base64.decode(ApplicationConstants.photo1.substring(ApplicationConstants.photo1.indexOf(",")+1), Base64.DEFAULT);
-            Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            profileImageView.setImageBitmap(image1);
-        }
-        else {
+
             profileImageView = view.findViewById(R.id.profileImageView);
             int id = R.drawable.profile2;
             Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
-        }
+
+    }
+    private void initActions(View view) {
+
+        userphoto.setOnClickListener((View v) -> {
+            Toast.makeText(getActivity(), "Clicked on Pen of Profile", Toast.LENGTH_SHORT).show();
+            CropImage.activity()
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setActivityTitle("My Crop")
+                    .setCropMenuCropButtonTitle("Done")
+                    .setRequestedSize(400, 800)
+                    .setCropMenuCropButtonIcon(R.drawable.badge_menu)
+                    .start(this.getActivity());
+        });
     }
 
     public EditText getRegNo() {

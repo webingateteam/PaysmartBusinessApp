@@ -117,7 +117,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
     }
 
     private void initDataBindings() {
-        int id = R.drawable.login_background_3;
+        int id = R.drawable.login_background;
         Utils.setImageToImageView(getApplicationContext(), bgImageView, id);
     }
 
