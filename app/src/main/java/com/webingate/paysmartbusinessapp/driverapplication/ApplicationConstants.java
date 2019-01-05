@@ -37,6 +37,11 @@ public class ApplicationConstants {
     public static String driveremail="";
     public static String driverid="";
 
+    public static String agentid="";
+    public static String agentname="";
+    public static String agentemail="";
+    public static String agentmno="";
+
     public static boolean isResetPasswordfirstWondow=true;
     public static boolean verify_email=true;
 

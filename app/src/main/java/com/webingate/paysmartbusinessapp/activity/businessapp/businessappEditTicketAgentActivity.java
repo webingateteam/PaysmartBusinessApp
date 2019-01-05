@@ -91,9 +91,6 @@ public class businessappEditTicketAgentActivity extends AppCompatActivity {
         bundle.putString("Mobileno", mo);
         bundle.putString("Drivername", dname);
         ApplicationConstants.pic = prefs.getString(photo, null);
-        ApplicationConstants.drivername = prefs.getString(name, null);
-        ApplicationConstants.driveremail = prefs.getString(email, null);
-        ApplicationConstants.drivermno = prefs.getString(mobileno, null);
          //set Fragmentclass Arguments
         businessAppEditTicketAgentInfoFragment fragobj = new businessAppEditTicketAgentInfoFragment();
         fragobj.setArguments(bundle);
@@ -197,8 +194,8 @@ public class businessappEditTicketAgentActivity extends AppCompatActivity {
                     object.addProperty("Email",email1.getText().toString());
                     object.addProperty("CountryId","91");
                     object.addProperty("VehicleGroupId","");
-                    object.addProperty("UserAccountNo",ApplicationConstants.driverid);
-                    object.addProperty("usertypeid","109");
+                    object.addProperty("UserAccountNo",ApplicationConstants.agentid);
+                    object.addProperty("usertypeid","149");
                     object.addProperty("isDriverOwned","0");
                     object.addProperty("UserPhoto","data:" + ApplicationConstants.document_format + ";base64," +  ApplicationConstants.picdata);
                     RegisterDriver(object);

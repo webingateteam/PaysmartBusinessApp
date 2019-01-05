@@ -244,6 +244,10 @@ public class businessappTicketAgentListActivity extends AppCompatActivity {
         editor .putString(name,obj.getNAme());
         editor.commit();
 
+        ApplicationConstants.agentname=obj.getNAme();
+        ApplicationConstants.agentmno=obj.getMobilenumber();
+        ApplicationConstants.agentemail=obj.getEmail();
+        ApplicationConstants.agentid=obj.getUserAccountNo();
         Intent intent = new Intent(this, businessappTicketAgentDetailsActivity.class);
         startActivity(intent);
     }

@@ -112,9 +112,9 @@ public class businessAppEditTicketAgentInfoFragment extends Fragment {
         postal = view.findViewById(R.id.s_postal);
         state = view.findViewById(R.id.s_state);
         userphoto = view.findViewById(R.id.edituserphoto);
-        name.setText(ApplicationConstants.drivername);
-        email.setText(ApplicationConstants.driveremail);
-        mno.setText(ApplicationConstants.drivermno);
+        name.setText(ApplicationConstants.agentname);
+        email.setText(ApplicationConstants.agentemail);
+        mno.setText(ApplicationConstants.agentmno);
     }
 
 
