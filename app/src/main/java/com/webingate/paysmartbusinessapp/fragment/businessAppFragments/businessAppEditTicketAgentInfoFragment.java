@@ -1,8 +1,11 @@
 package com.webingate.paysmartbusinessapp.fragment.businessAppFragments;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import butterknife.BindView;
@@ -21,21 +25,21 @@ import cropper.CropImageView;
 //import com.webingate.paysmartbusinessapp.businessapp.ApplicationConstants;
 //import com.webingate.paysmartbusinessapp.businessapp.GetaLyft;
 
-public class businessAppTicketAgentInfoFragment extends Fragment {
+public class businessAppEditTicketAgentInfoFragment extends Fragment {
 
     ImageView profileImageView;
-    @BindView(R.id.s_Regno)
-    EditText RegNo;
-    @BindView(R.id.s_chasisno)
-    EditText chasisno;
-    @BindView(R.id.s_engineno)
-    EditText engineno;
-    @BindView(R.id.s_vgroup)
-    Spinner vgroup;
-    @BindView(R.id.s_vtype)
-    Spinner vtype;
-    @BindView(R.id.s_modelyear)
-    EditText modelyear;
+    @BindView(R.id.s_name)
+    EditText name;
+    @BindView(R.id.s_email)
+    EditText email;
+    @BindView(R.id.s_address)
+    EditText address;
+    @BindView(R.id.s_city)
+    EditText city;
+    @BindView(R.id.s_mobileno)
+    EditText mno;
+    @BindView(R.id.s_postal)
+    EditText postal;
     @BindView(R.id.s_state)
     EditText state;
     @BindView(R.id.edituserphoto)
@@ -67,22 +71,7 @@ public class businessAppTicketAgentInfoFragment extends Fragment {
 //        flightsList = DirectoryHome9Repository.getFlightsList();
 //    }
 //
-    private void initUI(View view) {
 
-        profileImageView = view.findViewById(R.id.profileImageView);
-        int id = R.drawable.profile2;
-        Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
-        setRegNo((EditText)view.findViewById(R.id.s_Regno));
-
-        RegNo = view.findViewById(R.id.s_Regno);
-        chasisno = view.findViewById(R.id.s_chasisno);
-        engineno = view.findViewById(R.id.s_engineno);
-        vgroup = view.findViewById(R.id.s_vgroup);
-        vtype = view.findViewById(R.id.s_vtype);
-        modelyear = view.findViewById(R.id.s_modelyear);
-        state = view.findViewById(R.id.s_state);
-        userphoto = view.findViewById(R.id.edituserphoto);
-    }
     private void initActions(View view) {
 
 
@@ -99,13 +88,43 @@ public class businessAppTicketAgentInfoFragment extends Fragment {
                     .start(this.getActivity());
         });
     }
+    private void initUI(View view) {
 
-    public EditText getRegNo() {
-        return RegNo;
+        if(ApplicationConstants.pic!=null){
+            profileImageView = view.findViewById(R.id.profileImageView);
+            byte[] decodedString= Base64.decode(ApplicationConstants.pic.substring(ApplicationConstants.pic.indexOf(",")+1), Base64.DEFAULT);
+            Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            profileImageView.setImageBitmap(image1);
+        }
+        else {
+            profileImageView = view.findViewById(R.id.profileImageView);
+            int id = R.drawable.profile2;
+            Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2, R.color.md_white_1000);
+            //setRegNo((EditText)view.findViewById(R.id.s_Regno));
+        }
+
+
+        name = view.findViewById(R.id.s_name);
+        email = view.findViewById(R.id.s_email);
+        mno = view.findViewById(R.id.s_mobileno);
+        address = view.findViewById(R.id.s_address);
+        city = view.findViewById(R.id.s_city);
+        postal = view.findViewById(R.id.s_postal);
+        state = view.findViewById(R.id.s_state);
+        userphoto = view.findViewById(R.id.edituserphoto);
+        name.setText(ApplicationConstants.drivername);
+        email.setText(ApplicationConstants.driveremail);
+        mno.setText(ApplicationConstants.drivermno);
     }
 
-    public void setRegNo(EditText RegNo) {
-        this.RegNo = RegNo;
+
+
+    public EditText getName() {
+        return name;
+    }
+
+    public void setName(EditText name) {
+        this.name = name;
     }
 
 }

@@ -189,6 +189,8 @@ public class businessAppFleetownerFragment extends Fragment  {
                         break;
                     case 4:
                         intent = new Intent(getActivity(), businessappTicketAgentListActivity.class);
+                        intent.putExtra("UserAccountNo", usan);
+                        intent.putExtra("usertypeid", 149);
                         startActivity(intent);
                         break;
                     case 5:
