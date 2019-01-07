@@ -57,7 +57,7 @@ public class businessappTicketAgentListAdapter extends RecyclerView.Adapter<Recy
         if (viewHolder instanceof TicetAgentViewHolder) {
 
             DrivermasterResponse place = placeArrayList.get(position);
-            businessappTicketAgentListAdapter.PlaceViewHolder holder = (businessappTicketAgentListAdapter.PlaceViewHolder) viewHolder;
+            TicetAgentViewHolder holder = (TicetAgentViewHolder) viewHolder;
             holder.placeNameTextView.setText(place.getNAme());
             Context context = holder.placeHolderCardView.getContext();
             // int id = Utils.getDrawableInt(context, place.getPhoto());

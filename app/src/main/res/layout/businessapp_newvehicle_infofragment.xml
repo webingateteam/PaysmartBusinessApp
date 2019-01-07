@@ -48,7 +48,7 @@
                     android:textColor="@color/colorTextLight"
                     android:textSize="@dimen/font_title_size"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imageView46"
+                    app:layout_constraintStart_toEndOf="@+id/edituserphoto"
                     tools:layout_editor_absoluteY="16dp" />
 
                 <ImageView
