@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,12 +24,11 @@ import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
-import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppBusinessOwnerInfoFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDocsListFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppEditBusinessOwnerInfoFragment;
+import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppEditTicketAgentInfoFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppUploadDocsFragment;
-import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -43,13 +41,16 @@ import cropper.CropImage;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+//import com.webingate.paysmartbusinessapp.pa;
 
-public class businessappNewBusinessOwnerActivity extends AppCompatActivity {
+public class businessappEditBusinessOwnerActivity extends AppCompatActivity {
+
 
     public static final String MyPREFERENCES = "MyPrefs";
-    public static final String Username = "nameKey";
-    public static final String Phone = "phoneKey";
-
+    public static final String photo= "pphoto";
+    public static final String email="email";
+    public static final String mobileno= "mobileno";
+    public static final String name="name";
     private int position = 1;
     private int maxPosition = 5;
     private Button nextButton, prevButton;
@@ -59,30 +60,48 @@ public class businessappNewBusinessOwnerActivity extends AppCompatActivity {
 
 
 
-    EditText email;
-    EditText name;
+    EditText email1;
+    EditText name1;
     EditText address;
-
     EditText city;
-
     EditText mno;
-
     EditText postal;
     EditText state;
     Toast toast;
+
+    String pt,em,mo,dname;
     RegisterBusinessUsers rlist;
-    businessAppBusinessOwnerInfoFragment userInfoFragment;
+
+    businessAppEditBusinessOwnerInfoFragment userInfoFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_newbusinessowner_activity);
 
+        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        pt= prefs.getString(photo, null);
+        em= prefs.getString(email, null);
+        mo=prefs.getString(mobileno,null);
+        dname=prefs.getString(name,null);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("photo", pt);
+        bundle.putString("Email", em);
+        bundle.putString("Mobileno", mo);
+        bundle.putString("Drivername", dname);
+        ApplicationConstants.pic = prefs.getString(photo, null);
+         //set Fragmentclass Arguments
+        businessAppEditBusinessOwnerInfoFragment fragobj = new businessAppEditBusinessOwnerInfoFragment();
+        fragobj.setArguments(bundle);
+
         initData();
 
         initUI();
 
-        initActions();
+        initDataBinding();
 
+        initActions();
     }
 
     @Override
@@ -95,7 +114,6 @@ public class businessappNewBusinessOwnerActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //endregion
 
     //region Init Functions
     private void initData() {
@@ -103,6 +121,7 @@ public class businessappNewBusinessOwnerActivity extends AppCompatActivity {
     }
 
     private void initUI() {
+
         initToolbar();
 
         nextButton = findViewById(R.id.nextButton);
@@ -110,22 +129,31 @@ public class businessappNewBusinessOwnerActivity extends AppCompatActivity {
         imageNoTextView = findViewById(R.id.imageNoTextView);
 
 
+
+
         updatePositionTextView();
-        setupFragment(new businessAppBusinessOwnerInfoFragment());
+        setupFragment(new businessAppEditBusinessOwnerInfoFragment());
 
     }
 
     private void updatePositionTextView() {
+
         imageNoTextView.setText(position + " of " + maxPosition);
     }
+
     private void setupFragment(Fragment fragment) {
         try {
             this.getSupportFragmentManager().beginTransaction()
                     .replace(R.id.contentLayout, fragment)
                     .commitAllowingStateLoss();
-        } catch (Exception e) {
+            TextView tt=findViewById(R.id.s_name);
+            } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void initDataBinding() {
+
     }
 
     private void initActions() {
@@ -139,7 +167,7 @@ public class businessappNewBusinessOwnerActivity extends AppCompatActivity {
                 updatePositionTextView();
                 if(position == 1) {
                     Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
-                    userInfoFragment =      new businessAppBusinessOwnerInfoFragment();
+                    userInfoFragment =      new businessAppEditBusinessOwnerInfoFragment();
 
                     setupFragment(userInfoFragment);
 
@@ -147,8 +175,8 @@ public class businessappNewBusinessOwnerActivity extends AppCompatActivity {
                 if(position == 2)
                 {
                     //EditText name = (EditText)findViewById(R.id.s_name);
-                    name = findViewById(R.id.s_name);
-                    email = findViewById(R.id.s_email);
+                    name1 = findViewById(R.id.s_name);
+                    email1 = findViewById(R.id.s_email);
                     mno = findViewById(R.id.s_mobileno);
                     address = findViewById(R.id.s_address);
                     city = findViewById(R.id.s_city);
@@ -157,32 +185,31 @@ public class businessappNewBusinessOwnerActivity extends AppCompatActivity {
                     profileImageView = findViewById(R.id.profileImageView);
 
                     JsonObject object = new JsonObject();
-                    object.addProperty("flag", "I");
-                    object.addProperty("Firstname",name.getText().toString());
+
+                    object.addProperty("flag", "U");
+                    object.addProperty("Firstname",name1.getText().toString());
                     //object.addProperty("lastname","kumar");
                     object.addProperty("AuthTypeId", "");
                     object.addProperty("Password", "123");
                     object.addProperty("Mobilenumber",mno.getText().toString());
-                    object.addProperty("Email",email.getText().toString());
+                    object.addProperty("Email",email1.getText().toString());
                     object.addProperty("CountryId","91");
                     object.addProperty("VehicleGroupId","");
-                    object.addProperty("UserAccountNo","15191"+mno.getText().toString());
+                    object.addProperty("UserAccountNo",ApplicationConstants.agentid);
                     object.addProperty("usertypeid","151");
                     object.addProperty("isDriverOwned","0");
-                    object.addProperty("DPhoto","data:" + ApplicationConstants.document_format + ";base64," +  ApplicationConstants.picdata);
+                    object.addProperty("UserPhoto","data:" + ApplicationConstants.document_format + ";base64," +  ApplicationConstants.picdata);
                     RegisterDriver(object);
-
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
                     //setupFragment(new businessAppUploadDocsFragment());
                     //setupFragment(new businessAppDocCheckingFragment());
-                    setupFragment(new businessAppDriverDocsListFragment());
-
+                    setupFragment(new businessAppDriverDocsListFragment( ));
                 }
 
 
                 if(position == 3) {
                     Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppBusinessOwnerInfoFragment());
+                    setupFragment(new businessAppEditBusinessOwnerInfoFragment());
                 }
 
             } else {
@@ -197,18 +224,20 @@ public class businessappNewBusinessOwnerActivity extends AppCompatActivity {
                 updatePositionTextView();
                 if(position == 1) {
                     Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppBusinessOwnerInfoFragment());
+                    userInfoFragment =      new businessAppEditBusinessOwnerInfoFragment();
+
+                    setupFragment(userInfoFragment);
                 }
                 if(position == 2)
                 {
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppUploadDocsFragment());
+                    setupFragment(new businessAppDriverDocsListFragment());
                 }
 
 
                 if(position == 3) {
                     Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppBusinessOwnerInfoFragment());
+                    setupFragment(new businessAppEditBusinessOwnerInfoFragment());
                 }
 
             } else {
@@ -220,7 +249,7 @@ public class businessappNewBusinessOwnerActivity extends AppCompatActivity {
     public void RegisterDriver(JsonObject jsonObject){
 
         //StartDialogue();
-        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(businessappNewBusinessOwnerActivity.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(businessappEditBusinessOwnerActivity.this).getrestadapter()
                 .Savebusinessappusers(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -265,46 +294,48 @@ public class businessappNewBusinessOwnerActivity extends AppCompatActivity {
 //                        editor.putString(Emailotp, response.getEmailotp());
 //                        editor.putString(DRIVERID, response.getDriverId());
 //                        editor.putString(VEHICLEID, response.getVehicleId());
-                            List<RegisterBusinessUsers> rlist=responseList;
+                             List<RegisterBusinessUsers> rlist=responseList;
                             editor.commit();
 
                             // startActivity(new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class));
-                            finish();
+                            //finish();
                         }
                     }
                 });
     }
 
+
+    //region Init Toolbar
     private void initToolbar() {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         toolbar.setNavigationIcon(R.drawable.baseline_menu_black_24);
 
-        if(toolbar.getNavigationIcon() != null) {
+        if (toolbar.getNavigationIcon() != null) {
             toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.md_white_1000), PorterDuff.Mode.SRC_ATOP);
         }
 
-        toolbar.setTitle("New Business Owner");
+        toolbar.setTitle("Edit Business Owner Details");
 
         try {
             toolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
-        }catch (Exception e){
-            Log.e("TEAMPS","Can't set color.");
+        } catch (Exception e) {
+            Log.e("TEAMPS", "Can't set color.");
         }
 
         try {
             setSupportActionBar(toolbar);
-        }catch (Exception e) {
-            Log.e("TEAMPS","Error in set support action bar.");
+        } catch (Exception e) {
+            Log.e("TEAMPS", "Error in set support action bar.");
         }
 
         try {
             if (getSupportActionBar() != null) {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
-        }catch (Exception e) {
-            Log.e("TEAMPS","Error in set display home as up enabled.");
+        } catch (Exception e) {
+            Log.e("TEAMPS", "Error in set display home as up enabled.");
         }
 
     }
@@ -371,5 +402,6 @@ public class businessappNewBusinessOwnerActivity extends AppCompatActivity {
         toast.show();
 
     }
+
     //endregion
 }

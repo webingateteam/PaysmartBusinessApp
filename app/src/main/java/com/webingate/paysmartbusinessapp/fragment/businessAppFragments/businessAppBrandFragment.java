@@ -1,6 +1,8 @@
 package com.webingate.paysmartbusinessapp.fragment.businessAppFragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -42,6 +44,8 @@ import java.util.List;
 //import com.webingate.paysmartbusinessapp.businessapp.GetaLyft;
 
 public class businessAppBrandFragment extends Fragment {
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String UserAccountNo = "UserAccountNo";
 
     List<DirectoryHome9ProductsVO> productsList;
     List<DirectoryHome9CategoryVO> categoryList;
@@ -149,7 +153,8 @@ public class businessAppBrandFragment extends Fragment {
     private void initActions() {
         //productsAdapter.setOnItemClickListener((view, product, position) -> Toast.makeText(getContext(), "Clicked : " + product.getName(), Toast.LENGTH_SHORT).show());
         productsAdapter.setOnItemClickListener((view, promotion, position) -> {
-
+            SharedPreferences prefs = this.getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+            String usan = prefs.getString(UserAccountNo, null);
                 switch(position){
                     case 0:
                         Intent intent0 = new Intent(getActivity(), businessappDriversListActivity.class);
@@ -175,14 +180,20 @@ public class businessAppBrandFragment extends Fragment {
                         break;
                     case 4:
                         Intent intent4 = new Intent(getActivity(), businessappBusinessOwnerListActivity.class);
+                        intent4.putExtra("UserAccountNo", usan);
+                        intent4.putExtra("usertypeid", 151);
                         startActivity(intent4);
                         break;
                     case 5:
                         Intent intent5 = new Intent(getActivity(), businessappTicketAgentListActivity.class);
+                        intent5.putExtra("UserAccountNo", usan);
+                        intent5.putExtra("usertypeid", 149);
                         startActivity(intent5);
                         break;
                     case 6:
                         Intent intent6 = new Intent(getActivity(), businessappFleetOwnerListActivity.class);
+                        intent6.putExtra("UserAccountNo", usan);
+                        intent6.putExtra("usertypeid", 110);
                         startActivity(intent6);
                         break;
                     case 7:

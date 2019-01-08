@@ -1,6 +1,8 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +20,7 @@ import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.businessappBusinessOwnerListAdapter;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
 import com.webingate.paysmartbusinessapp.adapter.businessappVehicleListAdapter;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.object.Place;
 import com.webingate.paysmartbusinessapp.repository.BusinessOwnerListRepository;
@@ -32,9 +35,17 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class businessappBusinessOwnerListActivity extends AppCompatActivity {
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String photo= "pphoto";
+    public static final String email="email";
+    public static final String mobileno= "mobileno";
+    public static final String name="name";
+
 
     ArrayList<DrivermasterResponse> BusinessownerList;
     businessappBusinessOwnerListAdapter adapter;
+    String uaccountno;
+    int typid;
     // RecyclerView
     RecyclerView recyclerView;
     Toast toast;
@@ -48,7 +59,10 @@ public class businessappBusinessOwnerListActivity extends AppCompatActivity {
     {
         // get place list
         //placeArrayList = BusinessOwnerListRepository.getPlaceList();
-        GetBusinessOwnerlist("0");
+        Intent intent =getIntent();
+        uaccountno=intent.getStringExtra("UserAccountNo");
+        typid=intent.getIntExtra("usertypeid",0);
+        GetBusinessOwnerlist( ApplicationConstants.userAccountNo,151);
     }
 
     private void initUI()
@@ -169,9 +183,9 @@ public class businessappBusinessOwnerListActivity extends AppCompatActivity {
         });
     }
     ArrayList<DrivermasterResponse>  response;
-    public void GetBusinessOwnerlist(String ctryId ){
+    public void GetBusinessOwnerlist(String acct,int uit){
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
-                .GetDriverList(ctryId)
+                .GetDriverList_usertype(acct,uit)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<DrivermasterResponse>>() {
@@ -221,6 +235,18 @@ public class businessappBusinessOwnerListActivity extends AppCompatActivity {
     public  void GoToDetails(DrivermasterResponse obj)
     {
         Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(photo, (obj.getUserPhoto()!=null?obj.getUserPhoto():null));
+        editor.putString(email,obj.getEmail());
+        editor.putString(mobileno,obj.getMobilenumber());
+        editor .putString(name,obj.getNAme());
+        editor.commit();
+
+        ApplicationConstants.agentname=obj.getNAme();
+        ApplicationConstants.agentmno=obj.getMobilenumber();
+        ApplicationConstants.agentemail=obj.getEmail();
+        ApplicationConstants.agentid=obj.getUserAccountNo();
         Intent intent = new Intent(this, businessappBusinessOwnerDetailsActivity.class);
         startActivity(intent);
     }
