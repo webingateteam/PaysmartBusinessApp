@@ -1,9 +1,12 @@
 package com.webingate.paysmartbusinessapp.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,8 +64,16 @@ public class businessappFleetOwnerListAdapter extends RecyclerView.Adapter<Recyc
             Context context = holder.placeHolderCardView.getContext();
 
             // int id = Utils.getDrawableInt(context, place.getPhoto());
-            int id = Utils.getDrawableInt(context, "photo_male_7");
-            Utils.setImageToImageView(context, holder.placeImageView, id);
+            if(place.getUserPhoto()!=null){
+                byte[] decodedString= Base64.decode(place.getUserPhoto().substring(place.getUserPhoto().indexOf(",")+1), Base64.DEFAULT);
+                Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                holder.placeImageView.setImageBitmap(image1);
+            }
+            else{
+//            int id = Utils.getDrawableInt(context, "user_round_button");
+                int id = Utils.getDrawableInt(context, "profile2");
+                Utils.setImageToImageView(context, holder.placeImageView, id);
+            }
 
             holder.typeTextView.setText("12");
             holder.cityTextView.setText("");
