@@ -49,6 +49,7 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String Username = "nameKey";
     public static final String Phone = "phoneKey";
+    public static final String Photo = "photoKey";
     public static final String Email = "emailKey";
     public static final String UserAccountNumber = "UserAccountNo";
     public static final String usertypeid = "usertypeid";
@@ -82,6 +83,8 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         ApplicationConstants.username= prefs.getString(Username, null);
         ApplicationConstants.email= prefs.getString(Email, null);
+        ApplicationConstants.mobileNo= prefs.getString(Phone, null);
+        ApplicationConstants.pic= prefs.getString(Photo, null);
 
 
         initData();
@@ -203,7 +206,7 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
 
                 if(position == 3) {
                     Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppDriverUserInfoFragment());
+                    setupFragment(new businessAppFleetOwnerInfoFragment());
                 }
 
             } else {
@@ -219,7 +222,7 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
                 updatePositionTextView();
                 if(position == 1) {
                     Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppDriverUserInfoFragment());
+                    setupFragment(new businessAppFleetOwnerInfoFragment());
                 }
                 if(position == 2)
                 {
@@ -230,7 +233,7 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
 
                 if(position == 3) {
                     Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppDriverUserInfoFragment());
+                    setupFragment(new businessAppFleetOwnerInfoFragment());
                 }
 
             } else {

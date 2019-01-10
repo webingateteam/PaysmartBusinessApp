@@ -39,6 +39,7 @@ public class businessappBusinessownerDashboardActivity extends AppCompatActivity
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String Username = "nameKey";
     public static final String Phone = "phoneKey";
+    public static final String Photo = "photoKey";
     public static final String Email = "emailKey";
     public static final String UserAccountNumber = "UserAccountNo";
     public static final String usertypeid = "usertypeid";
@@ -239,6 +240,7 @@ public class businessappBusinessownerDashboardActivity extends AppCompatActivity
                             editor.putString(Email, response.getEmail());
                             editor.putString(Username, response.getUsername());
                             editor.putString(Phone, response.getMobilenumber());
+                            editor.putString(Photo, response.getUserPhoto());
                             //Intent intent = new Intent(customerappUserprofileActivity.this,customerappUserprofileActivity.class);
                             editor.commit();
                             startActivity(new Intent(businessappBusinessownerDashboardActivity.this, customerappUserprofileActivity.class));

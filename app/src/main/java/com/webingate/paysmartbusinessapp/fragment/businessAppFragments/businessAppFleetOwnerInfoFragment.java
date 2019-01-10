@@ -95,10 +95,18 @@ public class businessAppFleetOwnerInfoFragment extends Fragment {
 
     private void initUI(View view) {
 
-        profileImageView = view.findViewById(R.id.profileImageView);
-        int id = R.drawable.profile2;
-        Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
-        setName((EditText)view.findViewById(R.id.s_name));
+        if(ApplicationConstants.pic!=null){
+            profileImageView = view.findViewById(R.id.profileImageView);
+            byte[] decodedString= Base64.decode(ApplicationConstants.pic.substring(ApplicationConstants.pic.indexOf(",")+1), Base64.DEFAULT);
+            Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            profileImageView.setImageBitmap(image1);
+        }
+        else {
+            profileImageView = view.findViewById(R.id.profileImageView);
+            int id = R.drawable.profile2;
+            Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2, R.color.md_white_1000);
+//        setName((EditText)view.findViewById(R.id.s_name));
+        }
 
 
         name = view.findViewById(R.id.s_name);
@@ -109,6 +117,10 @@ public class businessAppFleetOwnerInfoFragment extends Fragment {
         postal = view.findViewById(R.id.s_postal);
         state = view.findViewById(R.id.s_state);
         userphoto = view.findViewById(R.id.edituserphoto);
+        name.setText(ApplicationConstants.username);
+        email.setText(ApplicationConstants.email);
+
+        mbno.setText(ApplicationConstants.mobileNo);
     }
 
     private void initActions(View view) {

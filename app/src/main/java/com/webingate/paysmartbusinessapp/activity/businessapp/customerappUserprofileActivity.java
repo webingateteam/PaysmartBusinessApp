@@ -65,6 +65,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String Username = "nameKey";
     public static final String Phone = "phoneKey";
+    public static final String Photo = "photoKey";
     public static final String Email = "emailKey";
     public static final String UserAccountNumber = "UserAccountNo";
     public static final String usertypeid = "usertypeid";
@@ -125,6 +126,8 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
                 {
                     ApplicationConstants.email=Email;
                     ApplicationConstants.username=Username;
+                    ApplicationConstants.mobileNo=Phone;
+                    ApplicationConstants.pic=Photo;
                     Toast.makeText(getApplicationContext(), "User Details", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappUserDetailsActivity.class);
                     startActivity(intent);
