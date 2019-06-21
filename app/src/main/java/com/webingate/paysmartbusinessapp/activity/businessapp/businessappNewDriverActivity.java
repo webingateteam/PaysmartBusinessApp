@@ -59,6 +59,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
     private TextView imageNoTextView;
 
     ImageView profileImageView;
+    int imagetesting;
 
 
 
@@ -180,8 +181,9 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                     object.addProperty("UserAccountNo","10991"+mno.getText().toString());
                     object.addProperty("usertypeid","109");
                     object.addProperty("isDriverOwned","0");
-                    object.addProperty("DPhoto","data:" + ApplicationConstants.document_format + ";base64," +  ApplicationConstants.picdata);
+                    object.addProperty("DPhoto",(((imagetesting==1)?("data:" + ApplicationConstants.document_format + ";base64," +  ApplicationConstants.picdata):"")));
                     RegisterDriver(object);
+
 
                     Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
                     //setupFragment(new businessAppUploadDocsFragment());
@@ -349,6 +351,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     byte[] imageBytes = baos.toByteArray();
                     ApplicationConstants.picdata = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                    imagetesting=1;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

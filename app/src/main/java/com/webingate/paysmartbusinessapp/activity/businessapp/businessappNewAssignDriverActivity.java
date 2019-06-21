@@ -1,6 +1,7 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -204,7 +205,7 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
 //                        editor.putString(DRIVERID, response.getDriverId());
 //                        editor.putString(VEHICLEID, response.getVehicleId());
                             editor.commit();
-                            // startActivity(new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class));
+                             startActivity(new Intent(businessappNewAssignDriverActivity.this, businessappFleetownerDashboardActivity.class));
                             finish();
                         }
                     }

@@ -57,6 +57,7 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
     EditText modelyear;
     EditText state;
     Toast toast;
+    String type,grp;
 
     businessAppVehicleInfoFragment userInfoFragment;
 
@@ -146,7 +147,7 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
 
                 updatePositionTextView();
                 if(position == 1) {
-                    Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
                     userInfoFragment =  new businessAppVehicleInfoFragment();
 
                     setupFragment(userInfoFragment);
@@ -174,9 +175,21 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
                     object.addProperty("ChasisNo",chasisno.getText().toString());
                     object.addProperty("Engineno",engineno.getText().toString());
                     object.addProperty("FleetOwnerCode","");
-                    object.addProperty("VehicleTypeId","Sedan");
+                    if(ApplicationConstants.vtype==null){
+                        type = "Sedan";
+                    }
+                    else{
+                        type = ApplicationConstants.vtype;
+                    }
+                    object.addProperty("VehicleTypeId",type);
                     object.addProperty("VehicleModelId","");
-                    object.addProperty("VehicleGroupId","Hailing Car");
+                    if(ApplicationConstants.vgrp==null){
+                        grp = "Hailing Car";
+                    }
+                    else{
+                        grp = ApplicationConstants.vgrp;
+                    }
+                    object.addProperty("VehicleGroupId",grp);
                     object.addProperty("ModelYear",modelyear.getText().toString());
                     object.addProperty("VehicleCode","12345");
                     object.addProperty("CountryId","India");
@@ -184,13 +197,13 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
                     object.addProperty("type","1");
                     VehicleCreation(object);
 
-                    Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
                     setupFragment(new businessAppVehicleDocsFragment());
                 }
 
 
                 if(position == 3) {
-                    Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
                     setupFragment(new businessAppVehicleInfoFragment());
                 }
 
@@ -206,18 +219,18 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
 
                 updatePositionTextView();
                 if(position == 1) {
-                    Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
                     setupFragment(new businessAppVehicleInfoFragment());
                 }
                 if(position == 2)
                 {
-                    Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
                     setupFragment(new businessAppDriverDocsFragment());
                 }
 
 
                 if(position == 3) {
-                    Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
                     setupFragment(new businessAppDriverUserInfoFragment());
                 }
 
@@ -238,13 +251,14 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
                 .subscribe(new Subscriber<List<VehicleCreationResponce>>() {
                     @Override
                     public void onCompleted() {
-                        DisplayToast("Vehicle Created Successfully");
+                       // DisplayToast("Vehicle Created Successfully");
                         //StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
                         try {
-                            DisplayToast("Successfully onError");
+                            Log.d("OnError ", e.getMessage());
+                            //DisplayToast("Successfully onError");
                             //DisplayToast("Unable to Register");
                             //StopDialogue();
                         } catch (Exception ex) {

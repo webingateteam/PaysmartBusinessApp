@@ -69,7 +69,7 @@ public class ResetPassword extends AppCompatActivity {
                     object.addProperty("Email", email.getText().toString());
                     object.addProperty("Password", old_password.getText().toString());
                     object.addProperty("NewPassword", new_password.getText().toString());
-                    ChangePassword(object);
+                    //ChangePassword(object);
                    /* ResetPasswordTask resetPasswordTask = new ResetPasswordTask();
                     resetPasswordTask.execute();*/
                 } else {
@@ -88,44 +88,44 @@ public class ResetPassword extends AppCompatActivity {
         return true;
     }
 
-    public void ChangePassword(JsonObject jsonObject){
-
-        StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(ResetPassword.this).getrestadapter()
-                .ChangePassword(jsonObject)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<CustomerChangePwdResponse>>() {
-                    @Override
-                    public void onCompleted() {
-                        //  DisplayToast("Successfully Registered");
-                        StopDialogue();
-                    }
-                    @Override
-                    public void onError(Throwable e) {
-                        try {
-                            Log.d("OnError ", e.getMessage());
-                            DisplayToast("Error");
-                            StopDialogue();
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onNext(List<CustomerChangePwdResponse> responselist) {
-                        CustomerChangePwdResponse response=responselist.get(0);
-                        if (response.getUsername()!=null) {
-                            DisplayToast("Password Updated Successfully");
-                            finish();
-                        } else if (response.getCode()!=null) {
-                            DisplayToast(response.getDescription());
-
-                        }
-
-                    }
-                });
-    }
+//    public void ChangePassword(JsonObject jsonObject){
+//
+//        StartDialogue();
+//        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(ResetPassword.this).getrestadapter()
+//                .ChangePassword(jsonObject)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<List<CustomerChangePwdResponse>>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        //  DisplayToast("Successfully Registered");
+//                        StopDialogue();
+//                    }
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        try {
+//                            Log.d("OnError ", e.getMessage());
+//                            DisplayToast("Error");
+//                            StopDialogue();
+//                        } catch (Exception ex) {
+//                            ex.printStackTrace();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onNext(List<CustomerChangePwdResponse> responselist) {
+//                        CustomerChangePwdResponse response=responselist.get(0);
+//                        if (response.getUsername()!=null) {
+//                            DisplayToast("Password Updated Successfully");
+//                            finish();
+//                        } else if (response.getCode()!=null) {
+//                            DisplayToast(response.getDescription());
+//
+//                        }
+//
+//                    }
+//                });
+//    }
     public void DisplayToast(String text){
         if(toast!=null){
             toast.cancel();

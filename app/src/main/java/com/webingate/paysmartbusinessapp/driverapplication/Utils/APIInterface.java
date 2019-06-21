@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.AddCardResponse;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessEOTPVerificationResponse;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessappuserValidateResp;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.ConfigResponse;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.MOTPVerification;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.MOTPVerificationResponse;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.WalletBalanceResponse;
@@ -192,6 +193,14 @@ public interface APIInterface  {
 
     @GET("/api/Common/GetCountry")
     public Observable<List<ActiveCountries>> GetActiveCountry(@Query("active") int active);//i
+
+    @GET("/api/Common/GetGroups")
+    public Observable<List<ConfigResponse>> GetGroups(@Query("Id") int Id);
+
+    @POST("/api/Common/ConfigData")
+    public Observable<List<ConfigResponse>> ConfigData(@Body JsonObject jsonObject);
+
+
 
 
 

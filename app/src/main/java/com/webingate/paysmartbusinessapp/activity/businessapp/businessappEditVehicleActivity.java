@@ -153,7 +153,7 @@ public class businessappEditVehicleActivity extends AppCompatActivity {
 
                 updatePositionTextView();
                 if(position == 1) {
-                    Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
                     userInfoFragment =  new businessAppVehicleEditInfoFragment();
 
                     setupFragment(userInfoFragment);
@@ -192,13 +192,13 @@ public class businessappEditVehicleActivity extends AppCompatActivity {
                     object.addProperty("type","1");
                     VehicleCreation(object);
 
-                    Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
                     setupFragment(new businessAppVehicleDocsFragment());
                 }
 
 
                 if(position == 3) {
-                    Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
                     setupFragment(new businessAppVehicleInfoFragment());
                 }
 
@@ -214,18 +214,18 @@ public class businessappEditVehicleActivity extends AppCompatActivity {
 
                 updatePositionTextView();
                 if(position == 1) {
-                    Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
                     setupFragment(new businessAppVehicleInfoFragment());
                 }
                 if(position == 2)
                 {
-                    Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
                     setupFragment(new businessAppDriverDocsFragment());
                 }
 
 
                 if(position == 3) {
-                    Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
                     setupFragment(new businessAppDriverUserInfoFragment());
                 }
 
@@ -246,14 +246,13 @@ public class businessappEditVehicleActivity extends AppCompatActivity {
                 .subscribe(new Subscriber<List<VehicleCreationResponce>>() {
                     @Override
                     public void onCompleted() {
-                        DisplayToast("Vehicle Created Successfully");
+                       // DisplayToast("Vehicle Created Successfully");
                         //StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
                         try {
-                            DisplayToast("Successfully onError");
-                            //DisplayToast("Unable to Register");
+                            Log.d("OnError ", e.getMessage());
                             //StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();

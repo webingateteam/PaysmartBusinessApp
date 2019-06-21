@@ -189,7 +189,8 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(List<BusinessEOTPVerificationResponse> responselist) {
-                        BusinessEOTPVerificationResponse response=responselist.get(0);
+
+                            BusinessEOTPVerificationResponse response=responselist.get(0);
                             SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedpreferences.edit();
                             editor.putString(Emailotp, response.getEmail());

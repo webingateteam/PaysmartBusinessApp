@@ -147,7 +147,7 @@ public class businessappDriverDetailsActivity extends AppCompatActivity {
 
         editFAB.setOnClickListener(view -> {
 
-            Toast.makeText(getApplicationContext(), "Click Edit FAB", Toast.LENGTH_SHORT).show();
+           //Toast.makeText(getApplicationContext(), "Click Edit FAB", Toast.LENGTH_SHORT).show();
             SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedpreferences.edit();
             editor.putString(photo, pt);

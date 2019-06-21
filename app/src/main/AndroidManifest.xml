@@ -136,7 +136,7 @@
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappCurrentTicketListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        busin<activity
+        <activity
         android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappBrandDashboardActivity"
         android:theme="@style/AppTheme.NoActionBar" />
         <activity

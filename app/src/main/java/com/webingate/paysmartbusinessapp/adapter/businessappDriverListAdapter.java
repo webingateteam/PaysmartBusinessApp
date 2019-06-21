@@ -60,15 +60,18 @@ public class businessappDriverListAdapter extends RecyclerView.Adapter<RecyclerV
             holder.placeNameTextView.setText(place.getNAme());
             Context context = holder.placeHolderCardView.getContext();
             // int id = Utils.getDrawableInt(context, place.getPhoto());
-            if(place.getUserPhoto()!=null){
+            if(place.getUserPhoto()==null){
+                int id = Utils.getDrawableInt(context, "profile2");
+                Utils.setImageToImageView(context, holder.placeImageView, id);
+            }
+           else if(place.getUserPhoto().matches("")){
+                int id = Utils.getDrawableInt(context, "profile2");
+                Utils.setImageToImageView(context, holder.placeImageView, id);
+            }
+            else{
                 byte[] decodedString= Base64.decode(place.getUserPhoto().substring(place.getUserPhoto().indexOf(",")+1), Base64.DEFAULT);
                 Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                 holder.placeImageView.setImageBitmap(image1);
-            }
-            else{
-//            int id = Utils.getDrawableInt(context, "user_round_button");
-                int id = Utils.getDrawableInt(context, "profile2");
-            Utils.setImageToImageView(context, holder.placeImageView, id);
             }
             holder.typeTextView.setText("12");
             holder.cityTextView.setText("");

@@ -153,7 +153,7 @@ public class businessappVehicleDetailsActivity extends AppCompatActivity {
 
         editFAB.setOnClickListener(view -> {
 
-            Toast.makeText(getApplicationContext(), "Click Edit FAB", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Click Edit FAB", Toast.LENGTH_SHORT).show();
            // ApplicationConstants.photo1=profileImageView.toString();
             ApplicationConstants.registrationNo = emailTextView.getText().toString();
             ApplicationConstants.vehiclegroup = phoneTextView.getText().toString();

@@ -169,7 +169,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
 
                 v ->
                 {
-                    Toast.makeText(getApplicationContext(), "Open fab clicked", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Open fab clicked", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappNewVehicleActivity.class);
                     startActivity(intent);
                 }
@@ -182,7 +182,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
 
                 v ->
                 {
-                    Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappNewVehicleActivity.class);
                     startActivity(intent);
                 }
@@ -193,7 +193,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
 
         fabCamera.setOnClickListener(v ->
                 {
-                    Toast.makeText(getApplicationContext(), "Open Camera clicked", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Open Camera clicked", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappNewStaffActivity.class);
                     startActivity(intent);
                 }
@@ -201,7 +201,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
 
         fabPhoto.setOnClickListener(v ->
         {
-            Toast.makeText(getApplicationContext(), "View Photos clicked", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "View Photos clicked", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, businessappNewDriverActivity.class);
             startActivity(intent);
 
@@ -218,14 +218,14 @@ public class businessappVehicleListActivity extends AppCompatActivity {
 
                     @Override
                     public void onCompleted() {
-                        DisplayToast("Successfully Registered");
+                       // DisplayToast("Successfully Registered");
                         //StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
                         try {
-                            //Log.d("OnError ", e.getMessage());
-                            DisplayToast("Error");
+                            Log.d("OnError ", e.getMessage());
+                            //DisplayToast("Error");
                             //StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -235,19 +235,19 @@ public class businessappVehicleListActivity extends AppCompatActivity {
                     @Override
                     public void onNext(List<GetVehicleListResponse> responselist) {
                         VehicleList= (ArrayList <GetVehicleListResponse>) responselist;
-                           SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                           SharedPreferences.Editor editor = sharedpreferences.edit();
-                           editor.putString(RegistrationNo, responselist.get(0).getRegistrationNo());
-                           editor.putString(VehicleGroup, responselist.get(0).getVehicleGroup());
-                        editor.putString(VehicleType, responselist.get(0).getVehicleType());
-                        editor.putString(VehicleCode, responselist.get(0).getVehicleCode());
-                           editor.putString(Photo, responselist.get(0).getPhoto().toString());
-                           editor.commit();
-                           ApplicationConstants.profilepic = responselist.get(0).getPhoto().toString();
-                        ApplicationConstants.registrationNo= responselist.get(0).getRegistrationNo().toString();
-                        ApplicationConstants.vehiclegroup= responselist.get(0).getVehicleGroup().toString();
-                        ApplicationConstants.vehicleType= responselist.get(0).getVehicleType().toString();
-                        ApplicationConstants.vehiclecode= responselist.get(0).getVehicleCode().toString();
+//                           SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+//                           SharedPreferences.Editor editor = sharedpreferences.edit();
+//                           editor.putString(RegistrationNo, responselist.get(0).getRegistrationNo());
+//                           editor.putString(VehicleGroup, responselist.get(0).getVehicleGroup());
+//                        editor.putString(VehicleType, responselist.get(0).getVehicleType());
+//                        editor.putString(VehicleCode, responselist.get(0).getVehicleCode());
+//                           editor.putString(Photo, responselist.get(0).getPhoto().toString());
+//                           editor.commit();
+//                           ApplicationConstants.profilepic = responselist.get(0).getPhoto().toString();
+//                        ApplicationConstants.registrationNo= responselist.get(0).getRegistrationNo().toString();
+//                        ApplicationConstants.vehiclegroup= responselist.get(0).getVehicleGroup().toString();
+//                        ApplicationConstants.vehicleType= responselist.get(0).getVehicleType().toString();
+//                        ApplicationConstants.vehiclecode= responselist.get(0).getVehicleCode().toString();
 //                          byte[] decodedString= Base64.decode(ApplicationConstants.profilepic.substring(ApplicationConstants.profilepic.indexOf(",")+1), Base64.DEFAULT);
 //                        Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 //                        photo.setImageBitmap(image1);
@@ -274,13 +274,15 @@ public class businessappVehicleListActivity extends AppCompatActivity {
     }
     public  void GoToDetails(GetVehicleListResponse obj)
     {
-        Toast.makeText(this, "Selected : " + obj.getRegistrationNo(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Selected : " + obj.getRegistrationNo(), Toast.LENGTH_LONG).show();
         ApplicationConstants.photo1=obj.getPhoto();
         ApplicationConstants.registrationNo = obj.getRegistrationNo();
         ApplicationConstants.vehiclegroup = obj.getVehicleGroup();
         ApplicationConstants.vehicleType = obj.getVehicleType();
         ApplicationConstants.vehiclecode = obj.getVehicleCode();
-        ApplicationConstants.Vid=Integer.toString(obj.getId()); ;
+        ApplicationConstants.Vid=Integer.toString(obj.getId());
+        ApplicationConstants.chasisNo = obj.getChasisNo();
+        ApplicationConstants.engineNo = obj.getEngineno();
         Intent intent = new Intent(this, businessappVehicleDetailsActivity.class);
         startActivity(intent);
     }

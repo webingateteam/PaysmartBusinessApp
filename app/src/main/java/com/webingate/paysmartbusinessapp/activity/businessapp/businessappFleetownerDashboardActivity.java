@@ -109,7 +109,7 @@ public class businessappFleetownerDashboardActivity extends AppCompatActivity {
 
                 v ->
                 {
-                    Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappNewVehicleActivity.class);
                     startActivity(intent);
                 }
@@ -120,7 +120,7 @@ public class businessappFleetownerDashboardActivity extends AppCompatActivity {
 
         fabCamera.setOnClickListener(v ->
                 {
-                    Toast.makeText(getApplicationContext(), "Open Camera clicked", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Open Camera clicked", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappNewBusinessOwnerActivity.class);
                     startActivity(intent);
                 }
@@ -128,7 +128,7 @@ public class businessappFleetownerDashboardActivity extends AppCompatActivity {
 
         fabPhoto.setOnClickListener(v ->
         {
-            Toast.makeText(getApplicationContext(), "View Photos clicked", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "View Photos clicked", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, businessappNewDriverActivity.class);
             startActivity(intent);
 
@@ -218,7 +218,7 @@ public class businessappFleetownerDashboardActivity extends AppCompatActivity {
                 .subscribe(new Subscriber<List<UserInformationResponse>>() {
                     @Override
                     public void onCompleted() {
-                        DisplayToast("User Information Succesfull");
+                        //DisplayToast("User Information Succesfull");
                         //   StopDialogue();
                     }
                     @Override

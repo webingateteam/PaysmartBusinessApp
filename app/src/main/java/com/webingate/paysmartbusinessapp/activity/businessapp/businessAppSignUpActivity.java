@@ -142,8 +142,8 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
 
             JsonObject object = new JsonObject();
             object.addProperty("flag", "I");
-            object.addProperty("Username",S_username.getText().toString());
-//            object.addProperty("lastname", "kumar");
+            object.addProperty("Firstname",S_username.getText().toString());
+           // object.addProperty("lastname", "");
             object.addProperty("AuthTypeId", "");
             object.addProperty("Password", S_password.getText().toString());
             object.addProperty("Mobilenumber",S_mobileNo.getText().toString());
@@ -175,7 +175,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
                 .subscribe(new Subscriber<List<RegisterBusinessUsers>>() {
                     @Override
                     public void onCompleted() {
-                        DisplayToast("Successfully onCompleted");
+                        //DisplayToast("Successfully onCompleted");
                         //StopDialogue();
                     }
                     @Override
@@ -190,7 +190,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
                     }
                     @Override
                     public void onNext(List<RegisterBusinessUsers> responseList) {
-                        DisplayToast("Successfully onNext");
+                       // DisplayToast("Successfully onNext");
                         RegisterBusinessUsers response=responseList.get(0);
                         if(response.getCode()!=null){
                             DisplayToast(response.getDescription());
@@ -210,7 +210,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
 //                            intent.putExtra("username", response.getusreid());
 //                            intent.putExtra("motp", response.getmotp());
 //                            intent.putExtra("mno", response.getmnumber());
-
+                            editor.commit();
                             startActivity(intent);
 //                        editor.putString(Phone, response.getPMobNo());
 //                        editor.putString(Email, response.getEmail());
@@ -219,7 +219,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
 //                        editor.putString(Emailotp, response.getEmailotp());
 //                        editor.putString(DRIVERID, response.getDriverId());
 //                        editor.putString(VEHICLEID, response.getVehicleId());
-                            editor.commit();
+
                             // startActivity(new Intent(businessAppSignUpActivity.this, customerEOTPVerificationActivity.class));
                             finish();
                         }

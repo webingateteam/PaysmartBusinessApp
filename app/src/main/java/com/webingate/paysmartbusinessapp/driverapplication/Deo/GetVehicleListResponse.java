@@ -28,7 +28,27 @@ public class GetVehicleListResponse {
 	@SerializedName("Photo")
 	private String Photo;
 
+	@SerializedName("ChasisNo")
+	private String ChasisNo;
 
+	@SerializedName("Engineno")
+	private String Engineno;
+
+	public void setChasisNo(String ChasisNo){
+		this.ChasisNo = ChasisNo;
+	}
+
+	public String getChasisNo(){
+		return ChasisNo;
+	}
+
+	public void setEngineno(String Engineno){
+		this.Engineno = Engineno;
+	}
+
+	public String getEngineno(){
+		return Engineno;
+	}
 
 	public void setRegistrationNo(String RegistrationNo){
 		this.RegistrationNo = RegistrationNo;

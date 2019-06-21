@@ -10,32 +10,41 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.ConfigResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import cropper.CropImage;
 import cropper.CropImageView;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppUploadDocsFragment.GET_FROM_GALLERY;
 
 //import com.webingate.paysmartbusinessapp.businessapp.ApplicationConstants;
 //import com.webingate.paysmartbusinessapp.businessapp.GetaLyft;
 
-public class businessAppVehicleEditInfoFragment extends Fragment {
+public class businessAppVehicleEditInfoFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     ImageView profileImageView;
     @BindView(R.id.s_Regno)
@@ -56,14 +65,29 @@ public class businessAppVehicleEditInfoFragment extends Fragment {
     ImageView vphoto;
     Toast toast;
 
+
+    int grp,type;
+    List<ConfigResponse> res,res1;
+
+    ArrayAdapter arlist,groupadapter;
+
+    List<String> vtypes = new ArrayList<String>();
+    List<String> typegroup = new ArrayList<String>();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.businessapp_editvehicle_infofragment, container, false);
 
-//        initData();
+        initData();
 //
+
+        vgroup = view.findViewById(R.id.s_vgroup);
+        vgroup.setOnItemSelectedListener(this);
+        vtype = view.findViewById(R.id.s_vtype);
+        vtype.setOnItemSelectedListener(this);
+
         initUI(view);
 //
 //        initDataBindings();
@@ -72,15 +96,10 @@ public class businessAppVehicleEditInfoFragment extends Fragment {
 //
         return view;
     }
-//
-//    private void initData() {
-//        productsList = DirectoryHome9Repository.getfleetownerList();
-//        categoryList = DirectoryHome9Repository.getCategoryList();
-//        promotionsList = DirectoryHome9Repository.getPromotionsList();
-//        popularList = DirectoryHome9Repository.getPopularList();
-//        flightsList = DirectoryHome9Repository.getFlightsList();
-//    }
-//
+    private void initData() {
+        GetVgrplist(4);
+        GetVTypeslist(12);
+    }
     private void initUI(View view) {
 
 //        profileImageView = view.findViewById(R.id.profileImageView);
@@ -92,11 +111,10 @@ public class businessAppVehicleEditInfoFragment extends Fragment {
         RegNo = view.findViewById(R.id.s_Regno);
         chasisno = view.findViewById(R.id.s_chasisno);
         engineno = view.findViewById(R.id.s_engineno);
-        vgroup = view.findViewById(R.id.s_vgroup);
-        vtype = view.findViewById(R.id.s_vtype);
         modelyear = view.findViewById(R.id.s_modelyear);
         state = view.findViewById(R.id.s_state);
         vphoto = view.findViewById(R.id.editvphoto);
+
         RegNo.setText(ApplicationConstants.registrationNo);
         chasisno.setText(ApplicationConstants.chasisNo);
         engineno.setText(ApplicationConstants.engineNo);
@@ -190,5 +208,101 @@ public class businessAppVehicleEditInfoFragment extends Fragment {
 //            }
 //        }
 //    }
+
+
+    public void GetVgrplist(int Id){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(getContext()).getrestadapter()
+                .GetGroups(Id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<ConfigResponse>>() {
+                    @Override
+                    public void onCompleted() {
+                        //DisplayToast("Successfully SignUp");
+                        //   StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            Log.d("OnError ", e.getLocalizedMessage());
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onNext(List<ConfigResponse> responce) {
+                        res = responce;
+
+                        for (int i = 0; i < res.size(); i++) {
+                            typegroup.add(res.get(i).getName());
+                        }
+                        groupadapter=new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,typegroup);
+                        groupadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        vgroup.setAdapter(groupadapter);
+                        int a =groupadapter.getPosition(ApplicationConstants.vgrp);
+                        vgroup.setSelection(a);
+                    }
+
+                });
+    }
+
+    public void GetVTypeslist(int Id){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(getContext()).getrestadapter()
+                .GetGroups(Id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<ConfigResponse>>() {
+                    @Override
+                    public void onCompleted() {
+                        //DisplayToast("Successfully SignUp");
+                        //   StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            Log.d("OnError ", e.getLocalizedMessage());
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onNext(List<ConfigResponse> responce) {
+                        res1 = responce;
+
+                        for (int i = 0; i < res1.size(); i++) {
+                            vtypes.add(res1.get(i).getName());
+                        }
+
+                        arlist=new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,vtypes);
+                        arlist.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        vtype.setAdapter(arlist);
+                        int a =arlist.getPosition(ApplicationConstants.vtype);
+                        vtype.setSelection(a);
+                        //spinnergametype.setAdapter(arlist);
+                    }
+                });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView <?> parent, View view, int position, long id) {
+        Spinner vgroup = (Spinner)parent;
+        Spinner vtype = (Spinner)parent;
+
+        if(vgroup.getId() == R.id.s_vgroup)
+        {
+            // Toast.makeText(this, "Your are selected :" + res.get(position).getName(),Toast.LENGTH_SHORT).show();
+            grp=position;
+        }
+        if(vtype.getId() == R.id.s_vtype)
+        {
+            //  Toast.makeText(this, "Your are selected :" + res1.get(position).getName(),Toast.LENGTH_SHORT).show();
+            type=position;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView <?> parent) {
+
+    }
 
 }

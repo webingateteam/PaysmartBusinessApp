@@ -142,7 +142,7 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
                 v ->
                 {
-                    Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappNewDriverActivity.class);
                     startActivity(intent);
                 }
@@ -155,7 +155,7 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
                 v ->
                 {
-                    Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappNewVehicleActivity.class);
                     startActivity(intent);
                 }
@@ -166,14 +166,14 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
         fabCamera.setOnClickListener(v ->
         {
-            Toast.makeText(getApplicationContext(), "Open Camera clicked", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Open Camera clicked", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, businessappNewStaffActivity.class);
             startActivity(intent);
         });
 
         fabPhoto.setOnClickListener(v ->
         {
-            Toast.makeText(getApplicationContext(), "View Photos clicked", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "View Photos clicked", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, businessappNewDriverActivity.class);
             startActivity(intent);
 
@@ -191,14 +191,14 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
                     @Override
                     public void onCompleted() {
-                        DisplayToast("Successfully Registered");
+                       // DisplayToast("Successfully Registered");
                         //StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
                         try {
-                            //Log.d("OnError ", e.getMessage());
-                            DisplayToast("Error");
+                            Log.d("OnError ", e.getMessage());
+                            //DisplayToast("Error");
                             //StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -234,7 +234,7 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
     public  void GoToDetails(DrivermasterResponse obj)
     {
-        Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
            SharedPreferences.Editor editor = sharedpreferences.edit();
            editor.putString(pphoto, (obj.getUserPhoto()!=null?obj.getUserPhoto():null));

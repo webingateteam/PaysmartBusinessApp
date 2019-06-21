@@ -35,6 +35,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -272,8 +273,8 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
         object.addProperty("DriverPhoneNo", ApplicationConstants.mobileNo);
         object.addProperty("BNo", ApplicationConstants.bNo);
         object.addProperty("DriverRating", ApplicationConstants.rating);
-        object.addProperty("DriverRated", "2");
-        object.addProperty("DriverComments", "Namasthe");
+        object.addProperty("DriverRated", ApplicationConstants.rating);
+        object.addProperty("DriverComments", ApplicationConstants.comments);
         RateTheRide(object);
     }
 
@@ -843,6 +844,10 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                                         public void onClick(DialogInterface dialog, int which) {
 
                                             RatingBarDialogue cdd = new RatingBarDialogue(MyTrips.this);
+                                            RatingBar ratebar = findViewById(R.id.dialog_ratingbar);
+                                            EditText comm = findViewById(R.id.input_comments);
+                                            ApplicationConstants.rating = ratebar.toString();
+                                            ApplicationConstants.comments = comm.getText().toString();
                                             cdd.setCancelable(false);
                                             cdd.show();
                                         }

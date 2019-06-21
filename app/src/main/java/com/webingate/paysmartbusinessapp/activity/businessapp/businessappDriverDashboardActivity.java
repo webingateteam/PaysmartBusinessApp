@@ -357,8 +357,6 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
                 .replace(R.id.home9Frame, fragment)
                 .commitAllowingStateLoss();
     }
-
-
     public void DriverGoOnline(JsonObject jsonObject, final int flag){
 
      //   StartDialogue();
@@ -376,54 +374,54 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
                     public void onError(Throwable e) {
                         try {
                             Log.d("OnError ","  "+ e.getLocalizedMessage());
-                            DisplayToast("Unable to Login/Logoff");
+                           // DisplayToast("Unable to Login/Logoff");
                          //   StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
                     }
-
                     @Override
                     public void onNext(List<DriverLoginResponse> responselist) {
-                        DriverLoginResponse response=responselist.get(0);
-                        int greenColorValue = Color.parseColor("#00ff00");
-                        if(flag==ACTIVEDRIVER){
-                            if (response.getStatus().matches("1")) {
-                                status.setTextColor(Color.RED);
-                                status.setBackgroundColor(Color.green(greenColorValue));
-                                status.setText("Go Offline");
-                                ApplicationConstants.tripflag = CHECKBOOKINGS;
-                                // ApplicationConstants.bookingList=new ArrayList();
-                                isOnline=true;
-                                TrackVehicle();
-                                // KeepTracking();
-                            } else {
-                                DisplayToast("Unable to Login");
-                            }
-                        }else if(flag==DEACTIVEDRIVER) {
-                            if (response.getStatus().matches("1")) {
-                                status.setTextColor(Color.GREEN);
-                                status.setText("Go Online");
-                                isOnline=false;
-                                // timer.cancel();
-                                // ApplicationConstants.tripflag = 0;
-                            } else {
-                                DisplayToast("Unable to LogOff");
-                            }
-                        }else if(flag==LOGOUT){
-                            if (response.getStatus().matches("1")) {
-                                status.setTextColor(Color.GREEN);
-                                status.setText("Go Online");
-                                ApplicationConstants.tripflag = 0;
-                                Log.i("Driver status", "loggedout");
-                                //SharedPreferences.Editor editor = this.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE).edit();
-                             //   editor.putString(Phone, null);
-                             //   editor.putString(Name, null);
-                              //  editor.commit();
-                                finish();
-                            }
-                        }
+                        DriverLoginResponse response = responselist.get(0);
+                        if (response.getCode() != null) {
+                            DisplayToast(response.getdescription());
+                        } else {
+                            int greenColorValue = Color.parseColor("#00ff00");
+                            if (flag == ACTIVEDRIVER) {
+                                if (response.getStatus().matches("1")) {
+                                    status.setTextColor(Color.RED);
+                                    status.setBackgroundColor(Color.green(greenColorValue));
+                                    status.setText("Go Offline");
+                                    ApplicationConstants.tripflag = CHECKBOOKINGS;
+                                    // ApplicationConstants.bookingList=new ArrayList();
+                                    isOnline = true;
+                                    TrackVehicle();
+                                    // KeepTracking();
+                                } else {
+                                    DisplayToast("Unable to Login");
+                                }
+                            } else if (flag == DEACTIVEDRIVER) {
+                                if (response.getStatus().matches("1")) {
+                                    status.setTextColor(Color.GREEN);
+                                    status.setText("Go Online");
+                                    isOnline = false;
+                                    // timer.cancel();
+                                    // ApplicationConstants.tripflag = 0;
+                                } else {
+                                    DisplayToast("Unable to LogOff");
+                                }
+                            } else if (flag == LOGOUT) {
+                                if (response.getStatus().matches("1")) {
+                                    status.setTextColor(Color.GREEN);
+                                    status.setText("Go Online");
+                                    ApplicationConstants.tripflag = 0;
+                                    Log.i("Driver status", "loggedout");
 
+                                    finish();
+                                }
+                            }
+
+                        }
                     }
                 });
     }
