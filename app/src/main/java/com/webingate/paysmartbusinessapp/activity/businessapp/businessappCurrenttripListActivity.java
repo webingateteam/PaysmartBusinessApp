@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,12 +16,14 @@ import android.widget.Toast;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.utils.common_adapter.ViewPagerAdapter;
 
+
+
 public class businessappCurrenttripListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.customerapp_getalyftbookings_activity);
+        setContentView(R.layout.businessapp_currenttrips_activity);
 
         initToolbar();
 
@@ -38,13 +41,16 @@ public class businessappCurrenttripListActivity extends AppCompatActivity {
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new customerappOpenTicketsFragment(), "Current & in progress");
-        adapter.addFragment(new customerappClosedTicketsFragment(), "Completed");
-        adapter.addFragment(new customerappClosedTicketsFragment(), "Cancelled");
+        adapter.addFragment(new businessapptripslistFragment(), "Current & in progress");
+        adapter.addFragment(new businessapptripscompletedlistFragment(), "Completed");
+        adapter.addFragment(new businessapptripscancellistFragment(), "Cancelled");
        //adapter.addFragment(new UiContainerTabLayoutTab3Fragment(), "Tab 3");
         viewPager.setAdapter(adapter);
     }
-
+  private void checkingtitle(int position){
+      ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+      adapter.getItem(position);
+  }
     //region Init Toolbar
 
     private void initToolbar() {
@@ -57,7 +63,7 @@ public class businessappCurrenttripListActivity extends AppCompatActivity {
             toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.md_white_1000), PorterDuff.Mode.SRC_ATOP);
         }
 
-        toolbar.setTitle("Trouble tickets");
+        toolbar.setTitle("Trips List");
 
         try {
             toolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));

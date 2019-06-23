@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name="com.webingate.paysmartbusinessapp.paysmartbusinessapp"
@@ -20,10 +21,12 @@
 
 
         <meta-data
-         android:name="com.google.android.geo.API_KEY"
-         android:value="AIzaSyBdLsoQN4TDHBGdwXvwp35gFo9o9cn8lus" />
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCc5LJh1ZMYHCodjSFQMq-2s1obdt4JTDw" />
 
-
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <!--<activity-->
             <!--android:name=".activity.uicollection.container.spinner.UiContainerCustomSpinnerActivity"-->
             <!--android:theme="@style/AppTheme.NoActionBar" />-->
@@ -44,7 +47,7 @@
         android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.customerSignUpActivity"
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessAppSignUpActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.customerForgotPasswordActivity"
@@ -68,9 +71,9 @@
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.customerappUserprofileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
-            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.customerappPaymentModeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity-->
+            <!--android:name="com.webingate.paysmartbusinessapp.activity.businessapp.customerappPaymentModeActivity"-->
+            <!--android:theme="@style/AppTheme.NoActionBar" />-->
 
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.customerappaboutusactivity"
@@ -133,7 +136,7 @@
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappCurrentTicketListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        busin<activity
+        <activity
         android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappBrandDashboardActivity"
         android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -176,7 +179,7 @@
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappNewBusinessOwnerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriverDetailsActivity"
+            android:name=".activity.businessapp.businessappDriverDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappBusinessOwnerDetailsActivity"
@@ -193,5 +196,115 @@
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappVehicleDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappStatisticsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappMOTPVerificationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappForgotPasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessapppwdOTPVerificationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappUserDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.driverapplication.MyTrips"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+        android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriversTripsListActivity"
+        android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.driverlistTrips"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappCurrenttripListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.customerapp.ConfirmedTripsDetails"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.DriverTripsDetails"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappBrandAmbassadorprofileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappBusinessOwnerprofileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappTicketAgentprofileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriverprofileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappStaffprofileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappDocumentUploadActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappAssignDriverActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappNewAssignDriverActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappEwalletActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappEwalletMOTPVerificationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.DashboardEWallet"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappEOTPVerificationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappPaymentCardDetails"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappPaymentModeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappEditDriverActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappEditVehicleActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.DashboardEWalletHistory"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappEditTicketAgentActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappEditBusinessOwnerActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity-->
+            <!--android:name="com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverUserInfoFragment1"-->
+            <!--android:theme="@style/AppTheme.NoActionBar" />-->
+
+
+
+        <activity android:name="cropper.CropImageActivity" android:theme="@style/Theme.AppCompat.Light"/>
     </application>
 </manifest>

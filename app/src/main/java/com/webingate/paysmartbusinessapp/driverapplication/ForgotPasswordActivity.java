@@ -207,7 +207,7 @@ public class ForgotPasswordActivity extends FragmentActivity {
                     @Override
                     public void onNext(List<DriverPasswordVerificationResponse> responseList) {
                         DriverPasswordVerificationResponse response=responseList.get(0);
-                            if (response.getNAme()!=null) {
+                            if (response.getUserAccountNo()!=null) {
                                 ApplicationConstants.isResetPasswordfirstWondow = true;
                                 DisplayToast("Password Reset Successful");
                                 startActivity(new Intent(ForgotPasswordActivity.this, LoginActivity.class));

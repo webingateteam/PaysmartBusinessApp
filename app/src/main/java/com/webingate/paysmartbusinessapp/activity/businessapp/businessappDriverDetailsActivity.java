@@ -1,13 +1,18 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -15,25 +20,46 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
+import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverEditUserInfoFragment;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 public class businessappDriverDetailsActivity extends AppCompatActivity {
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String photo= "pphoto";
+    public static final String email="email";
+    public static final String mobileno= "mobileno";
+    public static final String name="name";
 
     private ImageView profileImageView;
     private TextView emailTextView;
     private TextView phoneTextView;
     private TextView websiteTextView;
     private FloatingActionButton editFAB;
+    String pt,em,mo,dname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_driverdetails_activity);
+        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        pt= prefs.getString(photo, null);
+        em= prefs.getString(email, null);
+        mo=prefs.getString(mobileno,null);
+        dname=prefs.getString(dname,null);
 
-        initData();
+//        Bundle bundle = new Bundle();
+//        bundle.putString("photo", pt);
+//        bundle.putString("Email", em);
+//        bundle.putString("Mobileno", mo);
+//        bundle.putString("Drivername", dname);
+
+       // set Fragmentclass Arguments
+//        businessAppDriverEditUserInfoFragment fragobj = new businessAppDriverEditUserInfoFragment();
+//        fragobj.setArguments(bundle);
 
         initUI();
-
+        initData();
         initActions();
 
     }
@@ -52,15 +78,26 @@ public class businessappDriverDetailsActivity extends AppCompatActivity {
 
     //region Init Functions
     private void initData() {
+        if(pt!=null){
+            profileImageView = findViewById(R.id.profileImageView);
+            byte[] decodedString= Base64.decode(pt.substring(pt.indexOf(",")+1), Base64.DEFAULT);
+            Bitmap image1 = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            profileImageView.setImageBitmap(image1);
+        }
+        else{
+            profileImageView = findViewById(R.id.profileImageView);
+            int id = R.drawable.profile2;
+            Utils.setCornerRadiusImageToImageView(getApplicationContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
+        }
 
     }
 
     private void initUI() {
         initToolbar();
 
-        profileImageView = findViewById(R.id.profileImageView);
-        int id = R.drawable.profile2;
-        Utils.setCornerRadiusImageToImageView(getApplicationContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
+//        profileImageView = findViewById(R.id.profileImageView);
+//        int id = R.drawable.profile2;
+//        Utils.setCornerRadiusImageToImageView(getApplicationContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
 
       //  ImageView coverUserImageView = findViewById(R.id.coverUserImageView);
        // Utils.setImageToImageView(getApplicationContext(), coverUserImageView, id);
@@ -70,7 +107,8 @@ public class businessappDriverDetailsActivity extends AppCompatActivity {
         websiteTextView = findViewById(R.id.websiteTextView);
 
         editFAB = findViewById(R.id.editFAB);
-
+        emailTextView.setText(em);
+        phoneTextView.setText(mo);
     }
 
     private void initActions() {
@@ -109,9 +147,16 @@ public class businessappDriverDetailsActivity extends AppCompatActivity {
 
         editFAB.setOnClickListener(view -> {
 
-            Toast.makeText(getApplicationContext(), "Click Edit FAB", Toast.LENGTH_SHORT).show();
+           //Toast.makeText(getApplicationContext(), "Click Edit FAB", Toast.LENGTH_SHORT).show();
+            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putString(photo, pt);
+            editor.putString(email,em);
+            editor.putString(mobileno,mo);
+            editor .putString(name,dname);
+            editor.commit();
 
-            Intent intent = new Intent(this, businessappNewDriverActivity.class);
+            Intent intent = new Intent(this, businessappEditDriverActivity.class);
             startActivity(intent);
 
         });

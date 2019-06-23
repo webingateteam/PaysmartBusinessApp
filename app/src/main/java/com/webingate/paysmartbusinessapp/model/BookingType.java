@@ -17,5 +17,6 @@ public class BookingType {
         this.name = name;
         this.section = section;
     }
+    public String getName(){return name;}
 
 }

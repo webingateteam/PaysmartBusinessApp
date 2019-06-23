@@ -8,6 +8,9 @@ import java.util.List;
  */
 
 public class ApplicationConstants {
+    public static int usertypeid=0;
+    public static String id="";
+    public static String userAccountNo="";
     public static String username="";
     public static String mobileNo ="";
     public static String address ="";
@@ -21,7 +24,23 @@ public class ApplicationConstants {
     public static String vehicleType="";
     public static String vehiclepic="";
     public static String driverpic="";
+    public static String vehiclegroup="";
+    public static String vehiclecode="";
+    public static String pic ="";
+    public static String chasisNo ="";
+    public static String engineNo ="";
+    public static String document_vformat ="";
+    public static String vpicdata ="";
 
+    public static String drivername="";
+    public static String drivermno="";
+    public static String driveremail="";
+    public static String driverid="";
+
+    public static String agentid="";
+    public static String agentname="";
+    public static String agentemail="";
+    public static String agentmno="";
 
     public static boolean isResetPasswordfirstWondow=true;
     public static boolean verify_email=true;
@@ -38,7 +57,7 @@ public class ApplicationConstants {
     public static String sourcelongitude="0.00";
     public static int tripflag=0;
     public static String customerMobileNo="";
-
+    public static String photo1="";
     public static String rating,comments;
     public static List confirmedTrips;
     public static List paymentMethods;
@@ -50,7 +69,17 @@ public class ApplicationConstants {
     public static String document_expire_date;
     public static String document_data;
     public static String document_format;
+    public static String photo;
+    public static String picdata;
+    public static String upic;
+    public static String Vid;
+    public static String vgrp;
+    public static String vtype;
 
 
 
+
+    public static String getPhoto() {
+        return photo;
+    }
 }

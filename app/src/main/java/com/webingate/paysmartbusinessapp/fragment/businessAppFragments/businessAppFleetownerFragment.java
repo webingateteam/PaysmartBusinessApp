@@ -1,6 +1,8 @@
 package com.webingate.paysmartbusinessapp.fragment.businessAppFragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,12 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.activity.businessapp.businessappAssignDriverActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriversListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappStaffListActivity;
+import com.webingate.paysmartbusinessapp.activity.businessapp.businessappStatisticsActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappTicketAgentListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappVehicleListActivity;
-import com.webingate.paysmartbusinessapp.activity.businessapp.customerappFlightBookingSearchActivity;
-import com.webingate.paysmartbusinessapp.activity.businessapp.customerappTrainBookingSearchActivity;
 import com.webingate.paysmartbusinessapp.adapter.customerapp_FlightsAdapter;
 import com.webingate.paysmartbusinessapp.adapter.customerapp_PopularAdapter;
 import com.webingate.paysmartbusinessapp.adapter.customerapp_ProductsAdapter;
@@ -38,8 +40,9 @@ import java.util.List;
 //import com.webingate.paysmartbusinessapp.businessapp.ApplicationConstants;
 //import com.webingate.paysmartbusinessapp.businessapp.GetaLyft;
 
-public class businessAppFleetownerFragment extends Fragment {
-
+public class businessAppFleetownerFragment extends Fragment  {
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String UserAccountNo = "UserAccountNo";
     List<DirectoryHome9ProductsVO> productsList;
     List<DirectoryHome9CategoryVO> categoryList;
     List<DirectoryHome9PromotionsVO> promotionsList;
@@ -145,12 +148,24 @@ public class businessAppFleetownerFragment extends Fragment {
 
     private void initActions() {
         //productsAdapter.setOnItemClickListener((view, product, position) -> Toast.makeText(getContext(), "Clicked : " + product.getName(), Toast.LENGTH_SHORT).show());
-        productsAdapter.setOnItemClickListener((view, promotion, position) -> {
+        productsAdapter.setOnItemClickListener((View view, DirectoryHome9ProductsVO promotion, int position) -> {
+
+            SharedPreferences prefs = this.getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+            String usan = prefs.getString(UserAccountNo, null);
+
+
+//            SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE); // 0 - for private mode
+//            String usan = (pref.getString("UserAccountNo", null));
 
                 switch(position){
                     case 0:
                        // ApplicationConstants.marker = R.mipmap.marker_taxi;
+
                         Intent intent = new Intent(getActivity(), businessappDriversListActivity.class);
+                        intent.putExtra("UserAccountNo", usan);
+                        intent.putExtra("usertypeid", 109);
+//                        intent.putExtra("uid", response.getusreid());
+//                        Intent intent = new Intent(getActivity(), businessappDriversListActivity.class);
                        startActivity(intent);
                         break;
                     case 1:
@@ -163,15 +178,19 @@ public class businessAppFleetownerFragment extends Fragment {
 //                                .commitAllowingStateLoss();
                         break;
                     case 2:
-
-
+                        intent = new Intent(getActivity(), businessappAssignDriverActivity.class);
+                        intent.putExtra("UserAccountNo", usan);
+                        intent.putExtra("usertypeid", 109);
+                        startActivity(intent);
                         break;
                     case 3:
-                        intent = new Intent(getActivity(), customerappTrainBookingSearchActivity.class);
+                        intent = new Intent(getActivity(), businessappStatisticsActivity.class);
                         startActivity(intent);
                         break;
                     case 4:
                         intent = new Intent(getActivity(), businessappTicketAgentListActivity.class);
+                        intent.putExtra("UserAccountNo", usan);
+                        intent.putExtra("usertypeid", 149);
                         startActivity(intent);
                         break;
                     case 5:

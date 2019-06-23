@@ -35,6 +35,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -150,14 +151,16 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mytrips);
         ButterKnife.bind(this);
-        dialog =  new ProgressDialog.Builder(MyTrips.this)
-                .setTitle("Loading...")
-                .setTitleColorRes(R.color.gray)
-                .build();
+//        dialog =  new ProgressDialog.Builder(MyTrips.this)
+//                .setTitle("Loading...")
+//                .setTitleColorRes(R.color.gray)
+//                .build();
         initGoogleAPIClient();//Init Google API Client
         checkPermissions();//Check Permission
-        destlat = Double.parseDouble(ApplicationConstants.sourcelatitude);
-        destlong = Double.parseDouble(ApplicationConstants.sourcelongitude);
+//        destlat = Double.parseDouble(ApplicationConstants.sourcelatitude);
+//        destlong = Double.parseDouble(ApplicationConstants.sourcelongitude);
+         destlat=17.456455;
+         destlong=78.412086;
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -270,7 +273,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
         object.addProperty("DriverPhoneNo", ApplicationConstants.mobileNo);
         object.addProperty("BNo", ApplicationConstants.bNo);
         object.addProperty("DriverRating", ApplicationConstants.rating);
-        object.addProperty("DriverRated", "2");
+        object.addProperty("DriverRated", ApplicationConstants.rating);
         object.addProperty("DriverComments", ApplicationConstants.comments);
         RateTheRide(object);
     }
@@ -353,19 +356,20 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
         // mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setRotateGesturesEnabled(true);
-        latlngnew = new LatLng(0.0, 0.0);
+        latlngnew = new LatLng( destlat, destlong);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latlngnew);
         markerOptions.title("My Position");
         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_taxi));
         marker = mMap.addMarker(markerOptions);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlngnew));
         if (ApplicationConstants.mapflag == 1) {
 
         } else {
-            markerOptions.position(new LatLng(destlat, destlong));
-            markerOptions.title("Customer ");
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-            markerDest = mMap.addMarker(markerOptions);
+//            markerOptions.position(new LatLng(destlat, destlong));
+//            markerOptions.title("Customer ");
+//            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+//            markerDest = mMap.addMarker(markerOptions);
         }
 
     }
@@ -600,8 +604,11 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
         // Toast.makeText(getApplicationContext(), latitude+"   "+longitude, Toast.LENGTH_SHORT).show();
         latLng = latlngnew;
         latlngnew = new LatLng(latitude, longitude);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latlngnew));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(16.5f));
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latlngnew);
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+
+
         if (ApplicationConstants.mapflag != 1) {
             DirectionsTask directionsTask = new DirectionsTask();
             directionsTask.execute();
@@ -616,6 +623,8 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
             DownloadTask downloadTask = new DownloadTask();
             downloadTask.execute(url);
         }*/
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latlngnew));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(16.5f));
     }
 
 
@@ -722,14 +731,14 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
     public void TrackVehicle(){
         JsonObject object = new JsonObject();
         object.addProperty("PMobNo", ApplicationConstants.mobileNo);
-        object.addProperty("latitude", latitude + "");
-        object.addProperty("longitude", longitude + "");
+        object.addProperty("latitude", destlat+ "");
+        object.addProperty("longitude", destlong + "");
         TrackVehicle(object);
     }
 
     public void StartTrip(JsonObject jsonObject){
 
-        StartDialogue();
+      //  StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(MyTrips.this).getrestadapter()
                 .StartTrip(jsonObject)
                 .subscribeOn(Schedulers.io())
@@ -738,7 +747,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                     @Override
                     public void onCompleted() {
                         //  DisplayToast("Successfully Registered");
-                        StopDialogue();
+                   //     StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
@@ -746,7 +755,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 
                             Log.d("OnError ", e.getMessage());
                             DisplayToast("Unable to Register");
-                            StopDialogue();
+                          //  StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -778,7 +787,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 
     public void EndTrip(JsonObject jsonObject){
 
-        StartDialogue();
+      //  StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(MyTrips.this).getrestadapter()
                 .EndTrip(jsonObject)
                 .subscribeOn(Schedulers.io())
@@ -787,7 +796,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                     @Override
                     public void onCompleted() {
                         //  DisplayToast("Successfully Registered");
-                        StopDialogue();
+                     //  StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
@@ -795,7 +804,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 
                             Log.d("OnError ", e.getMessage());
                             DisplayToast("Unable to Register");
-                            StopDialogue();
+                          //  StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -825,6 +834,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                                     paymentmethod = "Debit Card";
                                     break;
                             }
+
                             AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyTrips.this, R.style.Theme_AppCompat_DayNight_Dialog);
                             alertDialog.setCancelable(false);
                             alertDialog.setTitle("Payment Mode - " + paymentmethod);
@@ -834,14 +844,15 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                                         public void onClick(DialogInterface dialog, int which) {
 
                                             RatingBarDialogue cdd = new RatingBarDialogue(MyTrips.this);
+                                            RatingBar ratebar = findViewById(R.id.dialog_ratingbar);
+                                            EditText comm = findViewById(R.id.input_comments);
+                                            ApplicationConstants.rating = ratebar.toString();
+                                            ApplicationConstants.comments = comm.getText().toString();
                                             cdd.setCancelable(false);
                                             cdd.show();
                                         }
                                     });
-
-
                             alertDialog.show();
-
                         }
                     }
                 });
@@ -885,7 +896,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 
     public void RateTheRide(JsonObject jsonObject){
 
-        StartDialogue();
+       // StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(MyTrips.this).getrestadapter()
                 .DriverRatingToRide(jsonObject).timeout(TIMEINTERVAL, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
@@ -894,7 +905,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                     @Override
                     public void onCompleted() {
                         //  DisplayToast("Successfully Registered");
-                        StopDialogue();
+                      //  StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
@@ -902,7 +913,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 
                             Log.d("OnError ", e.getMessage());
                             DisplayToast("Unable to Register");
-                            StopDialogue();
+                          // StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }

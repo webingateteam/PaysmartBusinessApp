@@ -671,9 +671,9 @@ public class Home extends Fragment implements GoogleApiClient.ConnectionCallback
                             ApplicationConstants.destlatitude = c.getDestLatitude();
                             ApplicationConstants.destlongitude = c.getDestLongitude();
                             ApplicationConstants.tripflag = 0;
-                            TripRequest cdd = new TripRequest(getActivity(),Home.this);
-                            cdd.setCanceledOnTouchOutside(false);
-                            cdd.show();
+//                            TripRequest cdd = new TripRequest(getActivity(),Home.this);
+//                            cdd.setCanceledOnTouchOutside(false);
+//                            cdd.show();
                         }
 
                     }
@@ -724,7 +724,7 @@ public class Home extends Fragment implements GoogleApiClient.ConnectionCallback
 
         StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(getActivity()).getrestadapter()
-                .Getdrivertrips(driverNo)
+                .Getdrivertrips(driverNo,1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<GetdriverTripsResponse>>() {

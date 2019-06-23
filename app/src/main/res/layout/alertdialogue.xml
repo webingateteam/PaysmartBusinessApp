@@ -1,97 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/rectangle_layoutboarder_slim"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:background="@drawable/rectangle_layoutboarder_slim">
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="100dp"
         android:gravity="center"
-        android:textStyle="bold" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/picklocation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/picklocation"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/picklocation"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="@android:color/black"
+        android:layout_marginBottom="18dp"
         android:gravity="center"
-        android:textStyle="bold" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/minsec"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/droplocation"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
     <TextView
         android:id="@+id/droplocation"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/minsec"
+        app:layout_constraintTop_toBottomOf="@+id/picklocation" />
+
     <TextView
         android:id="@+id/minsec"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginBottom="18dp"
         android:gravity="center"
         android:text="@string/time"
         android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/displaytime"
+        app:layout_constraintTop_toBottomOf="@+id/picklocation" />
 
     <TextView
         android:id="@+id/displaytime"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/min_time"
         android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/time"
+        app:layout_constraintTop_toBottomOf="@+id/minsec" />
+
     <TextView
         android:id="@+id/time"
-        android:layout_width="match_parent"
+        android:layout_width="364dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:gravity="center"
+        android:text="@string/seconds_left_toaccept"
         android:textColor="@android:color/black"
-        android:text = "@string/seconds_left_toaccept"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/decline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/minsec" />
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/accept"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:text="@string/accept"
-        android:gravity="center"
-        android:textColor="@color/colorPrimary"
-        android:background="@drawable/rectangle_layoutboarder"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
 
-        />
+        android:background="@drawable/rectangle_layoutboarder"
+        android:gravity="center"
+        android:text="@string/accept"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintEnd_toStartOf="@+id/decline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time" />
+
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/decline"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:text="@string/decline"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="146dp"
+        android:background="@drawable/rectangle_layoutboarder"
         android:gravity="center"
+        android:text="@string/decline"
         android:textColor="@color/red"
-        android:background="@drawable/rectangle_layoutboarder"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/accept"
+        app:layout_constraintTop_toBottomOf="@+id/time" />
 
-    </TableRow>
 
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
 
 
 

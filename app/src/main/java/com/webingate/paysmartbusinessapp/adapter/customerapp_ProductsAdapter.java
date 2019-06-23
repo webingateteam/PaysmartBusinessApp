@@ -75,7 +75,15 @@ public class customerapp_ProductsAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public int getItemCount() {
-        return productsList.size();
+       // return productsList.size();
+        int a ;
+        if(productsList != null && !productsList.isEmpty()) {
+            a = productsList.size();
+        }
+        else {
+            a = 0;
+        }
+        return a;
     }
 
     public class ProductsViewHolder extends RecyclerView.ViewHolder {

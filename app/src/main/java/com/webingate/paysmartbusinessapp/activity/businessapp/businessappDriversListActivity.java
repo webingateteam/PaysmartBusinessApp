@@ -1,8 +1,9 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -17,30 +18,56 @@ import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
-import com.webingate.paysmartbusinessapp.object.Place;
-import com.webingate.paysmartbusinessapp.repository.DriverListRepository;
-import com.webingate.paysmartbusinessapp.repository.directory.PlaceRepository;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
+import org.joda.time.convert.Converter;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class businessappDriversListActivity extends AppCompatActivity {
 
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String pphoto= "pphoto";
+    public static final String email="email";
+    public static final String mobileno= "mobileno";
+    public static final String name="name";
 
-    ArrayList<Place> placeArrayList;
+    Toast toast;
+    ArrayList<DrivermasterResponse> DriverList;
     businessappDriverListAdapter adapter;
     // RecyclerView
     RecyclerView recyclerView;
 
     private boolean twist = false;
-
+    String uaccountno;
+    int typid;
     private LinearLayout linearPhoto;
     private LinearLayout linearVideo;
     private LinearLayout linearCamera;
     private void initData()
     {
-        // get place list
-        placeArrayList = DriverListRepository.getPlaceList();
+
+//        JsonObject object = new JsonObject();
+//        object.addProperty("flag", "I");
+//        object.addProperty("Firstname", "");
+//        object.addProperty("lastname", "");
+//        object.addProperty("AuthTypeId", "2");
+//        object.addProperty("Password", "");
+//        object.addProperty("Mobilenumber", "");
+//        object.addProperty("Email", "");
+//        object.addProperty("Email", "");
+
+        Intent intent =getIntent();
+        uaccountno=intent.getStringExtra("UserAccountNo");
+        typid=intent.getIntExtra("usertypeid",0);
+        GetDriversList( ApplicationConstants.userAccountNo,109);
     }
 
     private void initUI()
@@ -48,30 +75,25 @@ public class businessappDriversListActivity extends AppCompatActivity {
         initToolbar();
 
         // get list adapter
-        adapter = new businessappDriverListAdapter(placeArrayList);
 
+        adapter = new businessappDriverListAdapter(null);
         // get recycler view
         recyclerView = findViewById(R.id.placeList1RecyclerView);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        //recyclerView.setAdapter(adapter);
     }
     private void initDataBindings()
     {
-        // bind adapter to recycler
-        recyclerView.setAdapter(adapter);
+      //  DriverList = response;
+                // bind adapter to recycler
+      //  recyclerView.setAdapter(adapter);
     }
     private void initActions()
     {
-        adapter.setOnItemClickListener((view, obj, position) ->
-                {
-        Toast.makeText(this, "Selected : " + obj.name, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, businessappDriverDetailsActivity.class);
-        startActivity(intent);
 
-    }
-
-        );
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,11 +138,24 @@ public class businessappDriversListActivity extends AppCompatActivity {
             }
         });
 
+        fab.setOnClickListener(
+
+                v ->
+                {
+                   // Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, businessappNewDriverActivity.class);
+                    startActivity(intent);
+                }
+
+                //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show()
+
+        );
+
         fabVideo.setOnClickListener(
 
                 v ->
                 {
-                    Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappNewVehicleActivity.class);
                     startActivity(intent);
                 }
@@ -131,18 +166,107 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
         fabCamera.setOnClickListener(v ->
         {
-            Toast.makeText(getApplicationContext(), "Open Camera clicked", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Open Camera clicked", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, businessappNewStaffActivity.class);
             startActivity(intent);
         });
 
         fabPhoto.setOnClickListener(v ->
         {
-            Toast.makeText(getApplicationContext(), "View Photos clicked", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "View Photos clicked", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, businessappNewDriverActivity.class);
             startActivity(intent);
 
         });
+    }
+
+    ArrayList<DrivermasterResponse>  response;
+
+    public void GetDriversList(String acct,int uit ){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
+                .GetDriverList_usertype(acct,uit)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<DrivermasterResponse>>() {
+
+                    @Override
+                    public void onCompleted() {
+                       // DisplayToast("Successfully Registered");
+                        //StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            Log.d("OnError ", e.getMessage());
+                            //DisplayToast("Error");
+                            //StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<DrivermasterResponse> responselist) {
+                        DriverList= (ArrayList <DrivermasterResponse>) responselist;
+                     //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                     //   SharedPreferences.Editor editor = sharedpreferences.edit();
+                      //  editor.putString(Emailotp, response.getEmail());
+                    //    editor.commit();
+                        //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
+                       // DriverList
+                        adapter = new businessappDriverListAdapter(DriverList);
+                        recyclerView.setAdapter(adapter);
+
+                        adapter.setOnItemClickListener((view, obj, position) ->
+                                {
+                                    //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+
+                                    GoToDetails(obj);
+                                }
+                        );
+                       // adapter.notifyDataSetChanged();
+                       // finish();
+                    }
+                });
+
+
+    }
+
+    public  void GoToDetails(DrivermasterResponse obj)
+    {
+        //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+           SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+           SharedPreferences.Editor editor = sharedpreferences.edit();
+           editor.putString(pphoto, (obj.getUserPhoto()!=null?obj.getUserPhoto():null));
+           editor.putString(email,obj.getEmail());
+           editor.putString(mobileno,obj.getMobilenumber());
+           editor .putString(name,obj.getNAme());
+           editor.commit();
+
+           ApplicationConstants.drivername=obj.getNAme();
+           ApplicationConstants.drivermno=obj.getMobilenumber();
+           ApplicationConstants.driveremail=obj.getEmail();
+           ApplicationConstants.driverpic=(obj.getUserPhoto()!=null?obj.getUserPhoto():null);
+//           ApplicationConstants.driverid=Integer.toString(obj.getDId());
+        ApplicationConstants.driverid=obj.getUserAccountNo();
+        Intent intent = new Intent(this, businessappDriverDetailsActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    public void DisplayToast(String text){
+        if(toast!=null){
+            toast.cancel();
+            toast=null;
+
+        }
+        toast= Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT);
+        toast.show();
+
     }
 
     //region Init Toolbar

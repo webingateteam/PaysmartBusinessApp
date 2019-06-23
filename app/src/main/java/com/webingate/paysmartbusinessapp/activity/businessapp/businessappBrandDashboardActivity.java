@@ -1,12 +1,15 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,21 +18,50 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.UserInformationResponse;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppBrandFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDashboardFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDriverDashboardFragment;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
+import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
 public class businessappBrandDashboardActivity extends AppCompatActivity {
+
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String Username = "nameKey";
+    public static final String Phone = "phoneKey";
+    public static final String Email = "emailKey";
+    public static final String UserAccountNumber = "UserAccountNo";
+    public static final String usertypeid = "usertypeid";
+
+    private boolean twist = false;
+
+    private LinearLayout linearPhoto;
+    private LinearLayout linearVideo;
+    private LinearLayout linearCamera;
+
+    String acntno;
+    int utype;
+
+    Toast toast;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_branddashboard_activity);
+        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        acntno = prefs.getString(UserAccountNumber, null);
+        utype = prefs.getInt(usertypeid, 0);
 
         initData();
 
@@ -38,6 +70,68 @@ public class businessappBrandDashboardActivity extends AppCompatActivity {
         initDataBinding();
 
         initAction();
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fabVideo = findViewById(R.id.fab_video);
+        FloatingActionButton fabCamera = findViewById(R.id.fab_camera);
+        FloatingActionButton fabPhoto = findViewById(R.id.fab_photo);
+
+
+        linearVideo = findViewById(R.id.linearVideo);
+        linearPhoto = findViewById(R.id.linearPhoto);
+        linearCamera = findViewById(R.id.linearCamera);
+
+        Utils.hideFirstFab(linearVideo);
+        Utils.hideFirstFab(linearCamera);
+        Utils.hideFirstFab(linearPhoto);
+
+        fab.setOnClickListener(v -> {
+
+            twist = Utils.twistFab(v, !twist);
+
+            if (twist) {
+
+                Utils.showFab(linearVideo);
+                Utils.showFab(linearCamera);
+                Utils.showFab(linearPhoto);
+
+            } else {
+
+                Utils.hideFab(linearVideo);
+                Utils.hideFab(linearCamera);
+                Utils.hideFab(linearPhoto);
+
+            }
+        });
+
+        fabVideo.setOnClickListener(
+
+                v ->
+                {
+                    Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, businessappNewVehicleActivity.class);
+                    startActivity(intent);
+                }
+
+                //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show()
+
+        );
+
+        fabCamera.setOnClickListener(v ->
+                {
+                    Toast.makeText(getApplicationContext(), "Open Camera clicked", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, businessappNewBusinessOwnerActivity.class);
+                    startActivity(intent);
+                }
+        );
+
+        fabPhoto.setOnClickListener(v ->
+        {
+            Toast.makeText(getApplicationContext(), "View Photos clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, businessappNewDriverActivity.class);
+            startActivity(intent);
+
+        });
     }
 
     @Override
@@ -87,10 +181,11 @@ public class businessappBrandDashboardActivity extends AppCompatActivity {
 //                    loadFragment(new AppDirectoryHome3Fragment());
 //                    break;
                 case R.id.profileMenu:
+                    GetUserInformation(acntno,utype);
                     //loadFragment(new AppDirectoryHome4Fragment());
 
-                    Intent intent = new Intent(this, customerappUserprofileActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(this, businessappBrandAmbassadorprofileActivity.class);
+//                    startActivity(intent);
                     break;
                 default:
                     loadFragment(new businessAppDashboardFragment());
@@ -143,6 +238,78 @@ public class businessappBrandDashboardActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.e("TEAMPS", "Error in set display home as up enabled.");
         }
+    }
+
+    public void GetUserInformation(String acct,int uit){
+
+        //StartDialogue();
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
+                .GetUserInformation(acct,uit)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<UserInformationResponse>>() {
+                    @Override
+                    public void onCompleted() {
+                        DisplayToast("User Information Succesfull");
+                        //   StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            Log.d("OnError ", e.getMessage());
+                            //DisplayToast("User Information Failed");
+//                            StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<UserInformationResponse> responseList) {
+                        UserInformationResponse response=responseList.get(0);
+                        if(response.getCode()!=null){
+                            DisplayToast(response.getDescription());
+                        }else {
+                            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                            editor.putString(UserAccountNumber, response.getUserAccountNo());
+                            editor.putString(Email, response.getEmail());
+                            editor.putString(Username, response.getUsername());
+                            editor.putString(Phone, response.getMobilenumber());
+                            //Intent intent = new Intent(customerappUserprofileActivity.this,customerappUserprofileActivity.class);
+                            editor.commit();
+                            startActivity(new Intent(businessappBrandDashboardActivity.this, customerappUserprofileActivity.class));
+                            finish();
+                        }
+
+                        //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                        //   SharedPreferences.Editor editor = sharedpreferences.edit();
+                        //  editor.putString(Emailotp, response.getEmail());
+                        //    editor.commit();
+                        //startActivity(new Intent(busianessappEOTPVerificationActivity.this, login_activity.class));
+                        // DriverList
+                        //adapter = new businessappDriverTripslistAdapter(DrivertripList);
+                        //recyclerView.setAdapter(adapter);
+
+//                       // adapter.setOnItemClickListener((view, obj, position) ->
+//                                {
+//                                    //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+//
+//                                    GoToDetails(obj);
+//                                }
+//                        );
+                    }
+                });
+    }
+    public void DisplayToast(String text){
+        if(toast!=null){
+            toast.cancel();
+            toast=null;
+
+        }
+        toast=Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT);
+        toast.show();
+
     }
 
     private void loadFragment(Fragment fragment) {

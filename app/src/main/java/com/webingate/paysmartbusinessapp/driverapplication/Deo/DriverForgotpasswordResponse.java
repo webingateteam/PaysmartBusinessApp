@@ -26,7 +26,11 @@ public class DriverForgotpasswordResponse{
 
 	@SerializedName("Code")
 	private String  Code;
+	@SerializedName("Email")
+	private String  Email;
 
+	@SerializedName("UserAccountNo")
+	private String  UserAccountNo;
 
 	@SerializedName("Description")
 	private String  Description;
@@ -38,12 +42,24 @@ public class DriverForgotpasswordResponse{
 	public String getPasswordotp(){
 		return passwordotp;
 	}
+	public String getemail(){
+		return Email;
+	}
+
+	public void setUserAccountNo(String UserAccountNo){
+		this.UserAccountNo = UserAccountNo;
+	}
+	public String getUserAccountNo(){
+		return UserAccountNo;
+	}
 
 	@Override
  	public String toString(){
 		return 
 			"DriverForgotpasswordResponse{" + 
-			"passwordotp = '" + passwordotp + '\'' + 
-			"}";
+			"passwordotp = '" + passwordotp + '\'' +
+		    "Email = '" + Email + '\'' +
+			"UserAccountNo = '" + UserAccountNo + '\'' +
+				"}";
 		}
 }
