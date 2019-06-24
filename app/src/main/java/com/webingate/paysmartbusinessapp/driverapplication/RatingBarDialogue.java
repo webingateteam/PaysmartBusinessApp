@@ -2,6 +2,7 @@ package com.webingate.paysmartbusinessapp.driverapplication;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.media.Rating;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -51,6 +52,22 @@ public class RatingBarDialogue extends Dialog implements
         setContentView(R.layout.ratingbar);
         ButterKnife.bind(this);
         submit.setOnClickListener(this);
+
+        submit.setOnClickListener(v->{
+            if (inputComments.getText().toString().matches("")) {
+                Toast.makeText(getContext(), "Please Provide Your Comments", Toast.LENGTH_SHORT).show();
+            } else {
+                //ratingbar.Rating(dialogRatingbar.getRating() + "", inputComments.getText().toString());
+                ApplicationConstants.rating = dialogRatingbar.getRating() + "";
+                ApplicationConstants.comments = inputComments.getText().toString();
+                MyTrips obj = new MyTrips();
+                obj.Rating1();
+                dismiss();
+
+            }
+        });
+
+
     }
 
     @Override
@@ -59,8 +76,8 @@ public class RatingBarDialogue extends Dialog implements
             Toast.makeText(getContext(), "Please Provide Your Comments", Toast.LENGTH_SHORT).show();
         } else {
             ratingbar.Rating(dialogRatingbar.getRating() + "",inputComments.getText().toString());
-           // ApplicationConstants.rating = dialogRatingbar.getRating() + "";
-           // ApplicationConstants.comments = inputComments.getText().toString();
+//            ApplicationConstants.rating = dialogRatingbar.getRating() + "";
+//            ApplicationConstants.comments = inputComments.getText().toString();
            // ApplicationConstants.tripflag = RATETHERIDE;
             dismiss();
         }

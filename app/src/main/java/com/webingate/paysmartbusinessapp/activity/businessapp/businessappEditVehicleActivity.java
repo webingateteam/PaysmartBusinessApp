@@ -181,13 +181,13 @@ public class businessappEditVehicleActivity extends AppCompatActivity {
                     object.addProperty("ChasisNo",chasisno.getText().toString());
                     object.addProperty("Engineno",engineno.getText().toString());
                     object.addProperty("FleetOwnerCode","");
-                    object.addProperty("VehicleTypeId","Sedan");
+                    object.addProperty("VehicleTypeId",ApplicationConstants.vtype);
                     object.addProperty("VehicleModelId","");
-                    object.addProperty("VehicleGroupId","Hailing Car");
+                    object.addProperty("VehicleGroupId",ApplicationConstants.vgrp);
                     object.addProperty("ModelYear",modelyear.getText().toString());
                     object.addProperty("Photo", "data:" + ApplicationConstants.document_vformat + ";base64," +  ApplicationConstants.vpicdata);
                     object.addProperty("VehicleCode","12345");
-                    object.addProperty("CountryId","India");
+                    object.addProperty("CountryId",ApplicationConstants.countryid);
                     object.addProperty("change","2");
                     object.addProperty("type","1");
                     VehicleCreation(object);
@@ -263,29 +263,14 @@ public class businessappEditVehicleActivity extends AppCompatActivity {
 //                        DisplayToast("Successfully onNext");
                         VehicleCreationResponce response=responseList.get(0);
                         if(response.getCode()!=null){
-                            DisplayToast(response.getDescription());
+                            DisplayToast(response.getdescription());
                         }else {
                             SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedpreferences.edit();
                             editor.putString(RegistrationNo, response.getRegistrationNo());
-//                            Intent intent = new Intent(businessappNewDriverActivity.this, customerEOTPVerificationActivity.class);
-//                            intent.putExtra("eotp", response.getemailotp());
-//                            intent.putExtra("uid", response.getusreid());
-//                            intent.putExtra("email", response.getemail());
-//                            intent.putExtra("username", response.getusreid());
-//                            intent.putExtra("motp", response.getmotp());
-//                            intent.putExtra("mno", response.getmnumber());
-//                            startActivity(intent);
-//                        editor.putString(Phone, response.getPMobNo());
-//                        editor.putString(Email, response.getEmail());
-//                        editor.putString(Password, response.getPassword());
-//                        editor.putString(Mobileotp, response.getMobileotp());
-//                        editor.putString(Emailotp, response.getEmailotp());
-//                        editor.putString(DRIVERID, response.getDriverId());
-//                        editor.putString(VEHICLEID, response.getVehicleId());
                             editor.commit();
-                            // startActivity(new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class));
-                            //finish();
+//                             startActivity(new Intent(businessappEditVehicleActivity.this, businessappVehicleListActivity.class));
+//                            finish();
                         }
                     }
                 });

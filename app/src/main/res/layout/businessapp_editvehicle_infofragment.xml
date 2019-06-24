@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_grey_100">
+    android:background="@color/md_white_1000">
 
 
     <android.support.constraint.ConstraintLayout
@@ -70,6 +70,33 @@
                     app:layout_constraintEnd_toEndOf="@+id/profileImageView"
                     app:layout_constraintTop_toTopOf="@+id/profileImageView"
                     app:srcCompat="@drawable/baseline_pen_circle_24" />
+
+                <Spinner
+                    android:id="@+id/s_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="@dimen/space_8"
+                    android:layout_weight="1"
+                    app:layout_constraintDimensionRatio="w,1:1"
+                    app:layout_constraintStart_toEndOf="@+id/CountryTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/CountryTextView" />
+
+
+                <TextView
+                    android:id="@+id/CountryTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Country"
+                    android:textColor="@color/colorTextLight"
+                    android:textSize="@dimen/font_body_s_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/s_modelyear" />
+
+
 
                 <TextView
                     android:id="@+id/stateTitleTextView"

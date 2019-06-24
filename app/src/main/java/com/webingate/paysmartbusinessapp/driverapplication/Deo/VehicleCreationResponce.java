@@ -14,9 +14,9 @@ public class VehicleCreationResponce {
 	private String VehicleType;
 
 	@SerializedName("Code")
-	private String code;
+	private String Code;
 
-	@SerializedName("Description")
+	@SerializedName("description")
 	private String description;
 	@SerializedName("Photo")
 	private String Photo;
@@ -48,11 +48,11 @@ public class VehicleCreationResponce {
 	}
 
 	public void setCode(String code){
-		this.code = code;
+		this.Code = Code;
 	}
 
 	public String getCode(){
-		return code;
+		return Code;
 	}
 	public String getPhoto(){
 		return Photo;
@@ -61,11 +61,11 @@ public class VehicleCreationResponce {
 		return Id;
 	}
 
-	public void setDescription(String description){
+	public void setdescription(String description){
 		this.description = description;
 	}
 
-	public String getDescription(){
+	public String getdescription(){
 		return description;
 	}
 

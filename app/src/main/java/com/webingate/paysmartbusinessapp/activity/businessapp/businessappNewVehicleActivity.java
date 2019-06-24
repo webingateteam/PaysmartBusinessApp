@@ -58,6 +58,8 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
     EditText state;
     Toast toast;
     String type,grp;
+    Spinner country;
+    String ctry;
 
     businessAppVehicleInfoFragment userInfoFragment;
 
@@ -165,6 +167,7 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
                     vtype = findViewById(R.id.s_vtype);
                     modelyear = findViewById(R.id.s_modelyear);
                     state = findViewById(R.id.s_state);
+                    country = findViewById(R.id.s_country);
 
                     JsonObject object = new JsonObject();
                     object.addProperty("flag", "I");
@@ -175,24 +178,12 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
                     object.addProperty("ChasisNo",chasisno.getText().toString());
                     object.addProperty("Engineno",engineno.getText().toString());
                     object.addProperty("FleetOwnerCode","");
-                    if(ApplicationConstants.vtype==null){
-                        type = "Sedan";
-                    }
-                    else{
-                        type = ApplicationConstants.vtype;
-                    }
-                    object.addProperty("VehicleTypeId",type);
+                    object.addProperty("VehicleTypeId",ApplicationConstants.vtype);
                     object.addProperty("VehicleModelId","");
-                    if(ApplicationConstants.vgrp==null){
-                        grp = "Hailing Car";
-                    }
-                    else{
-                        grp = ApplicationConstants.vgrp;
-                    }
-                    object.addProperty("VehicleGroupId",grp);
+                    object.addProperty("VehicleGroupId",ApplicationConstants.vgrp);
                     object.addProperty("ModelYear",modelyear.getText().toString());
                     object.addProperty("VehicleCode","12345");
-                    object.addProperty("CountryId","India");
+                    object.addProperty("CountryId", ApplicationConstants.countryid);
                     object.addProperty("change","2");
                     object.addProperty("type","1");
                     VehicleCreation(object);
@@ -270,7 +261,7 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
 //                        DisplayToast("Successfully onNext");
                         VehicleCreationResponce response=responseList.get(0);
                         if(response.getCode()!=null){
-                            DisplayToast(response.getDescription());
+                            DisplayToast(response.getdescription());
                         }else {
                             SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedpreferences.edit();

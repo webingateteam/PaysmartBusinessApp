@@ -133,6 +133,9 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 
     Toast toast;
     ProgressDialog dialog ;
+
+    RatingBar ratingBar;
+    EditText comm;
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -269,6 +272,15 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 
     @Override
     public void Rating(String rating, String comments) {
+        JsonObject object = new JsonObject();
+        object.addProperty("DriverPhoneNo", ApplicationConstants.mobileNo);
+        object.addProperty("BNo", ApplicationConstants.bNo);
+        object.addProperty("DriverRating", ApplicationConstants.rating);
+        object.addProperty("DriverRated", ApplicationConstants.rating);
+        object.addProperty("DriverComments", ApplicationConstants.comments);
+        RateTheRide(object);
+    }
+    public void Rating1() {
         JsonObject object = new JsonObject();
         object.addProperty("DriverPhoneNo", ApplicationConstants.mobileNo);
         object.addProperty("BNo", ApplicationConstants.bNo);
@@ -754,7 +766,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                         try {
 
                             Log.d("OnError ", e.getMessage());
-                            DisplayToast("Unable to Register");
+                            //DisplayToast("Unable to Register");
                           //  StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -844,10 +856,6 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                                         public void onClick(DialogInterface dialog, int which) {
 
                                             RatingBarDialogue cdd = new RatingBarDialogue(MyTrips.this);
-                                            RatingBar ratebar = findViewById(R.id.dialog_ratingbar);
-                                            EditText comm = findViewById(R.id.input_comments);
-                                            ApplicationConstants.rating = ratebar.toString();
-                                            ApplicationConstants.comments = comm.getText().toString();
                                             cdd.setCancelable(false);
                                             cdd.show();
                                         }
@@ -912,7 +920,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                         try {
 
                             Log.d("OnError ", e.getMessage());
-                            DisplayToast("Unable to Register");
+                            //DisplayToast("Unable to Register");
                           // StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -922,12 +930,13 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                     @Override
                     public void onNext(List<DriverRateTheRideResponse> responseList) {
                         DriverRateTheRideResponse response=responseList.get(0);
+                        Intent intent = new Intent();
+                        setResult(1, intent);
                         ApplicationConstants.tripflag = 0;
                         if (line != null)
                             line.remove();
                         mMap.clear();
-                        Intent intent = new Intent();
-                        setResult(1, intent);
+
                         finish();
                     }
                 });

@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,12 +62,13 @@ public class businessappNewDriverActivity extends AppCompatActivity {
     ImageView profileImageView;
     int imagetesting;
 
-
+    String ctry;
 
     EditText email;
     EditText name;
     EditText address;
 
+    Spinner country;
     EditText city;
 
     EditText mno;
@@ -74,6 +76,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
     EditText postal;
     EditText state;
     Toast toast;
+    int ccode;
     RegisterBusinessUsers rlist;
     businessAppDriverUserInfoFragment   userInfoFragment;
     @Override
@@ -167,6 +170,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                     postal = findViewById(R.id.s_postal);
                     state = findViewById(R.id.s_state);
                     profileImageView = findViewById(R.id.profileImageView);
+                    country = findViewById(R.id.s_country);
 
                     JsonObject object = new JsonObject();
                     object.addProperty("flag", "I");
@@ -176,11 +180,18 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                     object.addProperty("Password", "123");
                     object.addProperty("Mobilenumber",mno.getText().toString());
                     object.addProperty("Email",email.getText().toString());
-                    object.addProperty("CountryId","91");
+                    object.addProperty("CountryId",ApplicationConstants.countryid);
                     object.addProperty("VehicleGroupId","");
                     object.addProperty("UserAccountNo","10991"+mno.getText().toString());
                     object.addProperty("usertypeid","109");
                     object.addProperty("isDriverOwned","0");
+                    if(ApplicationConstants.countryid == 101){
+                         ccode = 91;
+                    }
+                    else{
+                        ccode = 263;
+                    }
+                    object.addProperty("CCode",ccode);
                     object.addProperty("DPhoto",(((imagetesting==1)?("data:" + ApplicationConstants.document_format + ";base64," +  ApplicationConstants.picdata):"")));
                     RegisterDriver(object);
 
@@ -240,7 +251,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                 .subscribe(new Subscriber<List<RegisterBusinessUsers>>() {
                     @Override
                     public void onCompleted() {
-                        DisplayToast("Successfully onCompleted");
+                        //DisplayToast("Successfully onCompleted");
                         //StopDialogue();
                     }
                     @Override
@@ -281,8 +292,8 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                              List<RegisterBusinessUsers> rlist=responseList;
                             editor.commit();
 
-                            // startActivity(new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class));
-                            finish();
+                             //startActivity(new Intent(businessappNewDriverActivity.this, businessappDriversListActivity.class));
+                           // finish();
                         }
                     }
                 });

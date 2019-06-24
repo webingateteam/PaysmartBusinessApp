@@ -283,6 +283,9 @@ public class businessappVehicleListActivity extends AppCompatActivity {
         ApplicationConstants.Vid=Integer.toString(obj.getId());
         ApplicationConstants.chasisNo = obj.getChasisNo();
         ApplicationConstants.engineNo = obj.getEngineno();
+        ApplicationConstants.vgrp = String.valueOf(obj.getVehicleGroupId());
+        ApplicationConstants.vtype = String.valueOf(obj.getVehicleTypeId());
+        ApplicationConstants.country = obj.getCountry();
         Intent intent = new Intent(this, businessappVehicleDetailsActivity.class);
         startActivity(intent);
     }

@@ -19,6 +19,12 @@ public class GetVehicleListResponse {
 	@SerializedName("VehicleCode")
 	private String VehicleCode;
 
+	@SerializedName("VehicleGroupId")
+	private int VehicleGroupId;
+
+	@SerializedName("VehicleTypeId")
+	private int VehicleTypeId;
+
 	@SerializedName("VehicleType")
 	private String VehicleType;
 
@@ -33,6 +39,28 @@ public class GetVehicleListResponse {
 
 	@SerializedName("Engineno")
 	private String Engineno;
+
+	@SerializedName("CountryId")
+	private int CountryId;
+
+	@SerializedName("Country")
+	private String Country;
+
+	public String getCountry(){
+		return Country;
+	}
+
+	public int getCountryId(){
+		return CountryId;
+	}
+
+	public int getVehicleGroupId(){
+		return VehicleGroupId;
+	}
+
+	public int getVehicleTypeId(){
+		return VehicleTypeId;
+	}
 
 	public void setChasisNo(String ChasisNo){
 		this.ChasisNo = ChasisNo;

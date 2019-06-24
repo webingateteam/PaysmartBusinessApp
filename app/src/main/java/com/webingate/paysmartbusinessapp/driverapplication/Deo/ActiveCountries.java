@@ -23,7 +23,7 @@ public class ActiveCountries {
     @SerializedName("Code")
     private String code;
 
-
+    @SerializedName("Id") private int Id;
     public String getCode() {
         return code;
     }
@@ -48,9 +48,14 @@ public class ActiveCountries {
         return ISOCode;
     }
 
+    public int getId(){
+        return Id;
+    }
+
     public void setName(String Name){
         this.Name = Name;
     }
+
 
     public String getName(){
         return Name;

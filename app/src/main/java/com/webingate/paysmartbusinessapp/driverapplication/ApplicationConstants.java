@@ -75,7 +75,8 @@ public class ApplicationConstants {
     public static String Vid;
     public static String vgrp;
     public static String vtype;
-
+    public static Integer countryid;
+    public static String country;
 
 
 

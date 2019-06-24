@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.ConfigResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
+import com.webingate.paysmartbusinessapp.driverapplication.Deo.ActiveCountries;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import java.io.ByteArrayOutputStream;
@@ -64,15 +65,19 @@ public class businessAppVehicleEditInfoFragment extends Fragment implements Adap
     @BindView(R.id.editvphoto)
     ImageView vphoto;
     Toast toast;
+    Spinner country;
 
 
-    int grp,type;
+    int grp,type,ct;
     List<ConfigResponse> res,res1;
 
-    ArrayAdapter arlist,groupadapter;
+    ArrayAdapter arlist,groupadapter,countries;
 
     List<String> vtypes = new ArrayList<String>();
     List<String> typegroup = new ArrayList<String>();
+    List<String> ctry = new ArrayList<String>();
+    List<ActiveCountries> res2;
+
 
     @Nullable
     @Override
@@ -87,6 +92,8 @@ public class businessAppVehicleEditInfoFragment extends Fragment implements Adap
         vgroup.setOnItemSelectedListener(this);
         vtype = view.findViewById(R.id.s_vtype);
         vtype.setOnItemSelectedListener(this);
+        country = view.findViewById(R.id.s_country);
+        country.setOnItemSelectedListener(this);
 
         initUI(view);
 //
@@ -97,8 +104,10 @@ public class businessAppVehicleEditInfoFragment extends Fragment implements Adap
         return view;
     }
     private void initData() {
+
         GetVgrplist(4);
         GetVTypeslist(12);
+        GetActiveCountries(1);
     }
     private void initUI(View view) {
 
@@ -235,11 +244,14 @@ public class businessAppVehicleEditInfoFragment extends Fragment implements Adap
 
                         for (int i = 0; i < res.size(); i++) {
                             typegroup.add(res.get(i).getName());
+//                            if( res.get(i).getId()==Integer.parseInt(ApplicationConstants.vgrp)){
+//                            b=i;
+//                            }
                         }
                         groupadapter=new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,typegroup);
                         groupadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         vgroup.setAdapter(groupadapter);
-                        int a =groupadapter.getPosition(ApplicationConstants.vgrp);
+                        int a =groupadapter.getPosition(ApplicationConstants.vehiclegroup);
                         vgroup.setSelection(a);
                     }
 
@@ -276,9 +288,48 @@ public class businessAppVehicleEditInfoFragment extends Fragment implements Adap
                         arlist=new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,vtypes);
                         arlist.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         vtype.setAdapter(arlist);
-                        int a =arlist.getPosition(ApplicationConstants.vtype);
-                        vtype.setSelection(a);
+                        int b =arlist.getPosition(ApplicationConstants.vehicleType);
+                        vtype.setSelection(b);
                         //spinnergametype.setAdapter(arlist);
+                    }
+                });
+    }
+
+    public void GetActiveCountries(int active){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(getContext()).getrestadapter()
+                .GetActiveCountry(active)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<ActiveCountries>>() {
+                    @Override
+                    public void onCompleted() {
+                        //DisplayToast("Successfully Registered");
+                        //StopDialogue();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            Log.d("OnError ", e.getMessage());
+                            //DisplayToast("Error");
+                            //StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List <ActiveCountries> list) {
+                        res2 = list;
+                        for (int i = 0; i < res2.size(); i++) {
+                            ctry.add(res2.get(i).getName());
+                        }
+
+                        countries = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, ctry);
+                        countries.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        country.setAdapter(countries);
+                        int c =countries.getPosition(ApplicationConstants.country);
+                        country.setSelection(c);
                     }
                 });
     }
@@ -287,16 +338,24 @@ public class businessAppVehicleEditInfoFragment extends Fragment implements Adap
     public void onItemSelected(AdapterView <?> parent, View view, int position, long id) {
         Spinner vgroup = (Spinner)parent;
         Spinner vtype = (Spinner)parent;
-
+        Spinner country = (Spinner)parent;
+        if(country.getId() == R.id.s_country)
+        {
+            // Toast.makeText(this, "Your are selected :" + res.get(position).getName(),Toast.LENGTH_SHORT).show();
+            ct=position;
+            ApplicationConstants.countryid=res2.get(ct).getId();
+        }
         if(vgroup.getId() == R.id.s_vgroup)
         {
             // Toast.makeText(this, "Your are selected :" + res.get(position).getName(),Toast.LENGTH_SHORT).show();
             grp=position;
+            ApplicationConstants.vgrp=String.valueOf(res.get(grp).getId());
         }
         if(vtype.getId() == R.id.s_vtype)
         {
             //  Toast.makeText(this, "Your are selected :" + res1.get(position).getName(),Toast.LENGTH_SHORT).show();
             type=position;
+            ApplicationConstants.vtype=String.valueOf(res1.get(type).getId());
         }
     }
 
