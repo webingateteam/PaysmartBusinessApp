@@ -208,6 +208,14 @@ public class businessappBrandAmbassadorprofileActivity extends AppCompatActivity
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            //finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     public void DisplayToast(String text){
         if(toast!=null){

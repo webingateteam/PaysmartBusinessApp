@@ -265,7 +265,7 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
                                     editor.putString(VehicleType, obj.getVehicleType());
                                     editor.commit();
 
-                                    GetDriversList("91");
+                                    GetDriversList("101");
                                 }
                         );
                         //}
@@ -293,14 +293,14 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
 
                     @Override
                     public void onCompleted() {
-                        DisplayToast("Successfully Registered");
+                        //DisplayToast("Successfully Registered");
                         //StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
                         try {
-                            //Log.d("OnError ", e.getMessage());
-                            DisplayToast("Error");
+                            Log.d("OnError ", e.getMessage());
+                            //DisplayToast("Error");
                             //StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();

@@ -68,6 +68,7 @@ import com.google.maps.android.PolyUtil;
 import com.google.maps.android.SphericalUtil;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.TravelMode;
+import com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriverDashboardActivity;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AcceptRejectBookingResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DriverRateTheRideResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.EndtripResponse;
@@ -930,13 +931,14 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                     @Override
                     public void onNext(List<DriverRateTheRideResponse> responseList) {
                         DriverRateTheRideResponse response=responseList.get(0);
-                        Intent intent = new Intent();
-                        setResult(1, intent);
-                        ApplicationConstants.tripflag = 0;
-                        if (line != null)
-                            line.remove();
-                        mMap.clear();
-
+                        //Intent intent = new Intent();
+                        Intent intent= new Intent(MyTrips.this, businessappDriverDashboardActivity.class);
+//                        setResult(1, intent);
+//                        ApplicationConstants.tripflag = 0;
+//                        if (line != null)
+//                            line.remove();
+                        //mMap.clear();
+                       startActivity(intent);
                         finish();
                     }
                 });

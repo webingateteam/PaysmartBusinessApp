@@ -62,7 +62,7 @@ public class RatingBarDialogue extends Dialog implements
                 ApplicationConstants.comments = inputComments.getText().toString();
                 MyTrips obj = new MyTrips();
                 obj.Rating1();
-                dismiss();
+                //dismiss();
 
             }
         });
