@@ -184,7 +184,9 @@ public class businessappFleetownerDashboardActivity extends AppCompatActivity {
 //                    break;
                 case R.id.profileMenu:
                     //loadFragment(new AppDirectoryHome4Fragment());
-                    GetUserInformation(acntno,utype);
+                    startActivity(new Intent(businessappFleetownerDashboardActivity.this, customerappUserprofileActivity.class));
+
+                    //GetUserInformation(acntno,utype);
 //                    Intent intent = new Intent(this, customerappUserprofileActivity.class);
 //                    startActivity(intent);
                     break;
@@ -231,7 +233,17 @@ public class businessappFleetownerDashboardActivity extends AppCompatActivity {
                             ex.printStackTrace();
                         }
                     }
-
+//[Id]
+//                            ,[Username]
+//                            ,[Email]
+//                            ,[Mobilenumber]
+//                            ,[StatusId]
+//                            ,[Firstname]
+//                            ,[lastname]
+//                            ,[AuthTypeId]
+//                            ,[UserAccountNo]
+//                            ,[usertypeid]
+//                            ,UserPhoto
                     @Override
                     public void onNext(List<UserInformationResponse> responseList) {
                         UserInformationResponse response=responseList.get(0);

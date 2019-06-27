@@ -64,6 +64,8 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
     public static final String UserAccountNumber = "UserAccountNo";
     public static final String usertypeid = "usertypeid";
     public static final String VEHICLEID = "vehicleid";
+    public static final String Username = "nameKey";
+
     int  a=0;
     private String response;
     Toast toast;
@@ -353,6 +355,10 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
 //                            editor.putString(Phone, mobileNo.getText().toString());
 //                            editor.putString(Emailotp, null);
 //                            editor.putString(Mobileotp, null);
+                            editor.putString(UserAccountNumber, credentialsResponse.getuseraccountno());
+                            editor.putString(Email, credentialsResponse.getEmail());
+                            editor.putString(Username, credentialsResponse.getusernamae());
+                            editor.putString(Phone, credentialsResponse.getMobilenumber());
                             editor.commit();
                             ApplicationConstants.fid = credentialsResponse.getId();
                             ApplicationConstants.mobileNo = mobileNo.getText().toString();

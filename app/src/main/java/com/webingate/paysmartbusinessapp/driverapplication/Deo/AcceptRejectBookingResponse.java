@@ -16,8 +16,33 @@ public class AcceptRejectBookingResponse {
 	@SerializedName("Username")
 	private String username;
 
-	@SerializedName("lastname")
-	private String lastname;
+	@SerializedName("lastname") private String lastname;
+
+	@SerializedName("SrcLatitude") private Double SrcLatitude;
+	@SerializedName("SrcLongitude") private Double SrcLongitude;
+	@SerializedName("Latitude") private Double Latitude;
+	@SerializedName("Longitude") private Double Longitude;
+	@SerializedName("DestLatitude") private Double DestLatitude;
+	@SerializedName("DestLongitude") private Double DestLongitude;
+	public Double getSrcLatitude(){
+		return SrcLatitude;
+	}
+	public Double getSrcLongitude(){
+		return SrcLongitude;
+	}
+	public Double getLatitude(){
+		return Latitude;
+	}
+	public Double getLongitude(){
+		return Longitude;
+	}
+	public Double getDestLatitude(){
+		return DestLatitude;
+	}
+	public Double getDestLongitude(){
+		return DestLongitude;
+	}
+
 
 	public void setFirstname(String firstname){
 		this.firstname = firstname;

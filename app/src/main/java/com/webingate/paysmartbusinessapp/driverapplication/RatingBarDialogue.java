@@ -2,6 +2,7 @@ package com.webingate.paysmartbusinessapp.driverapplication;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.media.Rating;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriverDashboardActivity;
 
 public class RatingBarDialogue extends Dialog implements
         View.OnClickListener {
@@ -62,7 +64,9 @@ public class RatingBarDialogue extends Dialog implements
                 ApplicationConstants.comments = inputComments.getText().toString();
                 MyTrips obj = new MyTrips();
                 obj.Rating1();
-                //dismiss();
+
+                dismiss();
+
 
             }
         });

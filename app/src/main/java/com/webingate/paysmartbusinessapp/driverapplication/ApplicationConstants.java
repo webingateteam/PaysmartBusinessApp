@@ -1,5 +1,6 @@
 package com.webingate.paysmartbusinessapp.driverapplication;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,14 @@ import java.util.List;
  */
 
 public class ApplicationConstants {
+
+    public static Double customerSrcLatitude;
+    public static Double customerSrcLongitude;
+    public static Double customerDestLatitude;
+    public static Double customerDestLongitude;
+    public static Double DriverLatitude;
+    public static Double DriverLongitude;
+
     public static int usertypeid=0;
     public static String id="";
     public static String userAccountNo="";
