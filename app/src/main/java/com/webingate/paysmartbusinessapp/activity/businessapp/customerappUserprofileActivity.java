@@ -104,7 +104,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
         editor.putString(UserAccountNumber, Email);
         editor.commit();
 
-      SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+       SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         em= prefs.getString(Email, null);
        ph= prefs.getString(Phone, null);
        us= prefs.getString(Username, null);
@@ -145,6 +145,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }else {
+            //startActivity(new Intent(this,businessappFleetownerDashboardActivity.class));
             super.onBackPressed();
         }
     }
@@ -339,7 +340,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 
                     @Override
                     public void onCompleted() {
-                        DisplayToast("Successfully Registered");
+                        //DisplayToast("Successfully Registered");
                         //StopDialogue();
                     }
                     @Override

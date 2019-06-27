@@ -507,6 +507,13 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
                         if(isAccepted){
                             ApplicationConstants.customerMobileNo = response.getCustomerPhoneNo();
                               ApplicationConstants.mapflag = 0;
+                              ApplicationConstants.customerSrcLatitude=response.getSrcLatitude();
+                              ApplicationConstants.customerSrcLongitude=response.getSrcLongitude();
+                              ApplicationConstants.DriverLatitude=response.getLatitude();
+                              ApplicationConstants.DriverLongitude=response.getLongitude();
+                              ApplicationConstants.customerDestLatitude=response.getDestLatitude();
+                              ApplicationConstants.customerDestLongitude=response.getDestLongitude();
+
                            // timer.cancel();
                             startActivityForResult(new Intent(businessappDriverDashboardActivity.this, MyTrips.class), MY_TRIP_ACTIVITY);
                         }else {

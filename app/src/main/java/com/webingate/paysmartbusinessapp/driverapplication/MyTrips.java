@@ -129,7 +129,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
     final Handler handler = new Handler();
    // TripsRequest tripsRequest;
     DirectionsResult result;
-    boolean updatemarkers = false;
+    boolean updatemarkers = true;
     private static final int TIMEINTERVAL = 5;
 
     Toast toast;
@@ -159,12 +159,13 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 //                .setTitle("Loading...")
 //                .setTitleColorRes(R.color.gray)
 //                .build();
+        destlat=ApplicationConstants.customerSrcLatitude; //17.4343;
+        destlong=ApplicationConstants.customerSrcLongitude;//78.4465;
         initGoogleAPIClient();//Init Google API Client
         checkPermissions();//Check Permission
 //        destlat = Double.parseDouble(ApplicationConstants.sourcelatitude);
 //        destlong = Double.parseDouble(ApplicationConstants.sourcelongitude);
-         destlat=17.456455;
-         destlong=78.412086;
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -931,15 +932,15 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                     @Override
                     public void onNext(List<DriverRateTheRideResponse> responseList) {
                         DriverRateTheRideResponse response=responseList.get(0);
-                        //Intent intent = new Intent();
+                       // Intent intent = new Intent();
                         Intent intent= new Intent(MyTrips.this, businessappDriverDashboardActivity.class);
-//                        setResult(1, intent);
-//                        ApplicationConstants.tripflag = 0;
-//                        if (line != null)
-//                            line.remove();
-                        //mMap.clear();
-                       startActivity(intent);
-                        finish();
+                        setResult(1, intent);
+                        ApplicationConstants.tripflag = 0;
+                        if (line != null)
+                            line.remove();
+                        mMap.clear();
+                        startActivity(intent);
+                        //finish();
                     }
                 });
     }
