@@ -47,7 +47,8 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
     @BindView(R.id.submitOTPButton)
     Button M_submit;
 
-    String mno,id;
+    String mno;
+    int id;
 
     ImageView bgImageView;
     Button changeButton, resendButton, submitOTPButton;
@@ -58,7 +59,7 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
         setContentView(R.layout.businessapp_motpverification_activity);
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         mno = prefs.getString(UserAccountNo, null);
-        id = prefs.getString(ID, null);
+        id = prefs.getInt(ID, 0);
 
         initUI();
 

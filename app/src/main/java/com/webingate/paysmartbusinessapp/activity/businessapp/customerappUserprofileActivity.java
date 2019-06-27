@@ -99,16 +99,15 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customerapp_userprofile_activity);
-        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString(UserAccountNumber, Email);
-        editor.commit();
 
        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        em= prefs.getString(Email, null);
+       em= prefs.getString(Email, null);
        ph= prefs.getString(Phone, null);
        us= prefs.getString(Username, null);
        firstname = prefs.getString(Username, null);
+       ApplicationConstants.userAccountNo = prefs.getString(UserAccountNumber,null);
+        ApplicationConstants.usertypeid = prefs.getInt(usertypeid,0);
+        ApplicationConstants.pic = prefs.getString(Photo,null);
 
 
         initUI();
@@ -124,11 +123,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 
                 v ->
                 {
-                    ApplicationConstants.email=Email;
-                    ApplicationConstants.username=Username;
-                    ApplicationConstants.mobileNo=Phone;
-                    ApplicationConstants.pic=Photo;
-                    Toast.makeText(getApplicationContext(), "User Details", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "User Details", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappUserDetailsActivity.class);
                     startActivity(intent);
                 }

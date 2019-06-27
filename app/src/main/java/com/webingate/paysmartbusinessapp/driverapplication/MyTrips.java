@@ -932,15 +932,14 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                     @Override
                     public void onNext(List<DriverRateTheRideResponse> responseList) {
                         DriverRateTheRideResponse response=responseList.get(0);
-                       // Intent intent = new Intent();
-                        Intent intent= new Intent(MyTrips.this, businessappDriverDashboardActivity.class);
-                        setResult(1, intent);
-                        ApplicationConstants.tripflag = 0;
-                        if (line != null)
-                            line.remove();
-                        mMap.clear();
-                        startActivity(intent);
-                        //finish();
+//                        Intent intent = new Intent();
+//                       // Intent intent= new Intent(getApplicationContext(), businessappDriverDashboardActivity.class);
+//                        setResult(1, intent);
+////                        ApplicationConstants.tripflag = 0;
+////                        if (line != null)
+////                            line.remove();
+//                        startActivity(intent);
+
                     }
                 });
     }

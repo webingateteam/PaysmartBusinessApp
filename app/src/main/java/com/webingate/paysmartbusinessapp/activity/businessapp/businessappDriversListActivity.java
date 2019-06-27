@@ -53,22 +53,8 @@ public class businessappDriversListActivity extends AppCompatActivity {
     private LinearLayout linearCamera;
     private void initData()
     {
-
-//        JsonObject object = new JsonObject();
-//        object.addProperty("flag", "I");
-//        object.addProperty("Firstname", "");
-//        object.addProperty("lastname", "");
-//        object.addProperty("AuthTypeId", "2");
-//        object.addProperty("Password", "");
-//        object.addProperty("Mobilenumber", "");
-//        object.addProperty("Email", "");
-//        object.addProperty("Email", "");
-
-        Intent intent =getIntent();
          String fid = String.valueOf(ApplicationConstants.fid);
-        uaccountno=intent.getStringExtra("UserAccountNo");
-        typid=intent.getIntExtra("usertypeid",0);
-        GetDriversList( fid,109);
+        GetDriversList(fid,109);
     }
 
     private void initUI()
@@ -183,7 +169,7 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
     ArrayList<DrivermasterResponse>  response;
 
-    public void GetDriversList(String acct,int uit ){
+    public void GetDriversList(String acct,int uit){
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
                 .GetDriverList_usertype(acct,uit)
                 .subscribeOn(Schedulers.io())

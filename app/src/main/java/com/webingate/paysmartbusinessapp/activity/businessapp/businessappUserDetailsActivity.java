@@ -85,7 +85,8 @@ public class businessappUserDetailsActivity extends AppCompatActivity {
         ApplicationConstants.email= prefs.getString(Email, null);
         ApplicationConstants.mobileNo= prefs.getString(Phone, null);
         ApplicationConstants.pic= prefs.getString(Photo, null);
-
+        ApplicationConstants.userAccountNo = prefs.getString(Photo, null);
+        ApplicationConstants.usertypeid = prefs.getInt(usertypeid,0);
 
         initData();
 

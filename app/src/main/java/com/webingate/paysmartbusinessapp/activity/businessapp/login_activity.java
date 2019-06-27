@@ -73,7 +73,8 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
     TextView forgotTextView, signUpTextView;
     private boolean isServerOn;
     public final static int REQUEST_CODE = 10101;
-    String mobNo, id, emailOTP, mobileOTP;
+    String mobNo, emailOTP, mobileOTP;
+    int id;
 
     private static final int PERMISSIONS_ALL = 7;
     String[] PERMISSIONS = {
@@ -118,13 +119,15 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
         checkServerTask.execute();
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         mobNo = prefs.getString(Phone, null);
-        id = prefs.getString(ID, null);
+        id = prefs.getInt(ID, 0);
         emailOTP = prefs.getString(Emailotp, null);
         mobileOTP = prefs.getString(Mobileotp, null);
+        ApplicationConstants.mobileNo = prefs.getString(Phone,null);
         ApplicationConstants.username = prefs.getString(Name, null);
         ApplicationConstants.email = prefs.getString(Email, null);
         ApplicationConstants.dateofbirth = prefs.getString(Dateofbirth, null);
         ApplicationConstants.profilepic = prefs.getString(Profilepic, null);
+        ApplicationConstants.usertypeid = prefs.getInt(usertypeid,0);
 
         // Making notification bar transparent
         if (Build.VERSION.SDK_INT >= 21) {
@@ -196,27 +199,28 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
 
             if (mobileNo.getText().toString().matches("") || textPassword.getText().toString().matches("")) {
                 Toast.makeText(getApplicationContext(), "Please Enter details", Toast.LENGTH_SHORT).show();
-            }else if(mobileNo.getText().equals("1234567890")){
-                SharedPreferences sharedPref = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-//                            SharedPreferences pref = getApplicationContext().getSharedPreferences(MyPREFERENCES, 0);
-//                            Editor editor = pref.edit();
-                editor.putString(UserAccountNumber, "109911234567890");
-                editor.putInt(usertypeid, 109);
-                // editor.putInt(usertypeid, credentialsResponse.getusertypeid());
-////                            editor.putString(VEHICLEID, credentialsResponse.getVehicleId());
-//                            editor.putString(Phone, mobileNo.getText().toString());
-//                            editor.putString(Emailotp, null);
-//                            editor.putString(Mobileotp, null);
-                editor.commit();
-                ApplicationConstants.mobileNo = mobileNo.getText().toString();
-                ApplicationConstants.userAccountNo="109911234567890";
-                ApplicationConstants.usertypeid=109;
-               // ApplicationConstants.upic=credentialsResponse.getUserPhoto();
-                //startActivity(new Intent(this, MainActivity.class));
-                GoToDashboard();
-                finish();
             }
+//            else if(mobileNo.getText().equals("1234567890")){
+//                SharedPreferences sharedPref = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+//                SharedPreferences.Editor editor = sharedPref.edit();
+////                            SharedPreferences pref = getApplicationContext().getSharedPreferences(MyPREFERENCES, 0);
+////                            Editor editor = pref.edit();
+//                editor.putString(UserAccountNumber, "109911234567890");
+//                editor.putInt(usertypeid, 109);
+//                // editor.putInt(usertypeid, credentialsResponse.getusertypeid());
+//////                            editor.putString(VEHICLEID, credentialsResponse.getVehicleId());
+////                            editor.putString(Phone, mobileNo.getText().toString());
+////                            editor.putString(Emailotp, null);
+////                            editor.putString(Mobileotp, null);
+//                editor.commit();
+//                ApplicationConstants.mobileNo = mobileNo.getText().toString();
+//                ApplicationConstants.userAccountNo="109911234567890";
+//                ApplicationConstants.usertypeid=109;
+//               // ApplicationConstants.upic=credentialsResponse.getUserPhoto();
+//                //startActivity(new Intent(this, MainActivity.class));
+//                GoToDashboard();
+//                finish();
+//            }
             else {
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("usertypeid", selectype());
@@ -254,6 +258,34 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
         }
         else {
             return 200;
+        }
+    }
+
+    private void GoToDashboardDetails(){
+        if(ApplicationConstants.usertypeid==109){
+            Intent intent = new Intent(this, businessappDriverDashboardActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        if(ApplicationConstants.usertypeid==110){
+            Intent intent = new Intent(login_activity.this,businessappFleetownerDashboardActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        if(ApplicationConstants.usertypeid==149){
+            Intent intent = new Intent(this, businessappticketagentDashboardActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        if(ApplicationConstants.usertypeid==150){
+            Intent intent = new Intent(this, businessappBrandDashboardActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        if(ApplicationConstants.usertypeid==151){
+            Intent intent = new Intent(this, businessappBusinessownerDashboardActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -352,9 +384,9 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
                             editor.putInt(usertypeid, credentialsResponse.getusertypeid());
                            // editor.putInt(usertypeid, credentialsResponse.getusertypeid());
 ////                            editor.putString(VEHICLEID, credentialsResponse.getVehicleId());
-//                            editor.putString(Phone, mobileNo.getText().toString());
-//                            editor.putString(Emailotp, null);
-//                            editor.putString(Mobileotp, null);
+                            editor.putInt(ID, credentialsResponse.getId());
+                            editor.putString(Emailotp, null);
+                            editor.putString(Mobileotp, null);
                             editor.putString(UserAccountNumber, credentialsResponse.getuseraccountno());
                             editor.putString(Email, credentialsResponse.getEmail());
                             editor.putString(Username, credentialsResponse.getusernamae());
@@ -515,30 +547,34 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
             if (dialog.isShowing())
                 dialog.dismiss();
             if (isServerOn) {
-//                if (mobNo != null && emailOTP == null && mobileOTP == null) {
-//                    //ApplicationConstants.mobileNo = mobNo;
-//                    ApplicationConstants.id = id;
-//                    startActivity(new Intent(login_activity.this, businessappMOTPVerificationActivity.class));
-//                    finish();
-//                } else if (mobNo != null && (emailOTP != null || mobileOTP != null)) {
-//                    startActivity(new Intent(login_activity.this, businessappEOTPVerificationActivity.class));
-//                    finish();
-//                }
                 if (emailOTP != null && mobileOTP != null) {
-//                    ApplicationConstants.mobileNo = mobNo;
-//                    ApplicationConstants.id = id;
-//                    startActivity(new Intent(login_activity.this,customerEOTPVerificationActivity.class));
-//                    finish();
-                } else {
-                    if (emailOTP == null && mobileOTP != null) {
-//                        startActivity(new Intent(login_activity.this, customerMOTPVerificationActivity.class));
-//                        finish();
-                    } else if(emailOTP != null && mobileOTP == null){
-
-//                        startActivity(new Intent(login_activity.this,customerEOTPVerificationActivity.class));
-//                        finish();
-                    }
+                    ApplicationConstants.id = String.valueOf(id);
+                    startActivity(new Intent(login_activity.this,businessappEOTPVerificationActivity.class));
+                    finish();
                 }
+                else if (emailOTP != null && mobileOTP == null){
+                    startActivity(new Intent(login_activity.this,businessappEOTPVerificationActivity.class));
+                    finish();
+                }
+                else if(emailOTP == null && mobileOTP != null){
+                    startActivity(new Intent(login_activity.this,businessappMOTPVerificationActivity.class));
+                    finish();
+                }
+                else if(ApplicationConstants.mobileNo!=null){
+                    GoToDashboardDetails();
+                    //finish();
+                }
+
+//                else {
+//                    if (emailOTP == null && mobileOTP != null) {
+////                        startActivity(new Intent(login_activity.this, customerMOTPVerificationActivity.class));
+////                        finish();
+//                    } else if(emailOTP != null && mobileOTP == null){
+//
+////                        startActivity(new Intent(login_activity.this,customerEOTPVerificationActivity.class));
+////                        finish();
+//                    }
+//                }
             } else {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(login_activity.this, R.style.Theme_AppCompat_DayNight_Dialog);
                 alertDialog.setTitle("Please Check Server or Please check Your Interenet Connection");

@@ -49,7 +49,8 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
 
     ImageView bgImageView;
     Button changeButton, resendButton, submitOTPButton;
-    String mno,email,id;
+    String mno,email;
+    int id;
 
 
     @Override
@@ -59,7 +60,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         mno = prefs.getString(UserAccountNo, null);
         email = prefs.getString(Email, null);
-        id = prefs.getString(ID, null);
+        id = prefs.getInt(ID, 0);
         initUI();
 
         initActions();

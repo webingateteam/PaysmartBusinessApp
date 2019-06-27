@@ -64,14 +64,13 @@ public class RatingBarDialogue extends Dialog implements
                 ApplicationConstants.comments = inputComments.getText().toString();
                 MyTrips obj = new MyTrips();
                 obj.Rating1();
-
+                getOwnerActivity().startActivity(new Intent(getContext(),businessappDriverDashboardActivity.class));
+                getOwnerActivity().finish();
                 dismiss();
 
 
             }
         });
-
-
     }
 
     @Override
@@ -86,4 +85,6 @@ public class RatingBarDialogue extends Dialog implements
             dismiss();
         }
     }
+
+
 }
