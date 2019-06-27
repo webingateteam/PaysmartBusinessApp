@@ -43,6 +43,11 @@ public class BusinessappuserValidateResp {
     @SerializedName("usertypeid")
     private int usertypeid;
 
+    @SerializedName("CountryId")
+    private int CountryId;
+
+    public int getId() { return Id;}
+    public int getCountryId() { return CountryId;}
     public String getusernamae() { return Username;}
     public String getEmail() {
         return Email;

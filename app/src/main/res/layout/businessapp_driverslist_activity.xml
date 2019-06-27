@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,16 +20,33 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
+
+
+    <EditText
+        android:id="@+id/filtername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_60"
+        android:layout_marginStart="@dimen/space_16"
+        android:hint="Please Enter Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/placeList1RecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_100"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_margin="@dimen/space_4"/>
+        android:layout_margin="@dimen/space_4"
+        app:layout_constraintTop_toBottomOf="@+id/filtername"/>
+
+
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingBottom="@dimen/space_16"
         android:paddingLeft="@dimen/space_16"
         android:paddingRight="@dimen/space_16"
@@ -49,7 +67,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end|right"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:id="@+id/linearPhoto"
@@ -169,9 +189,10 @@
             app:backgroundTint="@color/colorPrimary"
             app:fabSize="normal"
             app:rippleColor="@android:color/white"
-            app:srcCompat="@drawable/ic_add" />
+            app:srcCompat="@drawable/ic_add"
+           />
 
     </LinearLayout>
 
 
-</android.support.design.widget.CoordinatorLayout>
+</android.support.constraint.ConstraintLayout>

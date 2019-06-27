@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class DrivermasterResponse {
 
+	@SerializedName("Id")
+	private int Id;
+
 	@SerializedName("PPin")
 	private Object pPin;
 
@@ -65,6 +68,10 @@ public class DrivermasterResponse {
 
 	@SerializedName("DOJ")
 	private Object dOJ;
+
+	public int getId(){
+		return Id;
+	}
 
 	public void setPPin(Object pPin){
 		this.pPin = pPin;

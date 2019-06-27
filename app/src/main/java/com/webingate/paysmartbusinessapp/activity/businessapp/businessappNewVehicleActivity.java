@@ -177,7 +177,7 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
                     object.addProperty("RegistrationNo",RegNo.getText().toString());
                     object.addProperty("ChasisNo",chasisno.getText().toString());
                     object.addProperty("Engineno",engineno.getText().toString());
-                    object.addProperty("FleetOwnerCode","");
+                    object.addProperty("FleetOwnerCode",ApplicationConstants.fid);
                     object.addProperty("VehicleTypeId",ApplicationConstants.vtype);
                     object.addProperty("VehicleModelId","");
                     object.addProperty("VehicleGroupId",ApplicationConstants.vgrp);

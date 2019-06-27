@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.businessappAllocatedDriverListAdapter;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AllocatedDriverListResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.utils.Utils;
@@ -51,7 +52,7 @@ public class businessappAssignDriverActivity extends AppCompatActivity {
 //        Intent intent =getIntent();
 //        uaccountno=intent.getStringExtra("UserAccountNo");
 //        typid=intent.getIntExtra("usertypeid",0);
-        GetAllocatedDriverList(-1);
+        GetAllocatedDriverList(ApplicationConstants.fid);
     }
 
 
@@ -96,7 +97,7 @@ public class businessappAssignDriverActivity extends AppCompatActivity {
 
                 v ->
                 {
-                    Toast.makeText(getApplicationContext(), "Assign New Driver", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Assign New Driver", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappNewAssignDriverActivity.class);
                     startActivity(intent);
                 }
@@ -117,14 +118,14 @@ public class businessappAssignDriverActivity extends AppCompatActivity {
 
                     @Override
                     public void onCompleted() {
-                        DisplayToast("Successfully Registered");
+                        //DisplayToast("Successfully Registered");
                         //StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
                         try {
-                            //Log.d("OnError ", e.getMessage());
-                            DisplayToast("Error");
+                            Log.d("OnError ", e.getMessage());
+                            //DisplayToast("Error");
                             //StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -170,7 +171,7 @@ public class businessappAssignDriverActivity extends AppCompatActivity {
 
     public  void GoToDetails(AllocatedDriverListResponse obj)
     {
-        Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, businessappDriverDetailsActivity.class);
         startActivity(intent);
     }

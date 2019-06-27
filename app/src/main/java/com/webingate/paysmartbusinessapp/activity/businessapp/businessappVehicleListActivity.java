@@ -73,8 +73,8 @@ public class businessappVehicleListActivity extends AppCompatActivity {
     {
         // get place list
         //placeArrayList = VehicleListRepository.getPlaceList();
-        int ctryid = -1;
-        int fid = -1;
+        int ctryid = ApplicationConstants.countryid;
+        int fid = ApplicationConstants.fid;
         int vgid = -1;
         GetVehilcelist(ctryid,fid,vgid);
     }

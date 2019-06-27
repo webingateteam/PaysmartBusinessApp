@@ -65,9 +65,10 @@ public class businessappDriversListActivity extends AppCompatActivity {
 //        object.addProperty("Email", "");
 
         Intent intent =getIntent();
+         String fid = String.valueOf(ApplicationConstants.fid);
         uaccountno=intent.getStringExtra("UserAccountNo");
         typid=intent.getIntExtra("usertypeid",0);
-        GetDriversList( ApplicationConstants.userAccountNo,109);
+        GetDriversList( fid,109);
     }
 
     private void initUI()

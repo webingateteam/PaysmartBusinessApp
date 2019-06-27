@@ -25,6 +25,7 @@ import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.businessappAssigningVehicleAdapter;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.AssignDriverResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetVehicleListResponse;
@@ -110,8 +111,8 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
     //region Init Functions
     private void initData() {
         //GetVehiclesList();
-        int ctryid = -1;
-        int fid = -1;
+        int ctryid = ApplicationConstants.countryid;
+        int fid = ApplicationConstants.fid;
         int vgid = -1;
         GetVehiclesList(ctryid,fid,vgid);
 
@@ -166,13 +167,14 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
                 .subscribe(new Subscriber<List<AssignDriverResponse>>() {
                     @Override
                     public void onCompleted() {
-                        DisplayToast("Successfully onCompleted");
+                        //DisplayToast("Successfully onCompleted");
                         //StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
                         try {
-                            DisplayToast("Successfully onError");
+                            Log.d("OnError ", e.getMessage());
+                            //DisplayToast("Successfully onError");
                             //DisplayToast("Unable to Register");
                             //StopDialogue();
                         } catch (Exception ex) {
@@ -205,7 +207,7 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
 //                        editor.putString(DRIVERID, response.getDriverId());
 //                        editor.putString(VEHICLEID, response.getVehicleId());
                             editor.commit();
-                             startActivity(new Intent(businessappNewAssignDriverActivity.this, businessappFleetownerDashboardActivity.class));
+                             startActivity(new Intent(businessappNewAssignDriverActivity.this, businessappAssignDriverActivity.class));
                             finish();
                         }
                     }
@@ -222,14 +224,14 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
 
                     @Override
                     public void onCompleted() {
-                        DisplayToast("Successfully Registered");
+                        //DisplayToast("Successfully Registered");
                         //StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
                         try {
-                            //Log.d("OnError ", e.getMessage());
-                            DisplayToast("Error");
+                            Log.d("OnError ", e.getMessage());
+                            //DisplayToast("Error");
                             //StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -255,7 +257,7 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
                         adapter.setOnItemClickListener((view, obj, position) ->
                                 {
 
-                                    Toast.makeText(getApplicationContext(), "Selected : " + obj.getRegistrationNo(), Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(getApplicationContext(), "Selected : " + obj.getRegistrationNo(), Toast.LENGTH_LONG).show();
 
                                     SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -265,7 +267,8 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
                                     editor.putString(VehicleType, obj.getVehicleType());
                                     editor.commit();
 
-                                    GetDriversList("101");
+                                    String fid = String.valueOf(ApplicationConstants.fid);
+                                    GetDriversList(fid,109);
                                 }
                         );
                         //}
@@ -284,9 +287,9 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
 //        startActivity(intent);
     }
 
-    public void GetDriversList(String ctryId){
+    public void GetDriversList(String acct,int uit){
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
-                .GetDriverList(ctryId)
+                .GetDriverList_usertype(acct,uit)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<DrivermasterResponse>>() {
@@ -315,8 +318,8 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
                         }
                            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                            SharedPreferences.Editor editor = sharedpreferences.edit();
-                           editor.putInt(DId, responselist.get(0).getDId());
-                           editor.putString(Phone, responselist.get(0).getPMobNo());
+                           editor.putInt(DId, responselist.get(0).getId());
+                           editor.putString(Phone, responselist.get(0).getMobilenumber());
 //                        if(dlist!=null || !dlist.isEmpty()) {
 //                        for (int i=0;i<=dlist.size()-1;i++){
 //                            if(dlist.get(i)!=null || !dlist.get(i).isEmpty())
@@ -362,8 +365,9 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
                             jsonObject.addProperty("VechID",vechid);
                             jsonObject.addProperty("VehicleGroupId",vgrp);
                             jsonObject.addProperty("VehicleType",vtype);
-                            jsonObject.addProperty("DriverId",selItem.getDId());
-                            jsonObject.addProperty("PhoneNo",selItem.getPMobNo());
+                            jsonObject.addProperty("DriverId",selItem.getId());
+                            jsonObject.addProperty("PhoneNo",selItem.getMobilenumber());
+                            jsonObject.addProperty("fleetId",ApplicationConstants.fid);
                             RegisterAllocatedDriver(jsonObject);
                             //DisplayToast(selItem.getNAme());
                         }

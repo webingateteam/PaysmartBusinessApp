@@ -220,7 +220,7 @@ public class businessAppDriverUserInfoFragment extends Fragment implements Adapt
         {
             // Toast.makeText(this, "Your are selected :" + res.get(position).getName(),Toast.LENGTH_SHORT).show();
             ct=position;
-            ApplicationConstants.countryid = res2.get(ct).getId();
+            ApplicationConstants.ctryid = res2.get(ct).getId();
 
         }
     }

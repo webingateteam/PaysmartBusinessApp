@@ -354,10 +354,12 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
 //                            editor.putString(Emailotp, null);
 //                            editor.putString(Mobileotp, null);
                             editor.commit();
+                            ApplicationConstants.fid = credentialsResponse.getId();
                             ApplicationConstants.mobileNo = mobileNo.getText().toString();
                             ApplicationConstants.userAccountNo=credentialsResponse.getuseraccountno();
                             ApplicationConstants.usertypeid=credentialsResponse.getusertypeid();
                             ApplicationConstants.upic=credentialsResponse.getUserPhoto();
+                            ApplicationConstants.countryid = credentialsResponse.getCountryId();
                             //startActivity(new Intent(this, MainActivity.class));
                            GoToDashboard();
                             finish();

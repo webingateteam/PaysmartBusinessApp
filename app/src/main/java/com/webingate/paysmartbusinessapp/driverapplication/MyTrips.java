@@ -161,10 +161,10 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 //                .build();
         initGoogleAPIClient();//Init Google API Client
         checkPermissions();//Check Permission
-//        destlat = Double.parseDouble(ApplicationConstants.sourcelatitude);
-//        destlong = Double.parseDouble(ApplicationConstants.sourcelongitude);
-         destlat=17.456455;
-         destlong=78.412086;
+        destlat = Double.parseDouble(ApplicationConstants.destlatitude);
+        destlong = Double.parseDouble(ApplicationConstants.destlongitude);
+//         destlat=17.456455;
+//         destlong=78.412086;
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -931,15 +931,15 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                     @Override
                     public void onNext(List<DriverRateTheRideResponse> responseList) {
                         DriverRateTheRideResponse response=responseList.get(0);
-                        //Intent intent = new Intent();
-                        Intent intent= new Intent(MyTrips.this, businessappDriverDashboardActivity.class);
-//                        setResult(1, intent);
-//                        ApplicationConstants.tripflag = 0;
-//                        if (line != null)
-//                            line.remove();
-                        //mMap.clear();
+                        Intent intent = new Intent();
+                        //Intent intent= new Intent(MyTrips.this, businessappDriverDashboardActivity.class);
+                        setResult(1, intent);
+                        ApplicationConstants.tripflag = 0;
+                        if (line != null)
+                            line.remove();
+                        mMap.clear();
                        startActivity(intent);
-                        finish();
+                        //finish();
                     }
                 });
     }

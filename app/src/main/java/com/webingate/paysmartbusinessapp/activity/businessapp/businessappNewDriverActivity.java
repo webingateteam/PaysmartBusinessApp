@@ -180,12 +180,13 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                     object.addProperty("Password", "123");
                     object.addProperty("Mobilenumber",mno.getText().toString());
                     object.addProperty("Email",email.getText().toString());
-                    object.addProperty("CountryId",ApplicationConstants.countryid);
+                    object.addProperty("CountryId",ApplicationConstants.ctryid);
                     object.addProperty("VehicleGroupId","");
                     object.addProperty("UserAccountNo","10991"+mno.getText().toString());
                     object.addProperty("usertypeid","109");
                     object.addProperty("isDriverOwned","0");
-                    if(ApplicationConstants.countryid == 101){
+                    object.addProperty("ownerId",ApplicationConstants.fid);
+                    if(ApplicationConstants.ctryid == 101){
                          ccode = 91;
                     }
                     else{
