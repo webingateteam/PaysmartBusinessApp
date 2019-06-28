@@ -1,5 +1,6 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -51,6 +52,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
     public static final String VEHICLEID = "vehicleid";
     public static final String UserAccountNo = "UserAccountNoKey";
     Toast toast;
+    private  ProgressDialog pd;
     @BindView(R.id.registerButton)
     Button registerButton;
     @BindView(R.id.s_username)
@@ -167,7 +169,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
 
     public void RegisterDriver(JsonObject jsonObject){
 
-        //StartDialogue();
+        StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(businessAppSignUpActivity.this).getrestadapter()
                 .Savebusinessappusers(jsonObject)
                 .subscribeOn(Schedulers.io())
@@ -175,13 +177,14 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
                 .subscribe(new Subscriber<List<RegisterBusinessUsers>>() {
                     @Override
                     public void onCompleted() {
+                        StopDialogue();
                         //DisplayToast("Successfully onCompleted");
                         //StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
                         try {
-                            DisplayToast("Error"+e.getMessage());
+                            StopDialogue();
                             //DisplayToast("Unable to Register");
                             //StopDialogue();
                         } catch (Exception ex) {
@@ -228,6 +231,8 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
     }
 
     public void GetActiveCountries(int active){
+
+        StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(businessAppSignUpActivity.this).getrestadapter()
                 .GetActiveCountry(active)
                 .subscribeOn(Schedulers.io())
@@ -236,14 +241,14 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
                     @Override
                     public void onCompleted() {
                         //DisplayToast("Successfully Registered");
-                        //StopDialogue();
+                        StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
                         try {
-                            Log.d("OnError ", e.getMessage());
-                            DisplayToast("Error");
-                            //StopDialogue();
+                            StopDialogue();
+                           // DisplayToast("Error");
+                            StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -312,6 +317,18 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
         toast= Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT);
         toast.show();
 
+    }
+    public void StartDialogue(){
+        pd=new ProgressDialog(this);
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setMessage("Please wait.....");
+
+        pd.incrementProgressBy(50);
+        pd.show();
+    }
+    public void StopDialogue(){
+
+        pd.dismiss();
     }
     //endregion
 }

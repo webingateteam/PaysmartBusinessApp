@@ -1,5 +1,6 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -41,6 +42,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
     public static final String Emailotp = "emailotpkey";
     public static final String UserAccountNo = "UserAccountNoKey";
     Toast toast;
+    private  ProgressDialog pd;
     @BindView(R.id.b_eotp)
     EditText etop;
 
@@ -69,7 +71,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_true, menu);
+        //getMenuInflater().inflate(R.menu.menu_true, menu);
         return true;
     }
 
@@ -167,6 +169,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
 
     }
     public void EOTPVerification(JsonObject jsonObject){
+        StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
                 .BusinessEOTPVerification(jsonObject)
                 .subscribeOn(Schedulers.io())
@@ -174,6 +177,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
                 .subscribe(new Subscriber<List<BusinessEOTPVerificationResponse>>() {
                     @Override
                     public void onCompleted() {
+                        StopDialogue();
                         DisplayToast("Successfully Registered");
                         //StopDialogue();
                     }
@@ -181,7 +185,8 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
                     public void onError(Throwable e) {
                         try {
                             //Log.d("OnError ", e.getMessage());
-                            DisplayToast("Error");
+                            StopDialogue();
+                            //DisplayToast("Error");
                             //StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -203,6 +208,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
     }
 
     public void ResendOTP(JsonObject jsonObject){
+        StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
                 .BusinessAppResendOTP(jsonObject)
                 .subscribeOn(Schedulers.io())
@@ -210,15 +216,15 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
                 .subscribe(new Subscriber<List<BusinessResendOTPResponse>>() {
                     @Override
                     public void onCompleted() {
-                        DisplayToast("OTP has been Resent");
+                        StopDialogue();
                         //StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
                         try {
-                            //Log.d("OnError ", e.getMessage());
+                            StopDialogue();
                             DisplayToast("onError"+e.getMessage());
-                            //StopDialogue();
+                            StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -255,5 +261,17 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
         toast= Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT);
         toast.show();
 
+    }
+    public void StartDialogue(){
+        pd=new ProgressDialog(this);
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setMessage("Please wait.....");
+
+        pd.incrementProgressBy(50);
+        pd.show();
+    }
+    public void StopDialogue(){
+
+        pd.dismiss();
     }
 }

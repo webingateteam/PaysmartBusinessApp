@@ -1,5 +1,6 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,6 +41,7 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
     public static final String Emailotp = "emailotpkey";
     public static final String UserAccountNo = "UserAccountNoKey";
     Toast toast;
+    private  ProgressDialog pd;
     String M_numbers;
     int M_uid;
     @BindView(R.id.mpassword)
@@ -168,6 +170,7 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
 
     }
     public void MOTPVerification(JsonObject jsonObject){
+        StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
                 .MOTPVerifications1(jsonObject)
                 .subscribeOn(Schedulers.io())
@@ -175,14 +178,16 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
                 .subscribe(new Subscriber<List<MOTPVerification>>() {
                     @Override
                     public void onCompleted() {
-                        DisplayToast("Successfully Registered");
+                        StopDialogue();
+                        //DisplayToast("Successfully Registered");
                         //StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
                         try {
+                            StopDialogue();
                             //Log.d("OnError ", e.getMessage());
-                            DisplayToast("Error");
+                          //  DisplayToast("Error");
                             //StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -203,6 +208,7 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
     }
 
     public void ResendOTP(JsonObject jsonObject){
+        StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
                 .BusinessAppResendOTP(jsonObject)
                 .subscribeOn(Schedulers.io())
@@ -210,14 +216,14 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
                 .subscribe(new Subscriber<List<BusinessResendOTPResponse>>() {
                     @Override
                     public void onCompleted() {
-                        DisplayToast("OTP has been Resent");
+                        StopDialogue();
                         //StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
                         try {
-                            //Log.d("OnError ", e.getMessage());
-                            DisplayToast("onError"+e.getMessage());
+                            StopDialogue();
+                           // DisplayToast("onError"+e.getMessage());
                             //StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -255,5 +261,17 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
         toast= Toast.makeText(getApplicationContext(),text,Toast.LENGTH_SHORT);
         toast.show();
 
+    }
+    public void StartDialogue(){
+        pd=new ProgressDialog(this);
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setMessage("Please wait.....");
+
+        pd.incrementProgressBy(50);
+        pd.show();
+    }
+    public void StopDialogue(){
+
+        pd.dismiss();
     }
 }
