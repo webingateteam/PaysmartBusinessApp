@@ -161,6 +161,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
 //                .build();
         destlat=ApplicationConstants.customerSrcLatitude; //17.4343;
         destlong=ApplicationConstants.customerSrcLongitude;//78.4465;
+
         initGoogleAPIClient();//Init Google API Client
         checkPermissions();//Check Permission
 //        destlat = Double.parseDouble(ApplicationConstants.sourcelatitude);

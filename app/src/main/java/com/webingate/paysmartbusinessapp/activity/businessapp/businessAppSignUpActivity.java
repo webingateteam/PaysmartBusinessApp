@@ -71,6 +71,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
     ArrayList<String> list;
     ArrayAdapter<String> adapter;
     int loginasOption = -1;
+    int countryid;
 
     String[] fruits = {"Driver", "Fleet owner", "Ticket Agent", "Brand ambassador","Business Owner"};
     int[] icons = {R.drawable.baseline_person_outline_black_24, R.drawable.baseline_person_outline_black_24, R.drawable.baseline_person_outline_black_24
@@ -148,7 +149,13 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
             object.addProperty("Password", S_password.getText().toString());
             object.addProperty("Mobilenumber",S_mobileNo.getText().toString());
             object.addProperty("Email", S_email.getText().toString());
-            object.addProperty("CountryId",ccp.getSelectedCountryCode());
+            if(ccp.getSelectedCountryCode().matches("91")){
+                countryid = 101;
+            }
+            else{
+                countryid = 245;
+            }
+            object.addProperty("CountryId",countryid);
             object.addProperty("CCode","91");
             object.addProperty("UserAccountNo",selectype()+ccp.getSelectedCountryCode()+S_mobileNo.getText().toString());
             object.addProperty("usertypeid",selectype());
@@ -199,7 +206,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
                             SharedPreferences.Editor editor = sharedpreferences.edit();
                             Intent intent = new Intent(businessAppSignUpActivity.this, businessappEOTPVerificationActivity.class);
                             editor.putString(UserAccountNo, response.getUserAccountNo());
-                            editor.putString(ID, response.getId());
+                            editor.putInt(ID, response.getId());
                             editor.putString(Phone, response.getmnumber());
                             editor.putString(Email, response.getemail());
                             editor.putString(Emailotp, response.getemailotp());

@@ -70,6 +70,8 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
     public static final String UserAccountNumber = "UserAccountNo";
     public static final String usertypeid = "usertypeid";
     public static final String gender = "GenderKey";
+    public static final String Mobileotp = "mobileotpkey";
+    public static final String Emailotp = "emailotpkey";
 
     Toast toast;
 
@@ -187,9 +189,26 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
             Intent intent = new Intent(this, customerappFAQMainMenuActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_logout) {
+            SharedPreferences sharedPref = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+//                            SharedPreferences pref = getApplicationContext().getSharedPreferences(MyPREFERENCES, 0);
+//                            Editor editor = pref.edit();
+            //editor.putString(ID, null);
+            editor.putString(Phone, null);
+
+            editor.putString(usertypeid,null);
+            editor.putString(Emailotp,null);
+            editor.putString(Mobileotp,null);
+
+            editor.commit();
+            Intent i = new Intent(customerappUserprofileActivity.this, login_activity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    | Intent.FLAG_ACTIVITY_NEW_TASK);
+            //i.putExtra("logout",ApplicationConstants.Loginby);
+            startActivity(i);
+            finish();
             //Toast.makeText(this, "Clicked Logout.", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, login_activity.class);
-            startActivity(intent);
+
 
         } else if (id == R.id.nav_about_us) {
            // Toast.makeText(this, "Clicked About Us.", Toast.LENGTH_SHORT).show();
@@ -341,8 +360,8 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
                     @Override
                     public void onError(Throwable e) {
                         try {
-                            //Log.d("OnError ", e.getMessage());
-                            DisplayToast("Error");
+                            Log.d("OnError ", e.getMessage());
+                            //DisplayToast("Error");
                             //StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();

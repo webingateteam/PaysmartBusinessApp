@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -34,10 +35,17 @@ import rx.schedulers.Schedulers;
 public class businessappDriversListActivity extends AppCompatActivity {
 
     public static final String MyPREFERENCES = "MyPrefs";
-    public static final String pphoto= "pphoto";
-    public static final String email="email";
-    public static final String mobileno= "mobileno";
-    public static final String name="name";
+    public static final String ID = "idKey";
+    public static final String VehicleID = "VehicleIdKey";
+    public static final String DId = "didKey";
+    public static final String RegistrationNo = "RegistrationNoKey";
+    public static final String Name = "NAmeKey";
+    public static final String Phone = "phoneKey";
+    public static final String Profilepic = "profilepic";
+    public static final String VehicleGroup = "VehicleGroupKey";
+    public static final String VehicleType = "VehicleTypeKey";
+    public static final String CountryId = "countryKey";
+    public static final String Email = "emailKey";
 
     Toast toast;
     ArrayList<DrivermasterResponse> DriverList;
@@ -51,41 +59,18 @@ public class businessappDriversListActivity extends AppCompatActivity {
     private LinearLayout linearPhoto;
     private LinearLayout linearVideo;
     private LinearLayout linearCamera;
-    private void initData()
-    {
-         String fid = String.valueOf(ApplicationConstants.fid);
-        GetDriversList(fid,109);
-    }
+    int id,countryid;
 
-    private void initUI()
-    {
-        initToolbar();
-
-        // get list adapter
-
-        adapter = new businessappDriverListAdapter(null);
-        // get recycler view
-        recyclerView = findViewById(R.id.placeList1RecyclerView);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        //recyclerView.setAdapter(adapter);
-    }
-    private void initDataBindings()
-    {
-      //  DriverList = response;
-                // bind adapter to recycler
-      //  recyclerView.setAdapter(adapter);
-    }
-    private void initActions()
-    {
-
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_driverslist_activity);
+
+        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        countryid = prefs.getInt(CountryId, 0);
+        id = prefs.getInt(ID, 0);
+        ApplicationConstants.fid = id;
+        ApplicationConstants.countryid = countryid;
 
         initData();
         initUI();
@@ -129,7 +114,7 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
                 v ->
                 {
-                   // Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappNewDriverActivity.class);
                     startActivity(intent);
                 }
@@ -166,6 +151,39 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
         });
     }
+
+    private void initData()
+    {
+         String fid = String.valueOf(ApplicationConstants.fid);
+        GetDriversList(fid,109);
+    }
+
+    private void initUI()
+    {
+        initToolbar();
+
+        // get list adapter
+
+        adapter = new businessappDriverListAdapter(null);
+        // get recycler view
+        recyclerView = findViewById(R.id.placeList1RecyclerView);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        //recyclerView.setAdapter(adapter);
+    }
+    private void initDataBindings()
+    {
+      //  DriverList = response;
+                // bind adapter to recycler
+      //  recyclerView.setAdapter(adapter);
+    }
+    private void initActions()
+    {
+
+    }
+
 
     ArrayList<DrivermasterResponse>  response;
 
@@ -224,10 +242,10 @@ public class businessappDriversListActivity extends AppCompatActivity {
         //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
            SharedPreferences.Editor editor = sharedpreferences.edit();
-           editor.putString(pphoto, (obj.getUserPhoto()!=null?obj.getUserPhoto():null));
-           editor.putString(email,obj.getEmail());
-           editor.putString(mobileno,obj.getMobilenumber());
-           editor .putString(name,obj.getNAme());
+           editor.putString(Profilepic, (obj.getUserPhoto()!=null?obj.getUserPhoto():null));
+           editor.putString(Email,obj.getEmail());
+           editor.putString(Phone,obj.getMobilenumber());
+           editor .putString(Name,obj.getNAme());
            editor.commit();
 
            ApplicationConstants.drivername=obj.getNAme();
