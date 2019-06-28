@@ -86,8 +86,16 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class businessappDriverDashboardActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener,TripRequest.Triprequest{
+
+
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String ID = "idKey";
+    public static final String Name = "nameKey";
+    public static final String DriverStatus = "driverstatusKey";
+
+
     @BindView(R.id.status)
-    AppCompatButton status;
+    Button status;
 
     private boolean isOnline=false;
     Toast toast;
@@ -117,11 +125,16 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
     private static final int ACCESS_FINE_LOCATION_INTENT_ID = 3;
     private static final String BROADCAST_ACTION = "android.location.PROVIDERS_CHANGED";
 
+    String dstatus;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_driverdashboard_activity);
+        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        dstatus = prefs.getString(DriverStatus, null);
+        ApplicationConstants.driverstatus = dstatus;
 
         initData();
 
@@ -206,6 +219,7 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
 
     private void initAction() {
 
+
 //        goonlineBtn.setOnClickListener((View v) ->{
 //            //Toast.makeText(getApplicationContext(),"OTP is Resent.",Toast.LENGTH_SHORT).show();
 //            //Intent intent = new Intent(this, login_activity.class);
@@ -227,24 +241,24 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
         switch (v.getId()) {
             case R.id.status:
                 if (isOnline) {
-                    checkPermissions();
-                    JsonObject object=new JsonObject();
+                   // checkPermissions();
+                    JsonObject object = new JsonObject();
                     object.addProperty("loginlogout", "0");
                     object.addProperty("DriverNo", ApplicationConstants.mobileNo);
                     object.addProperty("LoginLatitude", latitude + "");
                     object.addProperty("LoginLongitude", longitude + "");
                     object.addProperty("Reason", "");
-                    DriverGoOnline(object,DEACTIVEDRIVER);
-                }else {
+                    DriverGoOnline(object, DEACTIVEDRIVER);
+                } else {
                     //checkPermissions();
                     Log.i("Driver status", "Driver go offline");
-                    JsonObject object=new JsonObject();
+                    JsonObject object = new JsonObject();
                     object.addProperty("loginlogout", "1");
                     object.addProperty("DriverNo", ApplicationConstants.mobileNo);
                     object.addProperty("LoginLatitude", latitude + "");
                     object.addProperty("LoginLongitude", longitude + "");
                     object.addProperty("Reason", "");
-                    DriverGoOnline(object,ACTIVEDRIVER);
+                    DriverGoOnline(object, ACTIVEDRIVER);
                 }
 
                 break;
@@ -386,6 +400,12 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
                         if (response.getCode() != null) {
                             DisplayToast(response.getdescription());
                         } else {
+                            SharedPreferences sharedPref = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+//                            SharedPreferences pref = getApplicationContext().getSharedPreferences(MyPREFERENCES, 0);
+//                            Editor editor = pref.edit();
+                            editor.putString(DriverStatus, response.getStatus());
+                            editor.commit();
                             int greenColorValue = Color.parseColor("#00ff00");
                             if (flag == ACTIVEDRIVER) {
                                 if (response.getStatus().matches("1")) {

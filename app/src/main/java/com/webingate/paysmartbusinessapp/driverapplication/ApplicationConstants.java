@@ -88,7 +88,7 @@ public class ApplicationConstants {
     public static String country;
     public static int ctryid;
     public static int fid;
-
+    public static String driverstatus;
 
 
     public static String getPhoto() {

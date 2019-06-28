@@ -50,11 +50,13 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
     public static final String Phone = "phoneKey";
     public static final String VehicleGroup = "VehicleGroupKey";
     public static final String VehicleType = "VehicleTypeKey";
+    public static final String CountryId = "countryKey";
 
     Toast toast;
 
-    String regno,vgroup,cmpid,mbno,id;
-    int vechid;
+    String regno,vgroup,cmpid,mbno;
+
+    int vechid,id;
     String[] fruits;
     ArrayAdapter<String> adapter2;
     ArrayList<String> list;
@@ -71,7 +73,7 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
     @BindView(R.id.fab)
     Button submit;
     String vgrp,vtype;
-    int DriverId;
+    int DriverId,countryid;
 
 
     @Override
@@ -80,11 +82,14 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
         setContentView(R.layout.businessapp_newallocateddriver_activity);
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         regno = prefs.getString(RegistrationNo, null);
-        id = prefs.getString(ID, null);
+        id = prefs.getInt(ID, 0);
         mbno = prefs.getString(Phone, null);
         DriverId = prefs.getInt(DId, 0);
         vgrp = prefs.getString(VehicleGroup, null);
         vtype = prefs.getString(VehicleType, null);
+        countryid = prefs.getInt(CountryId,0);
+        ApplicationConstants.fid = id;
+        ApplicationConstants.countryid = countryid;
 //        mobileOTP = prefs.getString(Mobileotp, null);
 //        ApplicationConstants.username = prefs.getString(Name, null);
 

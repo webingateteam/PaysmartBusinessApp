@@ -1,5 +1,6 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
@@ -47,6 +48,38 @@ public class businessappAssignDriverActivity extends AppCompatActivity {
     private boolean twist = false;
     String uaccountno;
     int typid;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.businessapp_assigndriverlist_activity);
+
+        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        ApplicationConstants.mobileNo = prefs.getString(Phone, null);
+        ApplicationConstants.fid = prefs.getInt(ID, 0);
+
+        initData();
+        initUI();
+        initDataBindings();
+        initActions();
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+
+        fab.setOnClickListener(
+
+                v ->
+                {
+                    //Toast.makeText(getApplicationContext(), "Assign New Driver", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, businessappNewAssignDriverActivity.class);
+                    startActivity(intent);
+                }
+
+                //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show()
+
+        );
+    }
+
     private void initData()
     {
 //        Intent intent =getIntent();
@@ -81,31 +114,7 @@ public class businessappAssignDriverActivity extends AppCompatActivity {
     {
 
     }
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.businessapp_assigndriverlist_activity);
 
-        initData();
-        initUI();
-        initDataBindings();
-        initActions();
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-
-        fab.setOnClickListener(
-
-                v ->
-                {
-                    //Toast.makeText(getApplicationContext(), "Assign New Driver", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this, businessappNewAssignDriverActivity.class);
-                    startActivity(intent);
-                }
-
-                //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show()
-
-        );
-    }
 
     ArrayList<AllocatedDriverListResponse>  response;
 

@@ -65,6 +65,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
     public static final String usertypeid = "usertypeid";
     public static final String VEHICLEID = "vehicleid";
     public static final String Username = "nameKey";
+    public static final String CountryId = "countryKey";
 
     int  a=0;
     private String response;
@@ -391,6 +392,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
                             editor.putString(Email, credentialsResponse.getEmail());
                             editor.putString(Username, credentialsResponse.getusernamae());
                             editor.putString(Phone, credentialsResponse.getMobilenumber());
+                            editor.putInt(CountryId,credentialsResponse.getCountryId());
                             editor.commit();
                             ApplicationConstants.fid = credentialsResponse.getId();
                             ApplicationConstants.mobileNo = mobileNo.getText().toString();
@@ -552,11 +554,11 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
                     startActivity(new Intent(login_activity.this,businessappEOTPVerificationActivity.class));
                     finish();
                 }
-                else if (emailOTP != null && mobileOTP == null){
+                else if (emailOTP != null){
                     startActivity(new Intent(login_activity.this,businessappEOTPVerificationActivity.class));
                     finish();
                 }
-                else if(emailOTP == null && mobileOTP != null){
+                else if(mobileOTP != null){
                     startActivity(new Intent(login_activity.this,businessappMOTPVerificationActivity.class));
                     finish();
                 }

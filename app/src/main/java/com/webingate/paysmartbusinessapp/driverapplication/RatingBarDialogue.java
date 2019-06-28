@@ -31,6 +31,7 @@ public class RatingBarDialogue extends Dialog implements
     EditText inputComments;
     @BindView(R.id.submit)
     Button submit;
+    private boolean isOnline;
 
     RatingBarInterface ratingbar;
 
@@ -64,6 +65,7 @@ public class RatingBarDialogue extends Dialog implements
                 ApplicationConstants.comments = inputComments.getText().toString();
                 MyTrips obj = new MyTrips();
                 obj.Rating1();
+                isOnline=false;
                 getOwnerActivity().startActivity(new Intent(getContext(),businessappDriverDashboardActivity.class));
                 getOwnerActivity().finish();
                 dismiss();

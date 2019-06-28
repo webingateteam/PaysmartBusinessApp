@@ -37,7 +37,7 @@ public class RegisterBusinessUsers {
     private String Emailotp;
 
     @SerializedName("Id")
-    private String Id;
+    private int Id;
     @SerializedName("Mobileotp")
     private String Mobileotp;
 
@@ -63,8 +63,8 @@ public class RegisterBusinessUsers {
     public String getDescription() {
         return description;
     }
-    public void setId(String Id){this.Id = Id;}
-    public String getId(){return Id;}
+    public void setId(int Id){this.Id = Id;}
+    public int getId(){return Id;}
     public void setUserAccountNo(String UserAccountNo){this.UserAccountNo = UserAccountNo;}
     public String getUserAccountNo() {
         return UserAccountNo;
