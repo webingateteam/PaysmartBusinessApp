@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -51,6 +52,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
     public static final String DRIVERID = "driverid";
     public static final String VEHICLEID = "vehicleid";
     public static final String UserAccountNo = "UserAccountNoKey";
+
     Toast toast;
     private  ProgressDialog pd;
     @BindView(R.id.registerButton)
@@ -67,14 +69,16 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
    //Button registerButton;
     ImageView bgImageView;
     CountryCodePicker ccp;
-
-    Spinner spinner;
+    EditText vehicle_regno;
+    CheckBox chkIos;
+    String ischecked=null;
+    Spinner spinner,vehicle_group,vehicle_type;
     TextView textView;
     ArrayList<String> list;
     ArrayAdapter<String> adapter;
     int loginasOption = -1;
     int countryid;
-
+    View view69,view67,view91;
     String[] fruits = {"Driver", "Fleet owner", "Ticket Agent", "Brand ambassador","Business Owner"};
     int[] icons = {R.drawable.baseline_person_outline_black_24, R.drawable.baseline_person_outline_black_24, R.drawable.baseline_person_outline_black_24
             , R.drawable.baseline_person_outline_black_24,R.drawable.baseline_person_outline_black_24};
@@ -82,7 +86,13 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_signup_activity);
-
+        vehicle_group=findViewById(R.id.vehicle_group);
+        vehicle_type=findViewById(R.id.vehicle_type);
+        chkIos=findViewById(R.id.chkIos);
+        vehicle_regno=findViewById(R.id.vehicle_regno);
+        view69=findViewById(R.id.view69);
+        view67=findViewById(R.id.view67);
+        view91=findViewById(R.id.view91);
         initUI();
 
         initDataBindings();
@@ -102,7 +112,27 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
         spinner.setAdapter(uiloginasCustomSpinnerAdapter);
         ccp = (CountryCodePicker) findViewById(R.id.ccp);
 
+        chkIos.setOnClickListener(view -> {
 
+                if (((CheckBox) view).isChecked()) {
+                    ischecked="okay";
+                    vehicle_group.setVisibility(view.getVisibility());
+                    vehicle_type.setVisibility(view.getVisibility());
+                    vehicle_regno.setVisibility(view.getVisibility());
+                    view67.setVisibility(view.getVisibility());
+                    view69.setVisibility(view.getVisibility());
+                    view91.setVisibility(view.getVisibility());
+                }else{
+                    ischecked=null;
+                    vehicle_group.setVisibility(view.GONE);
+                    vehicle_type.setVisibility(view.GONE);
+                    vehicle_regno.setVisibility(view.GONE);
+                    view67.setVisibility(view.GONE);
+                    view69.setVisibility(view.GONE);
+                    view91.setVisibility(view.GONE);
+                }
+
+        });
 
     }
 
@@ -293,6 +323,33 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         loginasOption = position;
+        if(loginasOption!=0){
+            vehicle_group.setVisibility(view.GONE);
+            vehicle_type.setVisibility(view.GONE);
+            vehicle_regno.setVisibility(view.GONE);
+            view67.setVisibility(view.GONE);
+            view69.setVisibility(view.GONE);
+            view91.setVisibility(view.GONE);
+            chkIos.setVisibility(view.GONE);
+        }else if(loginasOption==0){
+            if(ischecked!=null){
+                vehicle_group.setVisibility(view.getVisibility());
+                vehicle_type.setVisibility(view.getVisibility());
+                vehicle_regno.setVisibility(view.getVisibility());
+                view67.setVisibility(view.getVisibility());
+                view69.setVisibility(view.getVisibility());
+                view91.setVisibility(view.getVisibility());
+            }else{
+                vehicle_group.setVisibility(view.GONE);
+                vehicle_type.setVisibility(view.GONE);
+                vehicle_regno.setVisibility(view.GONE);
+                view67.setVisibility(view.GONE);
+                view69.setVisibility(view.GONE);
+                view91.setVisibility(view.GONE);
+            }
+
+            chkIos.setVisibility(view.getVisibility());
+        }
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
