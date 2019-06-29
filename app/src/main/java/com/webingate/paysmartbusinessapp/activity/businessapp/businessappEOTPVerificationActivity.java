@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessEOTPVerificationResponse;
 //import com.webingate.paysmartbusinessapp.customerapp.VerificationActivity;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.BusinessResendOTPResponse;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
@@ -40,7 +41,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
     public static final String Email = "emailKey";
     public static final String Mobileotp = "mobileotpkey";
     public static final String Emailotp = "emailotpkey";
-    public static final String UserAccountNo = "UserAccountNoKey";
+    public static final String UserAccountNumber = "UserAccountNo";
     Toast toast;
     private  ProgressDialog pd;
     @BindView(R.id.b_eotp)
@@ -60,9 +61,10 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_eotpverification_activity);
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        mno = prefs.getString(UserAccountNo, null);
+        mno = prefs.getString(UserAccountNumber, null);
         email = prefs.getString(Email, null);
         id = prefs.getInt(ID, 0);
+        ApplicationConstants.fid = id;
         initUI();
 
         initActions();
@@ -128,7 +130,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("Email", email);
                 jsonObject.addProperty("EVerificationCode", etop.getText().toString());
-                jsonObject.addProperty("userId", id);
+                jsonObject.addProperty("userId", ApplicationConstants.fid);
                 EOTPVerification(jsonObject);
             }
         });
@@ -239,7 +241,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
                             SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedpreferences.edit();
                             Intent intent = new Intent(businessappEOTPVerificationActivity.this, businessappEOTPVerificationActivity.class);
-                            editor.putString(UserAccountNo, response.getUserAccountNo());
+                            editor.putString(UserAccountNumber, response.getUserAccountNo());
                             //intent.putExtra("Uid",E_uid);
                             startActivity(intent);
                             editor.commit();

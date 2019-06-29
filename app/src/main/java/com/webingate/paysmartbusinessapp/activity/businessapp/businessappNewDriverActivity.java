@@ -55,7 +55,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
     public static final String Phone = "phoneKey";
 
     private int position = 1;
-    private int maxPosition = 5;
+    private int maxPosition = 1;
     private Button nextButton, prevButton;
     private TextView imageNoTextView;
 
@@ -116,6 +116,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
         nextButton = findViewById(R.id.nextButton);
         prevButton = findViewById(R.id.prevButton);
         imageNoTextView = findViewById(R.id.imageNoTextView);
+        nextButton.setText("Save");
 
 
 
@@ -159,59 +160,70 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                     setupFragment(userInfoFragment);
 
                 }
-                if(position == 2)
-                {
-                    //EditText name = (EditText)findViewById(R.id.s_name);
-                    name = findViewById(R.id.s_name);
-                    email = findViewById(R.id.s_email);
-                    mno = findViewById(R.id.s_mobileno);
-                    address = findViewById(R.id.s_address);
-                    city = findViewById(R.id.s_city);
-                    postal = findViewById(R.id.s_postal);
-                    state = findViewById(R.id.s_state);
-                    profileImageView = findViewById(R.id.profileImageView);
-                    country = findViewById(R.id.s_country);
+//                if(position == 2)
+//                {
+//
+//
+//                    //EditText name = (EditText)findViewById(R.id.s_name);
+//
+//
+//
+//                    //Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
+//
+//                    //setupFragment(new businessAppUploadDocsFragment());
+//                    //setupFragment(new businessAppDocCheckingFragment());
+//                    //setupFragment(new businessAppDriverDocsListFragment());
+//
+//                }
+
+
+//                if(position == 3) {
+////                    Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
+////                    setupFragment(new businessAppDriverUserInfoFragment());
+//                }
+
+            } else {
+                name = findViewById(R.id.s_name);
+                email = findViewById(R.id.s_email);
+                mno = findViewById(R.id.s_mobileno);
+                address = findViewById(R.id.s_address);
+                city = findViewById(R.id.s_city);
+                postal = findViewById(R.id.s_postal);
+                state = findViewById(R.id.s_state);
+                profileImageView = findViewById(R.id.profileImageView);
+                country = findViewById(R.id.s_country);
+
+                if(name.getText().toString().matches("")|| mno.getText().toString().matches("")
+                        || email.getText().toString().matches("")){
+
+                    Toast.makeText(this, "Please Enter Details", Toast.LENGTH_SHORT).show();
+                }
+                else {
 
                     JsonObject object = new JsonObject();
                     object.addProperty("flag", "I");
-                    object.addProperty("Firstname",name.getText().toString());
+                    object.addProperty("Firstname", name.getText().toString());
                     //object.addProperty("lastname","kumar");
                     object.addProperty("AuthTypeId", "");
                     object.addProperty("Password", "123");
-                    object.addProperty("Mobilenumber",mno.getText().toString());
-                    object.addProperty("Email",email.getText().toString());
-                    object.addProperty("CountryId",ApplicationConstants.ctryid);
-                    object.addProperty("VehicleGroupId","");
-                    object.addProperty("UserAccountNo","10991"+mno.getText().toString());
-                    object.addProperty("usertypeid","109");
-                    object.addProperty("isDriverOwned","0");
-                    object.addProperty("ownerId",ApplicationConstants.fid);
-                    if(ApplicationConstants.ctryid == 101){
-                         ccode = 91;
-                    }
-                    else{
+                    object.addProperty("Mobilenumber", mno.getText().toString());
+                    object.addProperty("Email", email.getText().toString());
+                    object.addProperty("CountryId", ApplicationConstants.ctryid);
+                    object.addProperty("VehicleGroupId", "");
+                    object.addProperty("UserAccountNo", "109" + mno.getText().toString());
+                    object.addProperty("usertypeid", "109");
+                    object.addProperty("isDriverOwned", "0");
+                    object.addProperty("ownerId", ApplicationConstants.fid);
+                    if (ApplicationConstants.ctryid == 101) {
+                        ccode = 91;
+                    } else {
                         ccode = 263;
                     }
-                    object.addProperty("CCode",ccode);
-                    object.addProperty("DPhoto",(((imagetesting==1)?("data:" + ApplicationConstants.document_format + ";base64," +  ApplicationConstants.picdata):"")));
+                    object.addProperty("CCode", ccode);
+                    object.addProperty("DPhoto", (((imagetesting == 1) ? ("data:" + ApplicationConstants.document_format + ";base64," + ApplicationConstants.picdata) : "")));
                     RegisterDriver(object);
-
-
-                    Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
-                    //setupFragment(new businessAppUploadDocsFragment());
-                    //setupFragment(new businessAppDocCheckingFragment());
-                    setupFragment(new businessAppDriverDocsListFragment());
-
                 }
-
-
-                if(position == 3) {
-                    Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppDriverUserInfoFragment());
-                }
-
-            } else {
-                Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
             }
         });
         prevButton.setOnClickListener(v -> {
@@ -224,17 +236,17 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                     Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
                     setupFragment(new businessAppDriverUserInfoFragment());
                 }
-                if(position == 2)
-                {
-                    Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppUploadDocsFragment());
-                }
+//                if(position == 2)
+//                {
+////                    Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
+////                    setupFragment(new businessAppUploadDocsFragment());
+//                }
 
-
-                if(position == 3) {
-                    Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppDriverUserInfoFragment());
-                }
+//
+//                if(position == 3) {
+//                    Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
+//                    setupFragment(new businessAppDriverUserInfoFragment());
+//                }
 
             } else {
                 Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
@@ -293,8 +305,8 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                              List<RegisterBusinessUsers> rlist=responseList;
                             editor.commit();
 
-                             //startActivity(new Intent(businessappNewDriverActivity.this, businessappDriversListActivity.class));
-                           // finish();
+                             startActivity(new Intent(businessappNewDriverActivity.this, businessappDriversListActivity.class));
+                            finish();
                         }
                     }
                 });

@@ -26,6 +26,7 @@ import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.UserInformationResponse;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppDashboardFragment;
 import com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppFleetownerFragment;
+import com.webingate.paysmartbusinessapp.object.Country;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public class businessappFleetownerDashboardActivity extends AppCompatActivity {
     public static final String Email = "emailKey";
     public static final String UserAccountNumber = "UserAccountNo";
     public static final String usertypeid = "usertypeid";
+    public static final String CountryId = "countryKey";
 
     private boolean twist = false;
 
@@ -55,6 +57,7 @@ public class businessappFleetownerDashboardActivity extends AppCompatActivity {
     int utype;
 
     Toast toast;
+    int countryid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,6 +66,7 @@ public class businessappFleetownerDashboardActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         acntno = prefs.getString(UserAccountNumber, null);
         utype = prefs.getInt(usertypeid, 0);
+        countryid = prefs.getInt(CountryId,0);
 
         initData();
 

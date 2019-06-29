@@ -39,7 +39,7 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
     public static final String Email = "emailKey";
     public static final String Mobileotp = "mobileotpkey";
     public static final String Emailotp = "emailotpkey";
-    public static final String UserAccountNo = "UserAccountNoKey";
+    public static final String UserAccountNumber = "UserAccountNo";
     Toast toast;
     private  ProgressDialog pd;
     String M_numbers;
@@ -60,7 +60,7 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_motpverification_activity);
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        mno = prefs.getString(UserAccountNo, null);
+        mno = prefs.getString(UserAccountNumber, null);
         id = prefs.getInt(ID, 0);
 
         initUI();
@@ -239,7 +239,7 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
                             SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedpreferences.edit();
                             Intent intent = new Intent(businessappMOTPVerificationActivity.this, businessappMOTPVerificationActivity.class);
-                            editor.putString(UserAccountNo, response.getUserAccountNo());
+                            editor.putString(UserAccountNumber, response.getUserAccountNo());
                             //intent.putExtra("Uid",E_uid);
                             startActivity(intent);
                             editor.commit();

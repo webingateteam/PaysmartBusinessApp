@@ -66,6 +66,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
     public static final String VEHICLEID = "vehicleid";
     public static final String Username = "nameKey";
     public static final String CountryId = "countryKey";
+    public static final String DriverStatus = "driverstatusKey";
 
     int  a=0;
     private String response;
@@ -119,7 +120,6 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
         login_activity.CheckServerTask checkServerTask = new login_activity.CheckServerTask();
         checkServerTask.execute();
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        mobNo = prefs.getString(Phone, null);
         id = prefs.getInt(ID, 0);
         emailOTP = prefs.getString(Emailotp, null);
         mobileOTP = prefs.getString(Mobileotp, null);
@@ -379,12 +379,7 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
                         }else {
                             SharedPreferences sharedPref = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPref.edit();
-//                            SharedPreferences pref = getApplicationContext().getSharedPreferences(MyPREFERENCES, 0);
-//                            Editor editor = pref.edit();
-                            editor.putString(UserAccountNumber, credentialsResponse.getuseraccountno());
                             editor.putInt(usertypeid, credentialsResponse.getusertypeid());
-                           // editor.putInt(usertypeid, credentialsResponse.getusertypeid());
-////                            editor.putString(VEHICLEID, credentialsResponse.getVehicleId());
                             editor.putInt(ID, credentialsResponse.getId());
                             editor.putString(Emailotp, null);
                             editor.putString(Mobileotp, null);
@@ -393,15 +388,9 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
                             editor.putString(Username, credentialsResponse.getusernamae());
                             editor.putString(Phone, credentialsResponse.getMobilenumber());
                             editor.putInt(CountryId,credentialsResponse.getCountryId());
+                            ApplicationConstants.usertypeid = credentialsResponse.getusertypeid();
                             editor.commit();
-                            ApplicationConstants.fid = credentialsResponse.getId();
-                            ApplicationConstants.mobileNo = mobileNo.getText().toString();
-                            ApplicationConstants.userAccountNo=credentialsResponse.getuseraccountno();
-                            ApplicationConstants.usertypeid=credentialsResponse.getusertypeid();
-                            ApplicationConstants.upic=credentialsResponse.getUserPhoto();
-                            ApplicationConstants.countryid = credentialsResponse.getCountryId();
-                            //startActivity(new Intent(this, MainActivity.class));
-                           GoToDashboard();
+                           GoToDashboardDetails();
                             finish();
                        }
 

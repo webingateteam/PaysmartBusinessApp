@@ -91,6 +91,20 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String ID = "idKey";
     public static final String Name = "nameKey";
+    public static final String Phone = "phoneKey";
+    public static final String Email = "emailKey";
+    public static final String Password = "passwordkey";
+    public static final String Mobileotp = "mobileotpkey";
+    public static final String Emailotp = "emailotpkey";
+    public static final String Dateofbirth = "dateofbirth";
+    public static final String Gender = "gender";
+    public static final String Paymenttype = "paymenttype";
+    public static final String Profilepic = "profilepic";
+    public static final String UserAccountNumber = "UserAccountNo";
+    public static final String usertypeid = "usertypeid";
+    public static final String VEHICLEID = "vehicleid";
+    public static final String Username = "nameKey";
+    public static final String CountryId = "countryKey";
     public static final String DriverStatus = "driverstatusKey";
 
 
@@ -126,6 +140,7 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
     private static final String BROADCAST_ACTION = "android.location.PROVIDERS_CHANGED";
 
     String dstatus;
+    int id;
 
 
     @Override
@@ -133,6 +148,8 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_driverdashboard_activity);
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        id = prefs.getInt(ID,0);
+        ApplicationConstants.mobileNo = prefs.getString(Phone,null);
         dstatus = prefs.getString(DriverStatus, null);
         ApplicationConstants.driverstatus = dstatus;
 
