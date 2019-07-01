@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappCurrentTicketListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappCurrenttripListActivity;
+import com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriverMyLocation;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriversTripsListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.customerappFlightBookingSearchActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.customerappGetaLyftBookingsListActivity;
@@ -178,7 +179,9 @@ public class businessAppDriverDashboardFragment extends Fragment {
 //                                .commitAllowingStateLoss();
                         break;
                     case 2:
-                        Intent intent2 = new Intent(getActivity(), businessappCurrentTicketListActivity.class);
+
+                        //my location activity
+                        Intent intent2 = new Intent(getActivity(), businessappDriverMyLocation.class);
                         startActivity(intent2);
                         break;
                     case 3:

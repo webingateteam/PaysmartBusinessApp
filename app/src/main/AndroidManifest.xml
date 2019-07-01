@@ -157,6 +157,7 @@
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappStaffListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriverMyLocation"/>
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappNewStaffActivity"
             android:theme="@style/AppTheme.NoActionBar" />
