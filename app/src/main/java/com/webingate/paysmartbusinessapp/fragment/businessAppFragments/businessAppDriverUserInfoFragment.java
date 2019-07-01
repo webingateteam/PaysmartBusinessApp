@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
+import com.rilixtech.CountryCodePicker;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.RegisterBusinessUsers;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappNewDriverActivity;
@@ -71,6 +72,7 @@ public class businessAppDriverUserInfoFragment extends Fragment implements Adapt
 
     Spinner country;
 
+
     List<ActiveCountries> res2;
 
     ArrayAdapter countries;
@@ -109,9 +111,10 @@ public class businessAppDriverUserInfoFragment extends Fragment implements Adapt
     private void initUI(View view) {
 
         profileImageView = view.findViewById(R.id.profileImageView);
-        int id = R.drawable.profile2;
+        int id = R.drawable.home9_profile;
         Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2,  R.color.md_white_1000);
-        setName((EditText)view.findViewById(R.id.s_name));
+
+        //setName((EditText)view.findViewById(R.id.s_name));
 
         name = view.findViewById(R.id.s_name);
         email = view.findViewById(R.id.s_email);
@@ -177,12 +180,14 @@ public class businessAppDriverUserInfoFragment extends Fragment implements Adapt
 //                        } else {
 //
 //                            String countriesList = "";
-//                            for(int i=0; i < countrycount ; i++){
-//                                if(i == countrycount-1)
+//                            for (int i = 0; i < countrycount; i++) {
+//                                if (i == countrycount - 1)
 //                                    countriesList += response.get(i).getISOCode();
 //                                else
-//                                    countriesList += response.get(i).getISOCode()+ ",";
+//                                    countriesList += response.get(i).getISOCode() + ",";
 //                            }
+//                            ccp.setCustomMasterCountries(countriesList);
+//                        }
 
                         for (int i = 0; i < res2.size(); i++) {
                             ctry.add(res2.get(i).getName());
@@ -220,13 +225,25 @@ public class businessAppDriverUserInfoFragment extends Fragment implements Adapt
         {
             // Toast.makeText(this, "Your are selected :" + res.get(position).getName(),Toast.LENGTH_SHORT).show();
             ct=position;
-            ApplicationConstants.ctryid = res2.get(ct).getId();
+            ApplicationConstants.countryid = res2.get(ct).getId();
+            ApplicationConstants.countrycode = res2.get(ct).getCountryCode();
 
         }
     }
 
     @Override
     public void onNothingSelected(AdapterView <?> parent) {
+
+    }
+
+    public void DisplayToast(String text){
+        if(toast!=null){
+            toast.cancel();
+            toast=null;
+
+        }
+        toast=Toast.makeText(getContext(),text,Toast.LENGTH_SHORT);
+        toast.show();
 
     }
 

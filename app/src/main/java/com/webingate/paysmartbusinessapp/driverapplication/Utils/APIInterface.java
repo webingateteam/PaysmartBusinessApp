@@ -77,8 +77,14 @@ public interface APIInterface  {
     @POST("/api/BusinessAppUser/BusinessAppUserForgotpassword")
     public Observable<List<DriverForgotpasswordResponse>> Forgotpassword1(@Body JsonObject jsonObject);
 
-    @POST("/api/BusinessAppUser/BusinessAppUserResendOTP")
-    public Observable<List<BusinessResendOTPResponse>> BusinessAppResendOTP(@Body JsonObject jsonObject);
+    @POST("/api/BusinessAppUser/ResendEmailOtp")
+    public Observable<List<BusinessResendOTPResponse>> BusinessAppResendEOTP(@Body JsonObject jsonObject);
+
+    @POST("/api/BusinessAppUser/ResendMobileOtp")
+    public Observable<List<BusinessResendOTPResponse>> BusinessAppResendMOTP(@Body JsonObject jsonObject);
+
+    @POST("/api/BusinessAppUser/ResendPasswordOtp")
+    public Observable<List<BusinessResendOTPResponse>> BusinessAppResendPOTP(@Body JsonObject jsonObject);
 
 
     @POST("/api/BusinessAppUser/BusinessAppUserPasswordverification")
@@ -132,7 +138,7 @@ public interface APIInterface  {
     @POST("/api/VehicleBooking/DriverRatingToRide")
     public Observable<List<DriverRateTheRideResponse>> DriverRatingToRide(@Body JsonObject jsonObject);
 
-    @GET("/api/Driverlogin/Getdrivertrips")
+    @GET("/api/BusinessAppUser/Getdrivertrips")
     public Observable<List<GetdriverTripsResponse>> Getdrivertrips(@Query("DriverNo") String driverNo,@Query("status") int status);
 
     @GET("/api/DriverMaster/GetDriverDetails")

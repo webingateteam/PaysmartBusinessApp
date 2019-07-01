@@ -167,11 +167,11 @@ public class businessappFleetownerDashboardActivity extends AppCompatActivity {
         View v = bottomNavigationMenuView.getChildAt(2);
         BottomNavigationItemView itemView = (BottomNavigationItemView) v;
 
-        View badge = LayoutInflater.from(this)
-                .inflate(R.layout.customerapp_notificationcount_item, bottomNavigationMenuView, false);
-        TextView tv = badge.findViewById(R.id.notification_badge);
-        tv.setText("8+");
-        itemView.addView(badge);
+//        View badge = LayoutInflater.from(this)
+//                .inflate(R.layout.customerapp_notificationcount_item, bottomNavigationMenuView, false);
+//        TextView tv = badge.findViewById(R.id.notification_badge);
+//        tv.setText("8+");
+//        itemView.addView(badge);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
 
@@ -199,7 +199,7 @@ public class businessappFleetownerDashboardActivity extends AppCompatActivity {
                     break;
             }
 
-            Toast.makeText(getApplicationContext(), "Clicked " + item.getTitle(), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getApplicationContext(), "Clicked " + item.getTitle(), Toast.LENGTH_SHORT).show();
 
             return false;
         });

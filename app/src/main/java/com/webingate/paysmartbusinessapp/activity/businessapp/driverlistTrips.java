@@ -82,7 +82,7 @@ public class driverlistTrips extends AppCompatActivity {
     }
 
     private void initData() {
-        String mb= com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants.mobileNo;
+        String mb= ApplicationConstants.mobileNo;
         GetDriverTrips(mb);
     }
 

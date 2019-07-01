@@ -23,7 +23,13 @@ public class ActiveCountries {
     @SerializedName("Code")
     private String code;
 
+    @SerializedName("CountryCode")
+    private String CountryCode;
+
     @SerializedName("Id") private int Id;
+    public String getCountryCode() {
+        return CountryCode;
+    }
     public String getCode() {
         return code;
     }

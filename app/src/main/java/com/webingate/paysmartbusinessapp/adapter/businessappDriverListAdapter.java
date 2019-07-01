@@ -61,11 +61,11 @@ public class businessappDriverListAdapter extends RecyclerView.Adapter<RecyclerV
             Context context = holder.placeHolderCardView.getContext();
             // int id = Utils.getDrawableInt(context, place.getPhoto());
             if(place.getUserPhoto()==null){
-                int id = Utils.getDrawableInt(context, "profile2");
+                int id = Utils.getDrawableInt(context, "home9_profile");
                 Utils.setImageToImageView(context, holder.placeImageView, id);
             }
            else if(place.getUserPhoto().matches("")){
-                int id = Utils.getDrawableInt(context, "profile2");
+                int id = Utils.getDrawableInt(context, "home9_profile");
                 Utils.setImageToImageView(context, holder.placeImageView, id);
             }
             else{

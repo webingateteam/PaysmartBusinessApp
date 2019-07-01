@@ -53,6 +53,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String Username = "nameKey";
     public static final String Phone = "phoneKey";
+    public static final String ID = "idKey";
 
     private int position = 1;
     private int maxPosition = 1;
@@ -62,7 +63,7 @@ public class businessappNewDriverActivity extends AppCompatActivity {
     ImageView profileImageView;
     int imagetesting;
 
-    String ctry;
+    String ctry,cout;
 
     EditText email;
     EditText name;
@@ -77,12 +78,18 @@ public class businessappNewDriverActivity extends AppCompatActivity {
     EditText state;
     Toast toast;
     int ccode;
+    String mbno;
+
     RegisterBusinessUsers rlist;
     businessAppDriverUserInfoFragment   userInfoFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_newdriver_activity);
+
+        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        mbno = prefs.getString(Phone, null);
+        ApplicationConstants.fid = prefs.getInt(ID, 0);
 
         initData();
 
@@ -208,18 +215,13 @@ public class businessappNewDriverActivity extends AppCompatActivity {
                     object.addProperty("Password", "123");
                     object.addProperty("Mobilenumber", mno.getText().toString());
                     object.addProperty("Email", email.getText().toString());
-                    object.addProperty("CountryId", ApplicationConstants.ctryid);
+                    object.addProperty("CountryId", ApplicationConstants.countryid);
                     object.addProperty("VehicleGroupId", "");
-                    object.addProperty("UserAccountNo", "109" + mno.getText().toString());
+                    object.addProperty("UserAccountNo", "109"+ApplicationConstants.countrycode + mno.getText().toString());
                     object.addProperty("usertypeid", "109");
                     object.addProperty("isDriverOwned", "0");
                     object.addProperty("ownerId", ApplicationConstants.fid);
-                    if (ApplicationConstants.ctryid == 101) {
-                        ccode = 91;
-                    } else {
-                        ccode = 263;
-                    }
-                    object.addProperty("CCode", ccode);
+                    object.addProperty("CCode", ApplicationConstants.countrycode);
                     object.addProperty("DPhoto", (((imagetesting == 1) ? ("data:" + ApplicationConstants.document_format + ";base64," + ApplicationConstants.picdata) : "")));
                     RegisterDriver(object);
                 }

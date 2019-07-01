@@ -2,9 +2,13 @@ package com.webingate.paysmartbusinessapp.activity.businessapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +21,8 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.adapter.businessappDriverTripslistAdapter;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetdriverTripsResponse;
 
 import java.util.ArrayList;
@@ -28,13 +34,14 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class businessapptripscompletedlistFragment extends Fragment {
+
     Toast toast;
     private Context context;
     private String bookingno;
-    @BindView(R.id.listView1)
-    ListView listView2;
     String mb;
-    MyCustomAdapter dataAdapter = null;
+    RecyclerView recyclerView;
+    businessappDriverTripslistAdapter adapter;
+    //MyCustomAdapter dataAdapter = null;
     List<GetdriverTripsResponse> list;
     ArrayList <GetdriverTripsResponse> completetripList;
     com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog dialog ;
@@ -49,7 +56,7 @@ public class businessapptripscompletedlistFragment extends Fragment {
 
         initData();
 
-        initUI();
+        initUI(view);
 
         //  initDataBindings();
 
@@ -60,12 +67,19 @@ public class businessapptripscompletedlistFragment extends Fragment {
 
 
     private void initData() {
-        mb= com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants.mobileNo;
+        mb= ApplicationConstants.mobileNo;
         int tt=2;
         GetDrivercompleteTrips(mb,tt);
     }
 
-    private void initUI() {
+    private void initUI(View view) {
+
+        adapter=new businessappDriverTripslistAdapter(null);
+
+        recyclerView = view.findViewById(R.id.RecyclerView);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
     private void initDataBinding() {
@@ -74,99 +88,99 @@ public class businessapptripscompletedlistFragment extends Fragment {
     private void initActions() {
     }
 
-    private void displayListView1() {
+//    private void displayListView1() {
+//
+//
+//        //create an ArrayAdaptar from the String Array
+//
+//        dataAdapter = new MyCustomAdapter(getActivity(),R.layout.layout_tripscustom, completetripList);
+//
+//        // Assign adapter to ListView
+//        dataAdapter.notifyDataSetChanged();
+//        ListView listView = (ListView) getActivity().findViewById(R.id.listView1);
+//        listView.setAdapter(dataAdapter);
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+//            public void onItemClick(AdapterView<?> parent, View view,
+//                                    int position, long id) {
+//                //dataAdapter.getPosition(GetdriverTripsResponse tripModel);
+//
+//               // GetdriverTripsResponse tripModel = (GetdriverTripsResponse)list.get(position);
+//                bookingno =  dataAdapter.getItem(position).getBNo();
+//                //bookingno = tripModel.getId();
+//                JsonObject object = new JsonObject();
+//                object.addProperty("BNo", bookingno);
+//                GetDriverTripsDetails(mb,bookingno);
+//                //RideDetails(object);
+//
+//               /* TripRequest tripRequest = new TripRequest();
+//                tripRequest.execute();*/
+//            }
+//        });
+//
+//    }
 
-
-        //create an ArrayAdaptar from the String Array
-
-        dataAdapter = new MyCustomAdapter(getActivity(),R.layout.layout_tripscustom, completetripList);
-
-        // Assign adapter to ListView
-        dataAdapter.notifyDataSetChanged();
-        ListView listView = (ListView) getActivity().findViewById(R.id.listView1);
-        listView.setAdapter(dataAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                //dataAdapter.getPosition(GetdriverTripsResponse tripModel);
-
-               // GetdriverTripsResponse tripModel = (GetdriverTripsResponse)list.get(position);
-                bookingno =  dataAdapter.getItem(position).getBNo();
-                //bookingno = tripModel.getId();
-                JsonObject object = new JsonObject();
-                object.addProperty("BNo", bookingno);
-                GetDriverTripsDetails(mb,bookingno);
-                //RideDetails(object);
-
-               /* TripRequest tripRequest = new TripRequest();
-                tripRequest.execute();*/
-            }
-        });
-
-    }
-
-    private class MyCustomAdapter extends ArrayAdapter<GetdriverTripsResponse> {
-
-        private ArrayList<GetdriverTripsResponse> logsselected;
-
-        public MyCustomAdapter(Context context, int textViewResourceId,
-                               ArrayList<GetdriverTripsResponse> logsSelected) {
-            super(context, textViewResourceId, logsSelected);
-            this.logsselected = completetripList;
-            this.logsselected.addAll(logsSelected);
-        }
-
-        private class ViewHolder {
-            TextView time, booking_no, source, destination, price;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            ViewHolder holder = null;
-            Log.v("ConvertView", String.valueOf(position));
-
-            if (convertView == null) {
-                //sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
-                LayoutInflater vi = (LayoutInflater)getActivity().getSystemService(
-                        Context.LAYOUT_INFLATER_SERVICE);
-                convertView = vi.inflate(R.layout.layout_tripscustom, null);
-
-                holder = new ViewHolder();
-                holder.time = (TextView) convertView.findViewById(R.id.time);
-                holder.price = (TextView) convertView.findViewById(R.id.price);
-                holder.booking_no = (TextView) convertView.findViewById(R.id.booking_no);
-                holder.source = (TextView) convertView.findViewById(R.id.source);
-                holder.destination = (TextView) convertView.findViewById(R.id.destination);
-                convertView.setTag(holder);
-
-	   /* holder.code.setOnClickListener( new View.OnClickListener() {
-		     public void onClick(View v) {
-		      TextView tb = (TextView) v ;
-		      LogModel log =new LogModel();
-		    		  log= (LogModel) tb.getTag();
-		      Toast.makeText(getApplicationContext(),"Clicked On Log" + log.getName()+" "+log.getDate()+"/"+log.getMonth()+"/"+log.getYear(),
-		      Toast.LENGTH_LONG).show();
-		      //log.setSelected(cb.isChecked());
-		     }
-		    }); */
-            } else {
-                holder = (MyCustomAdapter.ViewHolder) convertView.getTag();
-            }
-
-            GetdriverTripsResponse logs = logsselected.get(position);
-            // holder.code.setText(" (" +  logs.getCode() + ")");
-            holder.time.setText(logs.getBookedDate());
-            holder.price.setText("$ " + logs.getAmount());
-            holder.booking_no.setText("Booking No " + logs.getId());
-            holder.source.setText(logs.getSrc());
-
-            holder.destination.setText(logs.getDest());
-            return convertView;
-
-        }
-
-    }
+//    private class MyCustomAdapter extends ArrayAdapter<GetdriverTripsResponse> {
+//
+//        private ArrayList<GetdriverTripsResponse> logsselected;
+//
+//        public MyCustomAdapter(Context context, int textViewResourceId,
+//                               ArrayList<GetdriverTripsResponse> logsSelected) {
+//            super(context, textViewResourceId, logsSelected);
+//            this.logsselected = completetripList;
+//            this.logsselected.addAll(logsSelected);
+//        }
+//
+//        private class ViewHolder {
+//            TextView time, booking_no, source, destination, price;
+//        }
+//
+//        @Override
+//        public View getView(int position, View convertView, ViewGroup parent) {
+//
+//            ViewHolder holder = null;
+//            Log.v("ConvertView", String.valueOf(position));
+//
+//            if (convertView == null) {
+//                //sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+//                LayoutInflater vi = (LayoutInflater)getActivity().getSystemService(
+//                        Context.LAYOUT_INFLATER_SERVICE);
+//                convertView = vi.inflate(R.layout.layout_tripscustom, null);
+//
+//                holder = new ViewHolder();
+//                holder.time = (TextView) convertView.findViewById(R.id.time);
+//                holder.price = (TextView) convertView.findViewById(R.id.price);
+//                holder.booking_no = (TextView) convertView.findViewById(R.id.booking_no);
+//                holder.source = (TextView) convertView.findViewById(R.id.source);
+//                holder.destination = (TextView) convertView.findViewById(R.id.destination);
+//                convertView.setTag(holder);
+//
+//	   /* holder.code.setOnClickListener( new View.OnClickListener() {
+//		     public void onClick(View v) {
+//		      TextView tb = (TextView) v ;
+//		      LogModel log =new LogModel();
+//		    		  log= (LogModel) tb.getTag();
+//		      Toast.makeText(getApplicationContext(),"Clicked On Log" + log.getName()+" "+log.getDate()+"/"+log.getMonth()+"/"+log.getYear(),
+//		      Toast.LENGTH_LONG).show();
+//		      //log.setSelected(cb.isChecked());
+//		     }
+//		    }); */
+//            } else {
+//                holder = (MyCustomAdapter.ViewHolder) convertView.getTag();
+//            }
+//
+//            GetdriverTripsResponse logs = logsselected.get(position);
+//            // holder.code.setText(" (" +  logs.getCode() + ")");
+//            holder.time.setText(logs.getBookedDate());
+//            holder.price.setText("$ " + logs.getAmount());
+//            holder.booking_no.setText("Booking No " + logs.getId());
+//            holder.source.setText(logs.getSrc());
+//
+//            holder.destination.setText(logs.getDest());
+//            return convertView;
+//
+//        }
+//
+//    }
 
     public void GetDrivercompleteTrips( String driverNo, int status){
 
@@ -178,14 +192,14 @@ public class businessapptripscompletedlistFragment extends Fragment {
                 .subscribe(new Subscriber<List<GetdriverTripsResponse>>() {
                     @Override
                     public void onCompleted() {
-                        DisplayToast("Successfully get Drivers Trip list");
+                        //DisplayToast("Successfully get Drivers Trip list");
                         //   StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
                         try {
                             Log.d("OnError ", e.getMessage());
-                            DisplayToast("Unable to Register");
+                            //DisplayToast("Unable to Register");
 //                            StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -195,16 +209,8 @@ public class businessapptripscompletedlistFragment extends Fragment {
                     @Override
                     public void onNext(List<GetdriverTripsResponse> trips) {
                         completetripList= (ArrayList<GetdriverTripsResponse>) trips;
-                        DisplayToast("Next to Register");
-                        displayListView1();
-                        //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                        //   SharedPreferences.Editor editor = sharedpreferences.edit();
-                        //  editor.putString(Emailotp, response.getEmail());
-                        //    editor.commit();
-                        //startActivity(new Intent(busianessappEOTPVerificationActivity.this, login_activity.class));
-                        // DriverList
-                        //adapter = new businessappDriverTripslistAdapter(completetripList);
-                        //recyclerView.setAdapter(adapter);
+                        adapter = new businessappDriverTripslistAdapter(completetripList);
+                        recyclerView.setAdapter(adapter);
 
 //                       // adapter.setOnItemClickListener((view, obj, position) ->
 //                                {

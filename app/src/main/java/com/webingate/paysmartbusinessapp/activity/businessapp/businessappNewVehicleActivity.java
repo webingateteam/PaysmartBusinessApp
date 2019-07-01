@@ -1,6 +1,7 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -39,10 +40,12 @@ import static com.webingate.paysmartbusinessapp.driverapplication.ApplicationCon
 public class businessappNewVehicleActivity extends AppCompatActivity {
 
     public static final String MyPREFERENCES = "MyPrefs";
+    public static final String ID = "idKey";
     public static final String RegistrationNo = "RegistrationNoKey";
+    public static final String CountryId = "countryKey";
 
     private int position = 1;
-    private int maxPosition = 5;
+    private int maxPosition = 1;
     private Button nextButton, prevButton;
     private TextView imageNoTextView;
     ImageView profileImageView;
@@ -67,6 +70,8 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_newvehicle_activity);
+        SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        ApplicationConstants.fid= prefs.getInt(ID, 0);
 
         initData();
 
@@ -157,10 +162,50 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
 //                    RegNo.setText(ApplicationConstants.registrationNo);
 
                 }
-                if(position == 2)
-                {
-                    //EditText name = (EditText)findViewById(R.id.s_name);
-                    RegNo = findViewById(R.id.s_Regno);
+//                if(position == 2)
+//                {
+//                    //EditText name = (EditText)findViewById(R.id.s_name);
+//                    RegNo = findViewById(R.id.s_Regno);
+//                    chasisno = findViewById(R.id.s_chasisno);
+//                    engineno = findViewById(R.id.s_engineno);
+//                    vgroup = findViewById(R.id.s_vgroup);
+//                    vtype = findViewById(R.id.s_vtype);
+//                    modelyear = findViewById(R.id.s_modelyear);
+//                    state = findViewById(R.id.s_state);
+//                    country = findViewById(R.id.s_country);
+//
+//                    JsonObject object = new JsonObject();
+//                    object.addProperty("flag", "I");
+//                    object.addProperty("Id","");
+//                    object.addProperty("VID", "");
+//                    object.addProperty("CompanyId", "");
+//                    object.addProperty("RegistrationNo",RegNo.getText().toString());
+//                    object.addProperty("ChasisNo",chasisno.getText().toString());
+//                    object.addProperty("Engineno",engineno.getText().toString());
+//                    object.addProperty("FleetOwnerCode",ApplicationConstants.fid);
+//                    object.addProperty("VehicleTypeId",ApplicationConstants.vtype);
+//                    object.addProperty("VehicleModelId","");
+//                    object.addProperty("VehicleGroupId",ApplicationConstants.vgrp);
+//                    object.addProperty("ModelYear",modelyear.getText().toString());
+//                    object.addProperty("VehicleCode","12345");
+//                    object.addProperty("CountryId", ApplicationConstants.countryid);
+//                    object.addProperty("change","2");
+//                    object.addProperty("type","1");
+//                    VehicleCreation(object);
+//
+//                    //Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
+//                    setupFragment(new businessAppVehicleDocsFragment());
+//                }
+//
+//
+//                if(position == 3) {
+//                    //Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
+//                    setupFragment(new businessAppVehicleInfoFragment());
+//                }
+
+            } else {
+
+                RegNo = findViewById(R.id.s_Regno);
                     chasisno = findViewById(R.id.s_chasisno);
                     engineno = findViewById(R.id.s_engineno);
                     vgroup = findViewById(R.id.s_vgroup);
@@ -169,37 +214,32 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
                     state = findViewById(R.id.s_state);
                     country = findViewById(R.id.s_country);
 
-                    JsonObject object = new JsonObject();
-                    object.addProperty("flag", "I");
-                    object.addProperty("Id","");
-                    object.addProperty("VID", "");
-                    object.addProperty("CompanyId", "");
-                    object.addProperty("RegistrationNo",RegNo.getText().toString());
-                    object.addProperty("ChasisNo",chasisno.getText().toString());
-                    object.addProperty("Engineno",engineno.getText().toString());
-                    object.addProperty("FleetOwnerCode",ApplicationConstants.fid);
-                    object.addProperty("VehicleTypeId",ApplicationConstants.vtype);
-                    object.addProperty("VehicleModelId","");
-                    object.addProperty("VehicleGroupId",ApplicationConstants.vgrp);
-                    object.addProperty("ModelYear",modelyear.getText().toString());
-                    object.addProperty("VehicleCode","12345");
-                    object.addProperty("CountryId", ApplicationConstants.countryid);
-                    object.addProperty("change","2");
-                    object.addProperty("type","1");
-                    VehicleCreation(object);
+                    if(RegNo.getText().toString().matches("")){
+                        DisplayToast("Please Enter Details");
+                    }
+                    else {
 
-                    //Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppVehicleDocsFragment());
-                }
+                        JsonObject object = new JsonObject();
+                        object.addProperty("flag", "I");
+                        object.addProperty("Id", "");
+                        object.addProperty("VID", "");
+                        object.addProperty("CompanyId", "");
+                        object.addProperty("RegistrationNo", RegNo.getText().toString());
+                        object.addProperty("ChasisNo", chasisno.getText().toString());
+                        object.addProperty("Engineno", engineno.getText().toString());
+                        object.addProperty("FleetOwnerCode", ApplicationConstants.fid);
+                        object.addProperty("VehicleTypeId", ApplicationConstants.vtype);
+                        object.addProperty("VehicleModelId", "");
+                        object.addProperty("VehicleGroupId", ApplicationConstants.vgrp);
+                        object.addProperty("ModelYear", modelyear.getText().toString());
+                        object.addProperty("VehicleCode", "12345");
+                        object.addProperty("CountryId", ApplicationConstants.countryid);
+                        object.addProperty("change", "2");
+                        object.addProperty("type", "1");
+                        VehicleCreation(object);
+                    }
 
-
-                if(position == 3) {
-                    //Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppVehicleInfoFragment());
-                }
-
-            } else {
-                Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -213,17 +253,17 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
                     //Toast.makeText(this, "Step 1.", Toast.LENGTH_SHORT).show();
                     setupFragment(new businessAppVehicleInfoFragment());
                 }
-                if(position == 2)
-                {
-                    //Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppDriverDocsFragment());
-                }
-
-
-                if(position == 3) {
-                    //Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
-                    setupFragment(new businessAppDriverUserInfoFragment());
-                }
+//                if(position == 2)
+//                {
+//                    //Toast.makeText(this, "Step 2.", Toast.LENGTH_SHORT).show();
+//                    setupFragment(new businessAppDriverDocsFragment());
+//                }
+//
+//
+//                if(position == 3) {
+//                    //Toast.makeText(this, "Step 3.", Toast.LENGTH_SHORT).show();
+//                    setupFragment(new businessAppDriverUserInfoFragment());
+//                }
 
             } else {
                 Toast.makeText(this, "No More Step.", Toast.LENGTH_SHORT).show();
@@ -282,8 +322,8 @@ public class businessappNewVehicleActivity extends AppCompatActivity {
 //                        editor.putString(DRIVERID, response.getDriverId());
 //                        editor.putString(VEHICLEID, response.getVehicleId());
                             editor.commit();
-                            // startActivity(new Intent(customerSignUpActivity.this, customerEOTPVerificationActivity.class));
-                            //finish();
+                             startActivity(new Intent(businessappNewVehicleActivity.this, businessappVehicleListActivity.class));
+                            finish();
                         }
                     }
                 });

@@ -191,11 +191,11 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
         View v = bottomNavigationMenuView.getChildAt(2);
         BottomNavigationItemView itemView = (BottomNavigationItemView) v;
 
-        View badge = LayoutInflater.from(this)
-                .inflate(R.layout.customerapp_notificationcount_item, bottomNavigationMenuView, false);
-        TextView tv = badge.findViewById(R.id.notification_badge);
-        tv.setText("8+");
-        itemView.addView(badge);
+//        View badge = LayoutInflater.from(this)
+//                .inflate(R.layout.customerapp_notificationcount_item, bottomNavigationMenuView, false);
+//        TextView tv = badge.findViewById(R.id.notification_badge);
+//        tv.setText("8+");
+//        itemView.addView(badge);
 
         //goonlineBtn = findViewById(R.id.goonlineBtn);
 
@@ -222,7 +222,7 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
                     break;
             }
 
-            Toast.makeText(getApplicationContext(), "Clicked " + item.getTitle(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Clicked " + item.getTitle(), Toast.LENGTH_SHORT).show();
 
             return false;
         });

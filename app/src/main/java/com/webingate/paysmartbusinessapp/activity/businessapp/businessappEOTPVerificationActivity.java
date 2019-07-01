@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
@@ -54,6 +55,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
     Button changeButton, resendButton, submitOTPButton;
     String mno,email;
     int id;
+    TextView text;
 
 
     @Override
@@ -65,6 +67,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
         email = prefs.getString(Email, null);
         id = prefs.getInt(ID, 0);
         ApplicationConstants.fid = id;
+        ApplicationConstants.email = email;
         initUI();
 
         initActions();
@@ -99,6 +102,10 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
 
         sbtn=findViewById(R.id.submitOTPButton);
         etop=findViewById(R.id.b_eotp);
+
+        text = findViewById(R.id.textView253);
+
+        text.setText("You\"ve just received an email containing verification code on " + ApplicationConstants.email + " ");
     }
 
     private void initActions(){
@@ -212,7 +219,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
     public void ResendOTP(JsonObject jsonObject){
         StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
-                .BusinessAppResendOTP(jsonObject)
+                .BusinessAppResendEOTP(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<BusinessResendOTPResponse>>() {

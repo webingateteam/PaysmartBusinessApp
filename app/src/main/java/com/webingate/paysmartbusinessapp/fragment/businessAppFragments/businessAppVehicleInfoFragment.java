@@ -271,6 +271,7 @@ public class businessAppVehicleInfoFragment extends Fragment implements AdapterV
             // Toast.makeText(this, "Your are selected :" + res.get(position).getName(),Toast.LENGTH_SHORT).show();
             ct=position;
          ApplicationConstants.countryid=res2.get(ct).getId();
+
         }
         if(vgroup.getId() == R.id.s_vgroup)
         {

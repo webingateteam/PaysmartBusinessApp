@@ -91,17 +91,32 @@
                 app:layout_constraintStart_toEndOf="@+id/placeImageView"
                 app:layout_constraintTop_toBottomOf="@+id/distanceTextView" />
 
+            <TextView
+                android:id="@+id/StatusTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="Status"
+                android:textAlignment="viewStart"
+                android:textColor="@color/md_grey_800"
+                android:textSize="@dimen/font_body_s_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/placeImageView"
+                app:layout_constraintTop_toBottomOf="@+id/cityTextView" />
+
             <RatingBar
                 android:id="@+id/placeRatingBar"
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="11dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:isIndicator="true"
                 android:numStars="5"
-                android:stepSize="0.5"
                 android:progressTint="@color/md_yellow_500"
+                android:stepSize="0.5"
                 app:layout_constraintStart_toEndOf="@+id/placeImageView"
                 app:layout_constraintTop_toBottomOf="@+id/cityTextView" />
 

@@ -45,12 +45,15 @@ import rx.schedulers.Schedulers;
 public class businessappVehicleListActivity extends AppCompatActivity {
 
     public static final String MyPREFERENCES = "MyPrefs";
+    public static final String ID = "idKey";
     public static final String RegistrationNo = "RegNoKey";
     public static final String VehicleGroup = "vgrpKey";
     public static final String VehicleType = "vtypeKey";
     public static final String VehicleCode = "vcodeKey";
     public static final String Phone = "phoneKey";
     public static final String Photo = "PhotoKey";
+    public static final String CountryId = "countryKey";
+
 
     String regno,vimage,vgrp,vtype,vcode;
 
@@ -69,63 +72,20 @@ public class businessappVehicleListActivity extends AppCompatActivity {
     private LinearLayout linearVideo;
     private LinearLayout linearCamera;
 
-    private void initData()
-    {
-        // get place list
-        //placeArrayList = VehicleListRepository.getPlaceList();
-        int ctryid = ApplicationConstants.countryid;
-        int fid = ApplicationConstants.fid;
-        int vgid = -1;
-        GetVehilcelist(ctryid,fid,vgid);
-    }
-
-    private void initUI()
-    {
-        initToolbar();
-
-        // get list adapter
-        adapter = new businessappVehicleListAdapter(null);
-
-        // get recycler view
-        recyclerView = findViewById(R.id.placeList1RecyclerView);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-    }
-    private void initDataBindings()
-    {
-        // bind adapter to recycler
-        recyclerView.setAdapter(adapter);
-    }
-    private void initActions()
-    {
-//        adapter.setOnItemClickListener((view, obj, position) ->
-//                {
-//                    Toast.makeText(this, "Selected : " + obj.name, Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(this, businessappVehicleDetailsActivity.class);
-//                    startActivity(intent);
-//
-//                }
-//
-//        );
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_vehicleslist_activity);
-        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString(RegistrationNo, RegistrationNo);
-        editor.commit();
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-//        ApplicationConstants.username= prefs.getString(Username, null);
-//        ApplicationConstants.photo= prefs.getString(Photo, null);em= prefs.getString(Email, null);
+        ApplicationConstants.fid= prefs.getInt(ID, 0);
+        ApplicationConstants.photo= prefs.getString(Phone, null);
+        ApplicationConstants.countryid= prefs.getInt(CountryId, 0);
         regno= prefs.getString(RegistrationNo, null);
         vgrp = prefs.getString(VehicleGroup,null);
         vtype = prefs.getString(VehicleType,null);
         vcode = prefs.getString(VehicleCode,null);
+
         initData();
         initUI();
         initDataBindings();
@@ -172,42 +132,87 @@ public class businessappVehicleListActivity extends AppCompatActivity {
                     //Toast.makeText(getApplicationContext(), "Open fab clicked", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappNewVehicleActivity.class);
                     startActivity(intent);
+                    finish();
                 }
 
                 //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show()
 
         );
 
-        fabVideo.setOnClickListener(
-
-                v ->
-                {
-                   // Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this, businessappNewVehicleActivity.class);
-                    startActivity(intent);
-                }
-
-                //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show()
-
-        );
-
-        fabCamera.setOnClickListener(v ->
-                {
-                    //Toast.makeText(getApplicationContext(), "Open Camera clicked", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this, businessappNewStaffActivity.class);
-                    startActivity(intent);
-                }
-        );
-
-        fabPhoto.setOnClickListener(v ->
-        {
-            //Toast.makeText(getApplicationContext(), "View Photos clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, businessappNewDriverActivity.class);
-            startActivity(intent);
-
-        });
+//        fabVideo.setOnClickListener(
+//
+//                v ->
+//                {
+//                    // Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(this, businessappNewVehicleActivity.class);
+//                    startActivity(intent);
+//                }
+//
+//                //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show()
+//
+//        );
+//
+//        fabCamera.setOnClickListener(v ->
+//                {
+//                    //Toast.makeText(getApplicationContext(), "Open Camera clicked", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(this, businessappNewStaffActivity.class);
+//                    startActivity(intent);
+//                }
+//        );
+//
+//        fabPhoto.setOnClickListener(v ->
+//        {
+//            //Toast.makeText(getApplicationContext(), "View Photos clicked", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(this, businessappNewDriverActivity.class);
+//            startActivity(intent);
+//
+//        });
 
     }
+
+    private void initData()
+    {
+        // get place list
+        //placeArrayList = VehicleListRepository.getPlaceList();
+        int ctryid = ApplicationConstants.countryid;
+        int fid = ApplicationConstants.fid;
+        int vgid = -1;
+        GetVehilcelist(ctryid,fid,vgid);
+    }
+
+    private void initUI()
+    {
+        initToolbar();
+
+        // get list adapter
+        adapter = new businessappVehicleListAdapter(null);
+
+        // get recycler view
+        recyclerView = findViewById(R.id.placeList1RecyclerView);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+    }
+    private void initDataBindings()
+    {
+        // bind adapter to recycler
+        recyclerView.setAdapter(adapter);
+    }
+    private void initActions()
+    {
+//        adapter.setOnItemClickListener((view, obj, position) ->
+//                {
+//                    Toast.makeText(this, "Selected : " + obj.name, Toast.LENGTH_LONG).show();
+//                    Intent intent = new Intent(this, businessappVehicleDetailsActivity.class);
+//                    startActivity(intent);
+//
+//                }
+//
+//        );
+    }
+
+
     ArrayList<GetVehicleListResponse>  response;
     public void GetVehilcelist(int ctryid,int fid,int vgid){
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(businessappVehicleListActivity.this).getrestadapter()

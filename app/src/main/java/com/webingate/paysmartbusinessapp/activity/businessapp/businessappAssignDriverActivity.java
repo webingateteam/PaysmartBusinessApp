@@ -73,6 +73,7 @@ public class businessappAssignDriverActivity extends AppCompatActivity {
                     //Toast.makeText(getApplicationContext(), "Assign New Driver", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, businessappNewAssignDriverActivity.class);
                     startActivity(intent);
+                    finish();
                 }
 
                 //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show()

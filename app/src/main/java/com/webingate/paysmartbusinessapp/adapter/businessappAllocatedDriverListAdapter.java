@@ -63,7 +63,7 @@ public class businessappAllocatedDriverListAdapter extends RecyclerView.Adapter<
             Context context = holder.placeHolderCardView.getContext();
 
             // int id = Utils.getDrawableInt(context, place.getPhoto());
-            int id = Utils.getDrawableInt(context, "photo_male_7");
+            int id = Utils.getDrawableInt(context, "user_driver");
             Utils.setImageToImageView(context, holder.placeImageView, id);
 
             holder.typeTextView.setText(place.getRegistrationNo().toString());

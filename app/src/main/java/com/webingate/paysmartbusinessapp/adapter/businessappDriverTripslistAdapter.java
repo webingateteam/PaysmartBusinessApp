@@ -56,16 +56,17 @@ public class businessappDriverTripslistAdapter extends RecyclerView.Adapter<Recy
             GetdriverTripsResponse place = placeArrayList.get(position);
 
             PlaceViewHolder holder = (PlaceViewHolder) viewHolder;
-            holder.placeNameTextView.setText(place.getBNo());
+            holder.placeNameTextView.setText("BNo : "+place.getBNo());
 
             Context context = holder.placeHolderCardView.getContext();
 
             // int id = Utils.getDrawableInt(context, place.getPhoto());
-            int id = Utils.getDrawableInt(context, "photo_male_7");
+            int id = Utils.getDrawableInt(context, "home9_profile");
             Utils.setImageToImageView(context, holder.placeImageView, id);
 
-            holder.typeTextView.setText("12");
-            holder.cityTextView.setText("");
+            holder.typeTextView.setText("Customer No : "+place.getCustomerPhoneNo());
+            holder.cityTextView.setText(place.getBookingStatus());
+            holder.Status.setText(place.getAmount());
             holder.placeRatingBar.setRating(Float.parseFloat("4"));
             holder.totalRatingTextView.setText("4");
             holder.ratingCountTextView.setText("4");
@@ -107,6 +108,7 @@ public class businessappDriverTripslistAdapter extends RecyclerView.Adapter<Recy
       //  public TextView promoAmtTextView;
         public CardView promoCardView;
         public CardView placeHolderCardView;
+        TextView Status;
 
         public PlaceViewHolder(View view) {
             super(view);
@@ -121,6 +123,8 @@ public class businessappDriverTripslistAdapter extends RecyclerView.Adapter<Recy
          //   promoAmtTextView = view.findViewById(R.id.promoAmtTextView);
             promoCardView = view.findViewById(R.id.promoCardView);
             placeHolderCardView = view.findViewById(R.id.placeHolderCardView);
+            Status = view.findViewById(R.id.StatusTextView);
+
         }
 
 

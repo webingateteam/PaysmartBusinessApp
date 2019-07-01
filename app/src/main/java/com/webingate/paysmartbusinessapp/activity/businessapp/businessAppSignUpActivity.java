@@ -51,7 +51,8 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
     public static final String Emailotp = "emailotpkey";
     public static final String DRIVERID = "driverid";
     public static final String VEHICLEID = "vehicleid";
-    public static final String UserAccountNo = "UserAccountNoKey";
+    public static final String UserAccountNumber = "UserAccountNo";
+    public static final String ISOCode = "ISOCodeKey";
 
     Toast toast;
     private  ProgressDialog pd;
@@ -181,14 +182,8 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
             object.addProperty("Password", S_password.getText().toString());
             object.addProperty("Mobilenumber",S_mobileNo.getText().toString());
             object.addProperty("Email", S_email.getText().toString());
-            if(ccp.getSelectedCountryCode().matches("91")){
-                countryid = 101;
-            }
-            else{
-                countryid = 245;
-            }
-            object.addProperty("CountryId",countryid);
-            object.addProperty("CCode","91");
+            object.addProperty("CountryId",ccp.getSelectedCountryCode());
+            object.addProperty("CCode",ccp.getSelectedCountryCode());
             object.addProperty("UserAccountNo",selectype()+ccp.getSelectedCountryCode()+S_mobileNo.getText().toString());
             object.addProperty("usertypeid",selectype());
             object.addProperty("change",selectype());
@@ -238,7 +233,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
                             SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedpreferences.edit();
                             Intent intent = new Intent(businessAppSignUpActivity.this, businessappEOTPVerificationActivity.class);
-                            editor.putString(UserAccountNo, response.getUserAccountNo());
+                            editor.putString(UserAccountNumber, response.getUserAccountNo());
                             editor.putInt(ID, response.getId());
                             editor.putString(Phone, response.getmnumber());
                             editor.putString(Email, response.getemail());
@@ -314,7 +309,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
 //                            ccp.setCustomMasterCountries(response.getISOCode());
 //                            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 //                            SharedPreferences.Editor editor = sharedpreferences.edit();
-//                            editor.putString(Isocode, response.getISOCode());
+//                            editor.putString(ISOCode, response.getISOCode());
 //                            editor.commit();
                         }
                     }

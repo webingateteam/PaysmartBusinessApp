@@ -16,11 +16,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.MOTPVerification;
+import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.BusinessResendOTPResponse;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
@@ -48,8 +50,9 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
     EditText motp;
     @BindView(R.id.submitOTPButton)
     Button M_submit;
+    TextView text;
 
-    String mno;
+    String mno,email;
     int id;
 
     ImageView bgImageView;
@@ -62,6 +65,8 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         mno = prefs.getString(UserAccountNumber, null);
         id = prefs.getInt(ID, 0);
+        email = prefs.getString(Email,null);
+        ApplicationConstants.email = email;
 
         initUI();
 
@@ -71,7 +76,7 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_true, menu);
+       // getMenuInflater().inflate(R.menu.menu_true, menu);
         return true;
     }
 
@@ -100,6 +105,9 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
         M_submit=findViewById(R.id.submitOTPButton);
 
         submitOTPButton = findViewById(R.id.submitOTPButton);
+        text = findViewById(R.id.textView253);
+
+        text.setText("You\"ve just received an email containing verification code on " +  ApplicationConstants.email+" ");
     }
 
     private void initActions(){
@@ -210,7 +218,7 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
     public void ResendOTP(JsonObject jsonObject){
         StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
-                .BusinessAppResendOTP(jsonObject)
+                .BusinessAppResendMOTP(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<BusinessResendOTPResponse>>() {

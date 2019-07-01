@@ -6,8 +6,8 @@ public class RegisterBusinessUsers {
     @SerializedName("flag")
     private String flag;
 
-    @SerializedName("Usename")
-    private String Usename;
+    @SerializedName("Username")
+    private String Username;
 
     @SerializedName("AuthTypeId")
     private String AuthTypeId;
@@ -77,7 +77,7 @@ public class RegisterBusinessUsers {
                         "Id = '" + Id + '\'' +
                         "Email = '" + Email + '\'' +
                         "Emailotp = '" + Emailotp + '\'' +
-                        "Usename = '" + Usename + '\'' +
+                        "Usename = '" + Username + '\'' +
                         "Mobileotp = '" + Mobileotp + '\'' +
                         "Mobilenumber = '" + Mobilenumber + '\'' +
                         "UserAccountNo = '" + UserAccountNo + '\'' +
