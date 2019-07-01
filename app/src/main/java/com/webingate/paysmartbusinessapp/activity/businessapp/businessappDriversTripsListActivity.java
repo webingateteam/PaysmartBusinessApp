@@ -55,10 +55,10 @@ public class businessappDriversTripsListActivity extends AppCompatActivity {
 //        object.addProperty("Email", "");
 //        object.addProperty("Email", "");
 
-        Intent intent =getIntent();
-        dno=intent.getStringExtra("Driverno");
-
-        GetDriverTrips(dno);
+//        Intent intent =getIntent();
+//        dno=intent.getStringExtra("Driverno");
+//
+//        GetDriverTrips(dno);
     }
 
     private void initUI()
@@ -110,14 +110,14 @@ public class businessappDriversTripsListActivity extends AppCompatActivity {
                 .subscribe(new Subscriber<List<GetdriverTripsResponse>>() {
                     @Override
                     public void onCompleted() {
-                         DisplayToast("Successfully get Drivers Trip list");
+                        // DisplayToast("Successfully get Drivers Trip list");
                         //   StopDialogue();
                     }
                     @Override
                     public void onError(Throwable e) {
                         try {
                             Log.d("OnError ", e.getMessage());
-                            DisplayToast("Unable to Register");
+                           // DisplayToast("Unable to Register");
 //                            StopDialogue();
                         } catch (Exception ex) {
                             ex.printStackTrace();

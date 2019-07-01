@@ -15,8 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.activity.businessapp.businessappAssignDriverActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappCurrentTicketListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappCurrenttripListActivity;
+import com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriverMyLocation;
+import com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriverTripListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriversTripsListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.customerappFlightBookingSearchActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.customerappGetaLyftBookingsListActivity;
@@ -167,7 +170,7 @@ public class businessAppDriverDashboardFragment extends Fragment {
                     case 1:
 //                        Intent intent = new Intent(getActivity(), customerappFlightBookingSearchActivity.class);
 //                        startActivity(intent);
-                        Intent intent =new Intent(getActivity(),driverlistTrips.class);
+                        Intent intent =new Intent(getActivity(),businessappDriverTripListActivity.class);
                         // Intent intent =new Intent(getActivity(),businessappDriversTripsListActivity.class);
                         //intent.putExtra("Driverno","7893890990");
                         startActivity(intent);
@@ -178,11 +181,11 @@ public class businessAppDriverDashboardFragment extends Fragment {
 //                                .commitAllowingStateLoss();
                         break;
                     case 2:
-                        Intent intent2 = new Intent(getActivity(), businessappCurrentTicketListActivity.class);
+                        Intent intent2 = new Intent(getActivity(), businessappDriverMyLocation.class);
                         startActivity(intent2);
                         break;
                     case 3:
-                        intent = new Intent(getActivity(), customerappTrainBookingSearchActivity.class);
+                        intent = new Intent(getActivity(), businessappAssignDriverActivity.class);
                         startActivity(intent);
                         break;
                     case 4:
@@ -197,11 +200,11 @@ public class businessAppDriverDashboardFragment extends Fragment {
                         Intent intent6 = new Intent(getActivity(), businessappCurrentTicketListActivity.class);
                         startActivity(intent6);
                     case 7:
-                        Intent intent7 = new Intent(getActivity(), businessappCurrentTicketListActivity.class);
-                        startActivity(intent7);
+//                        Intent intent7 = new Intent(getActivity(), businessappCurrentTicketListActivity.class);
+//                        startActivity(intent7);
                     case 8:
-                        Intent intent8 = new Intent(getActivity(), businessappCurrentTicketListActivity.class);
-                        startActivity(intent8);
+//                        Intent intent8 = new Intent(getActivity(), businessappCurrentTicketListActivity.class);
+//                        startActivity(intent8);
                     case 9:
                         break;
                     case 10:
