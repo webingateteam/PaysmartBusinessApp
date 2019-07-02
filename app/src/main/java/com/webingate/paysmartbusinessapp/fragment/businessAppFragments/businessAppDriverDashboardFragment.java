@@ -21,6 +21,7 @@ import com.webingate.paysmartbusinessapp.activity.businessapp.businessappCurrent
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriverMyLocation;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriverTripListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriversTripsListActivity;
+import com.webingate.paysmartbusinessapp.activity.businessapp.businessappVehicleListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.customerappFlightBookingSearchActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.customerappGetaLyftBookingsListActivity;
 import com.webingate.paysmartbusinessapp.activity.businessapp.customerappTrainBookingSearchActivity;
@@ -48,10 +49,10 @@ import static com.webingate.paysmartbusinessapp.activity.businessapp.login_activ
 public class businessAppDriverDashboardFragment extends Fragment {
 
     List<DirectoryHome9ProductsVO> productsList;
-    List<DirectoryHome9CategoryVO> categoryList;
-    List<DirectoryHome9PromotionsVO> promotionsList;
-    List<DirectoryHome9PopularVO> popularList;
-    List<DirectoryHome9FlightsVO> flightsList;
+//    List<DirectoryHome9CategoryVO> categoryList;
+//    List<DirectoryHome9PromotionsVO> promotionsList;
+//    List<DirectoryHome9PopularVO> popularList;
+//    List<DirectoryHome9FlightsVO> flightsList;
 
     customerapp_ProductsAdapter productsAdapter;
    // AppDirectoryHome9CategoryAdapter categoryAdapter;
@@ -87,10 +88,10 @@ public class businessAppDriverDashboardFragment extends Fragment {
 
     private void initData() {
         productsList = DirectoryHome9Repository.getDriverOptionsList();
-        categoryList = DirectoryHome9Repository.getCategoryList();
-        promotionsList = DirectoryHome9Repository.getPromotionsList();
-        popularList = DirectoryHome9Repository.getPopularList();
-        flightsList = DirectoryHome9Repository.getFlightsList();
+//        categoryList = DirectoryHome9Repository.getCategoryList();
+//        promotionsList = DirectoryHome9Repository.getPromotionsList();
+//        popularList = DirectoryHome9Repository.getPopularList();
+//        flightsList = DirectoryHome9Repository.getFlightsList();
 
     }
 
@@ -98,17 +99,17 @@ public class businessAppDriverDashboardFragment extends Fragment {
 
         productsAdapter = new customerapp_ProductsAdapter(productsList);
        // categoryAdapter = new AppDirectoryHome9CategoryAdapter(categoryList);
-        promotionsAdapter = new customerapp_PromotionsAdapter(promotionsList);
-        popularAdapter = new customerapp_PopularAdapter(popularList);
-        flightsAdapter = new customerapp_FlightsAdapter(flightsList);
+//        promotionsAdapter = new customerapp_PromotionsAdapter(promotionsList);
+//        popularAdapter = new customerapp_PopularAdapter(popularList);
+//        flightsAdapter = new customerapp_FlightsAdapter(flightsList);
 
         if (getActivity() != null) {
 
             rvProduct = view.findViewById(R.id.rvProducts);
            // rvCategory = view.findViewById(R.id.rvCategory);
-            rvPromotions = view.findViewById(R.id.rvPromotions);
-            rvPopular = view.findViewById(R.id.rvPopular);
-            rvFlights = view.findViewById(R.id.rvFlights);
+//            rvPromotions = view.findViewById(R.id.rvPromotions);
+//            rvPopular = view.findViewById(R.id.rvPopular);
+//            rvFlights = view.findViewById(R.id.rvFlights);
 
             RecyclerView.LayoutManager productLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), noOfProductColumn);
             rvProduct.setLayoutManager(productLayoutManager);
@@ -119,21 +120,21 @@ public class businessAppDriverDashboardFragment extends Fragment {
            // rvCategory.setLayoutManager(categoryLayoutManger);
            // rvCategory.setAdapter(categoryAdapter);
 
-            RecyclerView.LayoutManager promotionsLayoutManger = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-            rvPromotions.setLayoutManager(promotionsLayoutManger);
-            rvPromotions.setAdapter(promotionsAdapter);
-
-            RecyclerView.LayoutManager popularLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), noOfPopularColumn);
-            rvPopular.setLayoutManager(popularLayoutManager);
-            rvPopular.setAdapter(popularAdapter);
-
-            RecyclerView.LayoutManager flightsLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-            rvFlights.setLayoutManager(flightsLayoutManager);
-            rvFlights.setAdapter(flightsAdapter);
+//            RecyclerView.LayoutManager promotionsLayoutManger = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+//            rvPromotions.setLayoutManager(promotionsLayoutManger);
+//            rvPromotions.setAdapter(promotionsAdapter);
+//
+//            RecyclerView.LayoutManager popularLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), noOfPopularColumn);
+//            rvPopular.setLayoutManager(popularLayoutManager);
+//            rvPopular.setAdapter(popularAdapter);
+//
+//            RecyclerView.LayoutManager flightsLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+//            rvFlights.setLayoutManager(flightsLayoutManager);
+//            rvFlights.setAdapter(flightsAdapter);
         }
 
-        moreImageView = view.findViewById(R.id.moreImageView);
-        moreImageView2 = view.findViewById(R.id.moreImageView2);
+//        moreImageView = view.findViewById(R.id.moreImageView);
+//        moreImageView2 = view.findViewById(R.id.moreImageView2);
         //profileImageView = view.findViewById(R.id.home9ProfileImageView);
         //loginRegisterTextView = view.findViewById(R.id.loginRegisterTextView);
     }
@@ -143,8 +144,8 @@ public class businessAppDriverDashboardFragment extends Fragment {
         int leftImageId = R.drawable.baseline_arrow_right_24;
         int profileImageId = R.drawable.home9_profile;
 
-        Utils.setImageToImageView(getContext(), moreImageView, leftImageId);
-        Utils.setImageToImageView(getContext(), moreImageView2, leftImageId);
+//        Utils.setImageToImageView(getContext(), moreImageView, leftImageId);
+//        Utils.setImageToImageView(getContext(), moreImageView2, leftImageId);
       //  Utils.setImageToImageView(getContext(), profileImageView, profileImageId);
 
        // profileImageView.setOnClickListener(view -> Toast.makeText(getContext(), "Clicked : Profile", Toast.LENGTH_SHORT).show());
@@ -185,11 +186,11 @@ public class businessAppDriverDashboardFragment extends Fragment {
                         startActivity(intent2);
                         break;
                     case 3:
-                        intent = new Intent(getActivity(), businessappAssignDriverActivity.class);
+                        intent = new Intent(getActivity(), businessappVehicleListActivity.class);
                         startActivity(intent);
                         break;
                     case 4:
-                        Intent intent4 = new Intent(getActivity(), businessappCurrentTicketListActivity.class);
+                        Intent intent4 = new Intent(getActivity(), businessappAssignDriverActivity.class);
                         startActivity(intent4);
                         break;
                     case 5:
@@ -199,9 +200,11 @@ public class businessAppDriverDashboardFragment extends Fragment {
                     case 6:
                         Intent intent6 = new Intent(getActivity(), businessappCurrentTicketListActivity.class);
                         startActivity(intent6);
+                        break;
                     case 7:
-//                        Intent intent7 = new Intent(getActivity(), businessappCurrentTicketListActivity.class);
-//                        startActivity(intent7);
+                        Intent intent7 = new Intent(getActivity(), businessappCurrentTicketListActivity.class);
+                        startActivity(intent7);
+                        break;
                     case 8:
 //                        Intent intent8 = new Intent(getActivity(), businessappCurrentTicketListActivity.class);
 //                        startActivity(intent8);
@@ -218,48 +221,48 @@ public class businessAppDriverDashboardFragment extends Fragment {
 
         //    categoryAdapter.setOnItemClickListener((view, category, position) -> Toast.makeText(getContext(), "Clicked : " + category.getName(), Toast.LENGTH_SHORT).show());
 
-        promotionsAdapter.setOnItemClickListener((view, promotion, position) -> {
-            if (position == 0)
-                Toast.makeText(getContext(), "Clicked : See All Promos", Toast.LENGTH_SHORT).show();
-            else
-            {
-                switch(position){
-                    case 1:
-//                        AppDirectoryHome1Fragment af = new AppDirectoryHome1Fragment();
+//        promotionsAdapter.setOnItemClickListener((view, promotion, position) -> {
+//            if (position == 0)
+//                Toast.makeText(getContext(), "Clicked : See All Promos", Toast.LENGTH_SHORT).show();
+//            else
+//            {
+//                switch(position){
+//                    case 1:
+////                        AppDirectoryHome1Fragment af = new AppDirectoryHome1Fragment();
+////
+////                        getActivity().getSupportFragmentManager().beginTransaction()
+////                                .replace(R.id.home9Frame, af)
+////                                .commitAllowingStateLoss();
+//                        break;
+//                    case 2:
+//                        break;
+//                    case 3:
+//                        break;
+//                    case 4:
+//                        break;
+//                    case 5:
+//                        break;
+//                    case 6:
+//                        break;
+//                    case 7:
+//                        break;
+//                    case 8:
+//                        break;
+//                    case 9:
+//                        break;
+//                    case 10:
+//                        break;
+//                    default:
+//                        break;
+//                }
 //
-//                        getActivity().getSupportFragmentManager().beginTransaction()
-//                                .replace(R.id.home9Frame, af)
-//                                .commitAllowingStateLoss();
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                    case 5:
-                        break;
-                    case 6:
-                        break;
-                    case 7:
-                        break;
-                    case 8:
-                        break;
-                    case 9:
-                        break;
-                    case 10:
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-                //Toast.makeText(getContext(), "Clicked : " + promotion.getName(), Toast.LENGTH_SHORT).show();
-        });
-
-        popularAdapter.setOnItemClickListener((view, popular, position) -> Toast.makeText(getContext(), "Clicked : " + popular.getName(), Toast.LENGTH_SHORT).show());
-
-        flightsAdapter.setOnItemClickListener((view, flight, position) -> Toast.makeText(getContext(), "Clicked : " + flight.getCountry(), Toast.LENGTH_SHORT).show());
+//            }
+//                //Toast.makeText(getContext(), "Clicked : " + promotion.getName(), Toast.LENGTH_SHORT).show();
+//        });
+//
+//        popularAdapter.setOnItemClickListener((view, popular, position) -> Toast.makeText(getContext(), "Clicked : " + popular.getName(), Toast.LENGTH_SHORT).show());
+//
+//        flightsAdapter.setOnItemClickListener((view, flight, position) -> Toast.makeText(getContext(), "Clicked : " + flight.getCountry(), Toast.LENGTH_SHORT).show());
 
     }
 

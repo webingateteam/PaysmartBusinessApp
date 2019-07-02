@@ -60,7 +60,7 @@ public class businessappAssigningVehicleAdapter extends RecyclerView.Adapter<Rec
             Context context = holder.placeHolderCardView.getContext();
 
             // int id = Utils.getDrawableInt(context, place.getPhoto());
-            int id = Utils.getDrawableInt(context, "photo_male_7");
+            int id = Utils.getDrawableInt(context, "home9_profile");
             Utils.setImageToImageView(context, holder.placeImageView, id);
 
             holder.typeTextView.setText(place.getVehicleGroup());

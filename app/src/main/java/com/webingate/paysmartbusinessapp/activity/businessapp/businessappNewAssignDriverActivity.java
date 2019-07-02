@@ -135,7 +135,7 @@ public class businessappNewAssignDriverActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        submit = findViewById(R.id.fab);
+        //submit = findViewById(R.id.fab);
 
     }
 

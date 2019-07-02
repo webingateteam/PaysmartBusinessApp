@@ -322,28 +322,28 @@ public class businessappDriverMyLocation extends AppCompatActivity implements On
         markerOptions.position(latlngnew);
         markerOptions.title("Current Position");
         markerOptions.icon(BitmapDescriptorFactory.fromResource(ApplicationConstants.marker));
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                destLatitude = latLng.latitude;
-                destLongitude = latLng.longitude;
-                dlat=destLatitude;
-                dlog=destLongitude;
-                //selectDestination.setText("Destination : " + (destLatitude + "").substring(0, 10) + " , " + (destLongitude + "").substring(0, 10));
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(new LatLng(destLatitude, destLongitude));
-                markerOptions.title("Destination");
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-                if (markerDesst != null)
-                    markerDesst.remove();
-                markerDesst = mMap.addMarker(markerOptions);
-                // Getting Directions from source to destination
-                businessappDriverMyLocation.DirectionsTask downloadTask2 = new businessappDriverMyLocation.DirectionsTask();
-                downloadTask2.execute();
-                dest = 0;
-                LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, businessappDriverMyLocation.this);
-            }
-        });
+//        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+//            @Override
+//            public void onMapClick(LatLng latLng) {
+//                destLatitude = latLng.latitude;
+//                destLongitude = latLng.longitude;
+//                dlat=destLatitude;
+//                dlog=destLongitude;
+//                //selectDestination.setText("Destination : " + (destLatitude + "").substring(0, 10) + " , " + (destLongitude + "").substring(0, 10));
+//                MarkerOptions markerOptions = new MarkerOptions();
+//                markerOptions.position(new LatLng(destLatitude, destLongitude));
+//                markerOptions.title("Destination");
+//                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+//                if (markerDesst != null)
+//                    markerDesst.remove();
+//                markerDesst = mMap.addMarker(markerOptions);
+//                // Getting Directions from source to destination
+//                businessappDriverMyLocation.DirectionsTask downloadTask2 = new businessappDriverMyLocation.DirectionsTask();
+//                downloadTask2.execute();
+//                dest = 0;
+//                LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, businessappDriverMyLocation.this);
+//            }
+//        });
 
     }
 

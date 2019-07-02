@@ -208,7 +208,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
                             BusinessEOTPVerificationResponse response=responselist.get(0);
                             SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedpreferences.edit();
-                            editor.putString(Emailotp, response.getEmail());
+                            editor.putString(Emailotp, response.getEmailotp());
                             editor.commit();
                             startActivity(new Intent(businessappEOTPVerificationActivity.this, businessappMOTPVerificationActivity.class));
                             finish();
@@ -247,10 +247,10 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
                         } else {
                             SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedpreferences.edit();
-                            Intent intent = new Intent(businessappEOTPVerificationActivity.this, businessappEOTPVerificationActivity.class);
+                            //Intent intent = new Intent(businessappEOTPVerificationActivity.this, businessappEOTPVerificationActivity.class);
                             editor.putString(UserAccountNumber, response.getUserAccountNo());
                             //intent.putExtra("Uid",E_uid);
-                            startActivity(intent);
+                            //startActivity(intent);
                             editor.commit();
                             //startActivity(new Intent(customerEOTPVerificationActivity.this, login_activity.class));
 //                       Intent intent = new Intent(customerEOTPVerificationActivity.this, businessappMOTPVerificationActivity.class);

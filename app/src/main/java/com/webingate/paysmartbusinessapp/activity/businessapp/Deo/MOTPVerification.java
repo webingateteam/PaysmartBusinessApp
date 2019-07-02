@@ -3,6 +3,10 @@ package com.webingate.paysmartbusinessapp.activity.businessapp.Deo;
 import com.google.gson.annotations.SerializedName;
 
 public class MOTPVerification {
+
+    @SerializedName("Mobileotp")
+    private String Mobileotp;
+
     @SerializedName("Code")
     private String code;
 
@@ -11,6 +15,9 @@ public class MOTPVerification {
 
     public String getCode() {
         return code;
+    }
+    public String getMobileotp() {
+        return Mobileotp;
     }
 
     public void setCode(String code) {

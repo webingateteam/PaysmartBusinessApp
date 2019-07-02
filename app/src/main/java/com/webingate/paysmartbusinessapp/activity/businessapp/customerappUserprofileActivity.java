@@ -155,7 +155,7 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 
 
         if (id == R.id.nav_profile) {
-            Toast.makeText(this, "Clicked nav_profile.", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "Clicked nav_profile.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_paymentmode) {
           //  Toast.makeText(this, "Clicked nav_paymentmode.", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, businessappPaymentModeActivity.class);
@@ -166,17 +166,17 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
             startActivity(intent);
 
         } else if (id == R.id.nav_ewallet) {
-            Toast.makeText(this, "Clicked nav_ewallet.", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "Clicked nav_ewallet.", Toast.LENGTH_SHORT).show();
             startActivity( new Intent(customerappUserprofileActivity.this, businessappEwalletActivity.class));
         } else if (id == R.id.nav_notification) {
-            Toast.makeText(this, "Clicked nav_notification.", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "Clicked nav_notification.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_alerts) {
-            Toast.makeText(this, "Clicked nav_alerts.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Clicked nav_alerts.", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this,businessappDriverDocList.class));
         } else if (id == R.id.nav_preferences) {
-            Toast.makeText(this, "Clicked nav_preferences.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Clicked nav_preferences.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_coupons) {
-        Toast.makeText(this, "Clicked nav_coupons.", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Clicked nav_coupons.", Toast.LENGTH_SHORT).show();
 
     } else if (id == R.id.nav_sos) {
        // Toast.makeText(this, "Clicked nav_sos.", Toast.LENGTH_SHORT).show();
@@ -397,8 +397,8 @@ public class customerappUserprofileActivity extends AppCompatActivity implements
 
                          // to check profile pic null or not
                         if(ApplicationConstants.upic==null){
-                            Utils.setCircleImageToImageView(getApplicationContext(), upict, R.drawable.profile1, 0, 0);
-                            Utils.setCircleImageToImageView(getApplicationContext(), pimage, R.drawable.profile1, 0, 0);
+                            Utils.setCircleImageToImageView(getApplicationContext(), upict, R.drawable.home9_profile, 0, 0);
+                            Utils.setCircleImageToImageView(getApplicationContext(), pimage, R.drawable.home9_profile, 0, 0);
                         }
                         else
                         {

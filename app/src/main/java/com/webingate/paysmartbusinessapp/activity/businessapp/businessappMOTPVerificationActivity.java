@@ -205,10 +205,10 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
                     @Override
                     public void onNext(List<MOTPVerification> responselist) {
                         MOTPVerification response=responselist.get(0);
-//                        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-//                        SharedPreferences.Editor editor = sharedpreferences.edit();
-//                        editor.putString(Emailotp, null);
-//                        editor.commit();
+                        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                        editor.putString(Mobileotp, response.getMobileotp());
+                        editor.commit();
                         startActivity(new Intent(businessappMOTPVerificationActivity.this, login_activity.class));
                         finish();
                     }

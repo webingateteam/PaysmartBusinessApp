@@ -79,6 +79,7 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
     ArrayAdapter<String> adapter;
     int loginasOption = -1;
     int countryid;
+    String ctry;
     View view69,view67,view91;
     String[] fruits = {"Driver", "Fleet owner", "Ticket Agent", "Brand ambassador","Business Owner"};
     int[] icons = {R.drawable.baseline_person_outline_black_24, R.drawable.baseline_person_outline_black_24, R.drawable.baseline_person_outline_black_24
@@ -182,7 +183,16 @@ public class businessAppSignUpActivity extends AppCompatActivity implements Adap
             object.addProperty("Password", S_password.getText().toString());
             object.addProperty("Mobilenumber",S_mobileNo.getText().toString());
             object.addProperty("Email", S_email.getText().toString());
-            object.addProperty("CountryId",ccp.getSelectedCountryCode());
+            if(ccp.getSelectedCountryCode().matches("91")){
+                ctry = "101";
+            }
+            else if (ccp.getSelectedCountryCode().matches("263")){
+                ctry = "245";
+            }
+            else{
+                ctry = "";
+            }
+            object.addProperty("CountryId",ctry);
             object.addProperty("CCode",ccp.getSelectedCountryCode());
             object.addProperty("UserAccountNo",selectype()+ccp.getSelectedCountryCode()+S_mobileNo.getText().toString());
             object.addProperty("usertypeid",selectype());

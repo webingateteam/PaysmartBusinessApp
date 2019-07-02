@@ -76,67 +76,67 @@ public class businessappFleetownerDashboardActivity extends AppCompatActivity {
 
         initAction();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        FloatingActionButton fabVideo = findViewById(R.id.fab_video);
-        FloatingActionButton fabCamera = findViewById(R.id.fab_camera);
-        FloatingActionButton fabPhoto = findViewById(R.id.fab_photo);
-
-
-        linearVideo = findViewById(R.id.linearVideo);
-        linearPhoto = findViewById(R.id.linearPhoto);
-        linearCamera = findViewById(R.id.linearCamera);
-
-        Utils.hideFirstFab(linearVideo);
-        Utils.hideFirstFab(linearCamera);
-        Utils.hideFirstFab(linearPhoto);
-
-        fab.setOnClickListener(v -> {
-
-            twist = Utils.twistFab(v, !twist);
-
-            if (twist) {
-
-                Utils.showFab(linearVideo);
-                Utils.showFab(linearCamera);
-                Utils.showFab(linearPhoto);
-
-            } else {
-
-                Utils.hideFab(linearVideo);
-                Utils.hideFab(linearCamera);
-                Utils.hideFab(linearPhoto);
-
-            }
-        });
-
-        fabVideo.setOnClickListener(
-
-                v ->
-                {
-                    //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this, businessappNewVehicleActivity.class);
-                    startActivity(intent);
-                }
-
-                //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show()
-
-        );
-
-        fabCamera.setOnClickListener(v ->
-                {
-                    //Toast.makeText(getApplicationContext(), "Open Camera clicked", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this, businessappNewBusinessOwnerActivity.class);
-                    startActivity(intent);
-                }
-        );
-
-        fabPhoto.setOnClickListener(v ->
-        {
-            //Toast.makeText(getApplicationContext(), "View Photos clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, businessappNewDriverActivity.class);
-            startActivity(intent);
-
-        });
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        FloatingActionButton fabVideo = findViewById(R.id.fab_video);
+//        FloatingActionButton fabCamera = findViewById(R.id.fab_camera);
+//        FloatingActionButton fabPhoto = findViewById(R.id.fab_photo);
+//
+//
+//        linearVideo = findViewById(R.id.linearVideo);
+//        linearPhoto = findViewById(R.id.linearPhoto);
+//        linearCamera = findViewById(R.id.linearCamera);
+//
+//        Utils.hideFirstFab(linearVideo);
+//        Utils.hideFirstFab(linearCamera);
+//        Utils.hideFirstFab(linearPhoto);
+//
+//        fab.setOnClickListener(v -> {
+//
+//            twist = Utils.twistFab(v, !twist);
+//
+//            if (twist) {
+//
+//                Utils.showFab(linearVideo);
+//                Utils.showFab(linearCamera);
+//                Utils.showFab(linearPhoto);
+//
+//            } else {
+//
+//                Utils.hideFab(linearVideo);
+//                Utils.hideFab(linearCamera);
+//                Utils.hideFab(linearPhoto);
+//
+//            }
+//        });
+//
+//        fabVideo.setOnClickListener(
+//
+//                v ->
+//                {
+//                    //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(this, businessappNewVehicleActivity.class);
+//                    startActivity(intent);
+//                }
+//
+//                //Toast.makeText(getApplicationContext(), "Open Video clicked", Toast.LENGTH_SHORT).show()
+//
+//        );
+//
+//        fabCamera.setOnClickListener(v ->
+//                {
+//                    //Toast.makeText(getApplicationContext(), "Open Camera clicked", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(this, businessappNewBusinessOwnerActivity.class);
+//                    startActivity(intent);
+//                }
+//        );
+//
+//        fabPhoto.setOnClickListener(v ->
+//        {
+//            //Toast.makeText(getApplicationContext(), "View Photos clicked", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(this, businessappNewDriverActivity.class);
+//            startActivity(intent);
+//
+//        });
     }
 
     @Override

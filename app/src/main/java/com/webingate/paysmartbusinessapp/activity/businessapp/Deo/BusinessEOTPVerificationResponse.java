@@ -7,8 +7,8 @@ public class BusinessEOTPVerificationResponse {
     @SerializedName("Email")
     private String Email;
 
-    @SerializedName("EVerificationCode")
-    private String EVerificationCode;
+    @SerializedName("Emailotp")
+    private String Emailotp;
 
     @SerializedName("userId")
     private String userId;
@@ -16,6 +16,9 @@ public class BusinessEOTPVerificationResponse {
 
     public String getEmail(){
         return Email;
+    }
+    public String getEmailotp(){
+        return Emailotp;
     }
     @Override
     public String toString(){

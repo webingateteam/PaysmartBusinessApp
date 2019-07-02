@@ -538,12 +538,12 @@ public class login_activity extends AppCompatActivity implements AdapterView.OnI
             if (dialog.isShowing())
                 dialog.dismiss();
             if (isServerOn) {
-                if (emailOTP != null && mobileOTP != null) {
-                    ApplicationConstants.id = String.valueOf(id);
-                    startActivity(new Intent(login_activity.this,businessappEOTPVerificationActivity.class));
-                    finish();
-                }
-                else if (emailOTP != null){
+//                if (emailOTP != null && mobileOTP != null) {
+//                    ApplicationConstants.id = String.valueOf(id);
+//                    startActivity(new Intent(login_activity.this,businessappEOTPVerificationActivity.class));
+//                    finish();
+//                }
+                if (emailOTP != null){
                     startActivity(new Intent(login_activity.this,businessappEOTPVerificationActivity.class));
                     finish();
                 }

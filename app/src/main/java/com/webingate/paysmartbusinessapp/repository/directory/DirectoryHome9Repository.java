@@ -455,6 +455,11 @@ public class DirectoryHome9Repository {
             "  \"icon\": \"home9_rental\",\n" +
             "  \"name\": \"My Location\"\n" +
             "},\n" +
+            "  {\n" +
+            "    \"id\": \"product4\",\n" +
+            "    \"icon\": \"home9_rental\",\n" +
+            "    \"name\": \"Vehicles\"\n" +
+            "  },\n" +
             " {\n" +
             "  \"id\": \"product14\",\n" +
             "  \"icon\": \"home9_train\",\n" +
