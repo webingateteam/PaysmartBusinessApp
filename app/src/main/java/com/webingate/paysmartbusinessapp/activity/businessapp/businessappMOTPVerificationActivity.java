@@ -246,15 +246,15 @@ public class businessappMOTPVerificationActivity extends AppCompatActivity {
                         } else {
                             SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedpreferences.edit();
-                            Intent intent = new Intent(businessappMOTPVerificationActivity.this, businessappMOTPVerificationActivity.class);
+                            //Intent intent = new Intent(businessappMOTPVerificationActivity.this, businessappMOTPVerificationActivity.class);
                             editor.putString(UserAccountNumber, response.getUserAccountNo());
                             //intent.putExtra("Uid",E_uid);
-                            startActivity(intent);
+                            //startActivity(intent);
                             editor.commit();
                             //startActivity(new Intent(customerEOTPVerificationActivity.this, login_activity.class));
 //                       Intent intent = new Intent(customerEOTPVerificationActivity.this, businessappMOTPVerificationActivity.class);
 //                        intent.putExtra("eotp","");
-                            finish();
+                            //finish();
                         }
                     }
                 });

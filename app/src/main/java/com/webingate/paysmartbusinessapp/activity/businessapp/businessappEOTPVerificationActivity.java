@@ -255,7 +255,7 @@ public class businessappEOTPVerificationActivity extends AppCompatActivity {
                             //startActivity(new Intent(customerEOTPVerificationActivity.this, login_activity.class));
 //                       Intent intent = new Intent(customerEOTPVerificationActivity.this, businessappMOTPVerificationActivity.class);
 //                        intent.putExtra("eotp","");
-                            finish();
+                            //finish();
                         }
                     }
                 });

@@ -103,7 +103,7 @@ public class businessAppFleetOwnerInfoFragment extends Fragment {
         }
         else {
             profileImageView = view.findViewById(R.id.profileImageView);
-            int id = R.drawable.profile2;
+            int id = R.drawable.home9_profile;
             Utils.setCornerRadiusImageToImageView(view.getContext(), profileImageView, id, 20, 2, R.color.md_white_1000);
 //        setName((EditText)view.findViewById(R.id.s_name));
         }
