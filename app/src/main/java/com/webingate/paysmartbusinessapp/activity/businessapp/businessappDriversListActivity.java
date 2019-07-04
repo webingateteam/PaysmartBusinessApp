@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -61,6 +62,8 @@ public class businessappDriversListActivity extends AppCompatActivity {
     private LinearLayout linearCamera;
     int id,countryid;
 
+    private Filter filter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +72,11 @@ public class businessappDriversListActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         countryid = prefs.getInt(CountryId, 0);
         id = prefs.getInt(ID, 0);
+        ApplicationConstants.mobileNo = prefs.getString(Phone,null);
         ApplicationConstants.fid = id;
         ApplicationConstants.countryid = countryid;
+
+        //this.filter = new MangaNameFilter();
 
         initData();
         initUI();
@@ -164,7 +170,7 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
         // get list adapter
 
-        adapter = new businessappDriverListAdapter(null);
+        adapter = new businessappDriverListAdapter(null,getApplicationContext());
         // get recycler view
         recyclerView = findViewById(R.id.placeList1RecyclerView);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -219,7 +225,7 @@ public class businessappDriversListActivity extends AppCompatActivity {
                     //    editor.commit();
                         //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
                        // DriverList
-                        adapter = new businessappDriverListAdapter(DriverList);
+                        adapter = new businessappDriverListAdapter(DriverList,getApplicationContext());
                         recyclerView.setAdapter(adapter);
 
                         adapter.setOnItemClickListener((view, obj, position) ->
@@ -316,6 +322,60 @@ public class businessappDriversListActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+//    @Override
+//    public Filter getFilter()
+//    {
+//        if(filter == null)
+//            filter = new MangaNameFilter();
+//        return filter;
+//    }
+//
+//    private class MangaNameFilter extends Filter
+//    {
+//
+//        @Override
+//        protected FilterResults performFiltering(CharSequence constraint) {
+//            // NOTE: this function is *always* called from a background thread, and
+//            // not the UI thread.
+//            constraint = constraint.toString().toLowerCase();
+//            FilterResults result = new FilterResults();
+//            if(constraint != null && constraint.toString().length() > 0)
+//            {
+//                ArrayList<Manga> filt = new ArrayList<Manga>();
+//                ArrayList<Manga> lItems = new ArrayList<Manga>();
+//                synchronized (items)
+//                {
+//                    Collections.copy(lItems, items);
+//                }
+//                for(int i = 0, l = lItems.size(); i < l; i++)
+//                {
+//                    Manga m = lItems.get(i);
+//                    if(m.getName().toLowerCase().contains(constraint))
+//                        filt.add(m);
+//                }
+//                result.count = filt.size();
+//                result.values = filt;
+//            }
+//            else
+//            {
+//                synchronized(items)
+//                {
+//                    result.values = items;
+//                    result.count = items.size();
+//                }
+//            }
+//            return result;
+//        }
+//
+//        @SuppressWarnings("unchecked")
+//        @Override
+//        protected void publishResults(CharSequence constraint, FilterResults results) {
+//            // NOTE: this function is *always* called from the UI thread.
+//            filtered = (ArrayList<Manga>)results.values;
+//            notifyDataSetChanged();
+//        }
+
 
     //endregion
 }

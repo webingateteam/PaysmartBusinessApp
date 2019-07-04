@@ -2,6 +2,7 @@ package com.webingate.paysmartbusinessapp.driverapplication.Utils;
 
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.AddCardResponse;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.ApprovalResponse;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessEOTPVerificationResponse;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.BusinessappuserValidateResp;
 import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.ConfigResponse;
@@ -205,6 +206,14 @@ public interface APIInterface  {
 
     @POST("/api/Common/ConfigData")
     public Observable<List<ConfigResponse>> ConfigData(@Body JsonObject jsonObject);
+
+    @POST("/api/VehicleMaster/SaveVehicleApprovals")
+    public Observable<List<ApprovalResponse>> SaveVehicleApprovals(@Body JsonObject jsonObject);
+
+    @POST("/api/DriverMaster/SaveDriverApprovals")
+    public Observable<List<ApprovalResponse>> SaveDriverApprovals(@Body JsonObject jsonObject);
+
+
 
 
 

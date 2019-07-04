@@ -20,8 +20,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
 import com.google.maps.model.VehicleType;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.ApprovalResponse;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
 import com.webingate.paysmartbusinessapp.adapter.businessappVehicleListAdapter;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
@@ -53,6 +55,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
     public static final String Phone = "phoneKey";
     public static final String Photo = "PhotoKey";
     public static final String CountryId = "countryKey";
+    public static final String Email = "emailKey";
 
 
     String regno,vimage,vgrp,vtype,vcode;
@@ -85,6 +88,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
         vgrp = prefs.getString(VehicleGroup,null);
         vtype = prefs.getString(VehicleType,null);
         vcode = prefs.getString(VehicleCode,null);
+        ApplicationConstants.email = prefs.getString(Email,null);
 
         initData();
         initUI();
@@ -185,7 +189,7 @@ public class businessappVehicleListActivity extends AppCompatActivity {
         initToolbar();
 
         // get list adapter
-        adapter = new businessappVehicleListAdapter(null);
+        adapter = new businessappVehicleListAdapter(null,getApplicationContext());
 
         // get recycler view
         recyclerView = findViewById(R.id.placeList1RecyclerView);
@@ -259,14 +263,14 @@ public class businessappVehicleListActivity extends AppCompatActivity {
                         //    editor.commit();
                         //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
                         // DriverList
-                        adapter = new businessappVehicleListAdapter(VehicleList);
+                        adapter = new businessappVehicleListAdapter(VehicleList,getApplicationContext());
                         recyclerView.setAdapter(adapter);
 
                         adapter.setOnItemClickListener((view, obj, position) ->
                                 {
-                                    //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+                                       //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
 
-                                    GoToDetails(obj);
+                                       GoToDetails(obj);
 
                                 }
                         );
@@ -277,6 +281,8 @@ public class businessappVehicleListActivity extends AppCompatActivity {
 
 
     }
+
+
     public  void GoToDetails(GetVehicleListResponse obj)
     {
         //Toast.makeText(this, "Selected : " + obj.getRegistrationNo(), Toast.LENGTH_LONG).show();

@@ -7,14 +7,19 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.activity.businessapp.Deo.ApprovalResponse;
+import com.webingate.paysmartbusinessapp.activity.businessapp.businessappVehicleListActivity;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetVehicleListResponse;
@@ -22,6 +27,11 @@ import com.webingate.paysmartbusinessapp.object.Place;
 import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Panacea-Soft on 17/7/18.
@@ -33,6 +43,9 @@ public class businessappVehicleListAdapter extends RecyclerView.Adapter<Recycler
     private ArrayList<GetVehicleListResponse> placeArrayList;
     private OnItemClickListener itemClickListener;
 
+    Context mcontext;
+    Button approve;
+
     public interface OnItemClickListener {
         void onItemClick(View view, GetVehicleListResponse obj, int position);
     }
@@ -41,8 +54,9 @@ public class businessappVehicleListAdapter extends RecyclerView.Adapter<Recycler
         this.itemClickListener = mItemClickListener;
     }
 
-    public businessappVehicleListAdapter(ArrayList<GetVehicleListResponse> placeArrayList) {
+    public businessappVehicleListAdapter(ArrayList<GetVehicleListResponse> placeArrayList,Context mcontext) {
         this.placeArrayList = placeArrayList;
+        this.mcontext = mcontext;
     }
 
     @NonNull
@@ -72,7 +86,7 @@ public class businessappVehicleListAdapter extends RecyclerView.Adapter<Recycler
             }
             else
             {
-                int id = Utils.getDrawableInt(context, "photo_male_7");
+                int id = Utils.getDrawableInt(context, "home9_profile");
                 Utils.setImageToImageView(context, holder.placeImageView, id);
             }
             holder.typeTextView.setText(place.getVehicleGroup());
@@ -80,6 +94,20 @@ public class businessappVehicleListAdapter extends RecyclerView.Adapter<Recycler
             holder.placeRatingBar.setRating(Float.parseFloat("4"));
             holder.totalRatingTextView.setText("4");
             holder.ratingCountTextView.setText("4");
+
+
+
+            holder.approve.setOnClickListener(v -> {
+                ApplicationConstants.vid = String.valueOf(place.getId());
+                ApplicationConstants.registrationNo=place.getRegistrationNo();
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("change",1);
+                jsonObject.addProperty("IsApproved",1);
+                jsonObject.addProperty("RegistrationNo",ApplicationConstants.registrationNo);
+                jsonObject.addProperty("Email",ApplicationConstants.email);
+                saveApprovals(jsonObject);
+
+            });
 
 //            DriverViewHolder holder = (DriverViewHolder) viewHolder;
 //
@@ -133,9 +161,12 @@ public class businessappVehicleListAdapter extends RecyclerView.Adapter<Recycler
         //  public TextView promoAmtTextView;
         public CardView promoCardView;
         public CardView placeHolderCardView;
+        public Button approve;
+
 
         public VehicleViewHolder(View view) {
             super(view);
+
 
             placeImageView = view.findViewById(R.id.placeImageView);
             placeNameTextView = view.findViewById(R.id.placeNameTextView);
@@ -147,7 +178,46 @@ public class businessappVehicleListAdapter extends RecyclerView.Adapter<Recycler
             //   promoAmtTextView = view.findViewById(R.id.promoAmtTextView);
             promoCardView = view.findViewById(R.id.promoCardView);
             placeHolderCardView = view.findViewById(R.id.placeHolderCardView);
+            approve = view.findViewById(R.id.approve);
+            mcontext = view.getContext();
         }
+
+
+    }
+
+    public void saveApprovals(JsonObject jsonObject){
+        com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(mcontext).getrestadapter()
+                .SaveVehicleApprovals(jsonObject)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<ApprovalResponse>>() {
+
+                    @Override
+                    public void onCompleted() {
+                        // DisplayToast("Successfully Registered");
+                        //StopDialogue();
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        try {
+                            Log.d("OnError ", e.getMessage());
+                            //DisplayToast("Error");
+                            //StopDialogue();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<ApprovalResponse> responselist) {
+                        ApprovalResponse res = responselist.get(0);
+
+
+                        approve.setText("Approved");
+
+
+                    }
+                });
 
 
     }
