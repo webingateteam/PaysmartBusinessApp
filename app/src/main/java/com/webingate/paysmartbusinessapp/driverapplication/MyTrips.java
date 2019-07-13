@@ -788,7 +788,6 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                             markerOptions.title("Destination");
                             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
                             if (markerDest != null)
-                                if (markerDest != null)
                                     markerDest.remove();
                             markerDest = mMap.addMarker(markerOptions);
                             updatemarkers = true;

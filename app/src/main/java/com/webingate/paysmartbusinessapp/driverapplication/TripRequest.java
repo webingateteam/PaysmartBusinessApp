@@ -61,7 +61,7 @@ public class TripRequest extends Dialog implements
 
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
-        name.setText("BookingId - " + ApplicationConstants.bookingId);
+        name.setText("Booking No - " + ApplicationConstants.bNo);
         destLocation.setText(ApplicationConstants.destlatitude + "  " + ApplicationConstants.destlongitude);
         countDownTimer = new CountDownTimer(60000, 1000) {
             @Override

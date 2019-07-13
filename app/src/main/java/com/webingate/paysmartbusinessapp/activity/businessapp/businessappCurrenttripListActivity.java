@@ -140,7 +140,7 @@ public class businessappCurrenttripListActivity extends AppCompatActivity {
     }
 
 
-    public void GetDrivercompleteTrips( String driverNo, int status){
+    public void GetDrivercompleteTrips(String driverNo, int status){
 
         //StartDialogue();
         com.webingate.paysmartbusinessapp.driverapplication.Utils.DataPrepare.get(this).getrestadapter()
@@ -178,13 +178,19 @@ public class businessappCurrenttripListActivity extends AppCompatActivity {
                         adapter = new businessappDriverTripslistAdapter(completetripList);
                         recyclerView.setAdapter(adapter);
 
-//                       // adapter.setOnItemClickListener((view, obj, position) ->
-//                                {
-//                                    //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
-//
-//                                    GoToDetails(obj);
-//                                }
-//                        );
+                        adapter.setOnItemClickListener((view, obj, position) ->
+                                {
+                                    ApplicationConstants.customerSrcLatitude = Double.parseDouble(obj.getDestLatitude());
+                                    ApplicationConstants.customerSrcLongitude = Double.parseDouble(obj.getDestLongitude());
+                                    ApplicationConstants.bNo = obj.getBNo();
+                                    ApplicationConstants.mobileNo = obj.getDriverPhoneNo();
+                                     Toast.makeText(getApplicationContext(), "Clicked for details.", Toast.LENGTH_SHORT).show();
+                                     startActivity(new Intent (getApplicationContext(), com.webingate.paysmartbusinessapp.driverapplication.MyTrips.class));
+                                    //Toast.makeText(this, "Selected : ", Toast.LENGTH_LONG).show();
+
+                                    //GoToDetails(obj);
+                                }
+                        );
                     }
                 });
     }

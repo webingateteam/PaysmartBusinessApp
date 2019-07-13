@@ -4,21 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="@drawable/rectangle_layoutboarder_slim">
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_20"
         android:gravity="center"
         android:textColor="@android:color/black"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/picklocation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/picklocation"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -57,23 +56,25 @@
         app:layout_constraintBottom_toTopOf="@+id/time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/displaytime"
-        app:layout_constraintTop_toBottomOf="@+id/picklocation" />
+        app:layout_constraintTop_toBottomOf="@+id/droplocation" />
 
     <TextView
         android:id="@+id/displaytime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:gravity="center"
         android:text="@string/min_time"
         android:textColor="@android:color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/time"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/minsec" />
 
     <TextView
         android:id="@+id/time"
-        android:layout_width="364dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/seconds_left_toaccept"
@@ -81,38 +82,37 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/decline"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/minsec" />
 
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/accept"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/space_100"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-
+        android:layout_marginLeft="@dimen/space_16"
+        android:layout_marginStart="@dimen/space_16"
+        android:layout_marginTop="@dimen/space_12"
         android:background="@drawable/rectangle_layoutboarder"
         android:gravity="center"
         android:text="@string/accept"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintEnd_toStartOf="@+id/decline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/time" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/decline"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/space_100"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="146dp"
+        android:layout_marginStart="@dimen/space_12"
+        android:layout_marginLeft="@dimen/space_12"
+        android:layout_marginTop="@dimen/space_12"
         android:background="@drawable/rectangle_layoutboarder"
         android:gravity="center"
         android:text="@string/decline"
         android:textColor="@color/red"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/accept"
         app:layout_constraintTop_toBottomOf="@+id/time" />
