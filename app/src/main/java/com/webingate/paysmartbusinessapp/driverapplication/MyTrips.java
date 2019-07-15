@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -347,6 +348,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                     if (line != null)
                         line.remove();
                     line = mMap.addPolyline(polylineOptions);
+                    polylineOptions.color(Color.green(getResources().getColor(R.color.green)));
                 }
 
             } catch (Exception e) {
@@ -787,14 +789,15 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                             markerOptions.position(new LatLng(destlat, destlong));
                             markerOptions.title("Destination");
                             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                            //markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_taxi));
                             if (markerDest != null)
-                                    markerDest.remove();
+                                    markerDest.isVisible();
                             markerDest = mMap.addMarker(markerOptions);
-                            updatemarkers = true;
+                            //updatemarkers = false;
                         } else if (response.getCode()!=null) {
                             DisplayToast(response.getDescription());
                         }
-                        ApplicationConstants.tripflag = CHECKBOOKINGS;
+                        //ApplicationConstants.tripflag = CHECKBOOKINGS;
                     }
                 });
     }
