@@ -328,7 +328,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                         MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(result.routes[0]
                                 .legs[0].startLocation.lat, result.routes[0]
                                 .legs[0].startLocation.lng))
-                                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_taxi))
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_taxi))
                                 .title("My Location :" + result.routes[0].legs[0].startAddress);
                         if (marker != null)
                             marker.remove();
@@ -345,10 +345,12 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
                     }
                     List<LatLng> decodedPath = PolyUtil.decode(result.routes[0].overviewPolyline.getEncodedPath());
                     PolylineOptions polylineOptions = new PolylineOptions().addAll(decodedPath);
+                    polylineOptions.width(20);
                     if (line != null)
                         line.remove();
                     line = mMap.addPolyline(polylineOptions);
                     polylineOptions.color(Color.green(getResources().getColor(R.color.green)));
+
                 }
 
             } catch (Exception e) {
@@ -373,7 +375,7 @@ public class MyTrips extends AppCompatActivity implements OnMapReadyCallback, Go
         // mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setRotateGesturesEnabled(true);
-        latlngnew = new LatLng( destlat, destlong);
+        latlngnew = new LatLng(destlat, destlong);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latlngnew);
         markerOptions.title("My Position");
