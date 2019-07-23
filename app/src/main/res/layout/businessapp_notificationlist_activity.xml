@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/md_light_blue_500"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/md_light_blue_500"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/placeList1RecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_margin="@dimen/space_4"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/space_16"
+        android:paddingLeft="@dimen/space_16"
+        android:paddingRight="@dimen/space_16"
+        android:paddingTop="@dimen/space_16"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--<ImageView-->
+                <!--android:id="@+id/imageView50"-->
+                <!--android:layout_width="150dp"-->
+                <!--android:layout_height="150dp"-->
+                <!--android:layout_marginEnd="8dp"-->
+                <!--android:layout_marginStart="8dp"-->
+                <!--android:layout_marginTop="100dp"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--app:srcCompat="@drawable/fab_badge" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/textView209"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginEnd="8dp"-->
+                <!--android:layout_marginStart="8dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:fontFamily="@font/roboto_medium"-->
+                <!--android:text="SubMenu FAB with Text"-->
+                <!--android:textSize="@dimen/font_h7_size"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/imageView50" />-->
+        </android.support.constraint.ConstraintLayout>
+
+    </RelativeLayout>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end|right"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/linearPhoto"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
+
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:fontFamily="@font/roboto_medium"-->
+                <!--android:gravity="center"-->
+                <!--android:text="Add Driver"-->
+                <!--android:textSize="@dimen/font_body_size" />-->
+
+            <!--<android.support.design.widget.FloatingActionButton-->
+                <!--android:id="@+id/fab_photo"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="@dimen/space_16"-->
+                <!--android:clickable="true"-->
+                <!--android:tint="@color/colorPrimary"-->
+                <!--app:backgroundTint="@color/colorLine"-->
+                <!--app:fabSize="mini"-->
+                <!--app:rippleColor="@color/colorPrimaryDark"-->
+                <!--app:srcCompat="@drawable/driver" />-->
+
+        <!--</LinearLayout>-->
+
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/linearVideo"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:paddingLeft="12dp">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:fontFamily="@font/roboto_medium"-->
+                <!--android:gravity="center"-->
+                <!--android:text="Add Vehicle"-->
+                <!--android:textSize="@dimen/font_body_size" />-->
+
+            <!--<android.support.design.widget.FloatingActionButton-->
+                <!--android:id="@+id/fab_video"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="@dimen/space_16"-->
+                <!--android:clickable="true"-->
+                <!--android:tint="@color/colorPrimary"-->
+                <!--app:backgroundTint="@color/colorLine"-->
+                <!--app:fabSize="mini"-->
+                <!--app:rippleColor="@color/colorPrimaryDark"-->
+                <!--app:srcCompat="@drawable/innova" />-->
+
+
+        <!--</LinearLayout>-->
+
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/linearCamera"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:fontFamily="@font/roboto_medium"-->
+                <!--android:gravity="center"-->
+                <!--android:text="Add Staff"-->
+                <!--android:textSize="@dimen/font_body_size" />-->
+
+            <!--<android.support.design.widget.FloatingActionButton-->
+                <!--android:id="@+id/fab_camera"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="@dimen/space_16"-->
+                <!--android:clickable="true"-->
+                <!--android:tint="@color/colorPrimary"-->
+                <!--app:backgroundTint="@color/colorLine"-->
+                <!--app:fabSize="mini"-->
+                <!--app:rippleColor="@color/colorPrimaryDark"-->
+                <!--app:srcCompat="@drawable/driver" />-->
+
+        <!--</LinearLayout>-->
+
+
+
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:id="@+id/fab"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="@dimen/spacing_middle"-->
+            <!--android:layout_marginLeft="@dimen/spacing_smlarge"-->
+            <!--android:layout_marginRight="@dimen/spacing_smlarge"-->
+            <!--android:layout_marginTop="@dimen/spacing_middle"-->
+            <!--android:clickable="true"-->
+            <!--android:tint="@android:color/white"-->
+            <!--app:backgroundTint="@color/colorPrimary"-->
+            <!--app:fabSize="normal"-->
+            <!--app:rippleColor="@android:color/white"-->
+            <!--app:srcCompat="@drawable/ic_add" />-->
+
+
+    <!--</LinearLayout>-->
+
+
+</android.support.design.widget.CoordinatorLayout>

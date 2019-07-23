@@ -205,12 +205,12 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
 //                case R.id.searchMenu:
 //                    loadFragment(new businessAppDashboardFragment());
 //                    break;
-//                case R.id.listMenu:
-//                    loadFragment(new AppDirectoryHome2Fragment());
-//                    break;
-//                case R.id.historyMenu:
-//                    loadFragment(new AppDirectoryHome3Fragment());
-//                    break;
+                case R.id.orderMenu:
+                    startActivity(new Intent(this,businessappCouponsListActivity.class));
+                    break;
+                case R.id.inboxMenu:
+                    startActivity(new Intent(this,businessappNotificationListActivity.class));
+                    break;
                 case R.id.profileMenu:
                     //loadFragment(new AppDirectoryHome4Fragment());
 

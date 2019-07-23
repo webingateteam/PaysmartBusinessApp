@@ -58,8 +58,16 @@ public class GetVehicleListResponse {
 		return VehicleGroupId;
 	}
 
+	public void setVehicleGroupId(int VehicleGroupId){
+		this.VehicleGroupId = VehicleGroupId;
+	}
+
 	public int getVehicleTypeId(){
 		return VehicleTypeId;
+	}
+
+	public void setVehicleTypeId(int VehicleTypeId){
+		this.VehicleTypeId = VehicleTypeId;
 	}
 
 	public void setChasisNo(String ChasisNo){

@@ -14,7 +14,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -61,6 +63,8 @@ public class businessappDriversListActivity extends AppCompatActivity {
     private LinearLayout linearVideo;
     private LinearLayout linearCamera;
     int id,countryid;
+
+    ImageView nodata;
 
     private Filter filter;
 
@@ -169,7 +173,8 @@ public class businessappDriversListActivity extends AppCompatActivity {
         initToolbar();
 
         // get list adapter
-
+           nodata = findViewById(R.id.nodata);
+           nodata.setVisibility(View.GONE);
         adapter = new businessappDriverListAdapter(null,getApplicationContext());
         // get recycler view
         recyclerView = findViewById(R.id.placeList1RecyclerView);
@@ -218,23 +223,30 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(List<DrivermasterResponse> responselist) {
-                        DriverList= (ArrayList <DrivermasterResponse>) responselist;
-                     //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                     //   SharedPreferences.Editor editor = sharedpreferences.edit();
-                      //  editor.putString(Emailotp, response.getEmail());
-                    //    editor.commit();
-                        //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
-                       // DriverList
-                        adapter = new businessappDriverListAdapter(DriverList,getApplicationContext());
-                        recyclerView.setAdapter(adapter);
+                        if(responselist.size()!=0) {
+                            nodata.setVisibility(View.GONE);
+                            DriverList = (ArrayList <DrivermasterResponse>) responselist;
 
-                        adapter.setOnItemClickListener((view, obj, position) ->
-                                {
-                                    //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+                            //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                            //   SharedPreferences.Editor editor = sharedpreferences.edit();
+                            //  editor.putString(Emailotp, response.getEmail());
+                            //    editor.commit();
+                            //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
+                            // DriverList
+                            adapter = new businessappDriverListAdapter(DriverList, getApplicationContext());
+                            recyclerView.setAdapter(adapter);
 
-                                    GoToDetails(obj);
-                                }
-                        );
+                            adapter.setOnItemClickListener((view, obj, position) ->
+                                    {
+                                        //Toast.makeText(this, "Selected : " + obj.getNAme(), Toast.LENGTH_LONG).show();
+
+                                        GoToDetails(obj);
+                                    }
+                            );
+                        }
+                        else{
+                            nodata.setVisibility(View.VISIBLE);
+                        }
                        // adapter.notifyDataSetChanged();
                        // finish();
                     }

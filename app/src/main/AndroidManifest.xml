@@ -303,6 +303,12 @@
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriverTripListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappNotificationListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappCouponsListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
 
 
