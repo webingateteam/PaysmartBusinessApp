@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbaar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/md_light_blue_500"
@@ -21,16 +22,25 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
-    <EditText
-        android:id="@+id/filtername"
+    <SearchView
+        android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_60"
-        android:layout_marginStart="@dimen/space_16"
-        android:hint="Please Enter Name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:backgroundTint="@color/md_white_1000"
+        app:layout_constraintTop_toBottomOf="@+id/appbaar"
+        android:background="@color/colorPrimary"
+        android:iconifiedByDefault="false">
+        <requestFocus />
+    </SearchView>
+    <!--<EditText-->
+        <!--android:id="@+id/filtername"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="@dimen/space_60"-->
+        <!--android:layout_marginStart="@dimen/space_16"-->
+        <!--android:hint="Please Enter Name"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"/>-->
 
 
     <android.support.v7.widget.RecyclerView
@@ -40,7 +50,7 @@
         android:layout_marginTop="@dimen/space_100"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_margin="@dimen/space_4"
-        app:layout_constraintTop_toBottomOf="@+id/filtername"/>
+        app:layout_constraintTop_toBottomOf="@+id/search"/>
 
 
 

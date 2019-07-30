@@ -12,13 +12,17 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.Toast;
+import android.text.TextWatcher;
 
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverListAdapter;
@@ -30,12 +34,13 @@ import org.joda.time.convert.Converter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class businessappDriversListActivity extends AppCompatActivity {
+public class businessappDriversListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String ID = "idKey";
@@ -52,6 +57,7 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
     Toast toast;
     ArrayList<DrivermasterResponse> DriverList;
+    List<DrivermasterResponse> DriverList1;
     businessappDriverListAdapter adapter;
     // RecyclerView
     RecyclerView recyclerView;
@@ -66,7 +72,7 @@ public class businessappDriversListActivity extends AppCompatActivity {
 
     ImageView nodata;
 
-    private Filter filter;
+    SearchView editsearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,6 +171,7 @@ public class businessappDriversListActivity extends AppCompatActivity {
     private void initData()
     {
          String fid = String.valueOf(ApplicationConstants.fid);
+
         GetDriversList(fid,109);
     }
 
@@ -175,7 +182,8 @@ public class businessappDriversListActivity extends AppCompatActivity {
         // get list adapter
            nodata = findViewById(R.id.nodata);
            nodata.setVisibility(View.GONE);
-        adapter = new businessappDriverListAdapter(null,getApplicationContext());
+        editsearch = findViewById(R.id.search);
+       // adapter = new businessappDriverListAdapter(null,getApplicationContext());
         // get recycler view
         recyclerView = findViewById(R.id.placeList1RecyclerView);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -183,6 +191,7 @@ public class businessappDriversListActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         //recyclerView.setAdapter(adapter);
+
     }
     private void initDataBindings()
     {
@@ -192,8 +201,30 @@ public class businessappDriversListActivity extends AppCompatActivity {
     }
     private void initActions()
     {
-
+//        editsearch.addTextChangedListener(new TextWatcher() {
+//
+//            @Override
+//            public void afterTextChanged(Editable arg0) {
+//                // TODO Auto-generated method stub
+//                String text = editsearch.getText().toString().toLowerCase(Locale.getDefault());
+//                adapter.filter(text);
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence arg0, int arg1,
+//                                          int arg2, int arg3) {
+//                // TODO Auto-generated method stub
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+//                                      int arg3) {
+//                // TODO Auto-generated method stub
+//            }
+//        });
+        editsearch.setOnQueryTextListener(this);
     }
+
 
 
     ArrayList<DrivermasterResponse>  response;
@@ -225,7 +256,7 @@ public class businessappDriversListActivity extends AppCompatActivity {
                     public void onNext(List<DrivermasterResponse> responselist) {
                         if(responselist.size()!=0) {
                             nodata.setVisibility(View.GONE);
-                            DriverList = (ArrayList <DrivermasterResponse>) responselist;
+                            DriverList1 =  responselist;
 
                             //   SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                             //   SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -233,7 +264,7 @@ public class businessappDriversListActivity extends AppCompatActivity {
                             //    editor.commit();
                             //startActivity(new Intent(businessappEOTPVerificationActivity.this, login_activity.class));
                             // DriverList
-                            adapter = new businessappDriverListAdapter(DriverList, getApplicationContext());
+                            adapter = new businessappDriverListAdapter(DriverList1, getApplicationContext());
                             recyclerView.setAdapter(adapter);
 
                             adapter.setOnItemClickListener((view, obj, position) ->
@@ -275,6 +306,22 @@ public class businessappDriversListActivity extends AppCompatActivity {
         Intent intent = new Intent(this, businessappDriverDetailsActivity.class);
         startActivity(intent);
     }
+
+    public boolean onQueryTextSubmit(String query) {
+
+        return false;
+    }
+
+
+    public boolean onQueryTextChange(String newText) {
+        String text = newText;
+        adapter.filter(text);
+        return false;
+    }
+
+
+
+
 
     @Override
     protected void onDestroy() {

@@ -27,6 +27,7 @@ import com.webingate.paysmartbusinessapp.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import rx.Subscriber;
@@ -40,8 +41,10 @@ import rx.schedulers.Schedulers;
  */
 public class businessappDriverListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private ArrayList<DrivermasterResponse> placeArrayList;
+    private List<DrivermasterResponse> placeArrayList;
     private OnItemClickListener itemClickListener;
+    private ArrayList<DrivermasterResponse> arraylist;
+    private List<DrivermasterResponse> placeArrayList2;
 
     Context mcontext;
 
@@ -53,9 +56,13 @@ public class businessappDriverListAdapter extends RecyclerView.Adapter<RecyclerV
         this.itemClickListener = mItemClickListener;
     }
 
-    public businessappDriverListAdapter(ArrayList<DrivermasterResponse> placeArrayList,Context mcontext) {
+    public businessappDriverListAdapter(List<DrivermasterResponse> placeArrayList,Context mcontext) {
         this.placeArrayList = placeArrayList;
+        this.placeArrayList2=placeArrayList;
         this.mcontext = mcontext;
+        this.arraylist = new ArrayList<DrivermasterResponse>();
+        this.arraylist.addAll(placeArrayList2);
+
     }
 
     @NonNull
@@ -104,6 +111,11 @@ public class businessappDriverListAdapter extends RecyclerView.Adapter<RecyclerV
                 saveApprovals(jsonObject);
 
             });
+
+            // Listen for ListView Item Click
+
+
+
 
 
 
@@ -200,5 +212,20 @@ public class businessappDriverListAdapter extends RecyclerView.Adapter<RecyclerV
                 });
 
 
+    }
+    // Filter Class
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        placeArrayList2.clear();
+        if (charText.length() == 0) {
+            placeArrayList2.addAll(arraylist);
+        } else {
+            for (DrivermasterResponse wp : arraylist) {
+                if (wp.getNAme().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    placeArrayList2.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }
