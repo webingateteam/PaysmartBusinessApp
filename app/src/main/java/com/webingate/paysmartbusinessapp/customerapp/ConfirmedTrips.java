@@ -3,8 +3,6 @@ package com.webingate.paysmartbusinessapp.customerapp;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +14,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.CustomerRideDetailsResponse;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.GetBookingHistoryResponse;
-import com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.driverapplication.Dialog.ProgressDialog;
+
 public class ConfirmedTrips extends AppCompatActivity {
     MyCustomAdapter dataAdapter = null;
     @BindView(R.id.toolbar)
@@ -169,7 +172,7 @@ public class ConfirmedTrips extends AppCompatActivity {
     public void RideDetails(JsonObject jsonObject){
 
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(ConfirmedTrips.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(ConfirmedTrips.this).getrestadapter()
                 .RideDetails(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

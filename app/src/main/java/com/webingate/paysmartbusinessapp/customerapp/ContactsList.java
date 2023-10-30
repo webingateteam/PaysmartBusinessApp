@@ -6,10 +6,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +16,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.SaveSOSNumberResponce;
-import com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.driverapplication.Dialog.ProgressDialog;
+
 public class ContactsList extends AppCompatActivity {
 
     ArrayList<ContactModel> StoreContacts;
@@ -230,7 +233,7 @@ public class ContactsList extends AppCompatActivity {
     public void SaveSOSNumber(JsonObject jsonObject){
 
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(ContactsList.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(ContactsList.this).getrestadapter()
                 .SaveSOSNumber(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

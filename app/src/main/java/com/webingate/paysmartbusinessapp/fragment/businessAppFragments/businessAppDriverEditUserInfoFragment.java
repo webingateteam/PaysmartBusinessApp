@@ -9,9 +9,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +34,9 @@ import cropper.CropImage;
 import cropper.CropImageView;
 
 import static com.webingate.paysmartbusinessapp.fragment.businessAppFragments.businessAppUploadDocsFragment.GET_FROM_GALLERY;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 //import com.webingate.paysmartbusinessapp.businessapp.ApplicationConstants;
 //import com.webingate.paysmartbusinessapp.businessapp.GetaLyft;

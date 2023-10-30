@@ -1,7 +1,8 @@
 package com.webingate.paysmartbusinessapp;
 
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
+
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 
 /**
  * Created by Panacea-Soft on 7/10/18.

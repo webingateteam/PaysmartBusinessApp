@@ -6,16 +6,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,10 +15,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.navigation.NavigationView;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.CustomerGetstopsResponse;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.GetBookingHistoryResponse;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.GetCustomerAccountResponce;
-import com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog;
+
 
 import java.io.Serializable;
 import java.util.List;
@@ -39,6 +40,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.customerapp.Dialog.ProgressDialog;
+
 public class HomeActivity1 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private final int HOME = 0;
     private final int TICKET_SOURCE_DESTINATION = 1;
@@ -271,7 +274,7 @@ public class HomeActivity1 extends AppCompatActivity implements NavigationView.O
 
     public void GetBookingHistory(String mobileNO ){
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(HomeActivity1.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(HomeActivity1.this).getrestadapter()
                 .GetBookingHistory(mobileNO)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -303,7 +306,7 @@ public class HomeActivity1 extends AppCompatActivity implements NavigationView.O
 
     public void GetCustomerAccount(String userId ){
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(HomeActivity1.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(HomeActivity1.this).getrestadapter()
                 .GetCustomerAccount(userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -335,7 +338,7 @@ public class HomeActivity1 extends AppCompatActivity implements NavigationView.O
 
     public void TaxiStops( ){
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(HomeActivity1.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(HomeActivity1.this).getrestadapter()
                 .TaxiStops()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

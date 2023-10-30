@@ -3,9 +3,6 @@ package com.webingate.paysmartbusinessapp.customerapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -13,10 +10,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.DefaultResponse;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.GetCustomerAccountResponce;
-import com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.customerapp.Dialog.ProgressDialog;
+
 /**
  * Created by Seshu on 10/18/2017.
  */
@@ -226,7 +229,7 @@ public class Payment_Card extends AppCompatActivity {
     public void GetCustomerAccount(String userid){
 
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(Payment_Card.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(Payment_Card.this).getrestadapter()
                 .GetCustomerAccount(userid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -260,7 +263,7 @@ public class Payment_Card extends AppCompatActivity {
     public void CustomerAccount(JsonObject object){
 
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(Payment_Card.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(Payment_Card.this).getrestadapter()
                 .CustomerAccount(object)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

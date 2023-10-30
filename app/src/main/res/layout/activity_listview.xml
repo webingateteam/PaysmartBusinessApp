@@ -61,7 +61,7 @@
         android:layout_below="@+id/row3"
         android:layout_gravity="center">
 
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/accept"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
             android:textColor="@color/black"
             android:textStyle="bold" />
 
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/reject"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

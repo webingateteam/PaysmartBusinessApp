@@ -12,16 +12,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.AppCompatButton;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,8 +23,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.webingate.paysmartbusinessapp.businessapp.Deo.CustomerGetstopsResponse;
-import com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog;
+
 
 import java.io.Serializable;
 import java.util.List;
@@ -46,6 +47,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.customerapp.Dialog.ProgressDialog;
+
 @SuppressLint("NewApi")
 public class Home extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
@@ -342,7 +345,7 @@ public class Home extends Fragment {
     public void GetStops(){
 
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(getActivity()).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(getActivity()).getrestadapter()
                 .getstops()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -375,7 +378,7 @@ public class Home extends Fragment {
 
     public void TaxiStops( ){
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(getActivity()).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(getActivity()).getrestadapter()
                 .TaxiStops()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

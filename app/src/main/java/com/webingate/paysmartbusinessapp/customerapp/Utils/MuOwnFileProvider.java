@@ -1,6 +1,7 @@
-package com.webingate.paysmartbusinessapp.businessapp.Utils;
+package com.webingate.paysmartbusinessapp.customerapp.Utils;
 
-import android.support.v4.content.FileProvider;
+
+import androidx.core.content.FileProvider;
 
 public class MuOwnFileProvider extends FileProvider {
 }

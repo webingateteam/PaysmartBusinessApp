@@ -1,20 +1,22 @@
-package com.webingate.paysmartbusinessapp.businessapp.Dialog;
+package com.webingate.paysmartbusinessapp.customerapp.Dialog;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 
+import androidx.annotation.ColorInt;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
+
 import com.webingate.paysmartbusinessapp.R;
-import com.webingate.paysmartbusinessapp.businessapp.Utils.DialogUtils;
+import com.webingate.paysmartbusinessapp.customerapp.Utils.DialogUtils;
 
 
 //TODO:: try to extends from view
-public class CamomileSpinner extends android.support.v7.widget.AppCompatImageView {
+public class CamomileSpinner extends AppCompatImageView {
 
     public static final int DEFAULT_DURATION = 60;
     @ColorInt

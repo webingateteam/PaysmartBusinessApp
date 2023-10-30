@@ -1,6 +1,7 @@
 package com.webingate.paysmartbusinessapp.utils.drag_and_swipe;
 
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by Panacea-Soft on 7/17/18.

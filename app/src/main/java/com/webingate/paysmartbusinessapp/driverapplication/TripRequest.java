@@ -4,10 +4,11 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.AppCompatButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,21 +19,14 @@ public class TripRequest extends Dialog implements
 
     public Activity c;
     public Dialog d;
-    @BindView(R.id.name)
+
     TextView name;
-    @BindView(R.id.picklocation)
     TextView pickLocation;
-    @BindView(R.id.droplocation)
     TextView destLocation;
-    @BindView(R.id.minsec)
     TextView minsec;
-    @BindView(R.id.displaytime)
     TextView timer;
-    @BindView(R.id.time)
     TextView timerNew;
-    @BindView(R.id.accept)
     AppCompatButton yes;
-    @BindView(R.id.decline)
     AppCompatButton no;
     private CountDownTimer countDownTimer;
     private static final int ACCEPTBOOKING = 4;
@@ -57,7 +51,16 @@ public class TripRequest extends Dialog implements
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.alertdialogue);
-        ButterKnife.bind(this);
+        //ButterKnife.bind(this);
+
+        name = findViewById(R.id.name);
+        pickLocation = findViewById(R.id.picklocation);
+        destLocation = findViewById(R.id.droplocation);
+        minsec = findViewById(R.id.minsec);
+        timer = findViewById(R.id.displaytime);
+        timerNew=findViewById(R.id.time);
+        yes = findViewById(R.id.accept);
+        no = findViewById(R.id.decline);
 
         yes.setOnClickListener(this);
         no.setOnClickListener(this);

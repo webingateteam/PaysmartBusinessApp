@@ -17,12 +17,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/paysmartadmin"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
 
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCc5LJh1ZMYHCodjSFQMq-2s1obdt4JTDw" />
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -34,7 +37,8 @@
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.login_activity"
             android:label="@string/title_activity_login_activity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -308,6 +312,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappCouponsListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.webingate.paysmartbusinessapp.activity.businessapp.businessappDriverDocList"
             android:theme="@style/AppTheme.NoActionBar" />
 
 

@@ -2,13 +2,14 @@ package com.webingate.paysmartbusinessapp.driverapplication.Dialog;
 
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.UiThread;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.UiThread;
 
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.utils.DialogUtils;

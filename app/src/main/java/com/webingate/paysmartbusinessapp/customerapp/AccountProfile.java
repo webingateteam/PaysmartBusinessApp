@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.UpdateUserResponse;
-import com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog;
+
 
 import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
@@ -39,6 +39,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.customerapp.Dialog.ProgressDialog;
+
 /**
  * Created by Seshu on 9/18/2017.
  */
@@ -199,7 +201,7 @@ public class AccountProfile extends Activity {
     public void UpdateAppUser(JsonObject jsonObject){
 
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(AccountProfile.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(AccountProfile.this).getrestadapter()
                 .UpdateAppUser(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

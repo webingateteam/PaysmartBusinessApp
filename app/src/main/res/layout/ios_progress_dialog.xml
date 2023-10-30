@@ -41,7 +41,7 @@
             android:visibility="visible"/>
     </LinearLayout>
 
-    <com.webingate.paysmartbusinessapp.businessapp.Dialog.CamomileSpinner
+    <com.webingate.paysmartbusinessapp.customerapp.Dialog.CamomileSpinner
         android:id="@+id/spinner"
         android:layout_below="@id/title_frame"
         android:layout_width="40dp"

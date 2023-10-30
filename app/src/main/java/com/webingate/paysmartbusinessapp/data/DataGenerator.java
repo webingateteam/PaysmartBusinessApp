@@ -2,7 +2,9 @@ package com.webingate.paysmartbusinessapp.data;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v7.content.res.AppCompatResources;
+
+
+import androidx.appcompat.content.res.AppCompatResources;
 
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.model.BookingType;

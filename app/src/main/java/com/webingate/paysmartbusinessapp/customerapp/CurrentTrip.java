@@ -18,14 +18,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -69,7 +61,7 @@ import com.webingate.paysmartbusinessapp.businessapp.Deo.CustomerRateTheRideResp
 import com.webingate.paysmartbusinessapp.businessapp.Deo.MakepaymentResponse;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.UpdateBookingstatusResponse;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.VehiclePositionResponse;
-import com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog;
+
 
 import org.joda.time.DateTime;
 
@@ -85,8 +77,18 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.driverapplication.Dialog.ProgressDialog;
 
 import static com.google.android.gms.location.LocationRequest.*;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class CurrentTrip extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener,RatingBarDialogue.Ratingfinished {
     String serverUrl = "", otp = "";
@@ -430,6 +432,7 @@ public class CurrentTrip extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             // Check for the integer request code originally supplied to startResolutionForResult().
             case REQUEST_CHECK_SETTINGS:
@@ -688,7 +691,7 @@ public class CurrentTrip extends AppCompatActivity implements OnMapReadyCallback
     }
 
     public void VehiclePosition(JsonObject jsonObject){
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(CurrentTrip.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(CurrentTrip.this).getrestadapter()
                 .VehiclePosition(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -802,7 +805,7 @@ public class CurrentTrip extends AppCompatActivity implements OnMapReadyCallback
     public void MakePayment(JsonObject jsonObject){
 
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(CurrentTrip.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(CurrentTrip.this).getrestadapter()
                 .MakePayment(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -840,7 +843,7 @@ public class CurrentTrip extends AppCompatActivity implements OnMapReadyCallback
     public void RateTheRide(JsonObject jsonObject){
 
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(CurrentTrip.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(CurrentTrip.this).getrestadapter()
                 .RateTheRide(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -870,7 +873,7 @@ public class CurrentTrip extends AppCompatActivity implements OnMapReadyCallback
     }
     public void UpdateBookingStatus(JsonObject jsonObject){
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(CurrentTrip.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(CurrentTrip.this).getrestadapter()
                 .UpdateBookingStatus(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

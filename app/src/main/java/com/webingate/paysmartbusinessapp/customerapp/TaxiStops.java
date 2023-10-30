@@ -2,12 +2,13 @@ package com.webingate.paysmartbusinessapp.customerapp;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.webingate.paysmartbusinessapp.businessapp.Deo.CustomerGetstopsResponse;
 

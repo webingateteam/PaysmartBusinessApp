@@ -1,4 +1,4 @@
-package com.webingate.paysmartbusinessapp.businessapp.Utils;
+package com.webingate.paysmartbusinessapp.customerapp.Utils;
 
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.AvailableVehiclesResponse;

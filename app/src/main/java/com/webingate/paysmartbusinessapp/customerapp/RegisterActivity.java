@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.AppCompatButton;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,9 +16,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.FragmentActivity;
+
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.RegisterUserResponse;
-import com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog;
+
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
@@ -33,6 +34,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.customerapp.Dialog.ProgressDialog;
 /*import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -162,6 +164,7 @@ public class RegisterActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         // handle result of CropImageActivity
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
@@ -204,7 +207,7 @@ public class RegisterActivity extends FragmentActivity {
     public void RegisterUser(JsonObject jsonObject){
 
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(RegisterActivity.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(RegisterActivity.this).getrestadapter()
                 .RegisterUser(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

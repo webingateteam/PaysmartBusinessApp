@@ -3,11 +3,6 @@ package com.webingate.paysmartbusinessapp.customerapp;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.AppCompatButton;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Log;
@@ -19,10 +14,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.GetCurrentBalanceResponse;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.WalletBalanceResponse;
-import com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog;
+
 
 import java.util.List;
 
@@ -33,6 +34,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.driverapplication.Dialog.ProgressDialog;
+
 @SuppressLint("NewApi")
 public class CurrentBalance extends Fragment {
     Button bookTicket, myTickets, eWallet;
@@ -199,7 +202,7 @@ public class CurrentBalance extends Fragment {
     public void Getcurrentbalance(String mobileNo){
 
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(getActivity()).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(getActivity()).getrestadapter()
                 .Getcurrentbalance(mobileNo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -232,7 +235,7 @@ public class CurrentBalance extends Fragment {
     public void WalletBalance(JsonObject object){
 
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(getActivity()).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(getActivity()).getrestadapter()
                 .WalletBalance(object)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

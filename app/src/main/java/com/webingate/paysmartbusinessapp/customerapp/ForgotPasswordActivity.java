@@ -2,8 +2,6 @@ package com.webingate.paysmartbusinessapp.customerapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,10 +9,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.FragmentActivity;
+
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.CustomerPwdVerificationResponse;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.CustomerforgotPwdResponse;
-import com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog;
+
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.driverapplication.Dialog.ProgressDialog;
 
 public class ForgotPasswordActivity extends FragmentActivity {
     @BindView(R.id.input_mobileno)
@@ -130,7 +132,7 @@ public class ForgotPasswordActivity extends FragmentActivity {
     public void Forgotpassword(JsonObject jsonObject){
 
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(ForgotPasswordActivity.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(ForgotPasswordActivity.this).getrestadapter()
                 .Forgotpassword(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -171,7 +173,7 @@ public class ForgotPasswordActivity extends FragmentActivity {
     public void Passwordverification(JsonObject jsonObject){
 
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(ForgotPasswordActivity.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(ForgotPasswordActivity.this).getrestadapter()
                 .Passwordverification(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

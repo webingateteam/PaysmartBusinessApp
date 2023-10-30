@@ -27,7 +27,7 @@
         android:textColor="@android:color/white"
         />
     <!-- MobileNo -->
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
        >
@@ -37,9 +37,9 @@
             android:inputType="phone"
             android:maxLength="10"
             android:hint="@string/mobilenumber" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
     <!-- Email -->
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:hint="@string/email_hint" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
     <!-- Passengers details -->
     <TableRow
 
@@ -293,7 +293,7 @@
             />
     </TableRow>
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_payments"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

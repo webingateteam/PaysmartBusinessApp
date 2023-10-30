@@ -2,10 +2,7 @@ package com.webingate.paysmartbusinessapp.activity.businessapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.ObservableArrayList;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,16 +14,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverTripslistAdapter;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.CustomerRideDetailsResponse;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.GetBookingHistoryResponse;
-import com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog;
+
 import com.webingate.paysmartbusinessapp.customerapp.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.customerapp.ConfirmedTripsDetails;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.DrivermasterResponse;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetdriverTripsResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Dialog.ProgressDialog;
 
 import java.util.ArrayList;
 import java.util.List;

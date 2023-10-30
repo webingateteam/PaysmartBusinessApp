@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
    >
 
-     <android.support.v4.widget.NestedScrollView
+     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-         <android.support.constraint.ConstraintLayout
+         <androidx.constraintlayout.widget.ConstraintLayout
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:orientation="vertical">
@@ -36,7 +37,7 @@
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toTopOf="parent" />
 
-             <android.support.v7.widget.CardView
+             <androidx.cardview.widget.CardView
                  android:id="@+id/priceRangeCardView"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
@@ -46,7 +47,7 @@
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toBottomOf="@+id/minimumEditText2">
 
-                 <android.support.constraint.ConstraintLayout
+                 <androidx.constraintlayout.widget.ConstraintLayout
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
                      android:orientation="vertical">
@@ -148,7 +149,7 @@
                          android:background="@color/colorLine"
                          app:layout_constraintTop_toBottomOf="@+id/priceRangeUpDownImageView" />
 
-                     <android.support.constraint.ConstraintLayout
+                     <androidx.constraintlayout.widget.ConstraintLayout
                          android:id="@+id/priceRangeLayout"
                          android:layout_width="0dp"
                          android:layout_height="wrap_content"
@@ -236,13 +237,13 @@
                              app:layout_constraintStart_toStartOf="parent"
                              app:layout_constraintTop_toBottomOf="@+id/price_range_bar_container" />
 
-                     </android.support.constraint.ConstraintLayout>
+                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                 </android.support.constraint.ConstraintLayout>
+                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-             </android.support.v7.widget.CardView>
+             </androidx.cardview.widget.CardView>
 
-             <android.support.v7.widget.CardView
+             <androidx.cardview.widget.CardView
                  android:id="@+id/sizeCardView"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
@@ -252,7 +253,7 @@
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toBottomOf="@+id/priceRangeCardView">
 
-                 <android.support.constraint.ConstraintLayout
+                 <androidx.constraintlayout.widget.ConstraintLayout
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
                      android:orientation="vertical">
@@ -305,7 +306,7 @@
                          android:background="@color/colorLine"
                          app:layout_constraintTop_toBottomOf="@+id/sizeUpDownImageView" />
 
-                     <android.support.constraint.ConstraintLayout
+                     <androidx.constraintlayout.widget.ConstraintLayout
                          android:id="@+id/sizeLayout"
                          android:layout_width="0dp"
                          android:layout_height="wrap_content"
@@ -316,7 +317,7 @@
                          app:layout_constraintStart_toStartOf="parent"
                          app:layout_constraintTop_toBottomOf="@+id/view25">
 
-                         <android.support.constraint.ConstraintLayout
+                         <androidx.constraintlayout.widget.ConstraintLayout
                              android:id="@+id/constraintLayout14"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
@@ -358,9 +359,9 @@
                                  app:layout_constraintEnd_toEndOf="parent"
                                  app:layout_constraintStart_toStartOf="parent"
                                  app:layout_constraintTop_toTopOf="parent" />
-                         </android.support.constraint.ConstraintLayout>
+                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                         <android.support.constraint.ConstraintLayout
+                         <androidx.constraintlayout.widget.ConstraintLayout
                              android:id="@+id/constraintLayout13"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
@@ -401,9 +402,9 @@
                                  app:layout_constraintEnd_toEndOf="parent"
                                  app:layout_constraintStart_toStartOf="parent"
                                  app:layout_constraintTop_toTopOf="parent" />
-                         </android.support.constraint.ConstraintLayout>
+                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                         <android.support.constraint.ConstraintLayout
+                         <androidx.constraintlayout.widget.ConstraintLayout
                              android:id="@+id/constraintLayout9"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
@@ -444,9 +445,9 @@
                                  app:layout_constraintEnd_toEndOf="parent"
                                  app:layout_constraintStart_toStartOf="parent"
                                  app:layout_constraintTop_toTopOf="parent" />
-                         </android.support.constraint.ConstraintLayout>
+                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                         <android.support.constraint.ConstraintLayout
+                         <androidx.constraintlayout.widget.ConstraintLayout
                              android:id="@+id/constraintLayout7"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
@@ -487,9 +488,9 @@
                                  app:layout_constraintEnd_toEndOf="parent"
                                  app:layout_constraintStart_toStartOf="parent"
                                  app:layout_constraintTop_toTopOf="parent" />
-                         </android.support.constraint.ConstraintLayout>
+                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                         <android.support.constraint.ConstraintLayout
+                         <androidx.constraintlayout.widget.ConstraintLayout
                              android:id="@+id/constraintLayout8"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
@@ -531,15 +532,15 @@
                                  app:layout_constraintEnd_toEndOf="parent"
                                  app:layout_constraintStart_toStartOf="parent"
                                  app:layout_constraintTop_toTopOf="parent" />
-                         </android.support.constraint.ConstraintLayout>
+                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                     </android.support.constraint.ConstraintLayout>
+                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                 </android.support.constraint.ConstraintLayout>
+                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-             </android.support.v7.widget.CardView>
+             </androidx.cardview.widget.CardView>
 
-             <android.support.v7.widget.CardView
+             <androidx.cardview.widget.CardView
                  android:id="@+id/colorCardView"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
@@ -549,7 +550,7 @@
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toBottomOf="@+id/sizeCardView">
 
-                 <android.support.constraint.ConstraintLayout
+                 <androidx.constraintlayout.widget.ConstraintLayout
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
                      android:orientation="vertical">
@@ -602,7 +603,7 @@
                          android:background="@color/colorLine"
                          app:layout_constraintTop_toBottomOf="@+id/colorUpDownImageView" />
 
-                     <android.support.constraint.ConstraintLayout
+                     <androidx.constraintlayout.widget.ConstraintLayout
                          android:id="@+id/colorLayout"
                          android:layout_width="0dp"
                          android:layout_height="wrap_content"
@@ -613,7 +614,7 @@
                          app:layout_constraintStart_toStartOf="parent"
                          app:layout_constraintTop_toBottomOf="@+id/view26">
 
-                         <android.support.constraint.ConstraintLayout
+                         <androidx.constraintlayout.widget.ConstraintLayout
                              android:id="@+id/constraintLayout16"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
@@ -650,9 +651,9 @@
                                  app:layout_constraintStart_toStartOf="parent"
                                  app:layout_constraintTop_toTopOf="parent"
                                  app:srcCompat="@drawable/baseline_select_with_check_transparent_24" />
-                         </android.support.constraint.ConstraintLayout>
+                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                         <android.support.constraint.ConstraintLayout
+                         <androidx.constraintlayout.widget.ConstraintLayout
                              android:id="@+id/constraintLayout17"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
@@ -688,9 +689,9 @@
                                  app:layout_constraintEnd_toEndOf="parent"
                                  app:layout_constraintStart_toStartOf="parent"
                                  app:layout_constraintTop_toTopOf="parent" />
-                         </android.support.constraint.ConstraintLayout>
+                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                         <android.support.constraint.ConstraintLayout
+                         <androidx.constraintlayout.widget.ConstraintLayout
                              android:id="@+id/constraintLayout15"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
@@ -726,9 +727,9 @@
                                  app:layout_constraintEnd_toEndOf="parent"
                                  app:layout_constraintStart_toStartOf="parent"
                                  app:layout_constraintTop_toTopOf="parent" />
-                         </android.support.constraint.ConstraintLayout>
+                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                         <android.support.constraint.ConstraintLayout
+                         <androidx.constraintlayout.widget.ConstraintLayout
                              android:id="@+id/constraintLayout18"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
@@ -764,9 +765,9 @@
                                  app:layout_constraintEnd_toEndOf="parent"
                                  app:layout_constraintStart_toStartOf="parent"
                                  app:layout_constraintTop_toTopOf="parent" />
-                         </android.support.constraint.ConstraintLayout>
+                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                         <android.support.constraint.ConstraintLayout
+                         <androidx.constraintlayout.widget.ConstraintLayout
                              android:id="@+id/constraintLayout19"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
@@ -802,9 +803,9 @@
                                  app:layout_constraintEnd_toEndOf="parent"
                                  app:layout_constraintStart_toStartOf="parent"
                                  app:layout_constraintTop_toTopOf="parent" />
-                         </android.support.constraint.ConstraintLayout>
+                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                         <android.support.constraint.ConstraintLayout
+                         <androidx.constraintlayout.widget.ConstraintLayout
                              android:id="@+id/constraintLayout20"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
@@ -840,9 +841,9 @@
                                  app:layout_constraintEnd_toEndOf="parent"
                                  app:layout_constraintStart_toStartOf="parent"
                                  app:layout_constraintTop_toTopOf="parent" />
-                         </android.support.constraint.ConstraintLayout>
+                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                         <android.support.constraint.ConstraintLayout
+                         <androidx.constraintlayout.widget.ConstraintLayout
                              android:id="@+id/constraintLayout21"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
@@ -879,15 +880,15 @@
                                  app:layout_constraintEnd_toEndOf="parent"
                                  app:layout_constraintStart_toStartOf="parent"
                                  app:layout_constraintTop_toTopOf="parent" />
-                         </android.support.constraint.ConstraintLayout>
+                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                     </android.support.constraint.ConstraintLayout>
+                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                 </android.support.constraint.ConstraintLayout>
+                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-             </android.support.v7.widget.CardView>
+             </androidx.cardview.widget.CardView>
 
-             <android.support.v7.widget.CardView
+             <androidx.cardview.widget.CardView
                  android:id="@+id/materialCardView"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
@@ -899,7 +900,7 @@
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toBottomOf="@+id/colorCardView">
 
-                 <android.support.constraint.ConstraintLayout
+                 <androidx.constraintlayout.widget.ConstraintLayout
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
                      android:orientation="vertical">
@@ -936,7 +937,7 @@
                          android:background="@color/colorLine"
                          app:layout_constraintTop_toBottomOf="@+id/materialUpDownImageView" />
 
-                     <android.support.constraint.ConstraintLayout
+                     <androidx.constraintlayout.widget.ConstraintLayout
                          android:id="@+id/materialLayout"
                          android:layout_width="0dp"
                          android:layout_height="wrap_content"
@@ -1083,14 +1084,14 @@
 
                          </com.google.android.flexbox.FlexboxLayout>
 
-                     </android.support.constraint.ConstraintLayout>
-                 </android.support.constraint.ConstraintLayout>
+                     </androidx.constraintlayout.widget.ConstraintLayout>
+                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-             </android.support.v7.widget.CardView>
-
-
-         </android.support.constraint.ConstraintLayout>
-    </android.support.v4.widget.NestedScrollView>
+             </androidx.cardview.widget.CardView>
 
 
-</android.support.design.widget.CoordinatorLayout>
+         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

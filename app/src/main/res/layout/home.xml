@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_getalyft"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -34,7 +34,7 @@
                 android:background="@color/white"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_metered_taxi"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -44,7 +44,7 @@
                 android:background="@color/white"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_ticket"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -55,7 +55,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 />
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_train"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_cruise"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -83,7 +83,7 @@
                 android:background="@color/white"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_ambulance"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -93,7 +93,7 @@
                 android:background="@color/white"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_towing"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -103,7 +103,7 @@
                 android:background="@color/white"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_parcel_services"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -120,7 +120,7 @@
             android:layout_gravity="center">
 
 
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_ewallet"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -130,7 +130,7 @@
                 android:background="@color/white"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_shop"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -140,7 +140,7 @@
                 android:background="@color/white"
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_hotel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -150,7 +150,7 @@
                 android:background="@color/white"
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_flight"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

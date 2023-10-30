@@ -49,7 +49,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -60,9 +60,9 @@
                         android:background="@drawable/rectangle_layoutboarder"
                         android:hint="@string/firstname_hint"
                         android:inputType="text" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
                 <!-- LastName -->
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -73,8 +73,8 @@
                         android:background="@drawable/rectangle_layoutboarder"
                         android:hint="@string/lastname_hint"
                         android:inputType="text" />
-                </android.support.design.widget.TextInputLayout>
-                <android.support.design.widget.TextInputLayout
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -85,7 +85,7 @@
                         android:background="@drawable/rectangle_layoutboarder"
                         android:hint="@string/email_hint"
                         android:inputType="textEmailAddress" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 

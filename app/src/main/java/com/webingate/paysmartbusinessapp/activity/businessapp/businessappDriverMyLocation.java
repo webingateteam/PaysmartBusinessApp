@@ -1,5 +1,7 @@
 package com.webingate.paysmartbusinessapp.activity.businessapp;
 
+import static com.google.android.gms.location.LocationServices.FusedLocationApi;
+
 import android.Manifest;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
@@ -19,17 +21,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -38,6 +29,15 @@ import android.widget.Button;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -104,12 +104,7 @@ public class businessappDriverMyLocation extends AppCompatActivity implements On
     public static final String Password = "passwordkey";
     public static final String UserAccountNo = "UserAccountNokey";
 
-    @BindView(R.id.toolbar)
     Toolbar toolbar;
-
-
-
-
    // AppCompatButton bus;
   //  @BindView(R.id.ridenow)
    // AppCompatButton rideNow;
@@ -184,28 +179,22 @@ public class businessappDriverMyLocation extends AppCompatActivity implements On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.businessapp_driver_mylocation);
-        ButterKnife.bind(this);
+        //ButterKnife.bind(this);
 
         //SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-
         initGoogleAPIClient();//Init Google API Client
-        checkPermissions();//Check Permission
+        checkPermissions();
+        //initGoogleAPIClient();//Init Google API Client
+        //Check Permission
         //  configureCameraIdle();//cofigure drag destionatio selection
-        setSupportActionBar(toolbar);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        setSupportActionBar(toolbar);
 //        taxi.setVisibility(View.GONE);
 //        meteredtaxi.setVisibility(View.GONE);
 //        bus.setVisibility(View.GONE);
-
-
-       ;
-
-
-
-
-
 
     }
 
@@ -462,11 +451,12 @@ public class businessappDriverMyLocation extends AppCompatActivity implements On
     @SuppressLint("MissingPermission")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
 
             case CURRENT_TRIP_ACTIVITY:
                 //selectsource.setText("");
-               // selectDestination.setText("");
+                // selectDestination.setText("");
                 LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
                 mMap.clear();
                 onMapReady(mMap);
@@ -575,7 +565,9 @@ public class businessappDriverMyLocation extends AppCompatActivity implements On
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            if (mGoogleApiClient.isConnected()) {
+                FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            }
         }
         // mMap.animateCamera(CameraUpdateFactory.zoomTo(18.5f));
     }
@@ -590,6 +582,7 @@ public class businessappDriverMyLocation extends AppCompatActivity implements On
 
     }
 
+    @SuppressLint("SuspiciousIndentation")
     @Override
     public void onLocationChanged(Location location) {
         //  mLastLocation = location;

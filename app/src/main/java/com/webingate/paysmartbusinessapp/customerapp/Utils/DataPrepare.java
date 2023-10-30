@@ -1,10 +1,11 @@
-package com.webingate.paysmartbusinessapp.businessapp.Utils;
+package com.webingate.paysmartbusinessapp.customerapp.Utils;
 
 import android.content.Context;
 import android.util.Base64;
 
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.BuildConfig;
+import com.webingate.paysmartbusinessapp.customerapp.Utils.APIInterface;
 
 import java.io.File;
 import java.io.IOException;

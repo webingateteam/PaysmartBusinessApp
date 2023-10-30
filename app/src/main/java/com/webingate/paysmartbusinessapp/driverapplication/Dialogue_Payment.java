@@ -4,11 +4,12 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import androidx.appcompat.widget.AppCompatButton;
 
 import butterknife.BindView;
 import butterknife.OnClick;

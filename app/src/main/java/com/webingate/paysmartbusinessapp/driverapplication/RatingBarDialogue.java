@@ -23,14 +23,11 @@ public class RatingBarDialogue extends Dialog implements
     private static final int RATETHERIDE = 9;
     public Activity c;
     public Dialog d;
-    @BindView(R.id.ratingid)
     TextView ratingid;
-    @BindView(R.id.dialog_ratingbar)
     RatingBar dialogRatingbar;
-    @BindView(R.id.input_comments)
     EditText inputComments;
-    @BindView(R.id.submit)
     Button submit;
+
     private boolean isOnline;
 
     RatingBarInterface ratingbar;
@@ -53,7 +50,12 @@ public class RatingBarDialogue extends Dialog implements
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.ratingbar);
-        ButterKnife.bind(this);
+
+        ratingid = findViewById(R.id.ratingid);
+        dialogRatingbar = findViewById(R.id.dialog_ratingbar);
+        inputComments = findViewById(R.id.input_comments);
+        submit = findViewById(R.id.submit);
+
         submit.setOnClickListener(this);
 
         submit.setOnClickListener(v->{

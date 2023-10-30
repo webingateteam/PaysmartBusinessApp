@@ -9,13 +9,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.AttrRes;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.annotation.StyleRes;
-import android.support.annotation.UiThread;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,6 +17,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.AttrRes;
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.annotation.StyleRes;
+import androidx.annotation.UiThread;
 
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.utils.DialogUtils;
@@ -82,7 +83,7 @@ public class ProgressDialog extends Dialog {
     public static class Builder {
 
         protected Context context;
-        protected View customView;
+        public View customView;
         protected CharSequence title;
         protected CharSequence message;
         protected boolean cancelable;

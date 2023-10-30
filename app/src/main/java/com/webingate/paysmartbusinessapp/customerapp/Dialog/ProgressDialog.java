@@ -1,4 +1,4 @@
-package com.webingate.paysmartbusinessapp.businessapp.Dialog;
+package com.webingate.paysmartbusinessapp.customerapp.Dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,13 +9,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.AttrRes;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.annotation.StyleRes;
-import android.support.annotation.UiThread;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,8 +18,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.AttrRes;
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.annotation.StyleRes;
+import androidx.annotation.UiThread;
+
 import com.webingate.paysmartbusinessapp.R;
-import com.webingate.paysmartbusinessapp.businessapp.Utils.DialogUtils;
+import com.webingate.paysmartbusinessapp.driverapplication.Dialog.CamomileSpinner;
+import com.webingate.paysmartbusinessapp.utils.DialogUtils;
+
 
 /**
  * Created by Vitalu on 4/17/2017. "Head Up Display" HUD

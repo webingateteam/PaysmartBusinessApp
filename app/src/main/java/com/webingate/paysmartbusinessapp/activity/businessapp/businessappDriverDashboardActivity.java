@@ -17,17 +17,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenuView;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,6 +25,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -50,6 +47,9 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStates;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
@@ -108,7 +108,7 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
     public static final String DriverStatus = "driverstatusKey";
 
 
-    @BindView(R.id.status)
+
     Button status;
 
     private boolean isOnline=false;
@@ -153,9 +153,9 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
         dstatus = prefs.getString(DriverStatus, null);
         ApplicationConstants.driverstatus = dstatus;
 
-        initData();
-
         initUI();
+
+        initData();
 
         initDataBinding();
 
@@ -181,7 +181,8 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
 
     private void initUI() {
         initToolbar();
-        ButterKnife.bind(this);
+
+        status = findViewById(R.id.status);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.home9BottomNavigation);
         Utils.removeShiftMode(bottomNavigationView);
@@ -236,6 +237,29 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
 
     private void initAction() {
 
+        status.setOnClickListener(v -> {
+            if (isOnline) {
+                // checkPermissions();
+                JsonObject object = new JsonObject();
+                object.addProperty("loginlogout", "0");
+                object.addProperty("DriverNo", ApplicationConstants.mobileNo);
+                object.addProperty("LoginLatitude", latitude + "");
+                object.addProperty("LoginLongitude", longitude + "");
+                object.addProperty("Reason", "");
+                DriverGoOnline(object, DEACTIVEDRIVER);
+            } else {
+                //checkPermissions();
+                Log.i("Driver status", "Driver go offline");
+                JsonObject object = new JsonObject();
+                object.addProperty("loginlogout", "1");
+                object.addProperty("DriverNo", ApplicationConstants.mobileNo);
+                object.addProperty("LoginLatitude", latitude + "");
+                object.addProperty("LoginLongitude", longitude + "");
+                object.addProperty("Reason", "");
+                DriverGoOnline(object, ACTIVEDRIVER);
+            }
+        });
+
 
 //        goonlineBtn.setOnClickListener((View v) ->{
 //            //Toast.makeText(getApplicationContext(),"OTP is Resent.",Toast.LENGTH_SHORT).show();
@@ -251,104 +275,104 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
     }
    // R.id.btn_confirmed_trips,
 
-   @Nullable
-   @OnClick({R.id.status})
-//    @OnClick({R.id.status,R.id.btn_statastics,R.id.btn_mylocation,R.id.btn_assigned_taxi,R.id.btn_ongoing_trips,R.id.btn_sos,R.id.btn_logout,R.id.btn_myprofile})
-    void OnClick(View v){
-        switch (v.getId()) {
-            case R.id.status:
-                if (isOnline) {
-                   // checkPermissions();
-                    JsonObject object = new JsonObject();
-                    object.addProperty("loginlogout", "0");
-                    object.addProperty("DriverNo", ApplicationConstants.mobileNo);
-                    object.addProperty("LoginLatitude", latitude + "");
-                    object.addProperty("LoginLongitude", longitude + "");
-                    object.addProperty("Reason", "");
-                    DriverGoOnline(object, DEACTIVEDRIVER);
-                } else {
-                    //checkPermissions();
-                    Log.i("Driver status", "Driver go offline");
-                    JsonObject object = new JsonObject();
-                    object.addProperty("loginlogout", "1");
-                    object.addProperty("DriverNo", ApplicationConstants.mobileNo);
-                    object.addProperty("LoginLatitude", latitude + "");
-                    object.addProperty("LoginLongitude", longitude + "");
-                    object.addProperty("Reason", "");
-                    DriverGoOnline(object, ACTIVEDRIVER);
-                }
-
-                break;
-//            case R.id.btn_confirmed_trips:
-//                Toast.makeText(getApplicationContext(), "Clicked Btn clickec ", Toast.LENGTH_SHORT).show();
-//                //GetDriverTrips(ApplicationConstants.mobileNo);
-//
-//               /* ApplicationConstants.tripflag = GETTRIPS;
-//                DriverCallingRequest driverCallingRequest = new DriverCallingRequest();
-//                driverCallingRequest.execute();*/
-//
-//                break;
-            case R.id.btn_statastics:
-
-                break;
-            case R.id.btn_mylocation:
-                ApplicationConstants.mapflag = 1;
-                // startActivity(new Intent(getActivity(), MyTrips.class));
-                break;
-            case R.id.btn_assigned_taxi:
-                GetVehicleDetails(ApplicationConstants.vid);
-
-                /*ApplicationConstants.tripflag = GETVEHICLEDETAILS;
-                driverCallingRequest = new DriverCallingRequest();
-                driverCallingRequest.execute();*/
-
-                break;
-//            case R.id.trip:
-//
-//                break;
-            case R.id.btn_ongoing_trips:
-                GetDriverTrips(ApplicationConstants.mobileNo);
-
-               /* ApplicationConstants.tripflag = GETTRIPS;
-                driverCallingRequest = new DriverCallingRequest();
-                driverCallingRequest.execute();*/
-
-                break;
-//            case R.id.btn_sos:
-//
-//                startActivity(new Intent(getActivity(), SosContacts.class));
-//
-//                       /* Sos_Dialoguebox dialoguebox=new Sos_Dialoguebox(getActivity());
-//                        dialoguebox.setCanceledOnTouchOutside(false);
-//                        dialoguebox.show();*/
-//                break;
-//            case R.id.btn_logout:
-//                if (status.getText().toString().matches("Go Offline")) {
+//   @Nullable
+//   @OnClick({R.id.status})
+////    @OnClick({R.id.status,R.id.btn_statastics,R.id.btn_mylocation,R.id.btn_assigned_taxi,R.id.btn_ongoing_trips,R.id.btn_sos,R.id.btn_logout,R.id.btn_myprofile})
+//    void OnClick(View v){
+//        switch (v.getId()) {
+//            case R.id.status:
+//                if (isOnline) {
+//                   // checkPermissions();
 //                    JsonObject object = new JsonObject();
 //                    object.addProperty("loginlogout", "0");
 //                    object.addProperty("DriverNo", ApplicationConstants.mobileNo);
 //                    object.addProperty("LoginLatitude", latitude + "");
 //                    object.addProperty("LoginLongitude", longitude + "");
 //                    object.addProperty("Reason", "");
-//                    DriverGoOnline(object, LOGOUT);
+//                    DriverGoOnline(object, DEACTIVEDRIVER);
 //                } else {
-//                    SharedPreferences.Editor editor = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE).edit();
-//                    editor.putString(Phone, null);
-//                    editor.putString(Name, null);
-//                    editor.commit();
-//                    getActivity().finish();
+//                    //checkPermissions();
+//                    Log.i("Driver status", "Driver go offline");
+//                    JsonObject object = new JsonObject();
+//                    object.addProperty("loginlogout", "1");
+//                    object.addProperty("DriverNo", ApplicationConstants.mobileNo);
+//                    object.addProperty("LoginLatitude", latitude + "");
+//                    object.addProperty("LoginLongitude", longitude + "");
+//                    object.addProperty("Reason", "");
+//                    DriverGoOnline(object, ACTIVEDRIVER);
 //                }
-//                break;
-//            case R.id.btn_myprofile:
-//                GetDriverDetails(ApplicationConstants.driverId);
 //
-//              /*  ApplicationConstants.tripflag = GETDRIVERDETAILS;
+//                break;
+////            case R.id.btn_confirmed_trips:
+////                Toast.makeText(getApplicationContext(), "Clicked Btn clickec ", Toast.LENGTH_SHORT).show();
+////                //GetDriverTrips(ApplicationConstants.mobileNo);
+////
+////               /* ApplicationConstants.tripflag = GETTRIPS;
+////                DriverCallingRequest driverCallingRequest = new DriverCallingRequest();
+////                driverCallingRequest.execute();*/
+////
+////                break;
+//            case R.id.btn_statastics:
+//
+//                break;
+//            case R.id.btn_mylocation:
+//                ApplicationConstants.mapflag = 1;
+//                // startActivity(new Intent(getActivity(), MyTrips.class));
+//                break;
+//            case R.id.btn_assigned_taxi:
+//                GetVehicleDetails(ApplicationConstants.vid);
+//
+//                /*ApplicationConstants.tripflag = GETVEHICLEDETAILS;
 //                driverCallingRequest = new DriverCallingRequest();
 //                driverCallingRequest.execute();*/
 //
 //                break;
-        }
-    }
+////            case R.id.trip:
+////
+////                break;
+//            case R.id.btn_ongoing_trips:
+//                GetDriverTrips(ApplicationConstants.mobileNo);
+//
+//               /* ApplicationConstants.tripflag = GETTRIPS;
+//                driverCallingRequest = new DriverCallingRequest();
+//                driverCallingRequest.execute();*/
+//
+//                break;
+////            case R.id.btn_sos:
+////
+////                startActivity(new Intent(getActivity(), SosContacts.class));
+////
+////                       /* Sos_Dialoguebox dialoguebox=new Sos_Dialoguebox(getActivity());
+////                        dialoguebox.setCanceledOnTouchOutside(false);
+////                        dialoguebox.show();*/
+////                break;
+////            case R.id.btn_logout:
+////                if (status.getText().toString().matches("Go Offline")) {
+////                    JsonObject object = new JsonObject();
+////                    object.addProperty("loginlogout", "0");
+////                    object.addProperty("DriverNo", ApplicationConstants.mobileNo);
+////                    object.addProperty("LoginLatitude", latitude + "");
+////                    object.addProperty("LoginLongitude", longitude + "");
+////                    object.addProperty("Reason", "");
+////                    DriverGoOnline(object, LOGOUT);
+////                } else {
+////                    SharedPreferences.Editor editor = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE).edit();
+////                    editor.putString(Phone, null);
+////                    editor.putString(Name, null);
+////                    editor.commit();
+////                    getActivity().finish();
+////                }
+////                break;
+////            case R.id.btn_myprofile:
+////                GetDriverDetails(ApplicationConstants.driverId);
+////
+////              /*  ApplicationConstants.tripflag = GETDRIVERDETAILS;
+////                driverCallingRequest = new DriverCallingRequest();
+////                driverCallingRequest.execute();*/
+////
+////                break;
+//        }
+//    }
 
     private void initToolbar() {
 
@@ -439,7 +463,8 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
                                 }
                             } else if (flag == DEACTIVEDRIVER) {
                                 if (response.getStatus().matches("1")) {
-                                    status.setTextColor(Color.GREEN);
+                                    status.setTextColor(Color.BLACK);
+                                    status.setBackgroundColor(Color.parseColor("#1565C0"));
                                     status.setText("Go Online");
                                     isOnline = false;
                                     // timer.cancel();
@@ -822,6 +847,7 @@ public class businessappDriverDashboardActivity extends AppCompatActivity implem
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             // Check for the integer request code originally supplied to startResolutionForResult().
             case MY_TRIP_ACTIVITY:

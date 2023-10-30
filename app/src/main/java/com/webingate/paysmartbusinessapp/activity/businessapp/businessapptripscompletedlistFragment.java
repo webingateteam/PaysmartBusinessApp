@@ -4,11 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +14,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.R;
 import com.webingate.paysmartbusinessapp.adapter.businessappDriverTripslistAdapter;
 import com.webingate.paysmartbusinessapp.driverapplication.ApplicationConstants;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.GetdriverTripsResponse;
+import com.webingate.paysmartbusinessapp.driverapplication.Dialog.ProgressDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +46,7 @@ public class businessapptripscompletedlistFragment extends Fragment {
     //MyCustomAdapter dataAdapter = null;
     List<GetdriverTripsResponse> list;
     ArrayList <GetdriverTripsResponse> completetripList;
-    com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog dialog ;
+    ProgressDialog dialog ;
     public businessapptripscompletedlistFragment() {
     }
 

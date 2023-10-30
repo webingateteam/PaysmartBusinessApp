@@ -18,15 +18,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -35,6 +26,16 @@ import android.widget.Button;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -74,7 +75,6 @@ import com.webingate.paysmartbusinessapp.businessapp.Deo.CalculatePriceResponse;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.CustomerBookingStatusResponse;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.SaveBookingDetailsResponse;
 import com.webingate.paysmartbusinessapp.businessapp.Deo.UpdateBookingstatusResponse;
-import com.webingate.paysmartbusinessapp.businessapp.Dialog.ProgressDialog;
 
 import org.joda.time.DateTime;
 
@@ -92,6 +92,9 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import com.webingate.paysmartbusinessapp.R;
+import com.webingate.paysmartbusinessapp.customerapp.Dialog.ProgressDialog;
+
+
 public class GetaLyft extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener,Payments_Dialoguebox.PaymentDetails,RideLater_Dialoguebox.RideLater,CheckingCabsDialogue.checkingcabsDialogue {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -636,6 +639,7 @@ public class GetaLyft extends AppCompatActivity implements OnMapReadyCallback, G
     @SuppressLint("MissingPermission")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case PLACE_AUTOCOMPLETE_REQUEST_CODE:
                 if (dest == 1) {
@@ -960,7 +964,7 @@ public class GetaLyft extends AppCompatActivity implements OnMapReadyCallback, G
 
     public void SaveBookingDetails(JsonObject jsonObject) {
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(GetaLyft.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(GetaLyft.this).getrestadapter()
                 .SaveBookingDetails(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -1003,7 +1007,7 @@ public class GetaLyft extends AppCompatActivity implements OnMapReadyCallback, G
 
     public void CalculatePrice(JsonObject jsonObject) {
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(GetaLyft.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(GetaLyft.this).getrestadapter()
                 .CalculatePrice(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -1044,7 +1048,7 @@ public class GetaLyft extends AppCompatActivity implements OnMapReadyCallback, G
     }
     public void BookingStatus(JsonObject jsonObject) {
         // StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(GetaLyft.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(GetaLyft.this).getrestadapter()
                 .BookingStatus(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -1091,7 +1095,7 @@ public class GetaLyft extends AppCompatActivity implements OnMapReadyCallback, G
 
     public void UpdateBookingStatus(JsonObject jsonObject) {
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(GetaLyft.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(GetaLyft.this).getrestadapter()
                 .UpdateBookingStatus(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -1131,7 +1135,7 @@ public class GetaLyft extends AppCompatActivity implements OnMapReadyCallback, G
 
     public void AdvanceBookingDetails(JsonObject jsonObject) {
         StartDialogue();
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(GetaLyft.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(GetaLyft.this).getrestadapter()
                 .AdvanceBookingDetails(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -1171,7 +1175,7 @@ public class GetaLyft extends AppCompatActivity implements OnMapReadyCallback, G
         }
     }
     public void AvailableVehicles(JsonObject jsonObject){
-        com.webingate.paysmartbusinessapp.businessapp.Utils.DataPrepare.get(GetaLyft.this).getrestadapter()
+        com.webingate.paysmartbusinessapp.customerapp.Utils.DataPrepare.get(GetaLyft.this).getrestadapter()
                 .AvailableVehicles(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

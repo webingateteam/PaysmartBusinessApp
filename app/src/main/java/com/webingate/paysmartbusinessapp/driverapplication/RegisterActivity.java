@@ -9,8 +9,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.AppCompatButton;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -25,6 +23,9 @@ import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.gson.JsonObject;
 import com.webingate.paysmartbusinessapp.driverapplication.Deo.RegisterDriverResponse;
@@ -245,6 +246,7 @@ public class RegisterActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         // handle result of CropImageActivity
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
@@ -252,7 +254,7 @@ public class RegisterActivity extends FragmentActivity {
                     profilepic.setImageURI(result.getUri());
                     isProfilePicUploaded = true;
                 } else {
-                  //  vehiclepic.setImageURI(result.getUri());
+                    //  vehiclepic.setImageURI(result.getUri());
                     isVehiclePicUploaded = true;
                 }
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
